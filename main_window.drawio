@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-03-15T14:24:00.642Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="3aWN9EHTXs6ojQQXJIqe" version="21.0.6" type="github">
+<mxfile host="app.diagrams.net" modified="2023-03-15T21:39:51.398Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="FYhvwKePEha8xO6REsBZ" version="21.0.6" type="github">
   <diagram name="Page-1" id="c9db0220-8083-56f3-ca83-edcdcd058819">
-    <mxGraphModel dx="1750" dy="955" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="826" pageHeight="1169" background="none" math="0" shadow="0">
+    <mxGraphModel dx="2100" dy="1146" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="826" pageHeight="1169" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" style=";html=1;" />
         <mxCell id="1" style=";html=1;" parent="0" />
@@ -63,7 +63,7 @@
         </mxCell>
         <UserObject label="" link="https://iso.500px.com/wp-content/uploads/2014/07/big-one.jpg" id="D_SpWGlHHmmVeTuO2wPM-39">
           <mxCell style="rounded=1;whiteSpace=wrap;html=1;arcSize=7;" vertex="1" parent="1">
-            <mxGeometry x="190" y="120" width="480" height="350" as="geometry" />
+            <mxGeometry x="190" y="110" width="480" height="380" as="geometry" />
           </mxCell>
         </UserObject>
         <mxCell id="D_SpWGlHHmmVeTuO2wPM-35" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
@@ -80,6 +80,137 @@
         </mxCell>
         <mxCell id="D_SpWGlHHmmVeTuO2wPM-42" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://iso.500px.com/wp-content/uploads/2014/07/big-one.jpg;" vertex="1" parent="1">
           <mxGeometry x="440" y="285" width="170.39" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-43" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://static.thenounproject.com/png/17703-200.png;" vertex="1" parent="1">
+          <mxGeometry x="340" y="440" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-44" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdn-icons-png.flaticon.com/512/1933/1933011.png;" vertex="1" parent="1">
+          <mxGeometry x="230" y="436" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-45" value="" style="line;strokeWidth=1;html=1;perimeter=backbonePerimeter;points=[];outlineConnect=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="200" y="420" width="460" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-46" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.iconpacks.net/icons/2/free-favourite-icon-2765-thumb.png;" vertex="1" parent="1">
+          <mxGeometry x="440" y="438" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-47" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdn-icons-png.flaticon.com/512/3916/3916593.png;" vertex="1" parent="1">
+          <mxGeometry x="509.2" y="444" width="32" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-48" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Ei-share-apple.svg/1200px-Ei-share-apple.svg.png;" vertex="1" parent="1">
+          <mxGeometry x="580" y="428" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-51" value="4" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=21;" vertex="1" parent="1">
+          <mxGeometry x="260" y="443" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-52" value="2" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=21;" vertex="1" parent="1">
+          <mxGeometry x="370" y="443" width="60" height="30" as="geometry" />
+        </mxCell>
+        <UserObject label="" link="https://iso.500px.com/wp-content/uploads/2014/07/big-one.jpg" id="D_SpWGlHHmmVeTuO2wPM-53">
+          <mxCell style="rounded=1;whiteSpace=wrap;html=1;arcSize=7;" vertex="1" parent="1">
+            <mxGeometry x="190" y="520" width="480" height="460" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-54" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="200" y="530" width="30" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-56" value="Best game ever" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9999;strokeColor=#FF9999;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="230" y="580" width="390" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-59" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://static.thenounproject.com/png/17703-200.png;" vertex="1" parent="1">
+          <mxGeometry x="340" y="923" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-60" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdn-icons-png.flaticon.com/512/1933/1933011.png;" vertex="1" parent="1">
+          <mxGeometry x="230" y="919" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-61" value="" style="line;strokeWidth=1;html=1;perimeter=backbonePerimeter;points=[];outlineConnect=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="200" y="903" width="460" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-63" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdn-icons-png.flaticon.com/512/3916/3916593.png;" vertex="1" parent="1">
+          <mxGeometry x="509.2" y="927" width="32" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-64" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Ei-share-apple.svg/1200px-Ei-share-apple.svg.png;" vertex="1" parent="1">
+          <mxGeometry x="580" y="911" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-65" value="2" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=21;" vertex="1" parent="1">
+          <mxGeometry x="260" y="926" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-66" value="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=21;" vertex="1" parent="1">
+          <mxGeometry x="370" y="926" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-67" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdn-icons-png.flaticon.com/512/1163/1163757.png;" vertex="1" parent="1">
+          <mxGeometry x="440" y="922.63" width="36.37" height="36.37" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-69" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://image.api.playstation.com/vulcan/ap/rnd/202208/1623/Zofebh60Ue7Zt5sC10UAtU3D.png;" vertex="1" parent="1">
+          <mxGeometry x="230" y="677.5" width="190" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-72" value="Nomai&lt;br&gt;12min ago" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="230" y="525" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-73" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://image.api.playstation.com/vulcan/ap/rnd/202109/0618/hPQ1yWCe8twWt2YJVxtwf7xC.png;" vertex="1" parent="1">
+          <mxGeometry x="429" y="677.5" width="190" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-75" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="115" width="380" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-76" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://static.thenounproject.com/png/17703-200.png;" vertex="1" parent="1">
+          <mxGeometry x="750" y="137.5" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-77" value="" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;size=20;position=0.4;strokeWidth=6;position2=0.43;base=19;" vertex="1" parent="1">
+          <mxGeometry x="760" y="295" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-78" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="262.5" width="380" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-74" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="850" y="272.5" width="30" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-80" value="Nomai&lt;br&gt;12min ago" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="880" y="270" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-81" value="Hi @Hpn4 do you want to play ?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9999;strokeColor=#FF9999;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="900" y="310" width="275" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-82" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="850" y="120" width="30" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-83" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="870" y="120" width="30" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-84" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="890" y="120" width="30" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-85" value="Nomai, The eye and 3 others&lt;br&gt;12min ago" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="930" y="120" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-87" value="URl of the boosted toots" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="892.5" y="165" width="275" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-88" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.iconpacks.net/icons/2/free-favourite-icon-2765-thumb.png;" vertex="1" parent="1">
+          <mxGeometry x="750" y="413" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-89" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="401.5" width="380" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-90" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="850" y="406.5" width="30" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-91" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="870" y="406.5" width="30" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-92" value="" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="890" y="406.5" width="30" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-93" value="Nomai, The eye and 3 others&lt;br&gt;12min ago" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="930" y="406.5" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-94" value="URl of the starred toots" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="892.5" y="451.5" width="275" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-95" value="" style="line;strokeWidth=1;html=1;perimeter=backbonePerimeter;points=[];outlineConnect=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="730" y="240" width="500" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="D_SpWGlHHmmVeTuO2wPM-96" value="" style="line;strokeWidth=1;html=1;perimeter=backbonePerimeter;points=[];outlineConnect=0;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="739" y="380" width="500" height="10" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
