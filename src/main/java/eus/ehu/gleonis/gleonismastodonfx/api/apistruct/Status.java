@@ -2,7 +2,7 @@ package eus.ehu.gleonis.gleonismastodonfx.api.apistruct;
 
 import java.util.List;
 
-public class Status {
+public class Status implements Identifiable {
 
     String id;
 
@@ -43,6 +43,7 @@ public class Status {
 
     boolean bookmarked;
 
+    @Override
     public String getId() {
         return id;
     }

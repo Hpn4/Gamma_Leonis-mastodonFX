@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="eus.ehu.gleonis.gleonismastodonfx.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="757.0" styleClass="background-region" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="494.0" prefWidth="203.0" styleClass="left-region" BorderPane.alignment="CENTER">
+         <BorderPane prefHeight="101.0" prefWidth="223.0">
+            <left>
+               <VBox prefHeight="102.0" prefWidth="57.0" spacing="10.0" BorderPane.alignment="CENTER">
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                  </padding>
+                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="settings-button"/>
+                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0"
+                          styleClass="notification-button"/>
+               </VBox>
+            </left>
+         </BorderPane>
+         <Line endX="170.0" stroke="#3d4fad">
+            <VBox.margin>
+               <Insets left="20.0" right="20.0"/>
+            </VBox.margin>
+         </Line>
+      </VBox>
+   </left>
+</BorderPane>

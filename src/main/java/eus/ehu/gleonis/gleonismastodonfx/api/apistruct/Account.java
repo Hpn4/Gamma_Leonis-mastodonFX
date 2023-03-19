@@ -1,6 +1,6 @@
 package eus.ehu.gleonis.gleonismastodonfx.api.apistruct;
 
-public class Account {
+public class Account implements Identifiable {
 
     String id;
 
@@ -45,6 +45,7 @@ public class Account {
                 '}';
     }
 
+    @Override
     public String getId() {
         return id;
     }
