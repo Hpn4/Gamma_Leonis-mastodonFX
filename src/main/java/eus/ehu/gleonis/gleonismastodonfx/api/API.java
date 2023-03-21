@@ -4,12 +4,29 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.reflect.TypeToken;
+import eus.ehu.gleonis.gleonismastodonfx.PropertiesManager;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.MediaAttachmentTypeDeserializer;
+import eus.ehu.gleonis.gleonismastodonfx.api.adapter.NotificationTypeDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.VisibilityDeserializer;
-import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.*;
-import okhttp3.*;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Application;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Conversation;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Identifiable;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.MediaAttachmentType;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Notification;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.NotificationType;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Relationship;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Suggestion;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Token;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -25,8 +42,11 @@ public class API {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Visibility.class, new VisibilityDeserializer());
         builder.registerTypeAdapter(MediaAttachmentType.class, new MediaAttachmentTypeDeserializer());
+        builder.registerTypeAdapter(NotificationType.class, new NotificationTypeDeserializer());
 
         gson = builder.create();
+
+        token = PropertiesManager.getInstance().getToken();
     }
 
 
@@ -75,7 +95,7 @@ public class API {
         postRequest("oauth/revoke", body);
     }
 
-    public void setupAPI(Token token) {
+    public void setupToken(Token token) {
         this.token = token.getAccessToken();
     }
 
@@ -101,6 +121,19 @@ public class API {
     // - removeSuggestion: remove a suggestion.
     //
     // *******************************************************************
+    /**
+     *
+     * @return The account of the connected user
+     */
+    public Account verifyCredentials() {
+        return getSingle("api/v1/accounts/verify_credentials", Account.class);
+    }
+
+    /**
+     *
+     * @param id The id of the account to get
+     * @return The account with the given id
+     */
     public Account getAccount(String id) {
         return getSingle("api/v1/accounts/" + id, Account.class);
     }
@@ -194,7 +227,6 @@ public class API {
     public void removeSuggestion(String id) {
         deleteRequest("api/v1/suggestions/" + id);
     }
-
 
     //*******************************************************************
     // Statuses methods

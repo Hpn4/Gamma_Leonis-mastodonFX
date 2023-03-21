@@ -1,0 +1,40 @@
+
+.root {
+    -fx-container-color: #404040;
+    -fx-eoi-color: #3D4FAD;
+    -fx-black-color: #1A1A1A;
+}
+
+.background-region {
+    -fx-background-color: #333333;
+}
+
+.text-field {
+    -fx-background-color: -fx-container-color;
+    -fx-background-radius: 5px;
+    -fx-border-color: -fx-black-color;
+    -fx-border-radius: 5px;
+
+    -fx-background-insets: 10px;
+    -fx-border-insets: 10px;
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-background-color: -fx-eoi-color;
+    -fx-background-radius: 5px;
+    -fx-border-color: -fx-black-color;
+    -fx-border-radius: 5px;
+    -fx-text-fill: white;
+
+    -fx-background-insets: 10px;
+    -fx-border-insets: 10px;
+}
+
+.button:hover {
+    -fx-background-color: #4F66E0;
+}
+
+.label {
+    -fx-text-fill: white;
+}

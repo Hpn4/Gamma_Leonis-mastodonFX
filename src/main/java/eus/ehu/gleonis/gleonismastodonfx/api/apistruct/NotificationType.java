@@ -2,6 +2,7 @@ package eus.ehu.gleonis.gleonismastodonfx.api.apistruct;
 
 public enum NotificationType {
 
+    UNKNOWN("unknown"), // Unknown type
     MENTION("mention"), // You were mentioned in a status
     STATUS("status"), // Someone you follow posted a status
     REBLOG("reblog"), // One of your statuses was boosted
