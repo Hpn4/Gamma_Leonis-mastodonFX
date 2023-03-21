@@ -6,21 +6,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.AccountContentController">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="130.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="toots" />
-            <Button mnemonicParsing="false" text="followers" />
-            <Button mnemonicParsing="false" text="followings" />
+            <Button fx:id="tootsButton" mnemonicParsing="false" onAction="#onTootsClick" text="toots" />
+            <Button fx:id="followersButton" mnemonicParsing="false" onAction="#onFollowersClick" text="followers" />
+            <Button fx:id="followingButton" mnemonicParsing="false" onAction="#onFollowingsClick" text="followings" />
          </children>
       </HBox>
    </top>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView prefHeight="299.0" prefWidth="600.0" />
+            <ListView fx:id="listView" prefHeight="299.0" prefWidth="600.0" />
          </children>
       </VBox>
    </center>
