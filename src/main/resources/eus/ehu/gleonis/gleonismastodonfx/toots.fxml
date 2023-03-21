@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <HBox alignment="TOP_CENTER" prefHeight="401.0" prefWidth="72.0" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="date" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets top="80.0" />
+         </padding>
+      </HBox>
+   </right>
+   <left>
+      <HBox alignment="CENTER" prefHeight="362.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+         <padding>
+            <Insets top="-70.0" />
+         </padding>
+      </HBox>
+   </left>
+   <center>
+      <VBox alignment="CENTER_LEFT" prefHeight="401.0" prefWidth="311.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="user" />
+            <Label text="webfinger" />
+            <VBox alignment="CENTER_LEFT" prefHeight="186.0" prefWidth="327.0">
+               <children>
+                  <Label text="use message" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
