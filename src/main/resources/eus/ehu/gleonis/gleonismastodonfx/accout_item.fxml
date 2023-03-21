@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane fx:id="accountItem" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <HBox alignment="CENTER" prefHeight="401.0" prefWidth="211.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="accountProfilePicture" fitHeight="150.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Label fx:id="accountName" />
+                  <Label fx:id="accountWebfinger" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </left>
+   <right>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="followButton" mnemonicParsing="false" text="Follow" />
+            <Button fx:id="unfollowButton" mnemonicParsing="false" text="Unfollow" />
+         </children>
+      </HBox>
+   </right>
+</BorderPane>
