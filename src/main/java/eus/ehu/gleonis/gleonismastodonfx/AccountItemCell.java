@@ -1,6 +1,7 @@
 package eus.ehu.gleonis.gleonismastodonfx;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 public class AccountItemCell extends ListCell<Account> {
+
+        private FXMLLoader loader;
 
         @FXML
         private BorderPane accountItem;
@@ -35,11 +38,25 @@ public class AccountItemCell extends ListCell<Account> {
                 if (empty || account == null) {
                         setText(null);
                         setGraphic(null);
-                } else {
-                        setText(null);
-                        setGraphic(accountItem);
-                        accountName.setText(account.getDisplayName());
-                        accountWebfinger.setText(account.getAcct());
+
+                        return;
                 }
+
+                if (loader == null){
+                        loader = new FXMLLoader(getClass().getResource("account_item.fxml"));
+                        loader.setController(this);
+
+                        try {
+                                loader.load();
+                        } catch (Exception e) {
+                                e.printStackTrace();
+                        }
+                }
+
+                accountName.setText(account.getUsername());
+                accountWebfinger.setText(account.getAcct());
+
+                setText(null);
+                setGraphic(accountItem);
         }
 }

@@ -8,12 +8,25 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.StackPane;
 
 public class AccountContentController {
 
     private API api = new API();
 
     private Account account;
+
+    @FXML
+    private ListView<?> tootsListView;
+
+    @FXML
+    private ListView<?> followersListView;
+
+    @FXML
+    private ListView<?> followingListView;
+
+    @FXML
+    private StackPane listViewStack;
 
     @FXML
     private Button followersButton;
@@ -53,8 +66,7 @@ public class AccountContentController {
 
     public void showFollowers() {
 
-
-        ObservableList<Account> followers = FXCollections.observableList(api.getAccountFollowers(account.getId(), 20).getElement());
+        ObservableList<Account> followers = api.getAccountFollowers(account.getId(), 20).getElement();
 
         if (listView != null) {
             listView.setItems(followers);
