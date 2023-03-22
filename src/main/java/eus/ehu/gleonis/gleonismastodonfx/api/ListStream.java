@@ -1,25 +1,27 @@
 package eus.ehu.gleonis.gleonismastodonfx.api;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Identifiable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
 public class ListStream<E extends Identifiable> {
 
-    private API api;
+    private final API api;
 
-    private String query;
+    private final String query;
 
-    private List<E> list;
+    private final ObservableList<E> list;
 
 
     public ListStream(API api, String query, List<E> list) {
         this.api = api;
         this.query = query;
-        this.list = list;
+        this.list = FXCollections.observableList(list);
     }
 
-    public List<E> getElement() {
+    public ObservableList<E> getElement() {
         return list;
     }
 
