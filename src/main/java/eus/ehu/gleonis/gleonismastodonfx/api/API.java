@@ -139,23 +139,23 @@ public class API {
     }
 
     public ListStream<Status> getAccountStatuses(String id, int limit) {
-        return getStream("api/v1/accounts/" + id + "/statuses", limit, null);
+        return getStream("api/v1/accounts/" + id + "/statuses", limit, null, Status.class);
     }
 
     public ListStream<Status> getBookmarks(int limit) {
-        return getStream("api/v1/bookmarks", limit, null);
+        return getStream("api/v1/bookmarks", limit, null, Status.class);
     }
 
     public ListStream<Status> getFavourites(int limit) {
-        return getStream("api/v1/favourites", limit, null);
+        return getStream("api/v1/favourites", limit, null, Status.class);
     }
 
     public ListStream<Account> getAccountFollowers(String id, int limit) {
-        return getStream("api/v1/accounts/" + id + "/followers", limit, null);
+        return getStream("api/v1/accounts/" + id + "/followers", limit, null, Account.class);
     }
 
     public ListStream<Account> getAccountFollowing(String id, int limit) {
-        return getStream("api/v1/accounts/" + id + "/following", limit, null);
+        return getStream("api/v1/accounts/" + id + "/following", limit, null, Account.class);
     }
 
     public Relationship followAccount(String id) {
@@ -209,7 +209,7 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Account> getFollowRequests(int limit) {
-        return getStream("api/v1/follow_requests", limit, null);
+        return getStream("api/v1/follow_requests", limit, null, Account.class);
     }
 
     public Relationship authorizeFollowRequest(String id) {
@@ -221,7 +221,7 @@ public class API {
     }
 
     public List<Suggestion> getSuggestions() {
-        return getList("api/v1/suggestions", 40, null);
+        return getList("api/v1/suggestions", 40, null, Suggestion.class);
     }
 
     public void removeSuggestion(String id) {
@@ -262,11 +262,11 @@ public class API {
     }
 
     public ListStream<Account> getStatusRebloggedBy(String id, int limit) {
-        return getStream("api/v1/statuses/" + id + "/reblogged_by", limit, null);
+        return getStream("api/v1/statuses/" + id + "/reblogged_by", limit, null, Account.class);
     }
 
     public ListStream<Account> getStatusFavouritedBy(String id, int limit) {
-        return getStream("api/v1/statuses/" + id + "/favourited_by", limit, null);
+        return getStream("api/v1/statuses/" + id + "/favourited_by", limit, null, Account.class);
     }
 
     public Status favouriteStatus(String id) {
@@ -302,15 +302,15 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Status> getPublicTimelines(int limit, boolean onlyLocal, boolean onlyRemote) {
-        return getStream("api/v1/timelines/public?local=" + onlyLocal + "&remote=" + onlyRemote, limit, null);
+        return getStream("api/v1/timelines/public?local=" + onlyLocal + "&remote=" + onlyRemote, limit, null, Status.class);
     }
 
     public ListStream<Status> getHashTagTimelines(String tag, int limit) {
-        return getStream("api/v1/timelines/tag/" + tag, limit, null);
+        return getStream("api/v1/timelines/tag/" + tag, limit, null, Status.class);
     }
 
     public ListStream<Status> getHomeTimeline(int limit) {
-        return getStream("api/v1/timelines/home", limit, null);
+        return getStream("api/v1/timelines/home", limit, null, Status.class);
     }
 
     //*******************************************************************
@@ -321,7 +321,7 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Conversation> getConversations(int limit) {
-        return getStream("api/v1/conversations", limit, null);
+        return getStream("api/v1/conversations", limit, null, Conversation.class);
     }
 
     public void removeConversation(String id) {
@@ -337,7 +337,7 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Notification> getNotifications(int limit) {
-        return getStream("api/v1/notifications", limit, null);
+        return getStream("api/v1/notifications", limit, null, Notification.class);
     }
 
     public Notification getNotification(String id) {
@@ -356,7 +356,7 @@ public class API {
     // Utils methods
     //
     // *******************************************************************
-    protected <E> List<E> getList(String url, int limit, String lastID) {
+    protected <E> List<E> getList(String url, int limit, String lastID, Class<E> objClass) {
         if (!url.contains("?"))
             url += "?";
 
@@ -368,14 +368,14 @@ public class API {
         String req = getRequest(url);
 
         JsonArray jsonArray = gson.fromJson(req, JsonArray.class);
-        Type statusListType = new TypeToken<List<E>>() {
-        }.getType();
 
-        return gson.fromJson(jsonArray, statusListType);
+        Type statusList = TypeToken.getParameterized(List.class, objClass).getType();
+
+        return gson.fromJson(jsonArray, statusList);
     }
 
-    private <E extends Identifiable> ListStream<E> getStream(String url, int limit, String lastID) {
-        return new ListStream<>(this, url, getList(url, limit, lastID));
+    private <E extends Identifiable> ListStream<E> getStream(String url, int limit, String lastID, Class<E> objClass) {
+        return new ListStream<>(this, url, getList(url, limit, lastID, objClass));
     }
 
     private <E> E getSingle(String url, Class<E> objClass) {

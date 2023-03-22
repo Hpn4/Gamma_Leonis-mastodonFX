@@ -27,9 +27,10 @@ public class ListStream<E extends Identifiable> {
 
     public List<E> getNextElements(int limit)
     {
-        List<E> nextList = api.getList(query, limit, list.get(list.size() - 1).getId());
-        list.addAll(nextList);
+        //List<E> nextList = (List<E extends Identifiable>) api.getList(query, limit, list.get(list.size() - 1).getId(), list.get(0).getClass());
+        //list.addAll(nextList);
 
-        return nextList;
+        //return nextList;
+        return null;
     }
 }
