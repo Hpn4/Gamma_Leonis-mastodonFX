@@ -2,79 +2,82 @@ package eus.ehu.gleonis.gleonismastodonfx;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
-import javafx.collections.FXCollections;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.StackPane;
 
 public class AccountContentController {
 
-    private API api = new API();
+    private final API api = new API();
 
     private Account account;
 
     @FXML
-    private ListView<?> tootsListView;
+    private ListView<Status> tootsListView;
 
     @FXML
-    private ListView<?> followersListView;
+    private ListView<Account> accountListView;
+
+    private ObservableList<Account> followingsList;
+    private ObservableList<Account> followersList;
 
     @FXML
-    private ListView<?> followingListView;
-
-    @FXML
-    private StackPane listViewStack;
-
-    @FXML
-    private Button followersButton;
-
-    @FXML
-    private Button followingButton;
-
-    @FXML
-    private ListView<Account> listView;
-
-    @FXML
-    private Button tootsButton;
-
-    @FXML
-    void onFollowersClick(ActionEvent event) {
+    void onFollowersClick() {
         showFollowers();
     }
 
     @FXML
-    void onFollowingsClick(ActionEvent event) {
-        // showFollowings();
+    void onFollowingsClick() {
+        showFollowings();
     }
 
     @FXML
-    void onTootsClick(ActionEvent event) {
-        // showToots();
+    void onTootsClick() {
+        showToots();
     }
 
     @FXML
-    void initialize() {
-
+    public void initialize() {
         account = api.verifyCredentials();
-
-
-
     }
 
-    public void showFollowers() {
 
-        ObservableList<Account> followers = api.getAccountFollowers(account.getId(), 20).getElement();
+    private void updateFollowers() {
+        followersList = api.getAccountFollowers(account.getId(), 20).getElement();
+    }
+    private void updateFollowings() {
+        followingsList = api.getAccountFollowing(account.getId(), 20).getElement();
+    }
 
-        if (listView != null) {
-            listView.setItems(followers);
-            listView.setCellFactory(param -> {
-                    var cell = new AccountItemCell();
-                    return cell;
-            });
+
+    private void showFollowers() {
+
+        updateFollowers();
+
+        accountListView.toFront();
+
+        if (accountListView != null) {
+            accountListView.setItems(followersList);
+            accountListView.setCellFactory(param -> new AccountItemCell(false));
         }
     }
 
+    private void showFollowings() {
+
+        updateFollowings();
+
+        accountListView.toFront();
+
+        if (accountListView != null) {
+            accountListView.setItems(followingsList);
+            accountListView.setCellFactory(param -> new AccountItemCell(true));
+        }
+    }
+
+    private void showToots() {
+
+        tootsListView.toFront();
+        // TODO
+    }
 }

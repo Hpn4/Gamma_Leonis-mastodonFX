@@ -9,20 +9,15 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.AccountContentController">
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="130.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="tootsButton" mnemonicParsing="false" onAction="#onTootsClick" text="toots" />
-            <Button fx:id="followersButton" mnemonicParsing="false" onAction="#onFollowersClick" text="followers" />
-            <Button fx:id="followingButton" mnemonicParsing="false" onAction="#onFollowingsClick" text="followings" />
-         </children>
+         <Button mnemonicParsing="false" onAction="#onTootsClick" text="toots"/>
+         <Button mnemonicParsing="false" onAction="#onFollowersClick" text="followers"/>
+         <Button mnemonicParsing="false" onAction="#onFollowingsClick" text="followings"/>
       </HBox>
    </top>
    <center>
-      <StackPane fx:id="listViewStack" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <ListView fx:id="tootsListView" prefHeight="200.0" prefWidth="200.0" />
-            <ListView fx:id="followersListView" prefHeight="200.0" prefWidth="200.0" />
-            <ListView fx:id="followingListView" prefHeight="200.0" prefWidth="200.0" />
-         </children>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <ListView fx:id="tootsListView" prefHeight="200.0" prefWidth="200.0"/>
+         <ListView fx:id="accountListView" prefHeight="200.0" prefWidth="200.0"/>
       </StackPane>
    </center>
 </BorderPane>

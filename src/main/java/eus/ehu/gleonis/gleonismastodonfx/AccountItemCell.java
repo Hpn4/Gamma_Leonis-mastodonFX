@@ -1,62 +1,90 @@
 package eus.ehu.gleonis.gleonismastodonfx;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ListCell;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 public class AccountItemCell extends ListCell<Account> {
 
-        private FXMLLoader loader;
+    public AccountItemCell(boolean isFollowings) {
+        super();
 
-        @FXML
-        private BorderPane accountItem;
+        this.isFollowings = isFollowings;
 
-        @FXML
-        private Label accountName;
+    }
 
-        @FXML
-        private ImageView accountProfilePicture;
+    private FXMLLoader loader;
 
-        @FXML
-        private Label accountWebfinger;
+    private final boolean isFollowings;
 
-        @FXML
-        private Button followButton;
+    @FXML
+    private ImageView accountAvatar;
 
-        @FXML
-        private Button unfollowButton;
+    @FXML
+    private BorderPane accountItem;
 
-        @Override
-        protected void updateItem(Account account, boolean empty) {
-                super.updateItem(account, empty);
+    @FXML
+    private Label accountName;
 
-                if (empty || account == null) {
-                        setText(null);
-                        setGraphic(null);
+    @FXML
+    private Label accountWebfinger;
 
-                        return;
-                }
+    @FXML
+    private Button followButton;
 
-                if (loader == null){
-                        loader = new FXMLLoader(getClass().getResource("account_item.fxml"));
-                        loader.setController(this);
+    @FXML
+    void onFollowClick() {
+        System.out.println("Following " + accountName.getText());
+        //TODO
+    }
 
-                        try {
-                                loader.load();
-                        } catch (Exception e) {
-                                e.printStackTrace();
-                        }
-                }
+    @FXML
+    void onUnfollowClick() {
+        System.out.println("Unfollowing " + accountName.getText());
+        //TODO
+    }
 
-                accountName.setText(account.getUsername());
-                accountWebfinger.setText(account.getAcct());
+    @Override
+    protected void updateItem(Account account, boolean empty) {
+        super.updateItem(account, empty);
 
-                setText(null);
-                setGraphic(accountItem);
+        if (empty || account == null) {
+            setText(null);
+            setGraphic(null);
+
+            return;
         }
+
+        if (loader == null) {
+            loader = new FXMLLoader(getClass().getResource("account_item.fxml"));
+            loader.setController(this);
+
+            try {
+                loader.load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (isFollowings) {
+            followButton.setVisible(false);
+        }
+
+        accountName.setText(account.getUsername());
+        accountWebfinger.setText(account.getAcct());
+
+        Image avatar = new Image(account.getAvatar(), true);
+        accountAvatar.setImage(avatar);
+
+        accountItem.prefWidthProperty().bind(getListView().widthProperty().subtract(40));
+
+        setText(null);
+        setGraphic(accountItem);
+    }
 }

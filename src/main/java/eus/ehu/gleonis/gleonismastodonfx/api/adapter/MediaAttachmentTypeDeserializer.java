@@ -5,7 +5,6 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.MediaAttachmentType;
-import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
 
 import java.lang.reflect.Type;
 
