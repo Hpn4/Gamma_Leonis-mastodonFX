@@ -70,21 +70,20 @@ public class AccountItemCell extends ListCell<Account> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            if (isFollowings)
+                followButton.setVisible(false);
+
+            accountName.setText(account.getUsername());
+            accountWebfinger.setText("@" + account.getAcct());
+
+            Image avatar = new Image(account.getAvatar(), true);
+            accountAvatar.setImage(avatar);
+
+            accountItem.prefWidthProperty().bind(getListView().widthProperty().subtract(30));
+
+            setText(null);
+            setGraphic(accountItem);
         }
-
-        if (isFollowings) {
-            followButton.setVisible(false);
-        }
-
-        accountName.setText(account.getUsername());
-        accountWebfinger.setText(account.getAcct());
-
-        Image avatar = new Image(account.getAvatar(), true);
-        accountAvatar.setImage(avatar);
-
-        accountItem.prefWidthProperty().bind(getListView().widthProperty().subtract(40));
-
-        setText(null);
-        setGraphic(accountItem);
     }
 }

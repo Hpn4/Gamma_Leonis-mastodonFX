@@ -6,21 +6,25 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="accountItem" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="585.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="accountItem" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="585.0" styleClass="account-region" stylesheets="@css/account_item.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <HBox alignment="CENTER" prefHeight="171.0" prefWidth="216.0" spacing="40.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="171.0" prefWidth="216.0" spacing="10.0" BorderPane.alignment="CENTER">
          <ImageView fx:id="accountAvatar" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
-         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-            <Label fx:id="accountName" minWidth="-Infinity" text="\@username" />
-            <Label fx:id="accountWebfinger" minWidth="-Infinity" text="\@webfinger" />
+         <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+            <Label fx:id="accountName" minWidth="-Infinity" text="\@username" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
+            <Label fx:id="accountWebfinger" minWidth="-Infinity" text="\@webfinger" textFill="#666666" />
          </VBox>
       </HBox>
    </left>
    <right>
-      <HBox alignment="CENTER" prefHeight="336.0" prefWidth="194.0" spacing="25.0" BorderPane.alignment="CENTER">
-         <Button fx:id="followButton" mnemonicParsing="false" onAction="#onFollowClick" text="Follow" />
-         <Button mnemonicParsing="false" onAction="#onUnfollowClick" text="Unfollow" />
+      <HBox alignment="CENTER" prefHeight="74.0" prefWidth="148.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <Button fx:id="followButton" mnemonicParsing="false" onAction="#onFollowClick" prefHeight="30.0" prefWidth="35.0" styleClass="follow-button" />
+         <Button mnemonicParsing="false" onAction="#onUnfollowClick" prefHeight="30.0" prefWidth="35.0" styleClass="unfollow-account" />
       </HBox>
    </right>
 </BorderPane>

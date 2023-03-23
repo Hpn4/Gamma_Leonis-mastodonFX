@@ -11,7 +11,7 @@ import eus.ehu.gleonis.gleonismastodonfx.api.adapter.VisibilityDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.*;
 import okhttp3.*;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -21,7 +21,12 @@ import java.util.List;
 public class API {
 
     private final Gson gson;
+
+    private final OkHttpClient client;
+
     private String token;
+
+    private APIError error;
 
     public API() {
         GsonBuilder builder = new GsonBuilder();
@@ -30,10 +35,18 @@ public class API {
         builder.registerTypeAdapter(NotificationType.class, new NotificationTypeDeserializer());
 
         gson = builder.create();
+        client = new OkHttpClient();
 
         token = PropertiesManager.getInstance().getToken();
     }
 
+    public boolean errorOccurred() {
+        return error != null;
+    }
+
+    public APIError getError() {
+        return error;
+    }
 
     //*******************************************************************
     // OAuth methods to authorize user, get and revoke tokens.
@@ -77,7 +90,7 @@ public class API {
                 .add("token", token.getAccessToken())
                 .build();
 
-        postRequest("oauth/revoke", body);
+        request("oauth/revoke", "POST", body);
     }
 
     public void setupToken(Token token) {
@@ -106,8 +119,8 @@ public class API {
     // - removeSuggestion: remove a suggestion.
     //
     // *******************************************************************
+
     /**
-     *
      * @return The account of the connected user
      */
     public Account verifyCredentials() {
@@ -115,7 +128,6 @@ public class API {
     }
 
     /**
-     *
      * @param id The id of the account to get
      * @return The account with the given id
      */
@@ -124,23 +136,32 @@ public class API {
     }
 
     public ListStream<Status> getAccountStatuses(String id, int limit) {
-        return getStream("api/v1/accounts/" + id + "/statuses", limit, null, Status.class);
+        return getStream("api/v1/accounts/" + id + "/statuses", limit, Status.class);
     }
 
     public ListStream<Status> getBookmarks(int limit) {
-        return getStream("api/v1/bookmarks", limit, null, Status.class);
+        return getStream("api/v1/bookmarks", limit, Status.class);
     }
 
     public ListStream<Status> getFavourites(int limit) {
-        return getStream("api/v1/favourites", limit, null, Status.class);
+        return getStream("api/v1/favourites", limit, Status.class);
     }
 
     public ListStream<Account> getAccountFollowers(String id, int limit) {
-        return getStream("api/v1/accounts/" + id + "/followers", limit, null, Account.class);
+        return getStream("api/v1/accounts/" + id + "/followers", limit, Account.class);
     }
 
     public ListStream<Account> getAccountFollowing(String id, int limit) {
-        return getStream("api/v1/accounts/" + id + "/following", limit, null, Account.class);
+        return getStream("api/v1/accounts/" + id + "/following", limit, Account.class);
+    }
+
+    public ListStream<Relationship> getRelationships(String... ids) {
+        StringBuilder baseUrl = new StringBuilder("api/v1/accounts/relationships?");
+        baseUrl.append("id=").append(ids[0]);
+        for (String id : ids)
+            baseUrl.append("&id=").append(id);
+
+        return getStream(baseUrl.toString(), 0, Relationship.class);
     }
 
     public Relationship followAccount(String id) {
@@ -194,7 +215,7 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Account> getFollowRequests(int limit) {
-        return getStream("api/v1/follow_requests", limit, null, Account.class);
+        return getStream("api/v1/follow_requests", limit, Account.class);
     }
 
     public Relationship authorizeFollowRequest(String id) {
@@ -205,8 +226,8 @@ public class API {
         return postSingle("api/v1/follow_requests/" + id + "/reject", Relationship.class);
     }
 
-    public List<Suggestion> getSuggestions() {
-        return getList("api/v1/suggestions", 40, null, Suggestion.class);
+    public ListStream<Suggestion> getSuggestions() {
+        return getStream("api/v1/suggestions", 40, Suggestion.class);
     }
 
     public void removeSuggestion(String id) {
@@ -247,11 +268,11 @@ public class API {
     }
 
     public ListStream<Account> getStatusRebloggedBy(String id, int limit) {
-        return getStream("api/v1/statuses/" + id + "/reblogged_by", limit, null, Account.class);
+        return getStream("api/v1/statuses/" + id + "/reblogged_by", limit, Account.class);
     }
 
     public ListStream<Account> getStatusFavouritedBy(String id, int limit) {
-        return getStream("api/v1/statuses/" + id + "/favourited_by", limit, null, Account.class);
+        return getStream("api/v1/statuses/" + id + "/favourited_by", limit, Account.class);
     }
 
     public Status favouriteStatus(String id) {
@@ -287,15 +308,15 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Status> getPublicTimelines(int limit, boolean onlyLocal, boolean onlyRemote) {
-        return getStream("api/v1/timelines/public?local=" + onlyLocal + "&remote=" + onlyRemote, limit, null, Status.class);
+        return getStream("api/v1/timelines/public?local=" + onlyLocal + "&remote=" + onlyRemote, limit, Status.class);
     }
 
     public ListStream<Status> getHashTagTimelines(String tag, int limit) {
-        return getStream("api/v1/timelines/tag/" + tag, limit, null, Status.class);
+        return getStream("api/v1/timelines/tag/" + tag, limit, Status.class);
     }
 
     public ListStream<Status> getHomeTimeline(int limit) {
-        return getStream("api/v1/timelines/home", limit, null, Status.class);
+        return getStream("api/v1/timelines/home", limit, Status.class);
     }
 
     //*******************************************************************
@@ -306,7 +327,7 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Conversation> getConversations(int limit) {
-        return getStream("api/v1/conversations", limit, null, Conversation.class);
+        return getStream("api/v1/conversations", limit, Conversation.class);
     }
 
     public void removeConversation(String id) {
@@ -322,7 +343,7 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Notification> getNotifications(int limit) {
-        return getStream("api/v1/notifications", limit, null, Notification.class);
+        return getStream("api/v1/notifications", limit, Notification.class);
     }
 
     public Notification getNotification(String id) {
@@ -338,41 +359,52 @@ public class API {
     }
 
     //*******************************************************************
-    // Utils methods
+    // Stream Utils methods
     //
     // *******************************************************************
-    protected <E> List<E> getList(String url, int limit, String lastID, Class<E> objClass) {
-        if (!url.contains("?"))
-            url += "?";
+    protected <E> List<E> updateStream(String baseUrl, int limit, Class<E> objClass, ListStream<E> listStream) {
+        String url = baseUrl + (baseUrl.contains("?") ? "&" : "?") + "limit=" + limit;
 
-        url += "limit=" + limit;
+        RequestResult requestResult = getRequest(url);
+        listStream.parsePaginationLink(requestResult.getPaginationLink());
+        if (errorOccurred())
+            return null;
 
-        if (lastID != null)
-            url += "&max_id=" + lastID;
-
-        String req = getRequest(url);
-
-        JsonArray jsonArray = gson.fromJson(req, JsonArray.class);
-
+        JsonArray jsonArray = gson.fromJson(requestResult.getResponse(), JsonArray.class);
         Type statusList = TypeToken.getParameterized(List.class, objClass).getType();
 
         return gson.fromJson(jsonArray, statusList);
     }
 
-    private <E extends Identifiable> ListStream<E> getStream(String url, int limit, String lastID, Class<E> objClass) {
-        return new ListStream<>(this, url, getList(url, limit, lastID, objClass));
+    private <E> ListStream<E> getStream(String baseUrl, int limit, Class<E> objClass) {
+        String url = baseUrl + (baseUrl.contains("?") ? "&" : "?") + "limit=" + limit;
+
+        RequestResult requestResult = getRequest(url);
+        if (errorOccurred())
+            return null;
+
+        JsonArray jsonArray = gson.fromJson(requestResult.getResponse(), JsonArray.class);
+        Type statusList = TypeToken.getParameterized(List.class, objClass).getType();
+
+        List<E> list = gson.fromJson(jsonArray, statusList);
+
+        return new ListStream<>(this, baseUrl, requestResult.getPaginationLink(), list);
     }
 
     private <E> E getSingle(String url, Class<E> objClass) {
-        String req = getRequest(url);
+        RequestResult requestResult = getRequest(url);
+        if (errorOccurred())
+            return null;
 
-        return gson.fromJson(req, objClass);
+        return gson.fromJson(requestResult.getResponse(), objClass);
     }
 
     private <E> E deleteSingle(String url, Class<E> objClass) {
-        String req = deleteRequest(url);
+        RequestResult requestResult = deleteRequest(url);
+        if (errorOccurred())
+            return null;
 
-        return gson.fromJson(req, objClass);
+        return gson.fromJson(requestResult.getResponse(), objClass);
     }
 
     private <E> E postSingle(String url, Class<E> objClass) {
@@ -380,16 +412,21 @@ public class API {
     }
 
     private <E> E postSingle(String url, Class<E> objClass, RequestBody body) {
-        String req = postRequest(url, body);
+        RequestResult requestResult = request(url, "POST", body);
+        if (errorOccurred())
+            return null;
+
+        String req = requestResult.getResponse();
 
         return gson.fromJson(req, objClass);
     }
 
     private <E> E putSingle(String url, Class<E> objClass, RequestBody body) {
-        Request.Builder builder = new Request.Builder()
-                .url("https://mastodon.social/" + url).put(body);
+        RequestResult requestResult = request(url, "PUT", body);
+        if (errorOccurred())
+            return null;
 
-        String req = request(builder);
+        String req = requestResult.getResponse();
 
         return gson.fromJson(req, objClass);
     }
@@ -398,48 +435,38 @@ public class API {
     // Utilitary methods for request building and execution.
     //
     // *******************************************************************
-    private String getRequest(String endpoint) {
-        Request.Builder builder = new Request.Builder()
-                .url("https://mastodon.social/" + endpoint).get();
-
-        return request(builder);
+    private RequestResult getRequest(String endpoint) {
+        return request(endpoint, "GET", null);
     }
 
-    private String deleteRequest(String endpoint) {
-        Request.Builder builder = new Request.Builder()
-                .url("https://mastodon.social/" + endpoint).delete();
-
-        return request(builder);
+    private RequestResult deleteRequest(String endpoint) {
+        return request(endpoint, "DELETE", null);
     }
 
-    private String postRequest(String endpoint, RequestBody body) {
-        Request.Builder builder = new Request.Builder()
-                .url("https://mastodon.social/" + endpoint).post(body);
+    private RequestResult request(String url, String method, RequestBody body) {
+        error = null;
+        RequestResult requestResult = null;
 
-        return request(builder);
-    }
-
-    private String request(Request.Builder builder) {
-        String result = "";
-
-        OkHttpClient client = new OkHttpClient();
+        Request.Builder builder = new Request.Builder().url("https://mastodon.social/" + url);
 
         if (token != null)
             builder.addHeader("Authorization", "Bearer " + token);
 
-        Request request = builder.build();
+        Request request = builder.method(method, body).build();
 
         try {
             Response response = client.newCall(request).execute();
 
-            System.out.println("Link pagination header: " + response.header("Link"));
+            String result = response.body() != null ? response.body().string() : null;
 
-            if (response.code() == 200 && response.body() != null)
-                result = response.body().string();
+            if (!response.isSuccessful())
+                error = new APIError(response.code(), result);
+
+            requestResult = new RequestResult(result, response.code(), response.header("Link"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        return result;
+        return requestResult;
     }
 }

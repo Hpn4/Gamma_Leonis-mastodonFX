@@ -38,7 +38,7 @@ public class AccountContentController {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize(){
         account = api.verifyCredentials();
     }
 
@@ -51,9 +51,10 @@ public class AccountContentController {
     }
 
 
-    private void showFollowers() {
+    private void showFollowers()  {
 
         updateFollowers();
+        System.out.println(followersList.size());
 
         accountListView.toFront();
 
