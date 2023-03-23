@@ -29,6 +29,9 @@ public class AccountContentController {
     private Label followersCount;
 
     @FXML
+    private Label followingsCount;
+
+    @FXML
     private ListView<Status> tootsListView;
 
     @FXML
@@ -58,6 +61,7 @@ public class AccountContentController {
 
         statusesCount.setText(String.valueOf(account.getStatusesCount()));
         followersCount.setText(String.valueOf(account.getFollowersCount()));
+        followingsCount.setText(String.valueOf(account.getFollowingCount()));
 
         accountBanner.setImage(new Image(account.getHeader(), true));
         accountAvatar.setImage(new Image(account.getAvatar(), true));
