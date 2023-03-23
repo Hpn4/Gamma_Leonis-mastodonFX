@@ -110,7 +110,7 @@ public class AccountContentController {
 
         tootsListView.toFront();
 
-        if (tootsListView != null) {
+        if (tootsListView == null) {
             tootsListView.setItems(tootsList);
             tootsListView.setCellFactory(param -> new TootsItemCell());
         }
