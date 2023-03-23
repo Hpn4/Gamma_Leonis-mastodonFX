@@ -5,13 +5,28 @@ import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class AccountContentController {
 
     private final API api = new API();
 
     private Account account;
+
+    @FXML
+    private ImageView accountAvatar;
+
+    @FXML
+    private ImageView accountBanner;
+
+    @FXML
+    private Label statusesCount;
+
+    @FXML
+    private Label followersCount;
 
     @FXML
     private ListView<Status> tootsListView;
@@ -40,6 +55,12 @@ public class AccountContentController {
     @FXML
     public void initialize(){
         account = api.verifyCredentials();
+
+        statusesCount.setText(String.valueOf(account.getStatusesCount()));
+        followersCount.setText(String.valueOf(account.getFollowersCount()));
+
+        accountBanner.setImage(new Image(account.getHeader(), true));
+        accountAvatar.setImage(new Image(account.getAvatar(), true));
     }
 
 

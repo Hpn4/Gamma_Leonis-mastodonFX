@@ -1,0 +1,66 @@
+
+.selection-action-region {
+    -fx-background-color: #333333;
+}
+
+
+.list-view, .list-cell, .top-account-region {
+    -fx-background-color: #404040;
+}
+
+.list-view .scroll-bar:vertical {
+    -fx-background-color: #404040;
+}
+
+.list-view .scroll-bar:vertical .increment-button:hover{
+    -fx-background-color: #333333;
+}
+
+.list-view .scroll-bar:vertical .decrement-button:hover{
+    -fx-background-color: #333333;
+}
+
+.list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #333333;
+    -fx-background-radius: 15px;
+    -fx-scale-x: 70%;
+}
+
+.account-selection-radio-button {
+    -fx-text-fill: #999999;
+    -fx-padding: 0 0 15px 0;
+}
+
+.account-selection-radio-button:hover {
+    -fx-text-fill: #CCCCCC;
+}
+
+.account-selection-radio-button:selected {
+    -fx-text-fill: #3D4FAD;
+}
+
+.account-selection-radio-button .radio {
+    -fx-background-color: none;
+    -fx-border-color: none;
+}
+
+.account-selection-radio-button:selected .dot {
+    -fx-shape: "M 50,5 95,97.5 5,97.5 z";
+    -fx-translate-y: 18px;
+    -fx-scale-x: 170%;
+    -fx-scale-y: 110%;
+    -fx-background-color: #3D4FAD;
+    -fx-border-color: none;
+}
+
+.followings-radio-button:selected .dot {
+    -fx-translate-x: 50px;
+}
+
+.followers-radio-button:selected .dot {
+    -fx-translate-x: 45px;
+}
+
+.toots-radio-button:selected .dot {
+    -fx-translate-x: 35px;
+}
