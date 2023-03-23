@@ -39,6 +39,8 @@ public class AccountContentController {
 
     private ObservableList<Account> followingsList;
     private ObservableList<Account> followersList;
+    private ObservableList<Status> tootsList;
+
 
     @FXML
     void onFollowersClick() {
@@ -74,6 +76,7 @@ public class AccountContentController {
     private void updateFollowings() {
         followingsList = api.getAccountFollowing(account.getId(), 20).getElement();
     }
+    private void updateToots() {tootsList = api.getAccountStatuses(account.getId(), 20).getElement();}
 
 
     private void showFollowers()  {
@@ -103,7 +106,13 @@ public class AccountContentController {
 
     private void showToots() {
 
+        updateToots();
+
         tootsListView.toFront();
-        // TODO
+
+        if (tootsListView != null) {
+            tootsListView.setItems(tootsList);
+            tootsListView.setCellFactory(param -> new TootsItemCell());
+        }
     }
 }
