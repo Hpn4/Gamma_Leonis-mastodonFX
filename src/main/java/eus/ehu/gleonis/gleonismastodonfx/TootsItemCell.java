@@ -11,10 +11,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebView;
 
 public class TootsItemCell extends ListCell<Status> {
+
+    public TootsItemCell() {
+        super();
+    }
+
     private FXMLLoader loader;
 
     @FXML
     private BorderPane messageBorder;
+
     @FXML
     private ImageView accountProfilePicture;
 
@@ -57,11 +63,11 @@ public class TootsItemCell extends ListCell<Status> {
             webfingerLabel.setText(status.getAccount().getAcct());
             userMessageLabel.getEngine().loadContent(status.getContent());
             dateMessageLabel.setText(status.getCreated_at());
-            accountProfilePicture.setImage(new Image(status.getAccount().getAvatar()));
+
+            accountProfilePicture.setImage(new Image(status.getAccount().getAvatar(), true));
 
             setText(null);
             setGraphic(messageBorder);
-
         }
     }
 }
