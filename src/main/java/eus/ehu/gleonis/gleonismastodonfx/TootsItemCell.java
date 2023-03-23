@@ -41,7 +41,7 @@ public class TootsItemCell extends ListCell<Status> {
             return;
         }
 
-        //Then, we check if the loader is null
+        ///Then, we check if the loader is null
         if (loader == null) {
             loader = new FXMLLoader(getClass().getResource("toots.fxml"));
             loader.setController(this);
