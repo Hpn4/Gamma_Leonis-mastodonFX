@@ -61,10 +61,15 @@ public class TootsItemCell extends ListCell<Status> {
 
             userLabel.setText(status.getAccount().getDisplayName());
             webfingerLabel.setText(status.getAccount().getAcct());
+
             userMessageLabel.getEngine().loadContent(status.getContent());
+
+
             dateMessageLabel.setText(status.getCreated_at());
 
             accountProfilePicture.setImage(new Image(status.getAccount().getAvatar(), true));
+
+            messageBorder.prefWidthProperty().bind(getListView().widthProperty().subtract(30));
 
             setText(null);
             setGraphic(messageBorder);
