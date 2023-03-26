@@ -59,6 +59,7 @@ public class TootsItemCell extends ListCell<Status> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
             //We have the loader, so we can set the graphic
 
             Status finalStatus = status;
@@ -70,20 +71,17 @@ public class TootsItemCell extends ListCell<Status> {
             userLabel.setText(finalStatus.getAccount().getDisplayName());
             webfingerLabel.setText(finalStatus.getAccount().getAcct());
 
-            HTMLView htmlView = new HTMLView();
-            htmlView.setHtml(finalStatus.getContent());
-            htmlView.prefHeight(HTMLView.USE_COMPUTED_SIZE);
+            HTMLView htmlView = new HTMLView(finalStatus.getContent());
 
             messageBorder.setCenter(htmlView);
 
-            dateMessageLabel.setText(Utils.getDateString(finalStatus.getCreated_at()));
+            dateMessageLabel.setText(Utils.getDateString(status.getCreated_at()));
             accountProfilePicture.setImage(new Image(finalStatus.getAccount().getAvatar(), true));
 
             messageBorder.prefWidthProperty().bind(getListView().widthProperty().subtract(30));
-            messageBorder.prefHeight(BorderPane.USE_COMPUTED_SIZE);
+            messageBorder.prefHeightProperty().bind(htmlView.heightProperty().map(e -> Math.max((Double) e, 100.0)));
 
             setText(null);
             setGraphic(messageBorder);
         }
-    }
 }
