@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="update toots">
+      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/TootsItemCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/TootsItemCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/toots.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/toots.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/toots.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/toots.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="FxmlFile" />
+        <option value="CSS File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2N8QIM3DW1RLHXo4pJQXYKNw8Jk" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/senig/IntelliJProject/SE_Project/Gamma_Leonis-mastodonFX&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX" />
+      <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources\eus\ehu\gleonis\gleonismastodonfx" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources\eus\ehu\gleonis\gleonismastodonfx" />
+      <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="eus.ehu.gleonis.gleonismastodonfx.api.adapter" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="eus.ehu.gleonis.gleonismastodonfx.HelloApplication" />
+      <module name="Gamma_Leonis-mastodonFX" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="eus.ehu.gleonis.gleonismastodonfx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HelloApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="" />
+      <created>1679043150863</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679043150863</updated>
+      <workItem from="1679043153951" duration="97000" />
+      <workItem from="1679043347714" duration="7193000" />
+      <workItem from="1679127900586" duration="1746000" />
+      <workItem from="1679214616686" duration="3829000" />
+      <workItem from="1679240217251" duration="3592000" />
+      <workItem from="1679248506202" duration="4484000" />
+      <workItem from="1679317377344" duration="3512000" />
+      <workItem from="1679394576965" duration="18231000" />
+      <workItem from="1679488006962" duration="35295000" />
+      <workItem from="1679757613568" duration="3131000" />
+      <workItem from="1679827897831" duration="1450000" />
+      <workItem from="1679836407530" duration="3129000" />
+      <workItem from="1679845340209" duration="746000" />
+    </task>
+    <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
+      <created>1679044335470</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679044335470</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update API and refactoring and start to create UI">
+      <created>1679252988665</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1679252988665</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update API and refactoring and start to create UI">
+      <created>1679253005892</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679253005892</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add config + login fxml">
+      <created>1679410135332</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1679410135332</updated>
+    </task>
+    <task id="LOCAL-00005" summary="API change + UI main screen">
+      <created>1679490060972</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679490060972</updated>
+    </task>
+    <task id="LOCAL-00006" summary="API change + UI main screen">
+      <created>1679493203519</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679493203519</updated>
+    </task>
+    <task id="LOCAL-00007" summary="API change + UI account style and performances">
+      <created>1679562864408</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679562864408</updated>
+    </task>
+    <task id="LOCAL-00008" summary="UI account style and performances">
+      <created>1679569907903</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679569907903</updated>
+    </task>
+    <task id="LOCAL-00009" summary="UI account header">
+      <created>1679571596577</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679571596577</updated>
+    </task>
+    <task id="LOCAL-00010" summary="UI toots">
+      <created>1679586741878</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679586741878</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Remove config.properties">
+      <created>1679588333401</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679588333401</updated>
+    </task>
+    <task id="LOCAL-00012" summary="update toots">
+      <created>1679599272676</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1679599272676</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Init repository + load all dependencies + blurhash + mockup" />
+    <MESSAGE value="Update API and refactoring and start to create UI" />
+    <MESSAGE value="Add config + login fxml" />
+    <MESSAGE value="API change + UI main screen" />
+    <MESSAGE value="API change + UI account style and performances" />
+    <MESSAGE value="UI account style and performances" />
+    <MESSAGE value="UI account header" />
+    <MESSAGE value="UI toots" />
+    <MESSAGE value="Remove config.properties" />
+    <MESSAGE value="update toots" />
+    <option name="LAST_COMMIT_MESSAGE" value="update toots" />
+  </component>
+</project>

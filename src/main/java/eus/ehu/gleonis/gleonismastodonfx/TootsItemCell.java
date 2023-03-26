@@ -1,6 +1,8 @@
 package eus.ehu.gleonis.gleonismastodonfx;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
+import eus.ehu.gleonis.gleonismastodonfx.utils.HTMLView;
+import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -8,7 +10,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.web.WebView;
+
 
 public class TootsItemCell extends ListCell<Status> {
 
@@ -25,13 +27,13 @@ public class TootsItemCell extends ListCell<Status> {
     private ImageView accountProfilePicture;
 
     @FXML
+    private ImageView accountReblogAvatar;
+
+    @FXML
     private Label dateMessageLabel;
 
     @FXML
     private Label userLabel;
-
-    @FXML
-    private WebView userMessageLabel;
 
     @FXML
     private Label webfingerLabel;
@@ -59,17 +61,26 @@ public class TootsItemCell extends ListCell<Status> {
             }
             //We have the loader, so we can set the graphic
 
-            userLabel.setText(status.getAccount().getDisplayName());
-            webfingerLabel.setText(status.getAccount().getAcct());
+            Status finalStatus = status;
+            if(status.getReblog() != null) {
+                finalStatus = status.getReblog();
+                accountReblogAvatar.setImage(new Image(status.getAccount().getAvatar(), true));
+            }
 
-            userMessageLabel.getEngine().loadContent(status.getContent());
+            userLabel.setText(finalStatus.getAccount().getDisplayName());
+            webfingerLabel.setText(finalStatus.getAccount().getAcct());
 
+            HTMLView htmlView = new HTMLView();
+            htmlView.setHtml(finalStatus.getContent());
+            htmlView.prefHeight(HTMLView.USE_COMPUTED_SIZE);
 
-            dateMessageLabel.setText(status.getCreated_at());
+            messageBorder.setCenter(htmlView);
 
-            accountProfilePicture.setImage(new Image(status.getAccount().getAvatar(), true));
+            dateMessageLabel.setText(Utils.getDateString(finalStatus.getCreated_at()));
+            accountProfilePicture.setImage(new Image(finalStatus.getAccount().getAvatar(), true));
 
             messageBorder.prefWidthProperty().bind(getListView().widthProperty().subtract(30));
+            messageBorder.prefHeight(BorderPane.USE_COMPUTED_SIZE);
 
             setText(null);
             setGraphic(messageBorder);

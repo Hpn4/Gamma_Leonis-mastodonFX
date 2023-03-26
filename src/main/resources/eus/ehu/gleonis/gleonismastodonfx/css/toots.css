@@ -2,3 +2,21 @@
 .toots-border-pane {
     -fx-background-color: #404040;
 }
+
+.html-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-fill: #FFFFFF;
+}
+
+.html-tag {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-fill: #6ca3ff;
+}
+
+.html-mention {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-fill: #a603b9;
+}
