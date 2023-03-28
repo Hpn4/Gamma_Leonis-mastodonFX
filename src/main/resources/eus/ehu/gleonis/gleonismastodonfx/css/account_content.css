@@ -8,6 +8,10 @@
     -fx-background-color: #404040;
 }
 
+.list-cell:hover {
+    -fx-background-color: #383838;
+}
+
 .list-view .scroll-bar:vertical {
     -fx-background-color: #404040;
 }

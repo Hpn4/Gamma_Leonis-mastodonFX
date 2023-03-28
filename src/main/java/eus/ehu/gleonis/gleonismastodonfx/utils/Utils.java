@@ -1,10 +1,14 @@
 package eus.ehu.gleonis.gleonismastodonfx.utils;
 
+import javafx.application.Platform;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class Utils {
 
@@ -38,5 +42,33 @@ public class Utils {
             return duration.toMinutes() + "m";
 
         return "now";
+    }
+
+
+    @FunctionalInterface
+    public interface ProducerWithThrow<R> {
+        R apply() throws Throwable;
+    }
+
+    /**
+     * Create and run an async task using the provided function as the asynchronous operation,
+     * and the callback as the success operation. Error are ignored and returned as null values.
+     *
+     * @param asyncOperation The asynchronous operation.
+     * @param callback The success callback.
+     * @param <V> The type of value produced asynchronously and provided to the callback as a result.
+     */
+    public static <V> void asyncTask(ProducerWithThrow<V> asyncOperation, Consumer<V> callback) {
+
+        CompletableFuture.supplyAsync(() -> {
+            try {
+                return asyncOperation.apply();
+            } catch (Throwable throwable) {
+                return null;
+            }
+        }).thenAcceptAsync(v -> {
+            if(callback != null)
+                Platform.runLater(() -> callback.accept(v));
+        });
     }
 }

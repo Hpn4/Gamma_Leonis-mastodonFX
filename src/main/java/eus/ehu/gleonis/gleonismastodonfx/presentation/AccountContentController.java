@@ -1,4 +1,4 @@
-package eus.ehu.gleonis.gleonismastodonfx;
+package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;

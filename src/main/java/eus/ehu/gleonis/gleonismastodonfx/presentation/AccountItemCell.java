@@ -1,5 +1,6 @@
-package eus.ehu.gleonis.gleonismastodonfx;
+package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
+import eus.ehu.gleonis.gleonismastodonfx.HelloApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,7 +57,7 @@ public class AccountItemCell extends ListCell<Account> {
         }
 
         if (loader == null) {
-            loader = new FXMLLoader(getClass().getResource("account_item.fxml"));
+            loader = new FXMLLoader(HelloApplication.class.getResource("account_item.fxml"));
             loader.setController(this);
 
             try {

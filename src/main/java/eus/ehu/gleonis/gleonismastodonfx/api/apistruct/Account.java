@@ -1,5 +1,7 @@
 package eus.ehu.gleonis.gleonismastodonfx.api.apistruct;
 
+import eus.ehu.gleonis.gleonismastodonfx.utils.CachedImage;
+
 public class Account implements Identifiable {
 
     String id;
@@ -28,12 +30,15 @@ public class Account implements Identifiable {
 
     int following_count;
 
+    private transient CachedImage avatarCachedImage;
+
+    private transient CachedImage headerCachedImage;
+
     public Account() {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Account{" +
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
@@ -87,6 +92,13 @@ public class Account implements Identifiable {
         return avatar;
     }
 
+    public CachedImage getAvatarCachedImage() {
+        if (avatarCachedImage == null)
+            avatarCachedImage = new CachedImage(null, avatar);
+
+        return avatarCachedImage;
+    }
+
     /**
      * Returns the URL of the header image. The image may be a png or a gif
      *
@@ -94,6 +106,13 @@ public class Account implements Identifiable {
      */
     public String getHeader() {
         return header;
+    }
+
+    public CachedImage getHeaderCachedImage() {
+        if (headerCachedImage == null)
+            headerCachedImage = new CachedImage(null, header);
+
+        return headerCachedImage;
     }
 
     public int getStatusesCount() {

@@ -32,11 +32,9 @@ public class HTMLView extends TextFlow {
     private void parseNodeToText(Node node) {
         String type = node.nodeName();
 
-        if (type.equals("#text")) {
-            Text text = new Text(((TextNode) node).text());
-            text.getStyleClass().add("html-text");
-            getChildren().add(text);
-        } else if (type.equals("p")) {
+        if (type.equals("#text"))
+            addChildren(((TextNode) node).text(), "html-text");
+        else if (type.equals("p")) {
             for (Node child : node.childNodes())
                 parseNodeToText(child);
 
@@ -44,19 +42,20 @@ public class HTMLView extends TextFlow {
         } else if (type.equals("br"))
             getChildren().add(new Text("\n"));
         else if (type.equals("a")) {
-            if (node.hasAttr("rel") && node.attr("rel").equals("tag")) {
-                Text text = new Text("#" + node.childNode(1).firstChild());
-                text.getStyleClass().add("html-tag");
-                getChildren().add(text);
-            } else if (node.attr("class").equals("u-url mention")) {
-                Text text = new Text("@" + node.childNode(1).firstChild());
-                text.getStyleClass().add("html-mention");
-                getChildren().add(text);
-            }
+            if (node.hasAttr("rel") && node.attr("rel").equals("tag"))
+                addChildren("#" + node.childNode(1).firstChild(), "html-tag");
+            else if (node.attr("class").equals("u-url mention"))
+                addChildren("@" + node.childNode(1).firstChild(), "html-mention");
         } else if (type.equals("span") && node.attr("class").equals("h-card"))
             for (Node child : node.childNodes())
                 parseNodeToText(child);
         else
             System.err.println("Unknown node type: " + node.outerHtml());
+    }
+
+    private void addChildren(String text, String cssClass) {
+        Text t = new Text(text);
+        t.getStyleClass().add(cssClass);
+        getChildren().add(t);
     }
 }
