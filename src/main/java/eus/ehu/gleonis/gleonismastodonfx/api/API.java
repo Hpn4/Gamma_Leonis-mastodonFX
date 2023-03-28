@@ -408,7 +408,7 @@ public class API {
     }
 
     private <E> E postSingle(String url, Class<E> objClass) {
-        return postSingle(url, objClass, null);
+        return postSingle(url, objClass, new FormBody.Builder().build());
     }
 
     private <E> E postSingle(String url, Class<E> objClass, RequestBody body) {

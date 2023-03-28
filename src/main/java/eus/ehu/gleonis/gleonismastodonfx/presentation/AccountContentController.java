@@ -107,7 +107,7 @@ public class AccountContentController {
         if (tootsListView != null) {
             tootsListView.toFront();
             tootsListView.setItems(tootsList);
-            tootsListView.setCellFactory(param -> new TootsItemCell());
+            tootsListView.setCellFactory(param -> new TootsItemCell(api));
         }
     }
 }

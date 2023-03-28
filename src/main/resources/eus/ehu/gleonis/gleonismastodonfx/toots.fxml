@@ -26,85 +26,80 @@
          </rowConstraints>
          <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1">
             <padding>
-               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>
             <GridPane fx:id="interactionPanel" prefHeight="39.0" prefWidth="262.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
-               <Button mnemonicParsing="false" onAction="#onReplyClick" prefHeight="50.0" prefWidth="25.0"
-                       GridPane.halignment="RIGHT">
+               <Button mnemonicParsing="false" onAction="#onReplyClick" prefHeight="50.0" prefWidth="25.0" GridPane.halignment="RIGHT">
                   <GridPane.margin>
-                     <Insets right="5.0"/>
+                     <Insets right="5.0" />
                   </GridPane.margin>
                   <styleClass>
-                     <String fx:value="reply-button"/>
-                     <String fx:value="interaction-status-button"/>
+                     <String fx:value="reply-button" />
+                     <String fx:value="interaction-status-button" />
                   </styleClass>
                </Button>
                <Label fx:id="repliesCount" text="12" textFill="#999999" GridPane.columnIndex="1">
                   <font>
-                     <Font name="System Bold" size="12.0"/>
+                     <Font name="System Bold" size="12.0" />
                   </font>
                </Label>
-               <Button fx:id="reblogButton" mnemonicParsing="false" onAction="#onReblogClick" prefHeight="15.0"
-                       prefWidth="15.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+               <Button fx:id="reblogButton" mnemonicParsing="false" onAction="#onReblogClick" prefHeight="15.0" prefWidth="15.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                   <GridPane.margin>
-                     <Insets right="5.0"/>
+                     <Insets right="5.0" />
                   </GridPane.margin>
                   <styleClass>
-                     <String fx:value="reblog-button"/>
-                     <String fx:value="interaction-status-button"/>
+                     <String fx:value="reblog-button" />
+                     <String fx:value="interaction-status-button" />
                   </styleClass>
                </Button>
                <Label fx:id="reblogsCount" text="16" textFill="#999999" GridPane.columnIndex="3">
                   <font>
-                     <Font name="System Bold" size="12.0"/>
+                     <Font name="System Bold" size="12.0" />
                   </font>
                </Label>
-               <Button fx:id="favouriteButton" mnemonicParsing="false" onAction="#onFavouriteClick" prefHeight="20.0"
-                       prefWidth="20.0" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+               <Button fx:id="favouriteButton" mnemonicParsing="false" onAction="#onFavouriteClick" prefHeight="20.0" prefWidth="20.0" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
                   <GridPane.margin>
-                     <Insets right="5.0" top="-3.0"/>
+                     <Insets right="5.0" top="-3.0" />
                   </GridPane.margin>
                   <styleClass>
-                     <String fx:value="favourite-button"/>
-                     <String fx:value="interaction-status-button"/>
+                     <String fx:value="favourite-button" />
+                     <String fx:value="interaction-status-button" />
                   </styleClass>
                </Button>
                <Label fx:id="favouritesCount" text="12" textFill="#999999" GridPane.columnIndex="5">
                   <font>
-                     <Font name="System Bold" size="12.0"/>
+                     <Font name="System Bold" size="12.0" />
                   </font>
                </Label>
-               <Button fx:id="bookmarkButton" mnemonicParsing="false" onAction="#onBookmarkClick"
-                       GridPane.columnIndex="6">
+               <Button fx:id="bookmarkButton" mnemonicParsing="false" onAction="#onBookmarkClick" GridPane.columnIndex="6">
                   <styleClass>
-                     <String fx:value="bookmark-button"/>
-                     <String fx:value="interaction-status-button"/>
+                     <String fx:value="bookmark-button" />
+                     <String fx:value="interaction-status-button" />
                   </styleClass>
                </Button>
-               <Button mnemonicParsing="false" onAction="#onMoreOptClick" prefHeight="7.0" prefWidth="16.0"
-                       GridPane.columnIndex="7">
+               <Button mnemonicParsing="false" onAction="#onMoreOptClick" prefHeight="7.0" prefWidth="16.0" GridPane.columnIndex="7">
                   <styleClass>
-                     <String fx:value="more-options-button"/>
-                     <String fx:value="interaction-status-button"/>
+                     <String fx:value="more-options-button" />
+                     <String fx:value="interaction-status-button" />
                   </styleClass>
                </Button>
             </GridPane>
             <Label fx:id="dateMessageLabel" alignment="TOP_RIGHT" text="Date" textFill="#999999">
                <padding>
-                  <Insets top="10.0"/>
+                  <Insets top="10.0" />
                </padding>
             </Label>
          </HBox>

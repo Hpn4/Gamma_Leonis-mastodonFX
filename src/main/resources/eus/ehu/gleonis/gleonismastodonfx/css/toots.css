@@ -25,6 +25,10 @@
     -fx-fill: #a603b9;
 }
 
+.html-mention:hover, .html-tag:hover {
+    -fx-underline: true;
+}
+
 .interaction-status-button {
     -fx-background-color: #1A1A1A;
 }

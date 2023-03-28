@@ -1,6 +1,7 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.HelloApplication;
+import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import eus.ehu.gleonis.gleonismastodonfx.utils.HTMLView;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
@@ -17,6 +18,8 @@ import javafx.scene.shape.Rectangle;
 
 
 public class TootsItemCell extends ListCell<Status> {
+
+    private API api;
 
     private FXMLLoader loader;
 
@@ -61,8 +64,9 @@ public class TootsItemCell extends ListCell<Status> {
     @FXML
     private Button bookmarkButton;
 
-    public TootsItemCell() {
+    public TootsItemCell(API api) {
         super();
+        this.api = api;
     }
 
     @FXML
@@ -74,33 +78,36 @@ public class TootsItemCell extends ListCell<Status> {
     void onReblogClick() {
         Status status = getItem();
         if (status.isReblogged())
-            reblogButton.getStyleClass().remove("rebloged-toots-button");
+            status = api.unreblogStatus(status.getId());
         else
-            reblogButton.getStyleClass().add("rebloged-toots-button");
+            status = api.reblogStatus(status.getId());
 
-        //TODO API and label update
+        setItem(status);
+        updateItem(status, false);
     }
 
     @FXML
     void onFavouriteClick() {
         Status status = getItem();
         if (status.isFavourited())
-            favouriteButton.getStyleClass().remove("favourited-toots-button");
+            status = api.unfavouriteStatus(status.getId());
         else
-            favouriteButton.getStyleClass().add("favourited-toots-button");
+            status = api.favouriteStatus(status.getId());
 
-        //TODO API and label update
+        setItem(status);
+        updateItem(status, false);
     }
 
     @FXML
     void onBookmarkClick() {
         Status status = getItem();
         if (status.isBookmarked())
-            bookmarkButton.getStyleClass().remove("bookmarked-toots-button");
+            status = api.unbookmarkStatus(status.getId());
         else
-            bookmarkButton.getStyleClass().add("bookmarked-toots-button");
+            status = api.bookmarkStatus(status.getId());
 
-        //TODO API and label update
+        setItem(status);
+        updateItem(status, false);
     }
 
     @FXML
@@ -131,8 +138,8 @@ public class TootsItemCell extends ListCell<Status> {
             }
             interactionPanel.setVisible(false);
         }
-        //We have the loader, so we can set the graphic
 
+        //We have the loader, so we can set the graphic
         Status finalStatus = status;
         if (status.getReblog() != null) {
             finalStatus = status.getReblog();
@@ -164,12 +171,9 @@ public class TootsItemCell extends ListCell<Status> {
         reblogsCount.setText(String.valueOf(finalStatus.getReblogs_count()));
         favouritesCount.setText(String.valueOf(finalStatus.getFavourites_count()));
 
-        if (status.isReblogged())
-            reblogButton.getStyleClass().add("rebloged-toots-button");
-        if (status.isFavourited())
-            favouriteButton.getStyleClass().add("favourited-toots-button");
-        if (status.isBookmarked())
-            bookmarkButton.getStyleClass().add("bookmarked-toots-button");
+        setupButtonColor(reblogButton, finalStatus.isReblogged(), "rebloged-toots-button");
+        setupButtonColor(favouriteButton, finalStatus.isFavourited(), "favourited-toots-button");
+        setupButtonColor(bookmarkButton, finalStatus.isBookmarked(), "bookmarked-toots-button");
 
         // Layout constraints
         messageBorder.prefWidthProperty().bind(getListView().widthProperty().subtract(30));
@@ -183,5 +187,19 @@ public class TootsItemCell extends ListCell<Status> {
 
         setText(null);
         setGraphic(messageBorder);
+
+        messageBorder.layout();
+    }
+
+    private void setupButtonColor(Button button, boolean setColor, String cssClassColor) {
+        if (setColor) {
+            button.getStyleClass().remove("interaction-status-button");
+            button.getStyleClass().add(cssClassColor);
+            button.applyCss();
+        } else {
+            button.getStyleClass().remove(cssClassColor);
+            button.getStyleClass().add("interaction-status-button");
+            button.applyCss();
+        }
     }
 }
