@@ -1,0 +1,81 @@
+
+.toots-border-pane {
+    -fx-background-color: #404040;
+}
+
+.toots-border-pane:hover {
+    -fx-background-color: #383838;
+}
+
+.html-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-fill: #FFFFFF;
+}
+
+.html-tag {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-fill: #6ca3ff;
+}
+
+.html-mention {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-fill: #a603b9;
+}
+
+.html-mention:hover, .html-tag:hover {
+    -fx-underline: true;
+}
+
+.interaction-status-button {
+    -fx-background-color: #1A1A1A;
+}
+
+.interaction-status-button:hover {
+    -fx-background-color: #3D4FAD;
+}
+
+.interaction-status-button:pressed {
+    -fx-background-color: #999999;
+}
+
+.reply-button {
+    -fx-shape: "M0,49.43l48.93,49.43V74.23c30.94-6.41,55.39,0.66,73.95,24.19c-3.22-48.4-36.29-71.76-73.95-73.31V0L0,49.43 L0,49.43L0,49.43z";
+    -fx-scale-y: 50%;
+}
+
+.reblog-button {
+    -fx-shape: "M2,5h10.672l-1.837,1.834L12,8l4-4l-4-4l-1.166,1.166L12.672,3H0v7l2-2V5z M14,11H3.328l1.838-1.834L4,8l-4,4l4,4 l1.166-1.166L3.328,13H16V6l-2,2V11z";
+    -fx-scale-y: 80%;
+}
+
+.favourite-button {
+    -fx-shape: "m12 17.328-5.403 3.286a.75.75 0 0 1-1.12-.813l1.456-6.155-4.796-4.123a.75.75 0 0 1 .428-1.316l6.303-.517 2.44-5.835a.75.75 0 0 1 1.384 0l2.44 5.835 6.303.517a.75.75 0 0 1 .427 1.316l-4.795 4.123 1.456 6.155a.75.75 0 0 1-1.12.813L12 17.328z";
+    -fx-scale-y: 70%;
+}
+
+.bookmark-button {
+    -fx-shape: "M1585.963 1920 960.48 1544.711 335 1920V170.586C335 76.536 411.536 0 505.586 0h909.79c94.05 0 170.587 76.536 170.587 170.586V1920Z";
+    -fx-scale-y: 85%;
+}
+
+.more-options-button {
+    -fx-shape: "M8,6.5A1.5,1.5,0,1,0,9.5,8,1.5,1.5,0,0,0,8,6.5Zm5,0A1.5,1.5,0,1,0,14.47,8,1.5,1.5,0,0,0,13,6.5ZM3,6.5A1.5,1.5,0,1,0,4.53,8,1.5,1.5,0,0,0,3,6.5Z";
+    -fx-scale-y: 20%;
+}
+
+.favourited-toots-button {
+    -fx-background-color: #ffb61f;
+}
+
+.bookmarked-toots-button {
+    -fx-background-color: #d90404;
+}
+
+.rebloged-toots-button {
+    -fx-background-color: #3D4FAD;
+}
+
+

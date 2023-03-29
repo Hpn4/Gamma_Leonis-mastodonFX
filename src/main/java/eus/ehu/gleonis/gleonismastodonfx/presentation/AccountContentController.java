@@ -1,4 +1,4 @@
-package eus.ehu.gleonis.gleonismastodonfx;
+package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
@@ -38,7 +38,9 @@ public class AccountContentController {
     private ListView<Account> accountListView;
 
     private ObservableList<Account> followingsList;
+
     private ObservableList<Account> followersList;
+
     private ObservableList<Status> tootsList;
 
 
@@ -80,39 +82,32 @@ public class AccountContentController {
 
 
     private void showFollowers()  {
-
         updateFollowers();
-        System.out.println(followersList.size());
-
-        accountListView.toFront();
 
         if (accountListView != null) {
+            accountListView.toFront();
             accountListView.setItems(followersList);
             accountListView.setCellFactory(param -> new AccountItemCell(false));
         }
     }
 
     private void showFollowings() {
-
         updateFollowings();
 
-        accountListView.toFront();
-
         if (accountListView != null) {
+            accountListView.toFront();
             accountListView.setItems(followingsList);
             accountListView.setCellFactory(param -> new AccountItemCell(true));
         }
     }
 
     private void showToots() {
-
         updateToots();
 
-        tootsListView.toFront();
-
         if (tootsListView != null) {
+            tootsListView.toFront();
             tootsListView.setItems(tootsList);
-            tootsListView.setCellFactory(param -> new TootsItemCell());
+            tootsListView.setCellFactory(param -> new TootsItemCell(api));
         }
     }
 }

@@ -1,5 +1,6 @@
-package eus.ehu.gleonis.gleonismastodonfx;
+package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
+import eus.ehu.gleonis.gleonismastodonfx.HelloApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,31 +13,25 @@ import javafx.scene.layout.BorderPane;
 
 public class AccountItemCell extends ListCell<Account> {
 
+    private final boolean isFollowings;
+    private FXMLLoader loader;
+    @FXML
+    private ImageView accountAvatar;
+    @FXML
+    private BorderPane accountItem;
+    @FXML
+    private Label accountName;
+    @FXML
+    private Label accountWebfinger;
+    @FXML
+    private Button followButton;
+
     public AccountItemCell(boolean isFollowings) {
         super();
 
         this.isFollowings = isFollowings;
 
     }
-
-    private FXMLLoader loader;
-
-    private final boolean isFollowings;
-
-    @FXML
-    private ImageView accountAvatar;
-
-    @FXML
-    private BorderPane accountItem;
-
-    @FXML
-    private Label accountName;
-
-    @FXML
-    private Label accountWebfinger;
-
-    @FXML
-    private Button followButton;
 
     @FXML
     void onFollowClick() {
@@ -62,7 +57,7 @@ public class AccountItemCell extends ListCell<Account> {
         }
 
         if (loader == null) {
-            loader = new FXMLLoader(getClass().getResource("account_item.fxml"));
+            loader = new FXMLLoader(HelloApplication.class.getResource("account_item.fxml"));
             loader.setController(this);
 
             try {
@@ -70,20 +65,20 @@ public class AccountItemCell extends ListCell<Account> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            if (isFollowings)
-                followButton.setVisible(false);
-
-            accountName.setText(account.getUsername());
-            accountWebfinger.setText("@" + account.getAcct());
-
-            Image avatar = new Image(account.getAvatar(), true);
-            accountAvatar.setImage(avatar);
-
-            accountItem.prefWidthProperty().bind(getListView().widthProperty().subtract(30));
-
-            setText(null);
-            setGraphic(accountItem);
         }
+
+        if (isFollowings)
+            followButton.setVisible(false);
+
+        accountName.setText(account.getUsername());
+        accountWebfinger.setText("@" + account.getAcct());
+
+        Image avatar = new Image(account.getAvatar(), true);
+        accountAvatar.setImage(avatar);
+
+        accountItem.prefWidthProperty().bind(getListView().widthProperty().subtract(30));
+
+        setText(null);
+        setGraphic(accountItem);
     }
 }
