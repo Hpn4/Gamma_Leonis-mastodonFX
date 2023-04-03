@@ -1,4 +1,7 @@
 
+/*
+* Global background color of the toots
+ */
 .toots-border-pane {
     -fx-background-color: #404040;
 }
@@ -7,6 +10,9 @@
     -fx-background-color: #383838;
 }
 
+/*
+* Style for toot's content
+ */
 .html-text {
     -fx-font-size: 14px;
     -fx-text-fill: #FFFFFF;
@@ -29,18 +35,10 @@
     -fx-underline: true;
 }
 
-.interaction-status-button {
-    -fx-background-color: #1A1A1A;
-}
 
-.interaction-status-button:hover {
-    -fx-background-color: #3D4FAD;
-}
-
-.interaction-status-button:pressed {
-    -fx-background-color: #999999;
-}
-
+/*
+* The following lines are used to change the shape of buttons (reply, reblog, favourite, bookmark and more options)
+ */
 .reply-button {
     -fx-shape: "M0,49.43l48.93,49.43V74.23c30.94-6.41,55.39,0.66,73.95,24.19c-3.22-48.4-36.29-71.76-73.95-73.31V0L0,49.43 L0,49.43L0,49.43z";
     -fx-scale-y: 50%;
@@ -66,6 +64,21 @@
     -fx-scale-y: 20%;
 }
 
+.interaction-status-button {
+    -fx-background-color: #1A1A1A;
+}
+
+.interaction-status-button:hover {
+    -fx-background-color: #3D4FAD;
+}
+
+.interaction-status-button:pressed {
+    -fx-background-color: #999999;
+}
+
+/*
+* CSS style to change color of the favourite, bookmark and reblog button
+ */
 .favourited-toots-button {
     -fx-background-color: #ffb61f;
 }

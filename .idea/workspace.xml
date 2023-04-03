@@ -4,13 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Update toots UI, modify style, add style, refactoring, API change and Image cache system">
+    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Toots interraction">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/API.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/AccountContentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/AccountContentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/AccountItemCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/AccountItemCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/TootsItemCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/TootsItemCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/account_content.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/account_content.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/account_content.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/account_content.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/toots.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/toots.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/toots.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/toots.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/loginWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/login_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/loginWindow.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/mainWindow.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/window.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +76,7 @@
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources\eus\ehu\gleonis\gleonismastodonfx" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources\eus\ehu\gleonis\gleonismastodonfx\css" />
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources\eus\ehu\gleonis\gleonismastodonfx" />
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX" />
     </key>
@@ -75,8 +85,8 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="eus.ehu.gleonis.gleonismastodonfx.HelloApplication" />
+    <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="eus.ehu.gleonis.gleonismastodonfx.MainApplication" />
       <module name="Gamma_Leonis-mastodonFX" />
       <extension name="coverage">
         <pattern>
@@ -90,7 +100,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.MainApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -117,7 +127,10 @@
       <workItem from="1679845340209" duration="4590000" />
       <workItem from="1679889525372" duration="2695000" />
       <workItem from="1679985315317" duration="8221000" />
-      <workItem from="1680011308010" duration="3217000" />
+      <workItem from="1680011308010" duration="3496000" />
+      <workItem from="1680021935271" duration="109000" />
+      <workItem from="1680524786043" duration="1067000" />
+      <workItem from="1680526268507" duration="6478000" />
     </task>
     <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
       <created>1679044335470</created>
@@ -224,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679996029623</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Toots interraction">
+      <created>1680014826255</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1680014826255</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,6 +275,7 @@
     <MESSAGE value="Update toots html view" />
     <MESSAGE value="Update toots and account" />
     <MESSAGE value="Update toots UI, modify style, add style, refactoring, API change and Image cache system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update toots UI, modify style, add style, refactoring, API change and Image cache system" />
+    <MESSAGE value="Toots interraction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Toots interraction" />
   </component>
 </project>

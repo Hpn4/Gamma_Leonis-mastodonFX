@@ -81,7 +81,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                eus.ehu.gleonis.gleonismastodonfx/eus.ehu.gleonis.gleonismastodonfx.HelloApplication
+                                eus.ehu.gleonis.gleonismastodonfx/eus.ehu.gleonis.gleonismastodonfx.MainApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

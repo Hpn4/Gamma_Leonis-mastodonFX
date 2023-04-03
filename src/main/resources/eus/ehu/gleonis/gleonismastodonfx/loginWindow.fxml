@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="284.0" prefWidth="380.0" spacing="30.0" styleClass="background-region" stylesheets="@login_style.css"
+      prefHeight="284.0" prefWidth="380.0" spacing="30.0" styleClass="background-region" stylesheets="@css/loginWindow.css"
       xmlns="http://javafx.com/javafx/19">
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>

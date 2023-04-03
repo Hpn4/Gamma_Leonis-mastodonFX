@@ -1,17 +1,16 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
-import eus.ehu.gleonis.gleonismastodonfx.HelloApplication;
+import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
-public class AccountItemCell extends ListCell<Account> {
+public class AccountItemCell {
 
     private final boolean isFollowings;
     private FXMLLoader loader;
@@ -26,11 +25,11 @@ public class AccountItemCell extends ListCell<Account> {
     @FXML
     private Button followButton;
 
-    public AccountItemCell(boolean isFollowings) {
+    public AccountItemCell(Account account, boolean isFollowings) {
         super();
 
         this.isFollowings = isFollowings;
-
+        updateItem(account);
     }
 
     @FXML
@@ -45,19 +44,12 @@ public class AccountItemCell extends ListCell<Account> {
         //TODO
     }
 
-    @Override
-    protected void updateItem(Account account, boolean empty) {
-        super.updateItem(account, empty);
-
-        if (empty || account == null) {
-            setText(null);
-            setGraphic(null);
-
+    protected void updateItem(Account account) {
+        if (account == null)
             return;
-        }
 
         if (loader == null) {
-            loader = new FXMLLoader(HelloApplication.class.getResource("account_item.fxml"));
+            loader = new FXMLLoader(MainApplication.class.getResource("account_item.fxml"));
             loader.setController(this);
 
             try {
@@ -75,10 +67,9 @@ public class AccountItemCell extends ListCell<Account> {
 
         Image avatar = new Image(account.getAvatar(), true);
         accountAvatar.setImage(avatar);
+    }
 
-        accountItem.prefWidthProperty().bind(getListView().widthProperty().subtract(30));
-
-        setText(null);
-        setGraphic(accountItem);
+    public BorderPane getAccountItem() {
+        return accountItem;
     }
 }
