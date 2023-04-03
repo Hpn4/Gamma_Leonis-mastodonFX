@@ -3,7 +3,7 @@
     -fx-bg-darker: #333333;
 }
 
-.scroll-pane, .top-account-region, .vbox-items {
+.scroll-pane, .top-account-region, .vbox-items, .rootBorderPane {
     -fx-background-color: -fx-bg-color;
 }
 

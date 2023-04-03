@@ -19,4 +19,6 @@ module eus.ehu.gleonis.gleonismastodonfx {
     exports eus.ehu.gleonis.gleonismastodonfx.api.apistruct;
     exports eus.ehu.gleonis.gleonismastodonfx.presentation;
     opens eus.ehu.gleonis.gleonismastodonfx.presentation to javafx.fxml;
+    exports eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
+    opens eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable to javafx.fxml;
 }

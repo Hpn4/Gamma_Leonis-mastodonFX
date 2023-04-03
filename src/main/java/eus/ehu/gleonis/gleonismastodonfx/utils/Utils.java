@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.WeakListChangeListener;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -99,46 +98,42 @@ public class Utils {
             targetList.add(t);
             sourceToTargetMap.put(s, t);
         }
+
         // Listen to changes in sourceList and update targetList accordingly
-        ListChangeListener<S> sourceListener = new ListChangeListener<S>()
-        {
-            @Override
-            public void onChanged(ListChangeListener.Change<? extends S> c)
+        ListChangeListener<S> sourceListener = c -> {
+            while (c.next())
             {
-                while (c.next())
+                if (c.wasPermutated())
                 {
-                    if (c.wasPermutated())
+                    for (int i = c.getFrom(); i < c.getTo(); i++)
                     {
-                        for (int i = c.getFrom(); i < c.getTo(); i++)
-                        {
-                            int j = c.getPermutation(i);
-                            S s = sourceList.get(j);
-                            T t = sourceToTargetMap.get(s);
-                            targetList.set(i, t);
-                        }
+                        int j = c.getPermutation(i);
+                        S s = sourceList.get(j);
+                        T t = sourceToTargetMap.get(s);
+                        targetList.set(i, t);
                     }
-                    else
+                }
+                else
+                {
+                    for (S s : c.getRemoved())
                     {
-                        for (S s : c.getRemoved())
-                        {
-                            T t = sourceToTargetMap.get(s);
-                            targetList.remove(t);
-                            sourceToTargetMap.remove(s);
-                        }
-                        int i = c.getFrom();
-                        for (S s : c.getAddedSubList())
-                        {
-                            T t = mapper.apply(s);
-                            targetList.add(i, t);
-                            sourceToTargetMap.put(s, t);
-                            i += 1;
-                        }
+                        T t = sourceToTargetMap.get(s);
+                        targetList.remove(t);
+                        sourceToTargetMap.remove(s);
+                    }
+                    for (S s : c.getAddedSubList())
+                    {
+                        if(sourceToTargetMap.containsKey(s))
+                            continue; //TODO improve this, double loop with c.next()
+                        T t = mapper.apply(s);
+                        targetList.add(t);
+                        sourceToTargetMap.put(s, t);
                     }
                 }
             }
         };
 
-        sourceList.addListener(new WeakListChangeListener<>(sourceListener));
+        sourceList.addListener(sourceListener);
         // Store the listener in targetList to prevent GC
         // The listener should be active as long as targetList exists
         targetList.addListener((InvalidationListener) iv ->

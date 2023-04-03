@@ -1,4 +1,4 @@
-package eus.ehu.gleonis.gleonismastodonfx.presentation;
+package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
@@ -169,14 +168,10 @@ public class TootsItemCell {
         setupButtonColor(bookmarkButton, finalStatus.isBookmarked(), "bookmarked-toots-button");
 
         // Layout constraints
-        //messageBorder.prefWidthProperty().bind(getListView().widthProperty().subtract(30));
         messageBorder.prefHeightProperty().bind(htmlView.heightProperty().map(e -> 40 + Math.max((Double) e, 60.0)));
 
         messageBorder.setOnMouseEntered(e -> interactionPanel.setVisible(true));
-
-        messageBorder.setOnMouseExited((MouseEvent e) -> {
-            interactionPanel.setVisible(false);
-        });
+        messageBorder.setOnMouseExited(e -> interactionPanel.setVisible(false));
     }
 
     private void setupButtonColor(Button button, boolean setColor, String cssClassColor) {

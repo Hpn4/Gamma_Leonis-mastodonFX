@@ -4,7 +4,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="770.0" stylesheets="@css/account_content.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.AccountContentController">
+<BorderPane fx:id="rootBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="770.0" styleClass="rootBorderPane" stylesheets="@css/account_content.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.AccountContentController">
    <top>
       <VBox prefHeight="222.0" prefWidth="770.0" styleClass="top-account-region" BorderPane.alignment="CENTER">
          <ImageView fx:id="accountBanner" fitHeight="83.0" fitWidth="550.0" pickOnBounds="true" preserveRatio="true" />
@@ -104,11 +103,4 @@
          </GridPane>
       </VBox>
    </top>
-   <center>
-      <ScrollPane fx:id="itemsScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="TOP_LEFT">
-         <content>
-            <VBox fx:id="itemBox" alignment="TOP_CENTER" styleClass="vbox-items"/>
-         </content>
-      </ScrollPane>
-   </center>
 </BorderPane>
