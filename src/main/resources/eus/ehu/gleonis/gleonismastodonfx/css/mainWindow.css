@@ -40,33 +40,33 @@
 }
 
 /* Menu button */
-.radio-button {
+.window-menu-radio-button {
     -fx-text-fill: -fx-text-color;
 }
 
-.radio-button:hover {
+.window-menu-radio-button:hover {
     -fx-text-fill: -fx-white-color;
 }
 
-.radio-button:selected {
+.window-menu-radio-button:selected {
     -fx-text-fill: -fx-eoi-color;
 }
 
-.radio-button .radio {
+.window-menu-radio-button .radio {
     -fx-background-color: none;
     -fx-border-color: -fx-text-color;
     -fx-scale-y: 95%;
 }
 
-.radio-button:hover .radio {
+.window-menu-radio-button:hover .radio {
     -fx-border-color: -fx-white-color;
 }
 
-.radio-button:selected .radio {
+.window-menu-radio-button:selected .radio {
     -fx-border-color: -fx-eoi-color;
 }
 
-.radio-button:selected .dot {
+.window-menu-radio-button:selected .dot {
     -fx-background-color: -fx-eoi-color;
     -fx-background-insets: -17px 41px -17px -36px;
     -fx-background-radius: 0px;

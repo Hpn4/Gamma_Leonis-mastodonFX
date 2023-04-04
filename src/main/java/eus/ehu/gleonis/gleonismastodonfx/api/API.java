@@ -358,6 +358,13 @@ public class API {
         postSingle("api/v1/notifications/" + id + "/dismiss", Notification.class);
     }
 
+
+    //*******************************************************************
+    // Web sockets
+    //
+    // *******************************************************************
+
+
     //*******************************************************************
     // Stream Utils methods
     //
@@ -445,14 +452,9 @@ public class API {
 
     private RequestResult request(String url, String method, RequestBody body) {
         error = null;
-        RequestResult requestResult = null;
+        RequestResult requestResult;
 
-        Request.Builder builder = new Request.Builder().url("https://mastodon.social/" + url);
-
-        if (token != null)
-            builder.addHeader("Authorization", "Bearer " + token);
-
-        Request request = builder.method(method, body).build();
+        Request request = buildRequest(url, method, body);
 
         try {
             Response response = client.newCall(request).execute();
@@ -468,5 +470,14 @@ public class API {
         }
 
         return requestResult;
+    }
+
+    private Request buildRequest(String url, String method, RequestBody body) {
+        Request.Builder builder = new Request.Builder().url("https://mastodon.social/" + url);
+
+        if (token != null)
+            builder.addHeader("Authorization", "Bearer " + token);
+
+        return builder.method(method, body).build();
     }
 }

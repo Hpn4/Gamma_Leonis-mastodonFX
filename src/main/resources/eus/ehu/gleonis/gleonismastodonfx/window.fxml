@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.*?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="674.0" prefWidth="983.0" styleClass="background-region" stylesheets="@css/mainWindow.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="674.0" prefWidth="983.0" styleClass="background-region" stylesheets="@css/mainWindow.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.MainWindowController">
    <left>
       <VBox prefHeight="674.0" prefWidth="254.0" styleClass="content-region" BorderPane.alignment="CENTER">
          <AnchorPane prefHeight="90.0" prefWidth="211.0">
             <VBox.margin>
-               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="settings-button"/>
-            <Button layoutY="46.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0"
-                    styleClass="notification-button"/>
-            <Label layoutX="116.0" layoutY="20.0" text="Hpn4" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="settings-button" />
+            <Button layoutY="46.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="notification-button" />
+            <Label fx:id="accountUsername" layoutX="116.0" layoutY="20.0" text="Hpn4" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="13.0"/>
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="112.0" layoutY="37.0" text="\@Hpn4" textFill="#666666"/>
-            <Circle fill="DODGERBLUE" layoutX="71.0" layoutY="38.0" radius="35.0" stroke="BLACK" strokeType="INSIDE"/>
+            <Label fx:id="accountWebfinger" layoutX="112.0" layoutY="37.0" text="\@Hpn4" textFill="#666666" />
+            <Circle fx:id="accountImage" fill="DODGERBLUE" layoutX="71.0" layoutY="38.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
          </AnchorPane>
          <Separator prefWidth="200.0" styleClass="menu-separator">
             <VBox.margin>
@@ -29,14 +38,13 @@
             </VBox.margin>
          </Separator>
          <StackPane alignment="CENTER_RIGHT" prefHeight="74.0" prefWidth="211.0">
-            <TextField prefHeight="54.0" prefWidth="233.0" promptText="Search..."/>
-            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0"
-                    styleClass="search-button" text="Search">
+            <TextField prefHeight="54.0" prefWidth="233.0" promptText="Search..." />
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" styleClass="search-button" text="Search">
                <StackPane.margin>
-                  <Insets right="15.0"/>
+                  <Insets right="15.0" />
                </StackPane.margin>
                <padding>
-                  <Insets bottom="2.0" top="2.0"/>
+                  <Insets bottom="2.0" top="2.0" />
                </padding>
             </Button>
          </StackPane>
@@ -45,7 +53,7 @@
                <Insets left="20.0" right="20.0" />
             </VBox.margin>
          </Separator>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" styleClass="home-radio-button" text="Home" textAlignment="CENTER" textFill="#666666">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" text="Home" textAlignment="CENTER" textFill="#666666">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
@@ -55,71 +63,103 @@
             <toggleGroup>
                <ToggleGroup fx:id="menuChoice" />
             </toggleGroup>
+            <styleClass>
+               <String fx:value="home-radio-button" />
+               <String fx:value="window-menu-radio-button" />
+            </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" styleClass="global-radio-button" text="Global Timelines" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" text="Global Timelines" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
             <padding>
                <Insets left="30.0" />
             </padding>
+            <styleClass>
+               <String fx:value="global-radio-button" />
+               <String fx:value="window-menu-radio-button" />
+            </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" styleClass="local-radio-button" text="Local Timelines" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" text="Local Timelines" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
             <padding>
                <Insets left="30.0" />
             </padding>
+            <styleClass>
+               <String fx:value="local-radio-button" />
+               <String fx:value="window-menu-radio-button" />
+            </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" styleClass="trending-radio-button" text="Trending" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" text="Trending" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
             <padding>
                <Insets left="30.0" />
             </padding>
+            <styleClass>
+               <String fx:value="trending-radio-button" />
+               <String fx:value="window-menu-radio-button" />
+            </styleClass>
          </RadioButton>
          <Separator prefHeight="27.0" prefWidth="177.0" styleClass="menu-separator">
             <VBox.margin>
                <Insets left="20.0" right="20.0" />
             </VBox.margin>
          </Separator>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" styleClass="message-radio-button" text="Direct Message" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" text="Direct Message" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
             <padding>
                <Insets left="30.0" />
             </padding>
+            <styleClass>
+               <String fx:value="message-radio-button" />
+               <String fx:value="window-menu-radio-button" />
+            </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" styleClass="favourites-radio-button" text="Favourites" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" text="Favourites" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
             <padding>
                <Insets left="30.0" />
             </padding>
+            <styleClass>
+               <String fx:value="favourites-radio-button" />
+               <String fx:value="window-menu-radio-button" />
+            </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" styleClass="bookmarks-radio-button" text="Bookmarks" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" text="Bookmarks" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
             <padding>
                <Insets left="30.0" />
             </padding>
+            <styleClass>
+               <String fx:value="bookmarks-radio-button" />
+               <String fx:value="window-menu-radio-button" />
+            </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" styleClass="lists-radio-button" text="Lists" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" prefHeight="54.0" prefWidth="217.0" text="Lists" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
             <padding>
                <Insets left="30.0" />
             </padding>
+            <styleClass>
+               <String fx:value="lists-radio-button" />
+               <String fx:value="window-menu-radio-button" />
+            </styleClass>
          </RadioButton>
       </VBox>
    </left>
    <center>
-      <StackPane prefHeight="674.0" prefWidth="764.0" styleClass="content-region" BorderPane.alignment="CENTER" />
+      <BorderPane fx:id="sceneContent" prefHeight="674.0" prefWidth="764.0" styleClass="content-region" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

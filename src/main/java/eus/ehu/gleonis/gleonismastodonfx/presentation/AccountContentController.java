@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
-public class AccountContentController {
+public class AccountContentController extends AbstractController {
 
     private final API api = new API();
 
@@ -51,9 +51,8 @@ public class AccountContentController {
         showToots();
     }
 
-    @FXML
-    public void initialize() {
-        account = api.verifyCredentials();
+    public void setAccount(String acc) {
+        account = acc == null ? api.verifyCredentials() : api.getAccount(acc);
 
         statusesCount.setText(String.valueOf(account.getStatusesCount()));
         followersCount.setText(String.valueOf(account.getFollowersCount()));
@@ -71,15 +70,15 @@ public class AccountContentController {
     }
 
     private void showFollowings() {
-        ListStream<Account> accountListStream = api.getAccountFollowers(account.getId(), 20);
+        ListStream<Account> accountListStream = api.getAccountFollowing(account.getId(), 20);
         AccountScrollableContent accountScrollableContent = new AccountScrollableContent(accountListStream, 10, true);
 
         accountScrollableContent.addToBorderPane(rootBorderPane);
     }
 
     private void showToots() {
-        ListStream<Status> tootsListStream = api.getAccountStatuses(account.getId(), 3);
-        TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(tootsListStream, 1, api);
+        ListStream<Status> tootsListStream = api.getAccountStatuses(account.getId(), 20);
+        TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(tootsListStream, 10, api);
 
         tootsScrollableContent.addToBorderPane(rootBorderPane);
     }

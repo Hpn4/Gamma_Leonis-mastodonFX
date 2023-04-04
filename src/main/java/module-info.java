@@ -6,6 +6,7 @@ module eus.ehu.gleonis.gleonismastodonfx {
     requires java.desktop;
     requires javafx.web;
     requires org.jsoup;
+    requires okio;
 
 
     opens eus.ehu.gleonis.gleonismastodonfx to javafx.fxml;
