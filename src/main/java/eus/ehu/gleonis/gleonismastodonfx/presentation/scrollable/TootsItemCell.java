@@ -15,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 
 
-public class TootsItemCell {
+public class TootsItemCell{
 
     private API api;
 
@@ -149,7 +149,7 @@ public class TootsItemCell {
         userLabel.setText(finalStatus.getAccount().getDisplayName());
         webfingerLabel.setText(finalStatus.getAccount().getAcct());
 
-        HTMLView htmlView = new HTMLView(finalStatus.getContent());
+        HTMLView htmlView = new HTMLView(finalStatus, finalStatus.getContent());
         htmlView.setPadding(new Insets(10));
 
         messageBorder.setCenter(htmlView);

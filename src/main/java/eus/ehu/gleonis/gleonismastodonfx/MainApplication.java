@@ -1,5 +1,7 @@
 package eus.ehu.gleonis.gleonismastodonfx;
 
+import eus.ehu.gleonis.gleonismastodonfx.api.API;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.AbstractController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.AccountContentController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.MainWindowController;
 import javafx.application.Application;
@@ -13,7 +15,22 @@ import java.io.IOException;
 
 public class MainApplication extends Application {
 
+    private static MainApplication instance;
+
+    public static MainApplication getInstance() {
+        return instance;
+    }
+
     private MainWindowController mainController;
+
+    // Window
+    private Window<AccountContentController> accountsWindow;
+
+    private API api;
+
+    public static void main(String[] args) {
+        launch();
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -29,20 +46,37 @@ public class MainApplication extends Application {
         requestShowAccount(null);
 
         stage.show();
+
+        instance = this;
     }
 
-    public void requestShowAccount(String account) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("account_content.fxml"));
-        Pane p = fxmlLoader.load();
+    public void requestShowAccount(String account) {
+        try {
+            if (accountsWindow == null)
+                accountsWindow = load("account_content.fxml");
 
-        AccountContentController controller = fxmlLoader.getController();
-        controller.setAccount(account);
-        controller.setApplication(this);
+            accountsWindow.controller.setAccount(account);
 
-        mainController.setCenter(p);
+            mainController.setCenter(accountsWindow.ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void main(String[] args) {
-        launch();
+    private class Window<E extends AbstractController> {
+        E controller;
+        Pane ui;
+    }
+
+    private <E extends AbstractController> Window<E> load(String url) throws IOException {
+        Window<E> ref = new Window<E>();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(url));
+        ref.ui = fxmlLoader.load();
+        ref.controller = fxmlLoader.getController();
+        ref.controller.setApplication(this);
+        ref.controller.setAPI(api);
+
+        return ref;
     }
 }

@@ -1,5 +1,6 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 
+import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
@@ -14,8 +15,10 @@ public class TootsScrollableContent extends AbstractScrollableContent<Status> {
     }
 
     private void setupListPropertyListener(API api) {
-        Utils.mapByValue(itemsList, contentBox.getChildren(), p -> {
-            Pane pane = new TootsItemCell(p, api).getGraphic();
+        Utils.mapByValue(itemsList, contentBox.getChildren(), status -> {
+            TootsItemCell toot = new TootsItemCell(status, api);
+
+            Pane pane = toot.getGraphic();
             pane.prefWidthProperty().bind(widthProperty().subtract(20));
 
             return pane;

@@ -43,6 +43,8 @@ public class Status implements Identifiable {
 
     boolean bookmarked;
 
+    List<StatusMention> mentions;
+
     @Override
     public String getId() {
         return id;
@@ -115,5 +117,7 @@ public class Status implements Identifiable {
     public boolean isBookmarked() {
         return bookmarked;
     }
+
+    public List<StatusMention> getMentions() {return mentions; }
 
 }

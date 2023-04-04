@@ -4,23 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="ScrollableContent">
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/websocks/AnnouncementListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/websocks/NotificationListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/websocks/StatusListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/websocks/StatusTimeline.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/AbstractController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="MainWindow start implementation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/API.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/apistruct/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/apistruct/Status.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/AbstractController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/AbstractController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/AccountContentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/AccountContentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/account_content.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/account_content.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/account_content.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/account_content.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/mainWindow.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/mainWindow.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/window.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountItemCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountItemCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsItemCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsItemCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsScrollableContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/HTMLView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/HTMLView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/account_item.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/account_item.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,24 +51,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/senig/IntelliJProject/SE_Project/Gamma_Leonis-mastodonFX",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/senig/IntelliJProject/SE_Project/Gamma_Leonis-mastodonFX&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX" />
@@ -138,7 +132,8 @@
       <workItem from="1680526268507" duration="6567000" />
       <workItem from="1680552781448" duration="5307000" />
       <workItem from="1680584716196" duration="2304000" />
-      <workItem from="1680593793080" duration="2624000" />
+      <workItem from="1680593793080" duration="2846000" />
+      <workItem from="1680629034566" duration="3200000" />
     </task>
     <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
       <created>1679044335470</created>
@@ -266,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680557908410</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="MainWindow start implementation">
+      <created>1680601418648</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1680601418648</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,6 +302,7 @@
     <MESSAGE value="Toots interraction" />
     <MESSAGE value="Change style + ListView to VBox + refactoring + performance + rename" />
     <MESSAGE value="ScrollableContent" />
-    <option name="LAST_COMMIT_MESSAGE" value="ScrollableContent" />
+    <MESSAGE value="MainWindow start implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="MainWindow start implementation" />
   </component>
 </project>

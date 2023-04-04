@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 public class AccountItemCell {
 
     private final boolean isFollowings;
+
     private FXMLLoader loader;
     @FXML
     private ImageView accountAvatar;
@@ -67,6 +68,8 @@ public class AccountItemCell {
 
         Image avatar = new Image(account.getAvatar(), true);
         accountAvatar.setImage(avatar);
+
+        accountItem.setOnMouseClicked(e -> MainApplication.getInstance().requestShowAccount(account.getId()));
     }
 
     public BorderPane getAccountItem() {

@@ -8,6 +8,7 @@ import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.AccountScrollab
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsScrollableContent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -20,6 +21,9 @@ public class AccountContentController extends AbstractController {
     private BorderPane rootBorderPane;
 
     private Account account;
+
+    @FXML
+    private ToggleGroup accountDataSelection;
 
     @FXML
     private ImageView accountAvatar;
@@ -59,7 +63,16 @@ public class AccountContentController extends AbstractController {
         followingsCount.setText(String.valueOf(account.getFollowingCount()));
 
         accountBanner.setImage(new Image(account.getHeader(), true));
+        //accountBanner.fitWidthProperty().bind(rootBorderPane.widthProperty());
+        //accountBanner.setPreserveRatio(false);
+
         accountAvatar.setImage(new Image(account.getAvatar(), true));
+
+        // Reset UI when switching to other accounts
+        rootBorderPane.setCenter(null);
+
+        if(accountDataSelection.getSelectedToggle() != null)
+            accountDataSelection.getSelectedToggle().setSelected(false);
     }
 
     private void showFollowers() {
