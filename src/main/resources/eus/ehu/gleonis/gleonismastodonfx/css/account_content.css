@@ -1,30 +1,18 @@
+.scroll-pane, .top-account-region, .vbox-items, .rootBorderPane {
+    -fx-background-color: #404040;
+}
 
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: #404040;
+}
+
+.scroll-pane .scroll-bar:vertical .increment-button:hover,
+.scroll-pane .scroll-bar:vertical .decrement-button:hover,
 .selection-action-region {
     -fx-background-color: #333333;
 }
 
-
-.list-view, .list-cell, .top-account-region {
-    -fx-background-color: #404040;
-}
-
-.list-cell:hover {
-    -fx-background-color: #383838;
-}
-
-.list-view .scroll-bar:vertical {
-    -fx-background-color: #404040;
-}
-
-.list-view .scroll-bar:vertical .increment-button:hover{
-    -fx-background-color: #333333;
-}
-
-.list-view .scroll-bar:vertical .decrement-button:hover{
-    -fx-background-color: #333333;
-}
-
-.list-view .scroll-bar:vertical .thumb {
+.scroll-pane .scroll-bar:vertical .thumb {
     -fx-background-color: #333333;
     -fx-background-radius: 15px;
     -fx-scale-x: 70%;

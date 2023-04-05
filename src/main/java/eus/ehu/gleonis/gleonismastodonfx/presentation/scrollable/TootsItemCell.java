@@ -1,6 +1,6 @@
-package eus.ehu.gleonis.gleonismastodonfx.presentation;
+package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 
-import eus.ehu.gleonis.gleonismastodonfx.HelloApplication;
+import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import eus.ehu.gleonis.gleonismastodonfx.utils.HTMLView;
@@ -10,14 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 
 
-public class TootsItemCell extends ListCell<Status> {
+public class TootsItemCell{
 
     private API api;
 
@@ -64,9 +62,14 @@ public class TootsItemCell extends ListCell<Status> {
     @FXML
     private Button bookmarkButton;
 
-    public TootsItemCell(API api) {
+    private Status status;
+
+    public TootsItemCell(Status status, API api) {
         super();
         this.api = api;
+        this.status = status;
+
+        updateItem(status);
     }
 
     @FXML
@@ -76,38 +79,32 @@ public class TootsItemCell extends ListCell<Status> {
 
     @FXML
     void onReblogClick() {
-        Status status = getItem();
         if (status.isReblogged())
             status = api.unreblogStatus(status.getId());
         else
             status = api.reblogStatus(status.getId());
 
-        setItem(status);
-        updateItem(status, false);
+        updateItem(status);
     }
 
     @FXML
     void onFavouriteClick() {
-        Status status = getItem();
         if (status.isFavourited())
             status = api.unfavouriteStatus(status.getId());
         else
             status = api.favouriteStatus(status.getId());
 
-        setItem(status);
-        updateItem(status, false);
+        updateItem(status);
     }
 
     @FXML
     void onBookmarkClick() {
-        Status status = getItem();
         if (status.isBookmarked())
             status = api.unbookmarkStatus(status.getId());
         else
             status = api.bookmarkStatus(status.getId());
 
-        setItem(status);
-        updateItem(status, false);
+        updateItem(status);
     }
 
     @FXML
@@ -115,20 +112,15 @@ public class TootsItemCell extends ListCell<Status> {
         //TODO
     }
 
-    @Override
-    protected void updateItem(Status status, boolean empty) {
-        super.updateItem(status, empty);
-
+    protected void updateItem(Status status) {
         //First, we check for the empty status
-        if (empty || status == null) {
-            setText(null);
-            setGraphic(null);
+        if (status == null) {
             return;
         }
 
         ///Then, we check if the loader is null
         if (loader == null) {
-            loader = new FXMLLoader(HelloApplication.class.getResource("toots.fxml"));
+            loader = new FXMLLoader(MainApplication.class.getResource("toots.fxml"));
             loader.setController(this);
 
             try {
@@ -157,7 +149,7 @@ public class TootsItemCell extends ListCell<Status> {
         userLabel.setText(finalStatus.getAccount().getDisplayName());
         webfingerLabel.setText(finalStatus.getAccount().getAcct());
 
-        HTMLView htmlView = new HTMLView(finalStatus.getContent());
+        HTMLView htmlView = new HTMLView(finalStatus, finalStatus.getContent());
         htmlView.setPadding(new Insets(10));
 
         messageBorder.setCenter(htmlView);
@@ -176,19 +168,10 @@ public class TootsItemCell extends ListCell<Status> {
         setupButtonColor(bookmarkButton, finalStatus.isBookmarked(), "bookmarked-toots-button");
 
         // Layout constraints
-        messageBorder.prefWidthProperty().bind(getListView().widthProperty().subtract(30));
         messageBorder.prefHeightProperty().bind(htmlView.heightProperty().map(e -> 40 + Math.max((Double) e, 60.0)));
 
         messageBorder.setOnMouseEntered(e -> interactionPanel.setVisible(true));
-
-        messageBorder.setOnMouseExited((MouseEvent e) -> {
-            interactionPanel.setVisible(false);
-        });
-
-        setText(null);
-        setGraphic(messageBorder);
-
-        messageBorder.layout();
+        messageBorder.setOnMouseExited(e -> interactionPanel.setVisible(false));
     }
 
     private void setupButtonColor(Button button, boolean setColor, String cssClassColor) {
@@ -201,5 +184,9 @@ public class TootsItemCell extends ListCell<Status> {
             button.getStyleClass().add("interaction-status-button");
             button.applyCss();
         }
+    }
+
+    public BorderPane getGraphic() {
+        return messageBorder;
     }
 }

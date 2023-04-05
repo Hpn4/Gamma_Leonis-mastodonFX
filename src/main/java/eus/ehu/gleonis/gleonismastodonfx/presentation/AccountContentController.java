@@ -1,20 +1,29 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
+import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
-import javafx.collections.ObservableList;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.AccountScrollableContent;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsScrollableContent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 
-public class AccountContentController {
+public class AccountContentController extends AbstractController {
 
     private final API api = new API();
 
+    @FXML
+    private BorderPane rootBorderPane;
+
     private Account account;
+
+    @FXML
+    private ToggleGroup accountDataSelection;
 
     @FXML
     private ImageView accountAvatar;
@@ -32,19 +41,6 @@ public class AccountContentController {
     private Label followingsCount;
 
     @FXML
-    private ListView<Status> tootsListView;
-
-    @FXML
-    private ListView<Account> accountListView;
-
-    private ObservableList<Account> followingsList;
-
-    private ObservableList<Account> followersList;
-
-    private ObservableList<Status> tootsList;
-
-
-    @FXML
     void onFollowersClick() {
         showFollowers();
     }
@@ -59,55 +55,44 @@ public class AccountContentController {
         showToots();
     }
 
-    @FXML
-    public void initialize(){
-        account = api.verifyCredentials();
+    public void setAccount(String acc) {
+        account = acc == null ? api.verifyCredentials() : api.getAccount(acc);
 
         statusesCount.setText(String.valueOf(account.getStatusesCount()));
         followersCount.setText(String.valueOf(account.getFollowersCount()));
         followingsCount.setText(String.valueOf(account.getFollowingCount()));
 
         accountBanner.setImage(new Image(account.getHeader(), true));
+        //accountBanner.fitWidthProperty().bind(rootBorderPane.widthProperty());
+        //accountBanner.setPreserveRatio(false);
+
         accountAvatar.setImage(new Image(account.getAvatar(), true));
+
+        // Reset UI when switching to other accounts
+        rootBorderPane.setCenter(null);
+
+        if(accountDataSelection.getSelectedToggle() != null)
+            accountDataSelection.getSelectedToggle().setSelected(false);
     }
 
+    private void showFollowers() {
+        ListStream<Account> accountListStream = api.getAccountFollowers(account.getId(), 20);
+        AccountScrollableContent accountScrollableContent = new AccountScrollableContent(accountListStream, 10, false);
 
-    private void updateFollowers() {
-        followersList = api.getAccountFollowers(account.getId(), 20).getElement();
-    }
-    private void updateFollowings() {
-        followingsList = api.getAccountFollowing(account.getId(), 20).getElement();
-    }
-    private void updateToots() {tootsList = api.getAccountStatuses(account.getId(), 20).getElement();}
-
-
-    private void showFollowers()  {
-        updateFollowers();
-
-        if (accountListView != null) {
-            accountListView.toFront();
-            accountListView.setItems(followersList);
-            accountListView.setCellFactory(param -> new AccountItemCell(false));
-        }
+        accountScrollableContent.addToBorderPane(rootBorderPane);
     }
 
     private void showFollowings() {
-        updateFollowings();
+        ListStream<Account> accountListStream = api.getAccountFollowing(account.getId(), 20);
+        AccountScrollableContent accountScrollableContent = new AccountScrollableContent(accountListStream, 10, true);
 
-        if (accountListView != null) {
-            accountListView.toFront();
-            accountListView.setItems(followingsList);
-            accountListView.setCellFactory(param -> new AccountItemCell(true));
-        }
+        accountScrollableContent.addToBorderPane(rootBorderPane);
     }
 
     private void showToots() {
-        updateToots();
+        ListStream<Status> tootsListStream = api.getAccountStatuses(account.getId(), 20);
+        TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(tootsListStream, 10, api);
 
-        if (tootsListView != null) {
-            tootsListView.toFront();
-            tootsListView.setItems(tootsList);
-            tootsListView.setCellFactory(param -> new TootsItemCell(api));
-        }
+        tootsScrollableContent.addToBorderPane(rootBorderPane);
     }
 }

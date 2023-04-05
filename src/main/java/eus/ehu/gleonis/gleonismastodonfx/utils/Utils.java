@@ -1,14 +1,21 @@
 package eus.ehu.gleonis.gleonismastodonfx.utils;
 
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class Utils {
 
@@ -69,6 +76,70 @@ public class Utils {
         }).thenAcceptAsync(v -> {
             if(callback != null)
                 Platform.runLater(() -> callback.accept(v));
+        });
+    }
+
+
+    public static <S, T> void mapByValue(
+            ObservableList<S> sourceList,
+            ObservableList<T> targetList,
+            Function<S, T> mapper)
+    {
+        Objects.requireNonNull(sourceList);
+        Objects.requireNonNull(targetList);
+        Objects.requireNonNull(mapper);
+        targetList.clear();
+
+        Map<S, T> sourceToTargetMap = new HashMap<>();
+        // Populate targetList by sourceList and mapper
+        for (S s : sourceList)
+        {
+            T t = mapper.apply(s);
+            targetList.add(t);
+            sourceToTargetMap.put(s, t);
+        }
+
+        // Listen to changes in sourceList and update targetList accordingly
+        ListChangeListener<S> sourceListener = c -> {
+            while (c.next())
+            {
+                if (c.wasPermutated())
+                {
+                    for (int i = c.getFrom(); i < c.getTo(); i++)
+                    {
+                        int j = c.getPermutation(i);
+                        S s = sourceList.get(j);
+                        T t = sourceToTargetMap.get(s);
+                        targetList.set(i, t);
+                    }
+                }
+                else
+                {
+                    for (S s : c.getRemoved())
+                    {
+                        T t = sourceToTargetMap.get(s);
+                        targetList.remove(t);
+                        sourceToTargetMap.remove(s);
+                    }
+                    for (S s : c.getAddedSubList())
+                    {
+                        if(sourceToTargetMap.containsKey(s))
+                            continue; //TODO improve this, double loop with c.next()
+                        T t = mapper.apply(s);
+                        targetList.add(t);
+                        sourceToTargetMap.put(s, t);
+                    }
+                }
+            }
+        };
+
+        sourceList.addListener(sourceListener);
+        // Store the listener in targetList to prevent GC
+        // The listener should be active as long as targetList exists
+        targetList.addListener((InvalidationListener) iv ->
+        {
+            Object[] refs = { sourceListener, };
+            Objects.requireNonNull(refs);
         });
     }
 }
