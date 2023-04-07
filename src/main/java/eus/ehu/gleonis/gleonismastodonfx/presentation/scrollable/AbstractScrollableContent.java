@@ -3,7 +3,6 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -33,11 +32,9 @@ public class AbstractScrollableContent<E> extends ScrollPane {
         setFitToHeight(true);
 
         setContent(contentBox);
-        contentBox.setAlignment(Pos.TOP_CENTER);
         contentBox.getStyleClass().add("vbox-items");
 
         setHbarPolicy(ScrollBarPolicy.NEVER);
-        contentBox.prefWidthProperty().bind(widthProperty());
 
         setupScrollBar();
     }
@@ -56,6 +53,5 @@ public class AbstractScrollableContent<E> extends ScrollPane {
 
     public void addToBorderPane(BorderPane borderPane) {
         borderPane.setCenter(this);
-        BorderPane.setAlignment(this, Pos.TOP_CENTER);
     }
 }

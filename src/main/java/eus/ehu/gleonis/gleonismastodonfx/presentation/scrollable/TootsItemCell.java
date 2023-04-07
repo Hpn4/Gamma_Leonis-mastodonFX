@@ -2,7 +2,10 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.MediaAttachment;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.MediaAttachmentType;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
+import eus.ehu.gleonis.gleonismastodonfx.utils.CachedImage;
 import eus.ehu.gleonis.gleonismastodonfx.utils.HTMLView;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXML;
@@ -10,16 +13,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
 
-public class TootsItemCell{
+public class TootsItemCell {
 
-    private API api;
-
-    private FXMLLoader loader;
+    private final API api;
 
     @FXML
     private BorderPane messageBorder;
@@ -62,14 +65,20 @@ public class TootsItemCell{
     @FXML
     private Button bookmarkButton;
 
+    @FXML
+    private Label sensitiveContentLabel;
+
+    @FXML
+    private VBox mediasPane;
+
     private Status status;
 
-    public TootsItemCell(Status status, API api) {
+    public TootsItemCell(Status status) {
         super();
-        this.api = api;
+        this.api = MainApplication.getInstance().getAPI();
         this.status = status;
 
-        updateItem(status);
+        updateItem(status, false);
     }
 
     @FXML
@@ -84,7 +93,7 @@ public class TootsItemCell{
         else
             status = api.reblogStatus(status.getId());
 
-        updateItem(status);
+        updateItem(status, true);
     }
 
     @FXML
@@ -94,7 +103,7 @@ public class TootsItemCell{
         else
             status = api.favouriteStatus(status.getId());
 
-        updateItem(status);
+        updateItem(status, true);
     }
 
     @FXML
@@ -104,7 +113,7 @@ public class TootsItemCell{
         else
             status = api.bookmarkStatus(status.getId());
 
-        updateItem(status);
+        updateItem(status, true);
     }
 
     @FXML
@@ -112,27 +121,23 @@ public class TootsItemCell{
         //TODO
     }
 
-    protected void updateItem(Status status) {
-        //First, we check for the empty status
-        if (status == null) {
+    protected void updateItem(Status status, boolean onlyInteractionPanel) {
+        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("toots.fxml"));
+        loader.setController(this);
+
+        try {
+            loader.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (onlyInteractionPanel) {
+            setupInteractionPanel(status.getReblog() != null ? status.getReblog() : status);
             return;
         }
 
-        ///Then, we check if the loader is null
-        if (loader == null) {
-            loader = new FXMLLoader(MainApplication.class.getResource("toots.fxml"));
-            loader.setController(this);
-
-            try {
-                loader.load();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            interactionPanel.setVisible(false);
-        }
-
         //We have the loader, so we can set the graphic
-        Status finalStatus = status;
+        final Status finalStatus;
         if (status.getReblog() != null) {
             finalStatus = status.getReblog();
 
@@ -141,10 +146,13 @@ public class TootsItemCell{
             accountProfilePicture.setHeight(35);
             accountProfilePicture.setWidth(35);
         } else {
+            finalStatus = status;
             accountReblogAvatar.setVisible(false);
             accountProfilePicture.setHeight(40);
             accountProfilePicture.setWidth(40);
         }
+
+        finalStatus.getAccount().getAvatarCachedImage().setImage(accountProfilePicture);
 
         userLabel.setText(finalStatus.getAccount().getDisplayName());
         webfingerLabel.setText(finalStatus.getAccount().getAcct());
@@ -152,24 +160,63 @@ public class TootsItemCell{
         HTMLView htmlView = new HTMLView(finalStatus, finalStatus.getContent());
         htmlView.setPadding(new Insets(10));
 
-        messageBorder.setCenter(htmlView);
+        if (finalStatus.isSensitive()) {
+            sensitiveContentLabel.setText(finalStatus.getSpoiler_text());
+            sensitiveContentLabel.setOnMouseClicked(e -> {
+                messageBorder.setCenter(htmlView);
+                sensitiveContentLabel.setVisible(false);
+            });
+        } else {
+            sensitiveContentLabel.setVisible(true);
+            messageBorder.setCenter(htmlView);
+        }
+
+        // Layout constraints
+        messageBorder.prefHeightProperty().bind(
+                        htmlView.heightProperty()
+                        .add(mediasPane.heightProperty())
+                        .map(e -> {
+                            double sens = sensitiveContentLabel.isVisible() ?
+                                    sensitiveContentLabel.heightProperty().get() : 0;
+                            return 30 + Math.max((Double) e + sens * 4, 40.0);
+                        })
+        );
+
+        setupInteractionPanel(finalStatus);
+        setupMediaAttachments(finalStatus);
+    }
+
+    private void setupMediaAttachments(Status status) {
+        for (MediaAttachment media : status.getMedia_attachments())
+            if (media.getType() == MediaAttachmentType.IMAGE) {
+                CachedImage cachedImage = new CachedImage(media.getBlurhash(), media.getUrl());
+                ImageView imageView = new ImageView();
+                imageView.fitWidthProperty().bind(messageBorder.widthProperty().divide(2));
+                imageView.setPreserveRatio(true);
+
+                cachedImage.setImage(imageView);
+                mediasPane.getChildren().add(imageView);
+                VBox.setMargin(imageView, new Insets(5));
+            }
+
+        mediasPane.setAlignment(javafx.geometry.Pos.CENTER);
+    }
+
+    private void setupInteractionPanel(Status status) {
+        interactionPanel.setVisible(false);
+
+        // Setup labels for interaction menu
+        repliesCount.setText(String.valueOf(status.getReplies_count()));
+        reblogsCount.setText(String.valueOf(status.getReblogs_count()));
+        favouritesCount.setText(String.valueOf(status.getFavourites_count()));
 
         dateMessageLabel.setText(Utils.getDateString(status.getCreated_at()));
 
-        finalStatus.getAccount().getAvatarCachedImage().setImage(accountProfilePicture);
-
-        // Setup labels for interaction menu
-        repliesCount.setText(String.valueOf(finalStatus.getReplies_count()));
-        reblogsCount.setText(String.valueOf(finalStatus.getReblogs_count()));
-        favouritesCount.setText(String.valueOf(finalStatus.getFavourites_count()));
-
-        setupButtonColor(reblogButton, finalStatus.isReblogged(), "rebloged-toots-button");
-        setupButtonColor(favouriteButton, finalStatus.isFavourited(), "favourited-toots-button");
-        setupButtonColor(bookmarkButton, finalStatus.isBookmarked(), "bookmarked-toots-button");
+        setupButtonColor(reblogButton, status.isReblogged(), "rebloged-toots-button");
+        setupButtonColor(favouriteButton, status.isFavourited(), "favourited-toots-button");
+        setupButtonColor(bookmarkButton, status.isBookmarked(), "bookmarked-toots-button");
 
         // Layout constraints
-        messageBorder.prefHeightProperty().bind(htmlView.heightProperty().map(e -> 40 + Math.max((Double) e, 60.0)));
-
         messageBorder.setOnMouseEntered(e -> interactionPanel.setVisible(true));
         messageBorder.setOnMouseExited(e -> interactionPanel.setVisible(false));
     }

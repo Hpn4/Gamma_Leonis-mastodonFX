@@ -8,15 +8,15 @@ import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.scene.layout.Pane;
 
 public class TootsScrollableContent extends AbstractScrollableContent<Status> {
-    public TootsScrollableContent(ListStream<Status> itemsStream, int itemsPerPage, API api) {
+    public TootsScrollableContent(ListStream<Status> itemsStream, int itemsPerPage) {
         super(itemsStream, itemsPerPage);
 
-        setupListPropertyListener(api);
+        setupListPropertyListener();
     }
 
-    private void setupListPropertyListener(API api) {
+    private void setupListPropertyListener() {
         Utils.mapByValue(itemsList, contentBox.getChildren(), status -> {
-            TootsItemCell toot = new TootsItemCell(status, api);
+            TootsItemCell toot = new TootsItemCell(status);
 
             Pane pane = toot.getGraphic();
             pane.prefWidthProperty().bind(widthProperty().subtract(20));

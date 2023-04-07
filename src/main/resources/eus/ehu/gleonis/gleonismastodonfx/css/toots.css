@@ -22,13 +22,13 @@
 .html-tag {
     -fx-font-size: 14px;
     -fx-text-fill: #FFFFFF;
-    -fx-fill: #6ca3ff;
+    -fx-fill: #afc2d9;
 }
 
 .html-mention {
     -fx-font-size: 14px;
     -fx-text-fill: #FFFFFF;
-    -fx-fill: #a603b9;
+    -fx-fill: #497ccb;
 }
 
 .html-mention:hover, .html-tag:hover {

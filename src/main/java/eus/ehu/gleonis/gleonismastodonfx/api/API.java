@@ -11,7 +11,7 @@ import eus.ehu.gleonis.gleonismastodonfx.api.adapter.VisibilityDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.*;
 import okhttp3.*;
 
-import java.awt.Desktop;
+import java.awt.*;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -297,6 +297,35 @@ public class API {
 
     public Status unbookmarkStatus(String id) {
         return postSingle("api/v1/statuses/" + id + "/unbookmark", Status.class);
+    }
+
+    //*******************************************************************
+    // Trending methods
+    //
+    // *******************************************************************
+    public ListStream<Tag> getTrendingTags(int limit) {
+        return getStream("api/v1/trends/tags", limit, Tag.class);
+    }
+
+    public ListStream<Status> getTrendingStatuses(int limit) {
+        return getStream("api/v1/trends/statuses", limit, Status.class);
+    }
+
+
+    //*******************************************************************
+    // HashTag methods
+    //
+    // *******************************************************************
+    public Tag getHashTagInfo(String tag) {
+        return getSingle("api/v1/tags/" + tag, Tag.class);
+    }
+
+    public Tag followHashTag(String tag) {
+        return postSingle("api/v1/tags/" + tag + "/follow", Tag.class);
+    }
+
+    public Tag unfollowHashTag(String tag) {
+        return postSingle("api/v1/tags/" + tag + "/unfollow", Tag.class);
     }
 
 
