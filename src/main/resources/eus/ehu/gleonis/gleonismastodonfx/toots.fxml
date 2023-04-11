@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="messageBorder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="892.0" styleClass="toots-border-pane" stylesheets="@css/toots.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="messageBorder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="892.0" styleClass="toots-border-pane" stylesheets="@css/toots.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsItemCell">
    <top>
       <HBox prefHeight="64.0" prefWidth="892.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>

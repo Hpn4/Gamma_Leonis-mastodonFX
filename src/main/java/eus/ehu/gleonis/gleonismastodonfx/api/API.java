@@ -2,27 +2,31 @@ package eus.ehu.gleonis.gleonismastodonfx.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import eus.ehu.gleonis.gleonismastodonfx.PropertiesManager;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.MediaAttachmentTypeDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.NotificationTypeDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.VisibilityDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.*;
+import javafx.collections.ObservableList;
 import okhttp3.*;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.lang.reflect.Type;
+import java.io.Reader;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 
 public class API {
+
+    private final PropertiesManager propertiesManager;
 
     private final Gson gson;
 
     private final OkHttpClient client;
+
+    private final Application application;
 
     private String token;
 
@@ -37,7 +41,13 @@ public class API {
         gson = builder.create();
         client = new OkHttpClient();
 
-        token = PropertiesManager.getInstance().getToken();
+        propertiesManager = PropertiesManager.getInstance();
+        if (propertiesManager.getClientID().isEmpty() || propertiesManager.getClientSecret().isEmpty())
+            throw new RuntimeException("Client ID and Client Secret are not set in config.properties file.");
+
+        application = new Application(propertiesManager.getClientID(), propertiesManager.getClientSecret());
+
+        token = propertiesManager.getToken();
     }
 
     public boolean errorOccurred() {
@@ -59,9 +69,9 @@ public class API {
     // It will return a Token object with the access token and other information.
     // The access token is then used to setup the API with setupAPI().
     // *******************************************************************
-    public void authorizeUser(Application app) {
+    public void authorizeUser() {
         String uri = "https://mastodon.social/oauth/authorize?response_type=code&client_id=" +
-                app.getClientId() + "&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=read+write+push+follow";
+                application.getClientId() + "&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=read+write+push+follow";
 
         try {
             Desktop.getDesktop().browse(new URI(uri));
@@ -70,10 +80,10 @@ public class API {
         }
     }
 
-    public Token getToken(Application app, String code) {
+    public Token getToken(String code) {
         RequestBody body = new FormBody.Builder()
-                .add("client_id", app.getClientId())
-                .add("client_secret", app.getClientSecret())
+                .add("client_id", application.getClientId())
+                .add("client_secret", application.getClientSecret())
                 .add("redirect_uri", "urn:ietf:wg:oauth:2.0:oob")
                 .add("grant_type", "authorization_code")
                 .add("code", code)
@@ -83,18 +93,23 @@ public class API {
         return postSingle("oauth/token", Token.class, body);
     }
 
-    public void revokeToken(Application app, Token token) {
+    public void revokeToken(Token token) {
         RequestBody body = new FormBody.Builder()
-                .add("client_id", app.getClientId())
-                .add("client_secret", app.getClientSecret())
+                .add("client_id", application.getClientId())
+                .add("client_secret", application.getClientSecret())
                 .add("token", token.getAccessToken())
                 .build();
 
         request("oauth/revoke", "POST", body);
     }
 
+    public boolean isUserConnected() {
+        return token != null && !token.isEmpty();
+    }
+
     public void setupToken(Token token) {
         this.token = token.getAccessToken();
+        propertiesManager.setToken(token.getAccessToken());
     }
 
 
@@ -398,18 +413,15 @@ public class API {
     // Stream Utils methods
     //
     // *******************************************************************
-    protected <E> List<E> updateStream(String baseUrl, int limit, Class<E> objClass, ListStream<E> listStream) {
+    protected <E> void updateStream(String baseUrl, int limit, Class<E> objClass, ListStream<E> listStream) {
         String url = baseUrl + (baseUrl.contains("?") ? "&" : "?") + "limit=" + limit;
 
         RequestResult requestResult = getRequest(url);
-        listStream.parsePaginationLink(requestResult.getPaginationLink());
+        listStream.parsePaginationLink(requestResult.paginationLink());
         if (errorOccurred())
-            return null;
+            return;
 
-        JsonArray jsonArray = gson.fromJson(requestResult.getResponse(), JsonArray.class);
-        Type statusList = TypeToken.getParameterized(List.class, objClass).getType();
-
-        return gson.fromJson(jsonArray, statusList);
+        readArraysFromJson(requestResult.response(), objClass, listStream.getElement());
     }
 
     private <E> ListStream<E> getStream(String baseUrl, int limit, Class<E> objClass) {
@@ -419,12 +431,11 @@ public class API {
         if (errorOccurred())
             return null;
 
-        JsonArray jsonArray = gson.fromJson(requestResult.getResponse(), JsonArray.class);
-        Type statusList = TypeToken.getParameterized(List.class, objClass).getType();
+        ListStream<E> listStream = new ListStream<>(this, baseUrl, requestResult.paginationLink());
 
-        List<E> list = gson.fromJson(jsonArray, statusList);
+        readArraysFromJson(requestResult.response(), objClass, listStream.getElement());
 
-        return new ListStream<>(this, baseUrl, requestResult.getPaginationLink(), list);
+        return listStream;
     }
 
     private <E> E getSingle(String url, Class<E> objClass) {
@@ -432,7 +443,7 @@ public class API {
         if (errorOccurred())
             return null;
 
-        return gson.fromJson(requestResult.getResponse(), objClass);
+        return readSingleFromJson(requestResult.response(), objClass);
     }
 
     private <E> E deleteSingle(String url, Class<E> objClass) {
@@ -440,7 +451,7 @@ public class API {
         if (errorOccurred())
             return null;
 
-        return gson.fromJson(requestResult.getResponse(), objClass);
+        return readSingleFromJson(requestResult.response(), objClass);
     }
 
     private <E> E postSingle(String url, Class<E> objClass) {
@@ -452,9 +463,7 @@ public class API {
         if (errorOccurred())
             return null;
 
-        String req = requestResult.getResponse();
-
-        return gson.fromJson(req, objClass);
+        return readSingleFromJson(requestResult.response(), objClass);
     }
 
     private <E> E putSingle(String url, Class<E> objClass, RequestBody body) {
@@ -462,9 +471,31 @@ public class API {
         if (errorOccurred())
             return null;
 
-        String req = requestResult.getResponse();
+        return readSingleFromJson(requestResult.response(), objClass);
+    }
 
-        return gson.fromJson(req, objClass);
+    private <E> void readArraysFromJson(Reader r, Class<E> objClass, ObservableList<E> list) {
+        try (JsonReader reader = new JsonReader(new BufferedReader(r))) {
+            reader.beginArray();
+
+            while (reader.hasNext())
+                list.add(gson.fromJson(reader, objClass));
+
+            reader.endArray();
+        } catch (IOException e) {
+            error = new APIError(0, e.getMessage());
+        }
+    }
+
+    private <E> E readSingleFromJson(Reader r, Class<E> objClass) {
+        E element = null;
+        try (JsonReader reader = new JsonReader(new BufferedReader(r))) {
+            element = gson.fromJson(reader, objClass);
+        } catch (IOException e) {
+            error = new APIError(0, e.getMessage());
+        }
+
+        return element;
     }
 
     //*******************************************************************
@@ -486,12 +517,12 @@ public class API {
         Request request = buildRequest(url, method, body);
 
         try {
+            // We do not close it since we need to read the response. And when we will read it, it will be closed.
             Response response = client.newCall(request).execute();
-
-            String result = response.body() != null ? response.body().string() : null;
+            Reader result = response.body() != null ? response.body().charStream() : null;
 
             if (!response.isSuccessful())
-                error = new APIError(response.code(), result);
+                error = new APIError(response.code(), response.body().string());
 
             requestResult = new RequestResult(result, response.code(), response.header("Link"));
         } catch (IOException e) {

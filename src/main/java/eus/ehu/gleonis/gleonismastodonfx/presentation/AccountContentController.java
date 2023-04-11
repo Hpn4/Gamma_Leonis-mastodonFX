@@ -73,23 +73,29 @@ public class AccountContentController extends AbstractController {
     }
 
     private void showFollowers() {
+        long t = System.currentTimeMillis();
         ListStream<Account> accountListStream = api.getAccountFollowers(account.getId(), 20);
         AccountScrollableContent accountScrollableContent = new AccountScrollableContent(accountListStream, 10, false);
 
         accountScrollableContent.addToBorderPane(rootBorderPane);
+        System.out.println("Time: " + (System.currentTimeMillis() - t));
     }
 
     private void showFollowings() {
+        long t = System.currentTimeMillis();
         ListStream<Account> accountListStream = api.getAccountFollowing(account.getId(), 20);
         AccountScrollableContent accountScrollableContent = new AccountScrollableContent(accountListStream, 10, true);
 
         accountScrollableContent.addToBorderPane(rootBorderPane);
+        System.out.println("Time: " + (System.currentTimeMillis() - t));
     }
 
     private void showToots() {
+        long t = System.currentTimeMillis();
         ListStream<Status> tootsListStream = api.getAccountStatuses(account.getId(), 10);
         TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(tootsListStream, 10);
 
         tootsScrollableContent.addToBorderPane(rootBorderPane);
+        System.out.println("Time: " + (System.currentTimeMillis() - t));
     }
 }

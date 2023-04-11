@@ -19,6 +19,8 @@ public class TagsScrollableContent extends AbstractScrollableContent<Tag> {
             Pane pane = tagItem.getHashtagItem();
             pane.prefWidthProperty().bind(widthProperty().subtract(20));
 
+            reduceSpeed();
+
             return pane;
         });
     }

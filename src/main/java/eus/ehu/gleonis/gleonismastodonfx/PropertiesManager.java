@@ -13,9 +13,9 @@ public class PropertiesManager {
 
     private String token;
 
-    private String key;
+    private String clientID;
 
-    private String secret;
+    private String clientSecret;
 
     public PropertiesManager() {
         loadProperties();
@@ -33,8 +33,8 @@ public class PropertiesManager {
         prop = new Properties();
         try (InputStream input = new FileInputStream(path)) {
             prop.load(input);
-            key = prop.getProperty("app.client.id");
-            secret = prop.getProperty("app.client.secret");
+            clientID = prop.getProperty("app.client.id");
+            clientSecret = prop.getProperty("app.client.secret");
             token = prop.getProperty("token");
         } catch (final IOException ex) {
             ex.printStackTrace();
@@ -65,12 +65,12 @@ public class PropertiesManager {
         saveProperties();
     }
 
-    public String getKey() {
-        return key;
+    public String getClientID() {
+        return clientID;
     }
 
-    public String getSecret() {
-        return secret;
+    public String getClientSecret() {
+        return clientSecret;
     }
 
 }

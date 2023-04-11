@@ -111,8 +111,6 @@ public class Utils {
                         sourceToTargetMap.remove(s);
                     }
                     for (S s : c.getAddedSubList()) {
-                        if (sourceToTargetMap.containsKey(s))
-                            continue; //TODO improve this, double loop with c.next()
                         T t = mapper.apply(s);
                         targetList.add(t);
                         sourceToTargetMap.put(s, t);

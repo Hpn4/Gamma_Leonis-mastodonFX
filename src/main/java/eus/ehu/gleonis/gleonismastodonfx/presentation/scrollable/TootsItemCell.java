@@ -9,7 +9,6 @@ import eus.ehu.gleonis.gleonismastodonfx.utils.CachedImage;
 import eus.ehu.gleonis.gleonismastodonfx.utils.HTMLView;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,7 +21,7 @@ import javafx.scene.shape.Rectangle;
 
 public class TootsItemCell {
 
-    private final API api;
+    private API api;
 
     @FXML
     private BorderPane messageBorder;
@@ -73,9 +72,8 @@ public class TootsItemCell {
 
     private Status status;
 
-    public TootsItemCell(Status status) {
-        super();
-        this.api = MainApplication.getInstance().getAPI();
+    public void init(Status status) {
+        api = MainApplication.getInstance().getAPI();
         this.status = status;
 
         updateItem(status, false);
@@ -122,14 +120,6 @@ public class TootsItemCell {
     }
 
     protected void updateItem(Status status, boolean onlyInteractionPanel) {
-        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("toots.fxml"));
-        loader.setController(this);
-
-        try {
-            loader.load();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         if (onlyInteractionPanel) {
             setupInteractionPanel(status.getReblog() != null ? status.getReblog() : status);
@@ -142,6 +132,8 @@ public class TootsItemCell {
             finalStatus = status.getReblog();
 
             status.getAccount().getAvatarCachedImage().setImage(accountReblogAvatar);
+            accountReblogAvatar.setOnMouseClicked(e -> MainApplication.getInstance().requestShowAccount(status.getAccount().getId()));
+
             accountReblogAvatar.setVisible(true);
             accountProfilePicture.setHeight(35);
             accountProfilePicture.setWidth(35);
@@ -153,6 +145,8 @@ public class TootsItemCell {
         }
 
         finalStatus.getAccount().getAvatarCachedImage().setImage(accountProfilePicture);
+
+        accountProfilePicture.setOnMouseClicked(e -> MainApplication.getInstance().requestShowAccount(finalStatus.getAccount().getId()));
 
         userLabel.setText(finalStatus.getAccount().getDisplayName());
         webfingerLabel.setText(finalStatus.getAccount().getAcct());
@@ -173,7 +167,7 @@ public class TootsItemCell {
 
         // Layout constraints
         messageBorder.prefHeightProperty().bind(
-                        htmlView.heightProperty()
+                htmlView.heightProperty()
                         .add(mediasPane.heightProperty())
                         .map(e -> {
                             double sens = sensitiveContentLabel.isVisible() ?
@@ -189,7 +183,7 @@ public class TootsItemCell {
     private void setupMediaAttachments(Status status) {
         for (MediaAttachment media : status.getMedia_attachments())
             if (media.getType() == MediaAttachmentType.IMAGE) {
-                CachedImage cachedImage = new CachedImage(media.getBlurhash(), media.getUrl());
+                CachedImage cachedImage = new CachedImage(media);
                 ImageView imageView = new ImageView();
                 imageView.fitWidthProperty().bind(messageBorder.widthProperty().divide(2));
                 imageView.setPreserveRatio(true);

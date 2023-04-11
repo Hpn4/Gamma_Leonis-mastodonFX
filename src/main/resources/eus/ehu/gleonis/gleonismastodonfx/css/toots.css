@@ -21,17 +21,20 @@
 
 .html-tag {
     -fx-font-size: 14px;
-    -fx-text-fill: #FFFFFF;
     -fx-fill: #afc2d9;
 }
 
 .html-mention {
     -fx-font-size: 14px;
-    -fx-text-fill: #FFFFFF;
-    -fx-fill: #497ccb;
+    -fx-fill: #638bcb;
 }
 
-.html-mention:hover, .html-tag:hover {
+.html-link {
+    -fx-font-size: 14px;
+    -fx-fill: #3e92ff;
+}
+
+.html-mention:hover, .html-tag:hover, .html-link:hover {
     -fx-underline: true;
 }
 

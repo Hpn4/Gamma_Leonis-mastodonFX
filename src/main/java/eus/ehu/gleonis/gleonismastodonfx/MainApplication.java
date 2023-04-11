@@ -6,6 +6,7 @@ import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Tag;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.AbstractController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.AccountContentController;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.LoginController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.MainWindowController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TagsScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsScrollableContent;
@@ -20,10 +21,19 @@ import java.io.IOException;
 public class MainApplication extends Application {
 
     private static MainApplication instance;
+
     private MainWindowController mainController;
-    // Window
-    private Window<AccountContentController> accountsWindow;
+
     private API api;
+
+    // Cached Window
+    private Window<AccountContentController> accountsWindow;
+
+    private Window<MainWindowController> mainWindow;
+
+    private Window<LoginController> loginWindow;
+
+    private Stage stage;
 
     public static MainApplication getInstance() {
         return instance;
@@ -34,22 +44,64 @@ public class MainApplication extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
+        // Initialize API and other variables
         api = new API();
-        Window<MainWindowController> mainWindow = load("window.fxml");
+        instance = this;
+        this.stage = stage;
 
-        mainController = mainWindow.controller;
-        mainController.init();
+        // Request the first screen, login if there is no access token or main window if there is one
+        if (api.isUserConnected())
+            requestMainScreen();
+        else
+            requestLoginScreen();
 
-        Scene scene = new Scene(mainWindow.ui, 1200, 700);
         stage.setTitle("Gamma Leonis Mastodon Client");
-        stage.setScene(scene);
-
-        requestShowAccount(null);
 
         stage.show();
+    }
 
-        instance = this;
+    public void requestLoginScreen() {
+        try {
+            if (loginWindow == null)
+                loginWindow = load("loginWindow.fxml");
+
+            // When possible, we just change the root element of the Scene instead of creating a new one
+            // In fact creating a new Scene instance is performance heavy
+            if (stage.getScene() == null)
+                stage.setScene(new Scene(loginWindow.ui, 400, 300));
+            else {
+                stage.getScene().setRoot(loginWindow.ui);
+                stage.setWidth(400);
+                stage.setHeight(300);
+                stage.centerOnScreen();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void requestMainScreen() {
+        try {
+            if (mainWindow == null)
+                mainWindow = load("window.fxml");
+
+            mainController = mainWindow.controller;
+            mainController.init();
+
+            if (stage.getScene() == null)
+                stage.setScene(new Scene(mainWindow.ui, 1200, 700));
+            else {
+                stage.getScene().setRoot(mainWindow.ui);
+                stage.setWidth(1200);
+                stage.setHeight(700);
+                stage.centerOnScreen();
+            }
+
+            requestShowAccount(null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void requestShowAccount(String account) {

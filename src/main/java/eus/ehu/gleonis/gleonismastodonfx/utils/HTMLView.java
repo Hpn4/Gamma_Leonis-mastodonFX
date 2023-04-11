@@ -43,19 +43,35 @@ public class HTMLView extends TextFlow {
         } else if (type.equals("br"))
             getChildren().add(new Text("\n"));
         else if (type.equals("a")) {
-            if (node.hasAttr("rel") && node.attr("rel").equals("tag")) {
-                String tag = node.childNode(1).firstChild().toString();
+            String t = node.childNode(0).toString();
 
-                addChildren("#" + tag, "html-tag").setOnMouseClicked(
-                        e -> MainApplication.getInstance().requestShowToots(MainApplication.getInstance().getAPI().getHashTagTimelines(tag, 10), 10)
+            // Tag mention
+            if (t.startsWith("#")) {
+                String tag;
+                if (node.childNodes().size() > 1)
+                    tag = "#" + node.childNode(1).firstChild().toString();
+                else
+                    tag = t;
+
+                addChildren(tag, "html-tag").setOnMouseClicked(
+                        e -> MainApplication.getInstance().requestShowToots(MainApplication.getInstance().getAPI().getHashTagTimelines(tag.substring(1), 10), 10)
                 );
+            }
 
-            } else if (node.attr("class").equals("u-url mention")) {
+            // Account mention
+            else if (t.startsWith("@")) {
                 String user = node.childNode(1).firstChild().toString();
                 String accId = getIDOfUser(user);
 
                 addChildren("@" + user, "html-mention").setOnMouseClicked(
                         e -> MainApplication.getInstance().requestShowAccount(accId)
+                );
+            }
+
+            // Weblink
+            else {
+                addChildren(node.childNode(1).firstChild() + "...", "html-link").setOnMouseClicked(
+                        e -> MainApplication.getInstance().getHostServices().showDocument(node.attr("href"))
                 );
             }
         } else if (type.equals("span") && node.attr("class").equals("h-card"))
