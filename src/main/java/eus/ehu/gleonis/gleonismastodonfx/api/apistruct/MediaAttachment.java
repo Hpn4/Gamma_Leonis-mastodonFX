@@ -2,39 +2,65 @@ package eus.ehu.gleonis.gleonismastodonfx.api.apistruct;
 
 public class MediaAttachment {
 
-        String id;
+    String id;
 
-        MediaAttachmentType type;
+    MediaAttachmentType type;
 
-        String url;
+    String url;
 
-        String preview_url;
+    String remote_url;
 
-        String description;
+    String description;
 
-        String blurhash;
+    String blurhash;
 
-        public String getId() {
-            return id;
+    public String getId() {
+        return id;
+    }
+
+    public MediaAttachmentType getType() {
+        return type;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getRemote_url() {
+        return remote_url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getBlurhash() {
+        return blurhash;
+    }
+
+    /*
+    Map<?, ?> meta;
+
+    private double getMetaDouble(String key) {
+        if (meta.containsKey(key))
+            return (double) meta.get(key);
+
+        if (meta.containsKey("original")) {
+            Map<?, ?> original = (Map<?, ?>) meta.get("original");
+
+            if (original.containsKey(key))
+                return (double) original.get(key);
         }
 
-        public MediaAttachmentType getType() {
-            return type;
-        }
+        return 0;
+    }
 
-        public String getUrl() {
-            return url;
-        }
+    public int getWidth() {
+        return (int) getMetaDouble("width");
+    }
 
-        public String getPreview_url() {
-            return preview_url;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public String getBlurhash() {
-            return blurhash;
-        }
+    public int getHeight() {
+        return (int) getMetaDouble("height");
+    }
+    */
 }

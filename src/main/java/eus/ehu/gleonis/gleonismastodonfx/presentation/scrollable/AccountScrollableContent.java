@@ -18,6 +18,8 @@ public class AccountScrollableContent extends AbstractScrollableContent<Account>
             Pane pane = new AccountItemCell(p, following).getAccountItem();
             pane.prefWidthProperty().bind(widthProperty().subtract(20));
 
+            reduceSpeed();
+
             return pane;
         });
     }

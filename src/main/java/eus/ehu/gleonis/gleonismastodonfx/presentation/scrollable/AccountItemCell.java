@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 public class AccountItemCell {
 
@@ -18,7 +18,7 @@ public class AccountItemCell {
     @FXML
     private ImageView accountAvatar;
     @FXML
-    private BorderPane accountItem;
+    private HBox accountItem;
     @FXML
     private Label accountName;
     @FXML
@@ -72,7 +72,7 @@ public class AccountItemCell {
         accountItem.setOnMouseClicked(e -> MainApplication.getInstance().requestShowAccount(account.getId()));
     }
 
-    public BorderPane getAccountItem() {
+    public HBox getAccountItem() {
         return accountItem;
     }
 }

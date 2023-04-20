@@ -3,8 +3,6 @@ package eus.ehu.gleonis.gleonismastodonfx.api;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.List;
-
 public class ListStream<E> {
 
     private final API api;
@@ -16,9 +14,9 @@ public class ListStream<E> {
     private String nextQuery;
 
 
-    public ListStream(API api, String baseUrl, String link, List<E> list) {
+    public ListStream(API api, String baseUrl, String link) {
         this.api = api;
-        this.list = FXCollections.observableList(list);
+        this.list = FXCollections.observableArrayList();
         this.baseUrl = baseUrl;
 
         parsePaginationLink(link);
@@ -47,15 +45,12 @@ public class ListStream<E> {
         return nextQuery != null;
     }
 
-    public List<E> getNextElements(int limit) {
+    public void getNextElements(int limit) {
         if (!hasNext()) {
             System.err.println("Debug warning in ListStream#getNextElements: No pagination link");
-            return null;
+            return;
         }
 
-        List<E> nextList = api.updateStream(nextQuery, limit, (Class<E>) list.get(0).getClass(), this);
-        list.addAll(nextList);
-
-        return nextList;
+        api.updateStream(nextQuery, limit, (Class<E>) list.get(0).getClass(), this);
     }
 }

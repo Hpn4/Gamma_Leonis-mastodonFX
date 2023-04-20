@@ -15,9 +15,14 @@
     -fx-border-color: -fx-black-color;
     -fx-border-radius: 5px;
 
-    -fx-background-insets: 10px;
-    -fx-border-insets: 10px;
+    -fx-background-insets: 0px;
+    -fx-border-insets: 0px;
     -fx-text-fill: white;
+}
+
+.button:disabled {
+    -fx-background-color: -fx-container-color;
+    -fx-text-fill: #b2b2b2;
 }
 
 .button {
@@ -26,8 +31,4 @@
 
 .button:hover {
     -fx-background-color: #4F66E0;
-}
-
-.label {
-    -fx-text-fill: white;
 }

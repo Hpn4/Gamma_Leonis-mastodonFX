@@ -141,3 +141,26 @@
 .notification-button:pressed,.settings-button:pressed, .search-button:pressed {
     -fx-border-color: -fx-text-color;
 }
+
+/*
+* Scroll pane and scroll bar/button styling
+ */
+.scroll-pane, .top-account-region, .vbox-items, .rootBorderPane {
+    -fx-background-color: #404040;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: #404040;
+}
+
+.scroll-pane .scroll-bar:vertical .increment-button:hover,
+.scroll-pane .scroll-bar:vertical .decrement-button:hover,
+.selection-action-region {
+    -fx-background-color: #333333;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #333333;
+    -fx-background-radius: 15px;
+    -fx-scale-x: 70%;
+}

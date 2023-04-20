@@ -1,0 +1,19 @@
+/*
+* Global background color of the toots
+ */
+.hashtag-item {
+    -fx-background-color: #404040;
+}
+
+.hashtag-item:hover {
+    -fx-background-color: #383838;
+}
+
+.hashtag-name-label {
+    -fx-text-fill: #CCCCCC;
+}
+
+.hashtag-name-label:hover {
+    -fx-text-fill: #FFFFFF;
+    -fx-underline: true;
+}

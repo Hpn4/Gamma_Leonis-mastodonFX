@@ -20,9 +20,9 @@ public class Account implements Identifiable {
 
     String note;
 
-    String avatar;
+    String avatar_static;
 
-    String header;
+    String header_static;
 
     int statuses_count;
 
@@ -89,12 +89,12 @@ public class Account implements Identifiable {
      * @return the URL of the avatar image.
      */
     public String getAvatar() {
-        return avatar;
+        return avatar_static;
     }
 
     public CachedImage getAvatarCachedImage() {
         if (avatarCachedImage == null)
-            avatarCachedImage = new CachedImage(null, avatar);
+            avatarCachedImage = new CachedImage(null, avatar_static);
 
         return avatarCachedImage;
     }
@@ -105,12 +105,12 @@ public class Account implements Identifiable {
      * @return the URL of the header image.
      */
     public String getHeader() {
-        return header;
+        return header_static;
     }
 
     public CachedImage getHeaderCachedImage() {
         if (headerCachedImage == null)
-            headerCachedImage = new CachedImage(null, header);
+            headerCachedImage = new CachedImage(null, header_static);
 
         return headerCachedImage;
     }
