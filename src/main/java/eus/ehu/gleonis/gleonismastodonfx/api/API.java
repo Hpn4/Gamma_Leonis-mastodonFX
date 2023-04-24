@@ -3,7 +3,9 @@ package eus.ehu.gleonis.gleonismastodonfx.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import eus.ehu.gleonis.gleonismastodonfx.PropertiesManager;
+import eus.ehu.gleonis.gleonismastodonfx.db.DBAccount;
+import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
+import eus.ehu.gleonis.gleonismastodonfx.utils.PropertiesManager;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.MediaAttachmentTypeDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.NotificationTypeDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.VisibilityDeserializer;
@@ -46,8 +48,7 @@ public class API {
             throw new RuntimeException("Client ID and Client Secret are not set in config.properties file.");
 
         application = new Application(propertiesManager.getClientID(), propertiesManager.getClientSecret());
-
-        token = propertiesManager.getToken();
+        token = null;
     }
 
     public boolean errorOccurred() {
@@ -104,12 +105,36 @@ public class API {
     }
 
     public boolean isUserConnected() {
-        return token != null && !token.isEmpty();
+        return !propertiesManager.getDbUser().isEmpty();
     }
 
-    public void setupToken(Token token) {
+    public void setupUser(DBManager db) {
+        DBAccount dbAccount = db.getLoggedAccount();
+        String token = dbAccount.getToken();
+        if(token == null)
+            throw new RuntimeException("Error while getting token from database.");
+
+        this.token = token;
+        Account account = getSingle("api/v1/accounts/verify_credentials", Account.class);
+        db.updateAccount(account);
+        propertiesManager.setDbUser(dbAccount.getId());
+    }
+
+    public void addNewUser(DBManager db, Token token) {
         this.token = token.getAccessToken();
-        propertiesManager.setToken(token.getAccessToken());
+        Account account = getSingle("api/v1/accounts/verify_credentials", Account.class);
+        if(account == null)
+            throw new RuntimeException("Error while getting account information.");
+
+        propertiesManager.setDbUser(account.getId());
+        db.insertAccount(account, token.getAccessToken());
+    }
+
+    public void switchUser(DBManager db, String token) {
+        Account account = getSingle("api/v1/accounts/verify_credentials", Account.class);
+
+        this.token = token;
+        propertiesManager.setDbUser(account.getId());
     }
 
 

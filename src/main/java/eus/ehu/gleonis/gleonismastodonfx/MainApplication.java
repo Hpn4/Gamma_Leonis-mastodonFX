@@ -4,6 +4,7 @@ import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Tag;
+import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.AbstractController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.AccountContentController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.LoginController;
@@ -26,6 +27,8 @@ public class MainApplication extends Application {
 
     private API api;
 
+    private DBManager dbManager;
+
     // Cached Window
     private Window<AccountContentController> accountsWindow;
 
@@ -45,15 +48,17 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage stage) {
-        // Initialize API and other variables
+        // Initialize API, DB and other variables
         api = new API();
+        dbManager = new DBManager();
         instance = this;
         this.stage = stage;
 
         // Request the first screen, login if there is no access token or main window if there is one
-        if (api.isUserConnected())
+        if (api.isUserConnected()) {
+            api.setupUser(dbManager);
             requestMainScreen();
-        else
+        }else
             requestLoginScreen();
 
         stage.setTitle("Gamma Leonis Mastodon Client");

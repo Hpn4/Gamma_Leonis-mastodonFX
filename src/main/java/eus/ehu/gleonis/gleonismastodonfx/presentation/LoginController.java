@@ -41,7 +41,7 @@ public class LoginController extends AbstractController {
             authorizeButton.setDisable(false);
             authorizeButton.setText("Generate new authorization");
         } else {
-            api.setupToken(token);
+            api.addNewUser(dbManager, token);
             getApplication().requestMainScreen();
         }
     }
