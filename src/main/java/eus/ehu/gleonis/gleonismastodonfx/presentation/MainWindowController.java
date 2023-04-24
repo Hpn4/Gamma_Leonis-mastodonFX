@@ -1,12 +1,10 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 
@@ -20,9 +18,6 @@ public class MainWindowController extends AbstractController {
 
     @FXML
     private Label accountWebfinger;
-
-    @FXML
-    private ToggleGroup menuChoice;
 
     @FXML
     private BorderPane sceneContent;
@@ -88,7 +83,7 @@ public class MainWindowController extends AbstractController {
 
     @FXML
     void onSettingsClick() {
-
+        getApplication().requestLoginScreen();
     }
 
     @FXML

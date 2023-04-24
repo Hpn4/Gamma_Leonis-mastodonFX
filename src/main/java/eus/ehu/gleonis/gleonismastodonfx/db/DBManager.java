@@ -3,22 +3,18 @@ package eus.ehu.gleonis.gleonismastodonfx.db;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import eus.ehu.gleonis.gleonismastodonfx.utils.PropertiesManager;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager implements IDBManager {
 
-    private PropertiesManager propManager;
+    private final PropertiesManager propManager;
 
     private Connection conn;
 
-    private String dbpath;
+    private final String dbpath;
 
     public DBManager() {
         propManager = PropertiesManager.getInstance();
@@ -51,7 +47,7 @@ public class DBManager implements IDBManager {
 
 
     @Override
-    public void insertAccount(Account account, String token) {
+    public boolean insertAccount(Account account, String token) {
         open();
 
         String sql = "INSERT INTO accounts (id, username, avatar, last_access, token) VALUES(?,?,?,?,?)";
@@ -64,10 +60,12 @@ public class DBManager implements IDBManager {
             pstmt.setString(5, token);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            close();
+            return false;
         }
 
         close();
+        return true;
     }
 
     @Override
@@ -89,8 +87,8 @@ public class DBManager implements IDBManager {
                         rs.getString("id"),
                         rs.getString("username"),
                         rs.getString("avatar"),
-                        rs.getString("token"),
-                        rs.getString("last_access")
+                        rs.getString("last_access"),
+                        rs.getString("token")
                 );
             }
         } catch (SQLException e) {
@@ -117,8 +115,8 @@ public class DBManager implements IDBManager {
                         rs.getString("id"),
                         rs.getString("username"),
                         rs.getString("avatar"),
-                        rs.getString("token"),
-                        rs.getString("last_access")
+                        rs.getString("last_access"),
+                        rs.getString("token")
                 );
 
                 accounts.add(account);

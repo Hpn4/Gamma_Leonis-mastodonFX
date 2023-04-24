@@ -7,7 +7,8 @@ import java.util.List;
 public interface IDBManager {
 
     // Add a new account in the database
-    void insertAccount(Account account, String token);
+    // returns true if no problem, false if the account already exists
+    boolean insertAccount(Account account, String token);
 
     // Get the currently logged in account or null if no account is logged in
     DBAccount getLoggedAccount();

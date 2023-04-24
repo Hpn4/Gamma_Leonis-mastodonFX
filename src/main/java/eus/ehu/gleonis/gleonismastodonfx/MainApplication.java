@@ -71,14 +71,16 @@ public class MainApplication extends Application {
             if (loginWindow == null)
                 loginWindow = load("loginWindow.fxml");
 
+            loginWindow.controller.init();
+
             // When possible, we just change the root element of the Scene instead of creating a new one
             // In fact creating a new Scene instance is performance heavy
             if (stage.getScene() == null)
-                stage.setScene(new Scene(loginWindow.ui, 400, 300));
+                stage.setScene(new Scene(loginWindow.ui));
             else {
                 stage.getScene().setRoot(loginWindow.ui);
-                stage.setWidth(400);
-                stage.setHeight(300);
+                stage.setWidth(700);
+                stage.setHeight(500);
                 stage.centerOnScreen();
             }
         } catch (IOException e) {
@@ -95,11 +97,11 @@ public class MainApplication extends Application {
             mainController.init();
 
             if (stage.getScene() == null)
-                stage.setScene(new Scene(mainWindow.ui, 1200, 700));
+                stage.setScene(new Scene(mainWindow.ui, 1400, 750));
             else {
                 stage.getScene().setRoot(mainWindow.ui);
-                stage.setWidth(1200);
-                stage.setHeight(700);
+                stage.setWidth(1400);
+                stage.setHeight(750);
                 stage.centerOnScreen();
             }
 
@@ -145,6 +147,7 @@ public class MainApplication extends Application {
         ref.ui = fxmlLoader.load();
         ref.controller = fxmlLoader.getController();
         ref.controller.setApplication(this);
+        ref.controller.setDBManager(dbManager);
         ref.controller.setAPI(api);
 
         return ref;

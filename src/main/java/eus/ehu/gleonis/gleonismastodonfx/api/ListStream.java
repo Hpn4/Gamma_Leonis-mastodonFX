@@ -33,7 +33,6 @@ public class ListStream<E> {
             String maxId = nextLink.substring(nextLink.indexOf("max_id="), nextLink.indexOf(">"));
 
             nextQuery = baseUrl + "?" + maxId;
-            System.err.println("Debug warning in ListStream#parsePaginationLink. Next query: " + nextQuery);
         }
     }
 
@@ -46,10 +45,8 @@ public class ListStream<E> {
     }
 
     public void getNextElements(int limit) {
-        if (!hasNext()) {
-            System.err.println("Debug warning in ListStream#getNextElements: No pagination link");
+        if (!hasNext())
             return;
-        }
 
         api.updateStream(nextQuery, limit, (Class<E>) list.get(0).getClass(), this);
     }

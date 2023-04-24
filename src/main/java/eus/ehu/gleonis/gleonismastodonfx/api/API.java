@@ -3,22 +3,19 @@ package eus.ehu.gleonis.gleonismastodonfx.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import eus.ehu.gleonis.gleonismastodonfx.db.DBAccount;
-import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
-import eus.ehu.gleonis.gleonismastodonfx.utils.PropertiesManager;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.MediaAttachmentTypeDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.NotificationTypeDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.VisibilityDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.*;
+import eus.ehu.gleonis.gleonismastodonfx.db.DBAccount;
+import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
+import eus.ehu.gleonis.gleonismastodonfx.utils.PropertiesManager;
 import javafx.collections.ObservableList;
 import okhttp3.*;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 public class API {
 
@@ -70,15 +67,9 @@ public class API {
     // It will return a Token object with the access token and other information.
     // The access token is then used to setup the API with setupAPI().
     // *******************************************************************
-    public void authorizeUser() {
-        String uri = "https://mastodon.social/oauth/authorize?response_type=code&client_id=" +
+    public String getAuthorizedUserURL() {
+        return "https://mastodon.social/oauth/authorize?response_type=code&client_id=" +
                 application.getClientId() + "&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=read+write+push+follow";
-
-        try {
-            Desktop.getDesktop().browse(new URI(uri));
-        } catch (URISyntaxException | IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public Token getToken(String code) {
@@ -110,31 +101,33 @@ public class API {
 
     public void setupUser(DBManager db) {
         DBAccount dbAccount = db.getLoggedAccount();
-        String token = dbAccount.getToken();
-        if(token == null)
-            throw new RuntimeException("Error while getting token from database.");
 
-        this.token = token;
-        Account account = getSingle("api/v1/accounts/verify_credentials", Account.class);
+        token = dbAccount.getToken();
+        Account account = verifyCredentials();
+
         db.updateAccount(account);
         propertiesManager.setDbUser(dbAccount.getId());
     }
 
-    public void addNewUser(DBManager db, Token token) {
+    public boolean addNewUser(DBManager db, Token token) {
         this.token = token.getAccessToken();
         Account account = getSingle("api/v1/accounts/verify_credentials", Account.class);
-        if(account == null)
+        if (account == null)
             throw new RuntimeException("Error while getting account information.");
 
         propertiesManager.setDbUser(account.getId());
-        db.insertAccount(account, token.getAccessToken());
+        return db.insertAccount(account, token.getAccessToken());
     }
 
-    public void switchUser(DBManager db, String token) {
-        Account account = getSingle("api/v1/accounts/verify_credentials", Account.class);
-
+    public void switchUser(String token) {
         this.token = token;
+        Account account = verifyCredentials();
+
         propertiesManager.setDbUser(account.getId());
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
 

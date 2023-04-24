@@ -15,4 +15,15 @@ Leave the other lines as they are.
 
 ---
 
+### Account switching
+
+To change from one account to another one they are two ways:
+1. Is when you opened the client for the first time.
+2. Is to click on the settings button on the main window
+
+In booth cases, you will have a login screen with saved accounts on a left scroll pane.
+And a login form on the right.
+
+---
+
 Mockup are located in the folder `docs` and are made with [Draw.io](https://draw.io/).
