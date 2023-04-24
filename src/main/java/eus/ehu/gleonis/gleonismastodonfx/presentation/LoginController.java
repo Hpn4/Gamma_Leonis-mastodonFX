@@ -22,7 +22,7 @@ public class LoginController extends AbstractController {
 
     @FXML
     void onAuthorizeClick() {
-        api.authorizeUser();
+        getApplication().getHostServices().showDocument(api.getAuthorizeUserURL());
 
         authorizeButton.setDisable(true);
         errorLabel.setVisible(false);

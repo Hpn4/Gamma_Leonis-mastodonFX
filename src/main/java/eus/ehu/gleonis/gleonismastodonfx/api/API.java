@@ -11,12 +11,9 @@ import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.*;
 import javafx.collections.ObservableList;
 import okhttp3.*;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 public class API {
 
@@ -69,15 +66,9 @@ public class API {
     // It will return a Token object with the access token and other information.
     // The access token is then used to setup the API with setupAPI().
     // *******************************************************************
-    public void authorizeUser() {
-        String uri = "https://mastodon.social/oauth/authorize?response_type=code&client_id=" +
+    public String getAuthorizeUserURL() {
+        return "https://mastodon.social/oauth/authorize?response_type=code&client_id=" +
                 application.getClientId() + "&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=read+write+push+follow";
-
-        try {
-            Desktop.getDesktop().browse(new URI(uri));
-        } catch (URISyntaxException | IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public Token getToken(String code) {
