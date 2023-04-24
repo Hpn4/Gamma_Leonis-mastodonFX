@@ -1,5 +1,5 @@
 ## Gamma Leonis Mastodon Client
-
+This project is a Rest API for the the platform Mastodon.
 ### Pre-requisites
 
 In order for the client to work, you need to create the `config.propeties` file by renaming the `config_template.properties` file.
