@@ -60,8 +60,7 @@ public class AccountContentController extends AbstractController {
         followingsCount.setText(String.valueOf(account.getFollowingCount()));
 
         accountBanner.setImage(new Image(account.getHeader(), true));
-        // accountBanner.fitWidthProperty().bind(rootBorderPane.widthProperty());
-        // accountBanner.setPreserveRatio(false);
+        accountBanner.fitWidthProperty().bind(rootBorderPane.widthProperty());
 
         accountAvatar.setImage(new Image(account.getAvatar(), true));
 
@@ -78,7 +77,7 @@ public class AccountContentController extends AbstractController {
         AccountScrollableContent accountScrollableContent = new AccountScrollableContent(accountListStream, 10, false);
 
         accountScrollableContent.addToBorderPane(rootBorderPane);
-        System.out.println("Time: " + (System.currentTimeMillis() - t));
+        System.out.println("Time to display followers: " + (System.currentTimeMillis() - t));
     }
 
     private void showFollowings() {
@@ -87,7 +86,7 @@ public class AccountContentController extends AbstractController {
         AccountScrollableContent accountScrollableContent = new AccountScrollableContent(accountListStream, 10, true);
 
         accountScrollableContent.addToBorderPane(rootBorderPane);
-        System.out.println("Time: " + (System.currentTimeMillis() - t));
+        System.out.println("Time to display followings: " + (System.currentTimeMillis() - t));
     }
 
     private void showToots() {
@@ -96,6 +95,6 @@ public class AccountContentController extends AbstractController {
         TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(tootsListStream, 10);
 
         tootsScrollableContent.addToBorderPane(rootBorderPane);
-        System.out.println("Time: " + (System.currentTimeMillis() - t));
+        System.out.println("Time to display toots: " + (System.currentTimeMillis() - t));
     }
 }
