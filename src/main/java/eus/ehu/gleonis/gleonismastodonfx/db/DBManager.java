@@ -2,12 +2,15 @@ package eus.ehu.gleonis.gleonismastodonfx.db;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import eus.ehu.gleonis.gleonismastodonfx.utils.PropertiesManager;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager implements IDBManager {
@@ -16,144 +19,84 @@ public class DBManager implements IDBManager {
 
     private final PropertiesManager propManager;
 
-    private Connection conn;
+    private final EntityManager dbConnector;
 
-    private final String dbpath;
+    private EntityManagerFactory emf;
 
     public DBManager() {
+        long start = System.currentTimeMillis();
         propManager = PropertiesManager.getInstance();
-        dbpath = propManager.getDbPath();
 
-        if (dbpath == null || dbpath.isEmpty()) {
-            logger.fatal("Database path not found in properties file");
-            throw new RuntimeException("Database path not found in properties file");
-        }
-    }
-
-    private void open() {
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure() // configures settings from hibernate.cfg.xml
+                .build();
         try {
-            String url = "jdbc:sqlite:" + dbpath;
-            conn = DriverManager.getConnection(url);
-
-            logger.info("Database connection established");
+            emf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         } catch (Exception e) {
-            logger.error("Cannot connect to database server " + e, e);
+            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
+            // so destroy it manually.
+            e.printStackTrace();
+            StandardServiceRegistryBuilder.destroy(registry);
         }
+
+        dbConnector = emf.createEntityManager();
+
+        logger.info("DataBase opened");
+        logger.debug("Time to open DB: " + (System.currentTimeMillis() - start) + "ms");
     }
 
-    private void close() {
-        if (conn != null)
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                logger.error("Cannot close the connection to database server " + e, e);
-                e.printStackTrace();
-            }
-
-        logger.info("Database connection closed");
-    }
-
-
-    @Override
     public boolean insertAccount(Account account, String token) {
-        open();
+        dbConnector.getTransaction().begin();
+        DBAccount dbAccount = new DBAccount(account.getId(), account.getUsername(), account.getAvatar(), LocalDate.now().toString(), token);
+        dbConnector.persist(dbAccount);
+        dbConnector.getTransaction().commit();
 
-        String sql = "INSERT INTO accounts (id, username, avatar, last_access, token) VALUES(?,?,?,?,?)";
+        logger.debug("Account inserted");
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, account.getId());
-            pstmt.setString(2, account.getUsername());
-            pstmt.setString(3, account.getAvatar());
-            pstmt.setString(4, LocalDate.now().toString());
-            pstmt.setString(5, token);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            close();
-            return false;
-        }
-
-        close();
         return true;
     }
 
-    @Override
-    public DBAccount getLoggedAccount() {
-        if (propManager.getDbUser().isEmpty())
-            return null;
-
-        open();
-
-        DBAccount account = null;
-
-        String sql = "SELECT * FROM accounts WHERE id = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, propManager.getDbUser());
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                account = new DBAccount(
-                        rs.getString("id"),
-                        rs.getString("username"),
-                        rs.getString("avatar"),
-                        rs.getString("last_access"),
-                        rs.getString("token")
-                );
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        close();
-
-        return account;
-    }
-
-    @Override
     public List<DBAccount> getAccounts() {
-        open();
-
-        List<DBAccount> accounts = new ArrayList<>();
-
-        String sql = "SELECT * FROM accounts";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                DBAccount account = new DBAccount(
-                        rs.getString("id"),
-                        rs.getString("username"),
-                        rs.getString("avatar"),
-                        rs.getString("last_access"),
-                        rs.getString("token")
-                );
-
-                accounts.add(account);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        close();
+        List<DBAccount> accounts = dbConnector.createQuery("SELECT a FROM DBAccount a", DBAccount.class).getResultList();
+        logger.debug(accounts.size() + " Accounts retrieved");
 
         return accounts;
     }
 
-    @Override
-    public void updateAccount(Account ac) {
-        open();
+    public DBAccount getLoggedAccount() {
+        String dbUser = propManager.getDbUser();
 
-        String sql = "UPDATE accounts SET username = ?, avatar = ?, last_access = ? WHERE id = ?";
+        if (dbUser.isEmpty())
+            return null;
 
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, ac.getUsername());
-            pstmt.setString(2, ac.getAvatar());
-            pstmt.setString(3, LocalDate.now().toString());
-            pstmt.setString(4, ac.getId());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        DBAccount account = dbConnector.getReference(DBAccount.class, dbUser);
+
+        if (account == null) {
+            logger.error("Account not found");
+            return null;
         }
 
-        close();
+        return account;
     }
+
+    public void updateAccount(Account ac) {
+        dbConnector.getTransaction().begin();
+
+        DBAccount dbAccount = dbConnector.getReference(DBAccount.class, ac.getId());
+        dbAccount.setAvatarUrl(ac.getAvatar());
+        dbAccount.setUsername(ac.getUsername());
+        dbAccount.setLast_access(LocalDate.now().toString());
+
+        dbConnector.getTransaction().commit();
+
+        logger.debug("Account updated");
+    }
+
+
+    // later we will add further operations here
+    public void closeDb() {
+        dbConnector.close();
+        logger.info("DataBase closed");
+    }
+
 }

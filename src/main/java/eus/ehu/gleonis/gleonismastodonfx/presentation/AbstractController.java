@@ -2,13 +2,13 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
-import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
+import eus.ehu.gleonis.gleonismastodonfx.db.IDBManager;
 
 public abstract class AbstractController {
 
     private MainApplication application;
 
-    protected DBManager dbManager;
+    protected IDBManager dbManager;
 
     protected API api;
 
@@ -24,7 +24,7 @@ public abstract class AbstractController {
         this.api = api;
     }
 
-    public void setDBManager(DBManager dbManager) {
+    public void setDBManager(IDBManager dbManager) {
         this.dbManager = dbManager;
     }
 }

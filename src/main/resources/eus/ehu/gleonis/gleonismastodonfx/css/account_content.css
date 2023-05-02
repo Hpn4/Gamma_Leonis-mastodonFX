@@ -56,3 +56,24 @@
 .toots-radio-button:selected .dot {
     -fx-translate-x: 35px;
 }
+
+.action-relation-button {
+    -fx-background-color: #3D4FAD;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0;
+
+    -fx-border-color: #2c3f9a;
+    -fx-border-radius: 5px;
+    -fx-border-insets: 0;
+
+    -fx-text-fill: #FFFFFF;
+}
+
+.action-relation-button:hover {
+    -fx-background-color: #4F66E0;
+}
+
+.action-relation-button:pressed {
+    -fx-background-color: #4d599a;
+    -fx-text-fill: #AAAAAA;
+}

@@ -1,4 +1,4 @@
-<Configuration status="error" name="softeng" packages="">
+<Configuration status="error" name="glmc" packages="">
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout
@@ -12,9 +12,16 @@
     </Appenders>
 
     <Loggers>
-        <Root level="debug">
-            <AppenderRef ref="console"/>
+        <Logger level="debug" name="Main">
             <AppenderRef ref="LogFile"/>
-        </Root>
+        </Logger>
+
+        <Logger level="debug" name="AccountContentController">
+            <AppenderRef ref="LogFile"/>
+        </Logger>
+
+        <Logger level="debug" name="DBManager">
+            <AppenderRef ref="LogFile"/>
+        </Logger>
     </Loggers>
 </Configuration>

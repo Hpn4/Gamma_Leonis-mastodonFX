@@ -8,7 +8,7 @@ import eus.ehu.gleonis.gleonismastodonfx.api.adapter.NotificationTypeDeserialize
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.VisibilityDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.*;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBAccount;
-import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
+import eus.ehu.gleonis.gleonismastodonfx.db.IDBManager;
 import eus.ehu.gleonis.gleonismastodonfx.utils.PropertiesManager;
 import javafx.collections.ObservableList;
 import okhttp3.*;
@@ -99,7 +99,7 @@ public class API {
         return !propertiesManager.getDbUser().isEmpty();
     }
 
-    public void setupUser(DBManager db) {
+    public void setupUser(IDBManager db) {
         DBAccount dbAccount = db.getLoggedAccount();
 
         token = dbAccount.getToken();
@@ -109,7 +109,7 @@ public class API {
         propertiesManager.setDbUser(dbAccount.getId());
     }
 
-    public boolean addNewUser(DBManager db, Token token) {
+    public boolean addNewUser(IDBManager db, Token token) {
         this.token = token.getAccessToken();
         Account account = getSingle("api/v1/accounts/verify_credentials", Account.class);
         if (account == null)

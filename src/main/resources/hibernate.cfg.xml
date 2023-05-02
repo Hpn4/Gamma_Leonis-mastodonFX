@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
+        <property name="hibernate.connection.driver_class">org.h2.Driver</property>
+        <property name="hibernate.connection.url">jdbc:h2:~/glmc;AUTO_SERVER=TRUE</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password"/>
+        <property name="hibernate.show_sql">false</property>
+
+        <!-- update allow hibernate to create the table if it does not exist. If the table exist, it does nothing -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Mapping files for our table -->
+        <mapping resource="DBAccount.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

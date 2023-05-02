@@ -23,21 +23,15 @@ import java.io.IOException;
 
 public class MainApplication extends Application {
 
+    private static final Logger logger = LogManager.getLogger("Main");
     private static MainApplication instance;
-
     private MainWindowController mainController;
-
     private API api;
-
     private DBManager dbManager;
-
     // Cached Window
     private Window<AccountContentController> accountsWindow;
-
     private Window<MainWindowController> mainWindow;
-
     private Window<LoginController> loginWindow;
-
     private Stage stage;
 
     public static MainApplication getInstance() {
@@ -48,11 +42,11 @@ public class MainApplication extends Application {
         launch();
     }
 
-    private static final Logger logger = LogManager.getLogger("Main");
-
     @Override
     public void start(Stage stage) {
+        long start = System.currentTimeMillis();
         logger.info("Start Gamma Leonis Mastodon Client");
+
         // Initialize API, DB and other variables
         api = new API();
         dbManager = new DBManager();
@@ -63,12 +57,20 @@ public class MainApplication extends Application {
         if (api.isUserConnected()) {
             api.setupUser(dbManager);
             requestMainScreen();
-        }else
+        } else
             requestLoginScreen();
 
         stage.setTitle("Gamma Leonis Mastodon Client");
 
         stage.show();
+
+        // When the window is closed, we close the DB connection
+        stage.setOnCloseRequest(event -> {
+            logger.info("Close Gamma Leonis Mastodon Client");
+            dbManager.closeDb();
+        });
+
+        logger.debug("Gamma Leonis Mastodon Client started in {} ms", System.currentTimeMillis() - start);
     }
 
     public void requestLoginScreen() {

@@ -2,10 +2,12 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Relationship;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.AccountScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsScrollableContent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
@@ -42,6 +44,9 @@ public class AccountContentController extends AbstractController {
     private Label followingsCount;
 
     @FXML
+    private Button accountRelationButton;
+
+    @FXML
     void onFollowersClick() {
         showFollowers();
     }
@@ -54,6 +59,22 @@ public class AccountContentController extends AbstractController {
     @FXML
     void onTootsClick() {
         showToots();
+    }
+
+    private void unfollowAccountButton() {
+        accountRelationButton.setText("Unfollow");
+        accountRelationButton.setOnAction(e -> {
+            api.unfollowAccount(account.getId());
+            followAccountButton();
+        });
+    }
+
+    private void followAccountButton() {
+        accountRelationButton.setText("Follow");
+        accountRelationButton.setOnAction(e -> {
+            api.followAccount(account.getId());
+            unfollowAccountButton();
+        });
     }
 
     public void setAccount(String acc) {
@@ -70,6 +91,18 @@ public class AccountContentController extends AbstractController {
 
         // Reset UI when switching to other accounts
         rootBorderPane.setCenter(null);
+
+        // get relationship with this account
+        if (acc != null) {
+            Relationship relationship = api.getRelationships(account.getId()).getElement().get(0);
+            if (relationship.isFollowing())
+                unfollowAccountButton();
+            else
+                followAccountButton();
+
+        }
+
+        accountRelationButton.setVisible(acc != null); // For our account we disable this button
 
         if (accountDataSelection.getSelectedToggle() != null)
             accountDataSelection.getSelectedToggle().setSelected(false);
