@@ -16,6 +16,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
@@ -46,8 +48,11 @@ public class MainApplication extends Application {
         launch();
     }
 
+    private static final Logger logger = LogManager.getLogger("Main");
+
     @Override
     public void start(Stage stage) {
+        logger.info("Start Gamma Leonis Mastodon Client");
         // Initialize API, DB and other variables
         api = new API();
         dbManager = new DBManager();
@@ -68,6 +73,8 @@ public class MainApplication extends Application {
 
     public void requestLoginScreen() {
         try {
+            logger.debug("Switch to login screen");
+
             if (loginWindow == null)
                 loginWindow = load("loginWindow.fxml");
 
@@ -90,6 +97,8 @@ public class MainApplication extends Application {
 
     public void requestMainScreen() {
         try {
+            logger.debug("Switch to main screen");
+
             if (mainWindow == null)
                 mainWindow = load("window.fxml");
 
@@ -113,6 +122,8 @@ public class MainApplication extends Application {
 
     public void requestShowAccount(String account) {
         try {
+            logger.debug("Switch to account screen");
+
             if (accountsWindow == null)
                 accountsWindow = load("account_content.fxml");
 
@@ -125,12 +136,16 @@ public class MainApplication extends Application {
     }
 
     public void requestShowToots(ListStream<Status> toots, int itemPerPage) {
+        logger.debug("Switch to scrollable toots screen");
+
         TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(toots, itemPerPage);
 
         mainController.setCenter(tootsScrollableContent);
     }
 
     public void requestShowTags(ListStream<Tag> tags, int itemPerPage) {
+        logger.debug("Switch to scrollable hashtags screen");
+
         TagsScrollableContent tagsScrollableContent = new TagsScrollableContent(tags, itemPerPage);
 
         mainController.setCenter(tagsScrollableContent);

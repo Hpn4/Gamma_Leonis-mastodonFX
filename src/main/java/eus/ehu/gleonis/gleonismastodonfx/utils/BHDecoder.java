@@ -33,33 +33,6 @@ public final class BHDecoder {
     private BHDecoder() {
     }
 
-    // $FF: synthetic method
-    public static Image decode(BHDecoder var0, String hash, int width, int height, float punch, boolean var5, int var6) {
-        if ((var6 & 8) != 0)
-            punch = 1.0F;
-
-        if ((var6 & 16) != 0)
-            var5 = true;
-
-        return var0.decode(hash, width, height, punch, var5);
-    }
-
-    // $FF: synthetic method
-    static int decode83(BHDecoder var0, String hash, int var2, int var3, int var4) {
-        if ((var4 & 2) != 0)
-            var2 = 0;
-
-        if ((var4 & 4) != 0)
-            var3 = hash.length();
-
-        return var0.decode83(hash, var2, var3);
-    }
-
-    public void clearCache() {
-        cacheCosinesX.clear();
-        cacheCosinesY.clear();
-    }
-
     public Image decode(String blurHash, int width, int height, float punch, boolean useCache) {
         if (blurHash != null && blurHash.length() >= 6) {
             int numCompEnc = decode83(blurHash, 0, 1);
@@ -207,11 +180,7 @@ public final class BHDecoder {
             return toCached;
         }
 
-        double[] cached = cacheCosinesY.get(height * numCompY);
-        if (cached == null)
-            System.err.println("cached is null: cacheCosinesY[height * numCompY]");
-
-        return cached;
+        return cacheCosinesY.get(height * numCompY);
     }
 
     private double[] getArrayForCosinesX(boolean calculate, int width, int numCompX) {
@@ -222,20 +191,16 @@ public final class BHDecoder {
             return toCached;
         }
 
-        double[] cached = cacheCosinesX.get(width * numCompX);
-        if (cached == null)
-            System.err.println("cached is null: cacheCosinesX[width * numCompX]");
-
-        return cached;
+        return cacheCosinesX.get(width * numCompX);
     }
 
-    private double getCos(double[] $this$getCos, boolean calculate, int x, int numComp, int y, int size) {
+    private double getCos(double[] $this$getCos, boolean calculate, int x, int numComp, int compY, int size) {
         if (calculate) {
-            double angle = Math.PI * (double) y * (double) x / (double) size;
-            $this$getCos[x + numComp * y] = Math.cos(angle);
+            double angle = Math.PI * (double) compY * (double) x / (double) size;
+            $this$getCos[x + numComp * compY] = Math.cos(angle);
         }
 
-        return $this$getCos[x + numComp * y];
+        return $this$getCos[x + numComp * compY];
     }
 
     private int linearToSrgb(float value) {

@@ -2,6 +2,8 @@ package eus.ehu.gleonis.gleonismastodonfx.db;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import eus.ehu.gleonis.gleonismastodonfx.utils.PropertiesManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBManager implements IDBManager {
+
+    private static final Logger logger = LogManager.getLogger("DBManager");
 
     private final PropertiesManager propManager;
 
@@ -20,8 +24,10 @@ public class DBManager implements IDBManager {
         propManager = PropertiesManager.getInstance();
         dbpath = propManager.getDbPath();
 
-        if (dbpath == null || dbpath.isEmpty())
+        if (dbpath == null || dbpath.isEmpty()) {
+            logger.fatal("Database path not found in properties file");
             throw new RuntimeException("Database path not found in properties file");
+        }
     }
 
     private void open() {
@@ -29,9 +35,9 @@ public class DBManager implements IDBManager {
             String url = "jdbc:sqlite:" + dbpath;
             conn = DriverManager.getConnection(url);
 
-            System.out.println("Database connection established");
+            logger.info("Database connection established");
         } catch (Exception e) {
-            System.err.println("Cannot connect to database server " + e);
+            logger.error("Cannot connect to database server " + e, e);
         }
     }
 
@@ -40,9 +46,11 @@ public class DBManager implements IDBManager {
             try {
                 conn.close();
             } catch (SQLException e) {
+                logger.error("Cannot close the connection to database server " + e, e);
                 e.printStackTrace();
             }
-        System.out.println("Database connection closed");
+
+        logger.info("Database connection closed");
     }
 
 

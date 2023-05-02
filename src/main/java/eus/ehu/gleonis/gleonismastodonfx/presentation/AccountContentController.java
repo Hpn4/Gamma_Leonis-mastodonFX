@@ -11,8 +11,12 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AccountContentController extends AbstractController {
+
+    private static final Logger logger = LogManager.getLogger("AccountContentController");
 
     @FXML
     private BorderPane rootBorderPane;
@@ -77,7 +81,7 @@ public class AccountContentController extends AbstractController {
         AccountScrollableContent accountScrollableContent = new AccountScrollableContent(accountListStream, 10, true);
 
         accountScrollableContent.addToBorderPane(rootBorderPane);
-        System.out.println("Time to display followers: " + (System.currentTimeMillis() - t));
+        logger.info("Time to display followers: " + (System.currentTimeMillis() - t));
     }
 
     private void showFollowings() {
@@ -86,7 +90,7 @@ public class AccountContentController extends AbstractController {
         AccountScrollableContent accountScrollableContent = new AccountScrollableContent(accountListStream, 10, false);
 
         accountScrollableContent.addToBorderPane(rootBorderPane);
-        System.out.println("Time to display followings: " + (System.currentTimeMillis() - t));
+        logger.info("Time to display followings: " + (System.currentTimeMillis() - t));
     }
 
     private void showToots() {
@@ -95,6 +99,6 @@ public class AccountContentController extends AbstractController {
         TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(tootsListStream, 10);
 
         tootsScrollableContent.addToBorderPane(rootBorderPane);
-        System.out.println("Time to display toots: " + (System.currentTimeMillis() - t));
+        logger.info("Time to display toots: " + (System.currentTimeMillis() - t));
     }
 }

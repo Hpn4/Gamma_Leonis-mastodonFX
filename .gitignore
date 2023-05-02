@@ -39,3 +39,4 @@ config.properties
 ### Mac OS ###
 .DS_Store
 /glmc_copy.db
+/logs/app.log

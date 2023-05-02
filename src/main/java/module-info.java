@@ -8,6 +8,7 @@ module eus.ehu.gleonis.gleonismastodonfx {
     requires org.jsoup;
     requires okio;
     requires java.sql;
+    requires org.apache.logging.log4j;
 
     opens eus.ehu.gleonis.gleonismastodonfx to javafx.fxml;
     exports eus.ehu.gleonis.gleonismastodonfx;
