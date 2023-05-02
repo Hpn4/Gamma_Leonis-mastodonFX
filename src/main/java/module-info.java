@@ -9,7 +9,6 @@ module eus.ehu.gleonis.gleonismastodonfx {
     requires okio;
     requires java.sql;
 
-
     opens eus.ehu.gleonis.gleonismastodonfx to javafx.fxml;
     exports eus.ehu.gleonis.gleonismastodonfx;
 

@@ -177,10 +177,10 @@ public class TootsItemCell {
         );
 
         setupInteractionPanel(finalStatus);
-        setupMediaAttachments(finalStatus);
+        setupMediaAttachments(finalStatus, finalStatus.isSensitive());
     }
 
-    private void setupMediaAttachments(Status status) {
+    private void setupMediaAttachments(Status status, boolean sensitive) {
         for (MediaAttachment media : status.getMedia_attachments())
             if (media.getType() == MediaAttachmentType.IMAGE) {
                 CachedImage cachedImage = new CachedImage(media);
@@ -188,7 +188,14 @@ public class TootsItemCell {
                 imageView.fitWidthProperty().bind(messageBorder.widthProperty().divide(2));
                 imageView.setPreserveRatio(true);
 
-                cachedImage.setImage(imageView);
+                // Enable ability to disable/activate image spoiler
+                imageView.setOnMouseClicked(e -> cachedImage.switchImage(imageView, media.getWidth(), media.getHeight()));
+
+                if (sensitive)
+                    cachedImage.setBlurHashedImg(imageView, media.getWidth(), media.getHeight());
+                else
+                    cachedImage.setImage(imageView);
+
                 mediasPane.getChildren().add(imageView);
                 VBox.setMargin(imageView, new Insets(5));
             }

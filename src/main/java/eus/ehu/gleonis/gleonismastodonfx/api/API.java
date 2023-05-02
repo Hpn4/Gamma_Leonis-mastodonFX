@@ -344,6 +344,10 @@ public class API {
         return getStream("api/v1/trends/statuses", limit, Status.class);
     }
 
+    public Search getSearch(String query, int limit) {
+        return getSingle("api/v1/search?q=" + query + "&limit=" + limit, Search.class);
+    }
+
 
     //*******************************************************************
     // HashTag methods

@@ -21,7 +21,7 @@
     </VBox>
     <Region HBox.hgrow="ALWAYS" />
     <Button fx:id="followButton" cache="true" cacheHint="SPEED" mnemonicParsing="false" onAction="#onFollowClick" prefHeight="30.0" prefWidth="35.0" styleClass="follow-button" />
-    <Button cache="true" cacheHint="SPEED" mnemonicParsing="false" onAction="#onUnfollowClick" prefHeight="30.0" prefWidth="35.0" styleClass="unfollow-account" />
+    <Button fx:id="unfollowButton" cache="true" cacheHint="SPEED" mnemonicParsing="false" onAction="#onUnfollowClick" prefHeight="30.0" prefWidth="35.0" styleClass="unfollow-account" />
     <padding>
         <Insets left="10.0" right="10.0" />
     </padding>
