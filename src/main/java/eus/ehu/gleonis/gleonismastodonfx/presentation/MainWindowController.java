@@ -88,6 +88,6 @@ public class MainWindowController extends AbstractController {
 
     @FXML
     void onTrendingClick() {
-        getApplication().requestShowTags(api.getTrendingTags(10), 10);
+        getApplication().requestShowTrending();
     }
 }

@@ -16,7 +16,7 @@
             <AppenderRef ref="LogFile"/>
         </Logger>
 
-        <Logger level="debug" name="AccountContentController">
+        <Logger level="debug" name="AbstractPanelSwitchController">
             <AppenderRef ref="LogFile"/>
         </Logger>
 

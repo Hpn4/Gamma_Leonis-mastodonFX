@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import java.time.LocalDate;
 import java.util.List;
 
-public class LoginController extends AbstractController {
+public class LoginWindowController extends AbstractController {
 
     @FXML
     private Button authorizeButton;

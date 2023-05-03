@@ -85,10 +85,13 @@ public class AccountItemCell {
         removeFromFollowers = followersPanel && relation.isFollowedBy();
         if(removeFromFollowers)
             unfollowButton.setTooltip(new Tooltip("Remove from followers"));
-        else
+        else {
             unfollowButton.setTooltip(new Tooltip("Unfollow"));
+            unfollowButton.setVisible(relation.isFollowing());
+        }
 
         followButton.setVisible(!relation.isFollowing()); // Show follow button only if we are not following this account
+
 
         accountName.setText(account.getUsername());
         accountWebfinger.setText("@" + account.getAcct());

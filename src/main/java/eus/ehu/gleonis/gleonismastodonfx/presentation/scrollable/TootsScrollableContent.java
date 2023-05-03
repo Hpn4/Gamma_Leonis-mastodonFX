@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class TootsScrollableContent extends AbstractScrollableContent<Status> {
 
-    private static final FXMLLoader fxml = new FXMLLoader(MainApplication.class.getResource("toots.fxml"));
+    private static final FXMLLoader fxml = new FXMLLoader(MainApplication.class.getResource("toot_item.fxml"));
 
     public TootsScrollableContent(ListStream<Status> itemsStream, int itemsPerPage) {
         super(itemsStream, itemsPerPage);

@@ -453,7 +453,7 @@ public class API {
         if (errorOccurred())
             return null;
 
-        ListStream<E> listStream = new ListStream<>(this, baseUrl, requestResult.paginationLink());
+        ListStream<E> listStream = new ListStream<>(this, baseUrl, requestResult.paginationLink(), limit);
 
         readArraysFromJson(requestResult.response(), objClass, listStream.getElement());
 

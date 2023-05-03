@@ -34,5 +34,7 @@ module eus.ehu.gleonis.gleonismastodonfx {
 
     opens eus.ehu.gleonis.gleonismastodonfx.utils to javafx.fxml;
     exports eus.ehu.gleonis.gleonismastodonfx.utils;
+    exports eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane;
+    opens eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane to javafx.fxml;
 
 }

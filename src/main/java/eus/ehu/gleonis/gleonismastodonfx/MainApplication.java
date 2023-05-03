@@ -5,10 +5,9 @@ import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Tag;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
-import eus.ehu.gleonis.gleonismastodonfx.presentation.AbstractController;
-import eus.ehu.gleonis.gleonismastodonfx.presentation.AccountContentController;
-import eus.ehu.gleonis.gleonismastodonfx.presentation.LoginController;
-import eus.ehu.gleonis.gleonismastodonfx.presentation.MainWindowController;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.*;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.AccountRPController;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.TrendingRPController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TagsScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsScrollableContent;
 import javafx.application.Application;
@@ -25,14 +24,20 @@ public class MainApplication extends Application {
 
     private static final Logger logger = LogManager.getLogger("Main");
     private static MainApplication instance;
-    private MainWindowController mainController;
+
     private API api;
+
     private DBManager dbManager;
-    // Cached Window
-    private Window<AccountContentController> accountsWindow;
-    private Window<MainWindowController> mainWindow;
-    private Window<LoginController> loginWindow;
+
     private Stage stage;
+
+    private MainWindowController mainController;
+
+    // Cached Window
+    private Window<AccountRPController> accountsWindow;
+    private Window<TrendingRPController> trendingWindow;
+    private Window<MainWindowController> mainWindow;
+    private Window<LoginWindowController> loginWindow;
 
     public static MainApplication getInstance() {
         return instance;
@@ -78,7 +83,7 @@ public class MainApplication extends Application {
             logger.debug("Switch to login screen");
 
             if (loginWindow == null)
-                loginWindow = load("loginWindow.fxml");
+                loginWindow = load("login_window.fxml");
 
             loginWindow.controller.init();
 
@@ -102,7 +107,7 @@ public class MainApplication extends Application {
             logger.debug("Switch to main screen");
 
             if (mainWindow == null)
-                mainWindow = load("window.fxml");
+                mainWindow = load("main_window.fxml");
 
             mainController = mainWindow.controller;
             mainController.init();
@@ -127,11 +132,26 @@ public class MainApplication extends Application {
             logger.debug("Switch to account screen");
 
             if (accountsWindow == null)
-                accountsWindow = load("account_content.fxml");
+                accountsWindow = load("account_root-pane.fxml");
 
             accountsWindow.controller.setAccount(account);
 
             mainController.setCenter(accountsWindow.ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void requestShowTrending() {
+        try {
+            logger.debug("Switch to trending screen");
+
+            if (trendingWindow == null)
+                trendingWindow = load("trending_root-pane.fxml");
+
+            trendingWindow.controller.refreshTrending();
+
+            mainController.setCenter(trendingWindow.ui);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -143,14 +163,6 @@ public class MainApplication extends Application {
         TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(toots, itemPerPage);
 
         mainController.setCenter(tootsScrollableContent);
-    }
-
-    public void requestShowTags(ListStream<Tag> tags, int itemPerPage) {
-        logger.debug("Switch to scrollable hashtags screen");
-
-        TagsScrollableContent tagsScrollableContent = new TagsScrollableContent(tags, itemPerPage);
-
-        mainController.setCenter(tagsScrollableContent);
     }
 
     public API getAPI() {
