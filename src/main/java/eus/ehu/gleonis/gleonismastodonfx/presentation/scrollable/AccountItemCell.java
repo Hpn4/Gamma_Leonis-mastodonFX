@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.util.List;
+
 public class AccountItemCell {
 
     private final API api;
@@ -78,20 +80,25 @@ public class AccountItemCell {
         }
 
         // We are interested in only the first since we send 1 ID
-        Relationship relation = api.getRelationships(account.getId()).getElement().get(0);
+        List<Relationship> relations = api.getRelationships(account.getId()).getElement();
+        if(relations.size() == 1) {
+            Relationship relation = relations.get(0);
 
-        // Followers: remove from followers (always) & add to followings (if not already)
-        // Following: unfollow
-        removeFromFollowers = followersPanel && relation.isFollowedBy();
-        if(removeFromFollowers)
-            unfollowButton.setTooltip(new Tooltip("Remove from followers"));
-        else {
-            unfollowButton.setTooltip(new Tooltip("Unfollow"));
-            unfollowButton.setVisible(relation.isFollowing());
+            // Followers: remove from followers (always) & add to followings (if not already)
+            // Following: unfollow
+            removeFromFollowers = followersPanel && relation.isFollowedBy();
+            if (removeFromFollowers)
+                unfollowButton.setTooltip(new Tooltip("Remove from followers"));
+            else {
+                unfollowButton.setTooltip(new Tooltip("Unfollow"));
+                unfollowButton.setVisible(relation.isFollowing());
+            }
+
+            followButton.setVisible(!relation.isFollowing()); // Show follow button only if we are not following this account
+        } else {
+            followButton.setVisible(true);
+            unfollowButton.setVisible(false);
         }
-
-        followButton.setVisible(!relation.isFollowing()); // Show follow button only if we are not following this account
-
 
         accountName.setText(account.getUsername());
         accountWebfinger.setText("@" + account.getAcct());

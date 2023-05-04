@@ -14,6 +14,8 @@ public class ListStream<E> {
     // When they are no pagination link, this variable will be used for pagination
     private int offset;
 
+    private SearchList<E> searchList; // Used only for search stream
+
     private String nextQuery;
 
 
@@ -27,21 +29,24 @@ public class ListStream<E> {
     }
 
     protected void parsePaginationLink(String link) {
-        if (link == null || !link.contains(",")) // No header or no next link (no links or only prev link)
-            nextQuery = baseUrl + "?offset=" + offset;
-        else
-        {
+        if (link == null || !link.contains("max_id")) // No header or no next link (no links or only prev link)
+            nextQuery = baseUrl + (baseUrl.contains("?") ? "&" : "?") + "offset=" + offset;
+        else {
             String[] links = link.split(",");
             String nextLink = links[0].contains("next") ? links[0] : links[1];
 
             String maxId = nextLink.substring(nextLink.indexOf("max_id="), nextLink.indexOf(">"));
 
-            nextQuery = baseUrl + "?" + maxId;
+            nextQuery = baseUrl + (baseUrl.contains("?") ? "&" : "?") + maxId;
         }
     }
 
     public ObservableList<E> getElement() {
         return list;
+    }
+
+    public void setSearchList(SearchList<E> searchList) {
+        this.searchList = searchList;
     }
 
     public boolean hasNext() {
@@ -54,6 +59,9 @@ public class ListStream<E> {
 
         offset += limit;
 
-        api.updateStream(nextQuery, limit, (Class<E>) list.get(0).getClass(), this);
+        if (searchList != null)
+            api.updateSearchStream(nextQuery, this, searchList, limit);
+        else
+            api.updateStream(nextQuery, limit, (Class<E>) list.get(0).getClass(), this);
     }
 }

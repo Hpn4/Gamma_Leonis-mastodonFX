@@ -16,6 +16,10 @@
             <AppenderRef ref="LogFile"/>
         </Logger>
 
+        <Logger level="debug" name="HTMLView">
+            <AppenderRef ref="LogFile"/>
+        </Logger>
+
         <Logger level="debug" name="AbstractPanelSwitchController">
             <AppenderRef ref="LogFile"/>
         </Logger>

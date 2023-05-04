@@ -3,12 +3,11 @@ package eus.ehu.gleonis.gleonismastodonfx;
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
-import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Tag;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.*;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.AccountRPController;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.SearchRPController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.TrendingRPController;
-import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TagsScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsScrollableContent;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +34,9 @@ public class MainApplication extends Application {
 
     // Cached Window
     private Window<AccountRPController> accountsWindow;
+    private Window<SearchRPController> searchWindow;
     private Window<TrendingRPController> trendingWindow;
+
     private Window<MainWindowController> mainWindow;
     private Window<LoginWindowController> loginWindow;
 
@@ -137,6 +138,24 @@ public class MainApplication extends Application {
             accountsWindow.controller.setAccount(account);
 
             mainController.setCenter(accountsWindow.ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void requestSearch(String query) {
+        if(query == null || query.isEmpty())
+            return;
+
+        try {
+            logger.debug("Switch to search screen");
+
+            if (searchWindow == null)
+                searchWindow = load("search_root-pane.fxml");
+
+            searchWindow.controller.doSearch(query);
+
+            mainController.setCenter(searchWindow.ui);
         } catch (IOException e) {
             e.printStackTrace();
         }

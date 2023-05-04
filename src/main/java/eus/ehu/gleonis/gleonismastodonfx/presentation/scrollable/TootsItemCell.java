@@ -172,7 +172,11 @@ public class TootsItemCell {
                         .map(e -> {
                             double sens = sensitiveContentLabel.isVisible() ?
                                     sensitiveContentLabel.heightProperty().get() : 0;
-                            return 30 + Math.max((Double) e + sens * 4, 40.0);
+
+                            // The spoiler label has a bigger size since it's bold and higher police, so it's take
+                            // more place than just a single line of text in a normal toot
+                            double minSize = sensitiveContentLabel.isVisible() ? 80 : 40;
+                            return 30 + Math.max((Double) e + sens * 4, minSize);
                         })
         );
 

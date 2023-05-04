@@ -54,6 +54,9 @@ public class AbstractPanelSwitchController extends AbstractController {
     }
 
     protected void showScrollableAccounts(ListStream<Account> accounts, boolean followersPane) {
+        if(accounts == null)
+            return;
+
         long t = System.currentTimeMillis();
 
         AccountScrollableContent accountScrollableContent = new AccountScrollableContent(accounts, elementsPerPage, followersPane);
@@ -63,6 +66,9 @@ public class AbstractPanelSwitchController extends AbstractController {
     }
 
     protected void showScrollableToots(ListStream<Status> toots) {
+        if(toots == null)
+            return;
+
         long t = System.currentTimeMillis();
 
         TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(toots, elementsPerPage);
@@ -72,6 +78,9 @@ public class AbstractPanelSwitchController extends AbstractController {
     }
 
     protected void showScrollableTags(ListStream<Tag> tags) {
+        if(tags == null)
+            return;
+
         long t = System.currentTimeMillis();
 
         TagsScrollableContent tagsScrollableContent = new TagsScrollableContent(tags, elementsPerPage);

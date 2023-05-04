@@ -16,6 +16,9 @@ import okhttp3.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class API {
 
@@ -344,10 +347,54 @@ public class API {
         return getStream("api/v1/trends/statuses", limit, Status.class);
     }
 
-    public Search getSearch(String query, int limit) {
-        return getSingle("api/v1/search?q=" + query + "&limit=" + limit, Search.class);
+    //*******************************************************************
+    // Search methods
+    //
+    // *******************************************************************
+    public ListStream<Account> searchAccounts(String query, int limit) {
+        query = URLEncoder.encode(query, StandardCharsets.UTF_8);
+        String baseUrl = "api/v2/search?q=" + query + "&resolve=true&type=accounts";
+
+        return getSearchStream(baseUrl, limit, Search::getAccounts);
     }
 
+    public ListStream<Status> searchToots(String query, int limit) {
+        String baseUrl = "api/v2/search?q=" + query + "&resolve=true&type=statuses";
+
+        return getSearchStream(baseUrl, limit, Search::getStatuses);
+    }
+
+    public ListStream<Tag> searchTags(String query, int limit) {
+        String baseUrl = "api/v2/search?q=" + query + "&resolve=true&type=hashtags";
+
+        return getSearchStream(baseUrl, limit, Search::getHashtags);
+    }
+
+    private <T> ListStream<T> getSearchStream(String baseUrl, int limit, SearchList<T> testList) {
+        RequestResult requestResult = getRequest(baseUrl + "&limit=" + limit);
+        if (errorOccurred())
+            return null;
+
+        Search searchRes = readSingleFromJson(requestResult.response(), Search.class);
+
+        ListStream<T> stream = new ListStream<>(this, baseUrl, requestResult.paginationLink(), limit);
+        stream.setSearchList(testList);
+        stream.getElement().addAll(testList.apply(searchRes));
+
+        return stream;
+    }
+
+    protected <T> void updateSearchStream(String baseUrl, ListStream<T> stream, SearchList<T> testList, int limit) {
+        String url = baseUrl + (baseUrl.contains("?") ? "&" : "?") + "limit=" + limit;
+        RequestResult requestResult = getRequest(url);
+        if (errorOccurred())
+            return;
+
+        Search searchRes = readSingleFromJson(requestResult.response(), Search.class);
+
+        stream.parsePaginationLink(requestResult.paginationLink());
+        stream.getElement().addAll(testList.apply(searchRes));
+    }
 
     //*******************************************************************
     // HashTag methods
@@ -364,7 +411,6 @@ public class API {
     public Tag unfollowHashTag(String tag) {
         return postSingle("api/v1/tags/" + tag + "/unfollow", Tag.class);
     }
-
 
     //*******************************************************************
     // Timelines methods:
@@ -424,13 +470,6 @@ public class API {
         postSingle("api/v1/notifications/" + id + "/dismiss", Notification.class);
     }
 
-
-    //*******************************************************************
-    // Web sockets
-    //
-    // *******************************************************************
-
-
     //*******************************************************************
     // Stream Utils methods
     //
@@ -445,6 +484,12 @@ public class API {
 
         readArraysFromJson(requestResult.response(), objClass, listStream.getElement());
     }
+
+
+    //*******************************************************************
+    // Web sockets
+    //
+    // *******************************************************************
 
     private <E> ListStream<E> getStream(String baseUrl, int limit, Class<E> objClass) {
         String url = baseUrl + (baseUrl.contains("?") ? "&" : "?") + "limit=" + limit;

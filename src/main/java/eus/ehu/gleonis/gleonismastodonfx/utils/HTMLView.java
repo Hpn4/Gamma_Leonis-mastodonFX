@@ -5,12 +5,16 @@ import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.StatusMention;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 
 public class HTMLView extends TextFlow {
+
+    private static final Logger logger = LogManager.getLogger("HTMLView");
 
     private final Status status;
 
@@ -35,13 +39,16 @@ public class HTMLView extends TextFlow {
 
         if (type.equals("#text"))
             addChildren(((TextNode) node).text(), "html-text");
+
         else if (type.equals("p")) {
             for (Node child : node.childNodes())
                 parseNodeToText(child);
 
             getChildren().add(new Text("\n\n"));
+
         } else if (type.equals("br"))
             getChildren().add(new Text("\n"));
+
         else if (type.equals("a")) {
             String t = node.childNode(0).toString();
 
@@ -78,7 +85,7 @@ public class HTMLView extends TextFlow {
             for (Node child : node.childNodes())
                 parseNodeToText(child);
         else
-            System.err.println("Unknown node type: " + node.outerHtml());
+            logger.error("Unknown node type: " + node.outerHtml());
     }
 
     private String getIDOfUser(String user) {

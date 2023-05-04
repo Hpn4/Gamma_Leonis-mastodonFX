@@ -17,3 +17,30 @@
     -fx-text-fill: #FFFFFF;
     -fx-underline: true;
 }
+
+
+/*
+* Chart styling
+ */
+.axis {
+    -fx-border-color: null;
+}
+
+.chart-plot-background {
+    -fx-background-color: null;
+}
+
+.default-color0.chart-area-symbol {
+    -fx-background-color: #3D4FAD;
+    -fx-padding: 2px;
+}
+
+.default-color0.chart-series-area-line {
+    -fx-stroke: #3D4FAD;
+    -fx-stroke-width: 1px;
+    -fx-effect: null;
+}
+
+.default-color0.chart-series-area-fill {
+    -fx-fill: rgba(103, 122, 225, 0.35);
+}
