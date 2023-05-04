@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="hashtagItem" onMouseClicked="#onItemClick" styleClass="hashtag-item"
-          stylesheets="@css/hashtag_item.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="hashtagItem" minHeight="80.0" onMouseClicked="#onItemClick" styleClass="hashtag-item" stylesheets="@css/hashtag_item.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <rowConstraints>
-      <RowConstraints minHeight="10.0"/>
+      <RowConstraints minHeight="10.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
    </rowConstraints>
    <columnConstraints>
-      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
-      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
+      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
    </columnConstraints>
-   <padding>
-      <Insets bottom="15.0" left="10.0" right="10.0" top="15.0"/>
-   </padding>
-   <Label fx:id="nameLabel" styleClass="hashtag-name-label" text="Label">
+   <Label fx:id="nameLabel" styleClass="hashtag-name-label" text="Label" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
       <font>
-         <Font name="System Bold" size="14.0"/>
+         <Font name="System Bold" size="14.0" />
       </font>
+      <padding>
+         <Insets top="15.0" />
+      </padding>
    </Label>
-   <Label fx:id="usesLabel" textFill="#666666" GridPane.columnIndex="1" GridPane.halignment="RIGHT"/>
+   <Label fx:id="usesLabel" textFill="#666666" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+   <AreaChart fx:id="frequenceCharts" animated="false" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" legendVisible="false" maxHeight="80.0" maxWidth="250.0" minHeight="80.0" minWidth="250.0" prefHeight="80.0" prefWidth="250.0" verticalGridLinesVisible="false" verticalZeroLineVisible="false" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+     <xAxis>
+       <CategoryAxis animated="false" tickLabelsVisible="false" tickMarkVisible="false" />
+     </xAxis>
+     <yAxis>
+       <NumberAxis animated="false" minorTickVisible="false" side="LEFT" tickLabelsVisible="false" tickMarkVisible="false" />
+     </yAxis>
+   </AreaChart>
+   <padding>
+      <Insets left="10.0" right="10.0" />
+   </padding>
 </GridPane>

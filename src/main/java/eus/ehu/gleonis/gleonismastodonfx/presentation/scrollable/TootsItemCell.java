@@ -172,15 +172,19 @@ public class TootsItemCell {
                         .map(e -> {
                             double sens = sensitiveContentLabel.isVisible() ?
                                     sensitiveContentLabel.heightProperty().get() : 0;
-                            return 30 + Math.max((Double) e + sens * 4, 40.0);
+
+                            // The spoiler label has a bigger size since it's bold and higher police, so it's take
+                            // more place than just a single line of text in a normal toot
+                            double minSize = sensitiveContentLabel.isVisible() ? 80 : 40;
+                            return 30 + Math.max((Double) e + sens * 4, minSize);
                         })
         );
 
         setupInteractionPanel(finalStatus);
-        setupMediaAttachments(finalStatus);
+        setupMediaAttachments(finalStatus, finalStatus.isSensitive());
     }
 
-    private void setupMediaAttachments(Status status) {
+    private void setupMediaAttachments(Status status, boolean sensitive) {
         for (MediaAttachment media : status.getMedia_attachments())
             if (media.getType() == MediaAttachmentType.IMAGE) {
                 CachedImage cachedImage = new CachedImage(media);
@@ -188,7 +192,14 @@ public class TootsItemCell {
                 imageView.fitWidthProperty().bind(messageBorder.widthProperty().divide(2));
                 imageView.setPreserveRatio(true);
 
-                cachedImage.setImage(imageView);
+                // Enable ability to disable/activate image spoiler
+                imageView.setOnMouseClicked(e -> cachedImage.switchImage(imageView, media.getWidth(), media.getHeight()));
+
+                if (sensitive)
+                    cachedImage.setBlurHashedImg(imageView, media.getWidth(), media.getHeight());
+                else
+                    cachedImage.setImage(imageView);
+
                 mediasPane.getChildren().add(imageView);
                 VBox.setMargin(imageView, new Insets(5));
             }

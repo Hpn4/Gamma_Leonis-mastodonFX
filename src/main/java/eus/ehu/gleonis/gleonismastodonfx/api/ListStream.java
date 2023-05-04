@@ -11,29 +11,33 @@ public class ListStream<E> {
 
     private final String baseUrl;
 
+    // When they are no pagination link, this variable will be used for pagination
+    private int offset;
+
+    private SearchList<E> searchList; // Used only for search stream
+
     private String nextQuery;
 
 
-    public ListStream(API api, String baseUrl, String link) {
+    public ListStream(API api, String baseUrl, String link, int limit) {
         this.api = api;
         this.list = FXCollections.observableArrayList();
         this.baseUrl = baseUrl;
+        offset = limit;
 
         parsePaginationLink(link);
     }
 
     protected void parsePaginationLink(String link) {
-        if (link == null || !link.contains(",")) // No header or no next link (no links or only prev link)
-            nextQuery = null;
-        else
-        {
+        if (link == null || !link.contains("max_id")) // No header or no next link (no links or only prev link)
+            nextQuery = baseUrl + (baseUrl.contains("?") ? "&" : "?") + "offset=" + offset;
+        else {
             String[] links = link.split(",");
             String nextLink = links[0].contains("next") ? links[0] : links[1];
 
             String maxId = nextLink.substring(nextLink.indexOf("max_id="), nextLink.indexOf(">"));
 
-            nextQuery = baseUrl + "?" + maxId;
-            System.err.println("Debug warning in ListStream#parsePaginationLink. Next query: " + nextQuery);
+            nextQuery = baseUrl + (baseUrl.contains("?") ? "&" : "?") + maxId;
         }
     }
 
@@ -41,16 +45,23 @@ public class ListStream<E> {
         return list;
     }
 
+    public void setSearchList(SearchList<E> searchList) {
+        this.searchList = searchList;
+    }
+
     public boolean hasNext() {
         return nextQuery != null;
     }
 
     public void getNextElements(int limit) {
-        if (!hasNext()) {
-            System.err.println("Debug warning in ListStream#getNextElements: No pagination link");
+        if (!hasNext())
             return;
-        }
 
-        api.updateStream(nextQuery, limit, (Class<E>) list.get(0).getClass(), this);
+        offset += limit;
+
+        if (searchList != null)
+            api.updateSearchStream(nextQuery, this, searchList, limit);
+        else
+            api.updateStream(nextQuery, limit, (Class<E>) list.get(0).getClass(), this);
     }
 }

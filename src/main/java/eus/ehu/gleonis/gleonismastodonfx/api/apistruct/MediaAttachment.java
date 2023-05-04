@@ -1,5 +1,7 @@
 package eus.ehu.gleonis.gleonismastodonfx.api.apistruct;
 
+import java.util.Map;
+
 public class MediaAttachment {
 
     String id;
@@ -38,7 +40,6 @@ public class MediaAttachment {
         return blurhash;
     }
 
-    /*
     Map<?, ?> meta;
 
     private double getMetaDouble(String key) {
@@ -62,5 +63,4 @@ public class MediaAttachment {
     public int getHeight() {
         return (int) getMetaDouble("height");
     }
-    */
 }

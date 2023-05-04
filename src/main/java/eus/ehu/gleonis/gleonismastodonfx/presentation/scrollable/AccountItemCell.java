@@ -1,18 +1,27 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
+import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Relationship;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.util.List;
+
 public class AccountItemCell {
 
-    private final boolean isFollowings;
+    private final API api;
+
+    private final Account account;
+
+    private boolean removeFromFollowers;
 
     private FXMLLoader loader;
     @FXML
@@ -26,26 +35,36 @@ public class AccountItemCell {
     @FXML
     private Button followButton;
 
-    public AccountItemCell(Account account, boolean isFollowings) {
+    @FXML
+    private Button unfollowButton;
+
+    public AccountItemCell(Account account, boolean followersPanel ) {
         super();
 
-        this.isFollowings = isFollowings;
-        updateItem(account);
+        api = MainApplication.getInstance().getAPI();
+        this.account = account;
+
+        updateItem(account, followersPanel);
     }
 
     @FXML
     void onFollowClick() {
-        System.out.println("Following " + accountName.getText());
-        //TODO
+        api.followAccount(account.getId());
+        followButton.setVisible(false);
     }
 
     @FXML
     void onUnfollowClick() {
-        System.out.println("Unfollowing " + accountName.getText());
-        //TODO
+        if(removeFromFollowers) {
+            api.removeAccountFromFollowers(account.getId());
+            //TODO: remove from the list in VBox
+        } else {
+            api.unfollowAccount(account.getId());
+            followButton.setVisible(true);
+        }
     }
 
-    protected void updateItem(Account account) {
+    protected void updateItem(Account account, boolean followersPanel) {
         if (account == null)
             return;
 
@@ -60,8 +79,26 @@ public class AccountItemCell {
             }
         }
 
-        if (isFollowings)
-            followButton.setVisible(false);
+        // We are interested in only the first since we send 1 ID
+        List<Relationship> relations = api.getRelationships(account.getId()).getElement();
+        if(relations.size() == 1) {
+            Relationship relation = relations.get(0);
+
+            // Followers: remove from followers (always) & add to followings (if not already)
+            // Following: unfollow
+            removeFromFollowers = followersPanel && relation.isFollowedBy();
+            if (removeFromFollowers)
+                unfollowButton.setTooltip(new Tooltip("Remove from followers"));
+            else {
+                unfollowButton.setTooltip(new Tooltip("Unfollow"));
+                unfollowButton.setVisible(relation.isFollowing());
+            }
+
+            followButton.setVisible(!relation.isFollowing()); // Show follow button only if we are not following this account
+        } else {
+            followButton.setVisible(true);
+            unfollowButton.setVisible(false);
+        }
 
         accountName.setText(account.getUsername());
         accountWebfinger.setText("@" + account.getAcct());

@@ -20,10 +20,18 @@ public class Relationship {
         return id;
     }
 
+    /**
+     *
+     * @return If we follow the account
+     */
     public boolean isFollowing() {
         return following;
     }
 
+    /**
+     *
+     * @return If the account follow us
+     */
     public boolean isFollowedBy() {
         return followed_by;
     }

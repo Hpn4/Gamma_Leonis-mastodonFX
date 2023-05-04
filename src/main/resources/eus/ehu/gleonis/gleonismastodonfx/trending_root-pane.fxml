@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="rootBorderPane" prefHeight="381.0" prefWidth="546.0" styleClass="rootBorderPane" stylesheets="@css/account_content.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.TrendingRPController">
+   <top>
+      <GridPane styleClass="selection-action-region" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <RadioButton mnemonicParsing="false" onAction="#onHashtagsTypeClick" styleClass="account-selection-radio-button" text="Hashtags" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+            <toggleGroup>
+               <ToggleGroup fx:id="trendingTypeSelection" />
+            </toggleGroup>
+         </RadioButton>
+         <RadioButton mnemonicParsing="false" onAction="#onTootsTypeClick" styleClass="account-selection-radio-button" text="Toots" textFill="WHITE" toggleGroup="$trendingTypeSelection" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+         </RadioButton>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets left="10.0" right="20.0" top="25.0" />
+         </padding>
+      </GridPane>
+   </top>
+</BorderPane>

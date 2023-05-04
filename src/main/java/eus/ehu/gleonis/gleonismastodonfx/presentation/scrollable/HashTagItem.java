@@ -3,10 +3,15 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Tag;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.TagHistory;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+
+import java.util.List;
 
 public class HashTagItem {
 
@@ -22,6 +27,9 @@ public class HashTagItem {
 
     @FXML
     private Label usesLabel;
+
+    @FXML
+    private AreaChart<String, Number> frequenceCharts;
 
     public HashTagItem(String hashtagName) {
         api = MainApplication.getInstance().getAPI();
@@ -55,12 +63,19 @@ public class HashTagItem {
         nameLabel.setText("#" + hashtag.getName());
 
         int uses = 0, accounts = 0;
+        List<TagHistory> historyList = hashtag.getHistory();
 
-        uses += hashtag.getHistory().get(0).getUses();
-        uses += hashtag.getHistory().get(1).getUses();
+        uses += historyList.get(0).getUses();
+        uses += historyList.get(1).getUses();
 
-        accounts += hashtag.getHistory().get(0).getAccounts();
-        accounts += hashtag.getHistory().get(1).getAccounts();
+        accounts += historyList.get(0).getAccounts();
+        accounts += historyList.get(1).getAccounts();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        for (TagHistory tagHistory : historyList)
+            series.getData().add(new XYChart.Data<>(tagHistory.getDay(), tagHistory.getUses()));
+
+        frequenceCharts.getData().add(series);
 
         usesLabel.setText(uses + " uses by " + accounts + " people in the past 2 days");
     }

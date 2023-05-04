@@ -1,4 +1,4 @@
-package eus.ehu.gleonis.gleonismastodonfx;
+package eus.ehu.gleonis.gleonismastodonfx.utils;
 
 import java.io.*;
 import java.util.Properties;
@@ -11,11 +11,13 @@ public class PropertiesManager {
 
     private Properties prop;
 
-    private String token;
-
     private String clientID;
 
     private String clientSecret;
+
+    private String dbPath;
+
+    private String dbUser;
 
     public PropertiesManager() {
         loadProperties();
@@ -35,7 +37,8 @@ public class PropertiesManager {
             prop.load(input);
             clientID = prop.getProperty("app.client.id");
             clientSecret = prop.getProperty("app.client.secret");
-            token = prop.getProperty("token");
+            dbPath = prop.getProperty("db.path");
+            dbUser = prop.getProperty("db.user");
         } catch (final IOException ex) {
             ex.printStackTrace();
         }
@@ -50,18 +53,13 @@ public class PropertiesManager {
         }
     }
 
-    public String getToken() {
-        return token;
+    public String getDbUser() {
+        return dbUser;
     }
 
-    /**
-     * Sets the token and saves it to the properties file
-     *
-     * @param token the token to set
-     */
-    public void setToken(String token) {
-        this.token = token;
-        prop.setProperty("token", token);
+    public void setDbUser(String dbUser) {
+        this.dbUser = dbUser;
+        prop.setProperty("db.user", dbUser);
         saveProperties();
     }
 
@@ -71,6 +69,10 @@ public class PropertiesManager {
 
     public String getClientSecret() {
         return clientSecret;
+    }
+
+    public String getDbPath() {
+        return dbPath;
     }
 
 }

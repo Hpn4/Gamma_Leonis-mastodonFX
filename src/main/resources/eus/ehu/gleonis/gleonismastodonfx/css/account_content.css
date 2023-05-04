@@ -18,6 +18,7 @@
     -fx-scale-x: 70%;
 }
 
+/* CSS for all radio button (Toots, Followers, Followings) */
 .account-selection-radio-button {
     -fx-text-fill: #999999;
     -fx-padding: 0 0 15px 0;
@@ -37,7 +38,7 @@
 }
 
 .account-selection-radio-button:selected .dot {
-    -fx-shape: "M 50,5 95,97.5 5,97.5 z";
+    -fx-shape: "M 50,5 95,97.5 5,97.5 z"; /* Triangle */
     -fx-translate-y: 18px;
     -fx-scale-x: 170%;
     -fx-scale-y: 110%;
@@ -45,14 +46,24 @@
     -fx-border-color: none;
 }
 
-.followings-radio-button:selected .dot {
-    -fx-translate-x: 50px;
+/* CSS for the Follow/Unfollow button */
+.action-relation-button {
+    -fx-background-color: #3D4FAD;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0;
+
+    -fx-border-color: #2c3f9a;
+    -fx-border-radius: 5px;
+    -fx-border-insets: 0;
+
+    -fx-text-fill: #FFFFFF;
 }
 
-.followers-radio-button:selected .dot {
-    -fx-translate-x: 45px;
+.action-relation-button:hover {
+    -fx-background-color: #4F66E0;
 }
 
-.toots-radio-button:selected .dot {
-    -fx-translate-x: 35px;
+.action-relation-button:pressed {
+    -fx-background-color: #4d599a;
+    -fx-text-fill: #AAAAAA;
 }

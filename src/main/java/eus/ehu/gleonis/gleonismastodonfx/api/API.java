@@ -3,20 +3,22 @@ package eus.ehu.gleonis.gleonismastodonfx.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import eus.ehu.gleonis.gleonismastodonfx.PropertiesManager;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.MediaAttachmentTypeDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.NotificationTypeDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.VisibilityDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.*;
+import eus.ehu.gleonis.gleonismastodonfx.db.DBAccount;
+import eus.ehu.gleonis.gleonismastodonfx.db.IDBManager;
+import eus.ehu.gleonis.gleonismastodonfx.utils.PropertiesManager;
 import javafx.collections.ObservableList;
 import okhttp3.*;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class API {
 
@@ -46,8 +48,7 @@ public class API {
             throw new RuntimeException("Client ID and Client Secret are not set in config.properties file.");
 
         application = new Application(propertiesManager.getClientID(), propertiesManager.getClientSecret());
-
-        token = propertiesManager.getToken();
+        token = null;
     }
 
     public boolean errorOccurred() {
@@ -69,15 +70,9 @@ public class API {
     // It will return a Token object with the access token and other information.
     // The access token is then used to setup the API with setupAPI().
     // *******************************************************************
-    public void authorizeUser() {
-        String uri = "https://mastodon.social/oauth/authorize?response_type=code&client_id=" +
+    public String getAuthorizedUserURL() {
+        return "https://mastodon.social/oauth/authorize?response_type=code&client_id=" +
                 application.getClientId() + "&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=read+write+push+follow";
-
-        try {
-            Desktop.getDesktop().browse(new URI(uri));
-        } catch (URISyntaxException | IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public Token getToken(String code) {
@@ -104,12 +99,38 @@ public class API {
     }
 
     public boolean isUserConnected() {
-        return token != null && !token.isEmpty();
+        return !propertiesManager.getDbUser().isEmpty();
     }
 
-    public void setupToken(Token token) {
+    public void setupUser(IDBManager db) {
+        DBAccount dbAccount = db.getLoggedAccount();
+
+        token = dbAccount.getToken();
+        Account account = verifyCredentials();
+
+        db.updateAccount(account);
+        propertiesManager.setDbUser(dbAccount.getId());
+    }
+
+    public boolean addNewUser(IDBManager db, Token token) {
         this.token = token.getAccessToken();
-        propertiesManager.setToken(token.getAccessToken());
+        Account account = getSingle("api/v1/accounts/verify_credentials", Account.class);
+        if (account == null)
+            throw new RuntimeException("Error while getting account information.");
+
+        propertiesManager.setDbUser(account.getId());
+        return db.insertAccount(account, token.getAccessToken());
+    }
+
+    public void switchUser(String token) {
+        this.token = token;
+        Account account = verifyCredentials();
+
+        propertiesManager.setDbUser(account.getId());
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
 
@@ -326,6 +347,54 @@ public class API {
         return getStream("api/v1/trends/statuses", limit, Status.class);
     }
 
+    //*******************************************************************
+    // Search methods
+    //
+    // *******************************************************************
+    public ListStream<Account> searchAccounts(String query, int limit) {
+        query = URLEncoder.encode(query, StandardCharsets.UTF_8);
+        String baseUrl = "api/v2/search?q=" + query + "&resolve=true&type=accounts";
+
+        return getSearchStream(baseUrl, limit, Search::getAccounts);
+    }
+
+    public ListStream<Status> searchToots(String query, int limit) {
+        String baseUrl = "api/v2/search?q=" + query + "&resolve=true&type=statuses";
+
+        return getSearchStream(baseUrl, limit, Search::getStatuses);
+    }
+
+    public ListStream<Tag> searchTags(String query, int limit) {
+        String baseUrl = "api/v2/search?q=" + query + "&resolve=true&type=hashtags";
+
+        return getSearchStream(baseUrl, limit, Search::getHashtags);
+    }
+
+    private <T> ListStream<T> getSearchStream(String baseUrl, int limit, SearchList<T> testList) {
+        RequestResult requestResult = getRequest(baseUrl + "&limit=" + limit);
+        if (errorOccurred())
+            return null;
+
+        Search searchRes = readSingleFromJson(requestResult.response(), Search.class);
+
+        ListStream<T> stream = new ListStream<>(this, baseUrl, requestResult.paginationLink(), limit);
+        stream.setSearchList(testList);
+        stream.getElement().addAll(testList.apply(searchRes));
+
+        return stream;
+    }
+
+    protected <T> void updateSearchStream(String baseUrl, ListStream<T> stream, SearchList<T> testList, int limit) {
+        String url = baseUrl + (baseUrl.contains("?") ? "&" : "?") + "limit=" + limit;
+        RequestResult requestResult = getRequest(url);
+        if (errorOccurred())
+            return;
+
+        Search searchRes = readSingleFromJson(requestResult.response(), Search.class);
+
+        stream.parsePaginationLink(requestResult.paginationLink());
+        stream.getElement().addAll(testList.apply(searchRes));
+    }
 
     //*******************************************************************
     // HashTag methods
@@ -342,7 +411,6 @@ public class API {
     public Tag unfollowHashTag(String tag) {
         return postSingle("api/v1/tags/" + tag + "/unfollow", Tag.class);
     }
-
 
     //*******************************************************************
     // Timelines methods:
@@ -402,13 +470,6 @@ public class API {
         postSingle("api/v1/notifications/" + id + "/dismiss", Notification.class);
     }
 
-
-    //*******************************************************************
-    // Web sockets
-    //
-    // *******************************************************************
-
-
     //*******************************************************************
     // Stream Utils methods
     //
@@ -424,6 +485,12 @@ public class API {
         readArraysFromJson(requestResult.response(), objClass, listStream.getElement());
     }
 
+
+    //*******************************************************************
+    // Web sockets
+    //
+    // *******************************************************************
+
     private <E> ListStream<E> getStream(String baseUrl, int limit, Class<E> objClass) {
         String url = baseUrl + (baseUrl.contains("?") ? "&" : "?") + "limit=" + limit;
 
@@ -431,7 +498,7 @@ public class API {
         if (errorOccurred())
             return null;
 
-        ListStream<E> listStream = new ListStream<>(this, baseUrl, requestResult.paginationLink());
+        ListStream<E> listStream = new ListStream<>(this, baseUrl, requestResult.paginationLink(), limit);
 
         readArraysFromJson(requestResult.response(), objClass, listStream.getElement());
 
