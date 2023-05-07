@@ -1,10 +1,10 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
-import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.MediaAttachment;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.MediaAttachmentType;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.StatusVisibility;
 import eus.ehu.gleonis.gleonismastodonfx.utils.CachedImage;
 import eus.ehu.gleonis.gleonismastodonfx.utils.HTMLView;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -19,9 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
 
-public class TootsItemCell {
-
-    private API api;
+public class TootItem extends AbstractItem<Status> {
 
     @FXML
     private BorderPane messageBorder;
@@ -70,53 +70,62 @@ public class TootsItemCell {
     @FXML
     private VBox mediasPane;
 
-    private Status status;
+    @FXML
+    private MenuButton moreMenuButton;
+
+    @FXML
+    private MenuItem deleteMenuItem;
+
+    public TootItem() {
+        super(null);
+    }
 
     public void init(Status status) {
-        api = MainApplication.getInstance().getAPI();
-        this.status = status;
+        elem = status;
 
-        updateItem(status, false);
+        updateItem(elem, false);
     }
 
     @FXML
     void onReplyClick() {
-        //TODO
+        MainApplication.getInstance().requestShowSendToot("@" + elem.getAccount().getAcct(), StatusVisibility.DIRECT, elem.getId());
     }
 
     @FXML
     void onReblogClick() {
-        if (status.isReblogged())
-            status = api.unreblogStatus(status.getId());
-        else
-            status = api.reblogStatus(status.getId());
+        elem = elem.isReblogged() ? api.unreblogStatus(elem.getId()) : api.reblogStatus(elem.getId());
 
-        updateItem(status, true);
+        updateItem(elem, true);
     }
 
     @FXML
     void onFavouriteClick() {
-        if (status.isFavourited())
-            status = api.unfavouriteStatus(status.getId());
-        else
-            status = api.favouriteStatus(status.getId());
+        elem = elem.isFavourited() ? api.unfavouriteStatus(elem.getId()) : api.favouriteStatus(elem.getId());
 
-        updateItem(status, true);
+        updateItem(elem, true);
     }
 
     @FXML
     void onBookmarkClick() {
-        if (status.isBookmarked())
-            status = api.unbookmarkStatus(status.getId());
-        else
-            status = api.bookmarkStatus(status.getId());
+        elem = elem.isBookmarked() ? api.unbookmarkStatus(elem.getId()) : api.bookmarkStatus(elem.getId());
 
-        updateItem(status, true);
+        updateItem(elem, true);
     }
 
     @FXML
-    void onMoreOptClick() {
-        //TODO
+    void onDeleteTootClick() {
+        api.deleteStatus(elem.getId());
+        deleteItemFromUI();
+    }
+
+    @FXML
+    void onMentionMenuClick() {
+        MainApplication.getInstance().requestShowSendToot("@" + elem.getAccount().getAcct() + " ", StatusVisibility.PUBLIC, null);
+    }
+
+    @FXML
+    void onPrivateMentionMenuClick() {
+        MainApplication.getInstance().requestShowSendToot("@" + elem.getAccount().getAcct() + " ", StatusVisibility.DIRECT, null);
     }
 
     protected void updateItem(Status status, boolean onlyInteractionPanel) {
@@ -180,8 +189,21 @@ public class TootsItemCell {
                         })
         );
 
+        deleteMenuItem.setVisible(api.isUser(status.getAccount()));
+
         setupInteractionPanel(finalStatus);
+        interactionPanel.setVisible(false);
         setupMediaAttachments(finalStatus, finalStatus.isSensitive());
+
+        moreMenuButton.showingProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                messageBorder.setOnMouseExited(null);
+                interactionPanel.setVisible(true);
+            } else {
+                interactionPanel.setVisible(false);
+                messageBorder.setOnMouseExited(e -> interactionPanel.setVisible(false));
+            }
+        });
     }
 
     private void setupMediaAttachments(Status status, boolean sensitive) {
@@ -208,8 +230,6 @@ public class TootsItemCell {
     }
 
     private void setupInteractionPanel(Status status) {
-        interactionPanel.setVisible(false);
-
         // Setup labels for interaction menu
         repliesCount.setText(String.valueOf(status.getReplies_count()));
         reblogsCount.setText(String.valueOf(status.getReblogs_count()));
@@ -238,7 +258,7 @@ public class TootsItemCell {
         }
     }
 
-    public BorderPane getGraphic() {
+    public BorderPane getParent() {
         return messageBorder;
     }
 }

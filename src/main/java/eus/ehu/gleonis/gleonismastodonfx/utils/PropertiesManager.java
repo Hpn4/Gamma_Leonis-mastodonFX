@@ -15,8 +15,6 @@ public class PropertiesManager {
 
     private String clientSecret;
 
-    private String dbPath;
-
     private String dbUser;
 
     public PropertiesManager() {
@@ -37,7 +35,6 @@ public class PropertiesManager {
             prop.load(input);
             clientID = prop.getProperty("app.client.id");
             clientSecret = prop.getProperty("app.client.secret");
-            dbPath = prop.getProperty("db.path");
             dbUser = prop.getProperty("db.user");
         } catch (final IOException ex) {
             ex.printStackTrace();
@@ -69,10 +66,6 @@ public class PropertiesManager {
 
     public String getClientSecret() {
         return clientSecret;
-    }
-
-    public String getDbPath() {
-        return dbPath;
     }
 
 }

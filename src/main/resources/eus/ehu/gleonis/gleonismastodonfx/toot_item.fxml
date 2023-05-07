@@ -4,6 +4,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="messageBorder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="892.0" styleClass="toots-border-pane" stylesheets="@css/toots.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsItemCell">
+<BorderPane fx:id="messageBorder" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="892.0" styleClass="toots-border-pane" stylesheets="@css/toots.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootItem">
    <top>
       <HBox prefHeight="64.0" prefWidth="892.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -45,7 +47,7 @@
             <Label fx:id="webfingerLabel" prefHeight="18.0" prefWidth="97.0" text="Webfinger" textFill="#999999" />
          </VBox>
          <Region HBox.hgrow="ALWAYS" />
-         <GridPane fx:id="interactionPanel" prefHeight="39.0" prefWidth="262.0">
+         <GridPane fx:id="interactionPanel" focusTraversable="true" prefHeight="39.0" prefWidth="262.0">
             <columnConstraints>
                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -107,12 +109,17 @@
                   <String fx:value="interaction-status-button" />
                </styleClass>
             </Button>
-            <Button cache="true" mnemonicParsing="false" onAction="#onMoreOptClick" prefHeight="7.0" prefWidth="16.0" GridPane.columnIndex="7">
+            <MenuButton fx:id="moreMenuButton" mnemonicParsing="false" popupSide="TOP" GridPane.columnIndex="7">
+              <items>
+                <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#onDeleteTootClick" text="Delete" />
+                <MenuItem mnemonicParsing="false" onAction="#onMentionMenuClick" text="Mention" />
+                  <MenuItem mnemonicParsing="false" onAction="#onPrivateMentionMenuClick" text="Private mention" />
+              </items>
                <styleClass>
                   <String fx:value="more-options-button" />
                   <String fx:value="interaction-status-button" />
                </styleClass>
-            </Button>
+            </MenuButton>
          </GridPane>
          <Label fx:id="dateMessageLabel" alignment="CENTER" text="Date" textFill="#999999">
             <padding>

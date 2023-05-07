@@ -8,7 +8,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-public class AbstractScrollableContent<E> extends ScrollPane {
+public abstract class AbstractScrollableContent<E> extends ScrollPane {
 
     protected final VBox contentBox;
 
@@ -62,8 +62,9 @@ public class AbstractScrollableContent<E> extends ScrollPane {
         });
     }
 
-    public void addToBorderPane(BorderPane borderPane) {
-        borderPane.setCenter(this);
+    public void deleteItem(E toDelete) {
+        itemsList.remove(toDelete);
+        layout();
     }
 
     public void reduceSpeed() {

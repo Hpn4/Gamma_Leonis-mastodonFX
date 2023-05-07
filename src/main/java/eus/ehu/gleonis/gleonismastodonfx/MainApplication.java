@@ -3,6 +3,7 @@ package eus.ehu.gleonis.gleonismastodonfx;
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.StatusVisibility;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.*;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.AccountRPController;
@@ -110,9 +111,6 @@ public class MainApplication extends Application {
             if (mainWindow == null)
                 mainWindow = load("main_window.fxml");
 
-            mainController = mainWindow.controller;
-            mainController.init();
-
             if (stage.getScene() == null)
                 stage.setScene(new Scene(mainWindow.ui, 1400, 750));
             else {
@@ -121,6 +119,9 @@ public class MainApplication extends Application {
                 stage.setHeight(750);
                 stage.centerOnScreen();
             }
+
+            mainController = mainWindow.controller;
+            mainController.init(stage.getScene());
 
             requestShowAccount(null);
         } catch (IOException e) {
@@ -141,6 +142,10 @@ public class MainApplication extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void requestShowSendToot(String tootContent, StatusVisibility visibility, String inResponseTo) {
+        mainController.gainTootFocus(tootContent, visibility, inResponseTo);
     }
 
     public void requestSearch(String query) {

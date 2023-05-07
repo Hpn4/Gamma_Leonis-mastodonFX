@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.util.Objects;
 
 public class API {
 
@@ -57,6 +57,10 @@ public class API {
 
     public APIError getError() {
         return error;
+    }
+
+    public boolean isUser(Account account) {
+        return Objects.equals(account.getId(), propertiesManager.getDbUser());
     }
 
     //*******************************************************************
@@ -282,17 +286,40 @@ public class API {
     // - viewEditHistory
     // - viewStatusSource
     // *******************************************************************
-    public Status postStatus(String status, String inReplyToId, String mediaIds, boolean sensitive, String spoilerText, String visibility) {
-        RequestBody body = new FormBody.Builder()
-                .add("status", status)
-                .add("in_reply_to_id", inReplyToId)
-                .add("media_ids", mediaIds)
-                .add("sensitive", sensitive ? "true" : "false")
-                .add("spoiler_text", spoilerText)
-                .add("visibility", visibility)
-                .build();
+    public Status repplyToStatus(String statusId, String content, String spoilerText, MediaAttachment... medias) {
+        return postStatus(content, StatusVisibility.DIRECT, statusId, spoilerText, medias);
+    }
 
-        return postSingle("api/v1/statuses", Status.class, body);
+    /**
+     * Post a new status
+     *
+     * @param status      The content of the status
+     * @param visibility  The visibility: public (visible by everyone),
+     *                    private (followers only),
+     *                    direct (only for mentionned user) and
+     *                    unlisted (visible by everyone but not in the public timeline)
+     * @param inReplyToId Id of the toots to reply to or null if none
+     * @param spoilerText Text to be displayed as a warning before the status or null if none
+     * @param medias      Medias to attach to the status
+     *
+     * @return The posted status
+     */
+    public Status postStatus(String status, StatusVisibility visibility, String inReplyToId, String spoilerText, MediaAttachment... medias) {
+        FormBody.Builder form = new FormBody.Builder()
+                .add("status", status)
+                .add("visibility", visibility.getValue());
+
+        if (inReplyToId != null)
+            form.add("in_reply_to_id", inReplyToId);
+
+        if (spoilerText != null && !spoilerText.isEmpty())
+            form.add("sensitive", "true")
+                    .add("spoiler_text", spoilerText);
+
+        for (int i = 0; i < medias.length; ++i)
+            form.add("media_ids[" + i + "]", medias[i].getId());
+
+        return postSingle("api/v1/statuses", Status.class, form.build());
     }
 
     public Status getStatus(String id) {
