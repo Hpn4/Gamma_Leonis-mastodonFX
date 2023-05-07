@@ -40,6 +40,7 @@ public class MainApplication extends Application {
 
     private Window<MainWindowController> mainWindow;
     private Window<LoginWindowController> loginWindow;
+    private Window<ConfigWindowController> configWindow;
 
     public static MainApplication getInstance() {
         return instance;
@@ -60,12 +61,20 @@ public class MainApplication extends Application {
         instance = this;
         this.stage = stage;
 
-        // Request the first screen, login if there is no access token or main window if there is one
-        if (api.isUserConnected()) {
-            api.setupUser(dbManager);
-            requestMainScreen();
-        } else
-            requestLoginScreen();
+        // If there is no config file, we launch UI to fill it
+        if(api.isConfigFileEmpty())
+            requestConfigFileScreen();
+        else {
+            api.initAPI();
+            dbManager.initDB();
+
+            // Request the first screen, login if there is no access token or main window if there is one
+            if (api.isUserConnected()) {
+                api.setupUser(dbManager);
+                requestMainScreen();
+            } else
+                requestLoginScreen();
+        }
 
         stage.setTitle("Gamma Leonis Mastodon Client");
 
@@ -78,6 +87,29 @@ public class MainApplication extends Application {
         });
 
         logger.debug("Gamma Leonis Mastodon Client started in {} ms", System.currentTimeMillis() - start);
+    }
+
+    private void requestConfigFileScreen() {
+        try {
+            logger.error("No config file found, switch to config file screen");
+            logger.debug("Switch to config file screen");
+
+            if (configWindow == null)
+                configWindow = load("configFile_window.fxml");
+
+            // When possible, we just change the root element of the Scene instead of creating a new one
+            // In fact creating a new Scene instance is performance heavy
+            if (stage.getScene() == null)
+                stage.setScene(new Scene(configWindow.ui));
+            else {
+                stage.getScene().setRoot(configWindow.ui);
+                stage.setWidth(700);
+                stage.setHeight(500);
+                stage.centerOnScreen();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void requestLoginScreen() {

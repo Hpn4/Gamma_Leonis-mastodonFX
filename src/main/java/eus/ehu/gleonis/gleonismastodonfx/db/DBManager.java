@@ -17,13 +17,16 @@ public class DBManager implements IDBManager {
 
     private static final Logger logger = LogManager.getLogger("DBManager");
 
-    private final PropertiesManager propManager;
+    private PropertiesManager propManager;
 
-    private final EntityManager dbConnector;
+    private EntityManager dbConnector;
 
     private EntityManagerFactory emf;
 
     public DBManager() {
+    }
+
+    public void initDB() {
         long start = System.currentTimeMillis();
         propManager = PropertiesManager.getInstance();
 

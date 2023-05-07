@@ -1,6 +1,9 @@
 package eus.ehu.gleonis.gleonismastodonfx.utils;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class PropertiesManager {
@@ -29,8 +32,19 @@ public class PropertiesManager {
     }
 
     private void loadProperties() {
-        // Load from config.properties
         prop = new Properties();
+
+        // If the file does not exist, we create it
+        Path path1 = Paths.get(path);
+        if (!Files.exists(path1)) {
+            try {
+                Files.createFile(path1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Then we read data from the file
         try (InputStream input = new FileInputStream(path)) {
             prop.load(input);
             clientID = prop.getProperty("app.client.id");
@@ -66,6 +80,18 @@ public class PropertiesManager {
 
     public String getClientSecret() {
         return clientSecret;
+    }
+
+    public void setApp(String clientID, String clientSecret) {
+        this.clientID = clientID;
+        this.clientSecret = clientSecret;
+        prop.setProperty("app.client.id", clientID);
+        prop.setProperty("app.client.secret", clientSecret);
+        saveProperties();
+    }
+
+    public boolean empty() {
+        return clientID == null || clientSecret == null || clientID.isEmpty() || clientSecret.isEmpty();
     }
 
 }

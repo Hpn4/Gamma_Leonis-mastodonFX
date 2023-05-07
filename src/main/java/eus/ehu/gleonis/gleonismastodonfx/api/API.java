@@ -28,7 +28,7 @@ public class API {
 
     private final OkHttpClient client;
 
-    private final Application application;
+    private Application application;
 
     private String token;
 
@@ -44,9 +44,9 @@ public class API {
         client = new OkHttpClient();
 
         propertiesManager = PropertiesManager.getInstance();
-        if (propertiesManager.getClientID().isEmpty() || propertiesManager.getClientSecret().isEmpty())
-            throw new RuntimeException("Client ID and Client Secret are not set in config.properties file.");
+    }
 
+    public void initAPI() {
         application = new Application(propertiesManager.getClientID(), propertiesManager.getClientSecret());
         token = null;
     }
@@ -100,6 +100,10 @@ public class API {
                 .build();
 
         request("oauth/revoke", "POST", body);
+    }
+
+    public boolean isConfigFileEmpty() {
+        return propertiesManager.empty();
     }
 
     public boolean isUserConnected() {
