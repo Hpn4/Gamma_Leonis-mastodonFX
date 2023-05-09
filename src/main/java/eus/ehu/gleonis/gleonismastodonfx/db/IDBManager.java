@@ -16,6 +16,8 @@ public interface IDBManager {
 
     boolean deleteAccount(String id);
 
+    boolean deleteAccount(DBAccount account);
+
     // Get the currently logged in account or null if no account is logged in
     DBAccount getLoggedAccount();
 

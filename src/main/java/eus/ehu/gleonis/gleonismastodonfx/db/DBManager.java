@@ -83,6 +83,14 @@ public class DBManager implements IDBManager {
         return amount == 1;
     }
 
+    public boolean deleteAccount(DBAccount account) {
+        dbConnector.getTransaction().begin();
+        dbConnector.remove(account);
+        dbConnector.getTransaction().commit();
+
+        return true;
+    }
+
 
     public List<DBAccount> getAccounts() {
         List<DBAccount> accounts = dbConnector.createQuery("SELECT a FROM DBAccount a", DBAccount.class).getResultList();

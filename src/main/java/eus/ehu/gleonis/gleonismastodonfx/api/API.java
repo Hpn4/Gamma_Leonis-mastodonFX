@@ -116,7 +116,7 @@ public class API {
     }
 
     public boolean isUserConnected() {
-        return !propertiesManager.getDbUser().isEmpty();
+        return !propertiesManager.getDbUser().isEmpty() && verifyCredentials() != null;
     }
 
     public void setupUser(IDBManager db) {
@@ -139,11 +139,16 @@ public class API {
         return db.insertAccount(account, token.getAccessToken()) != null;
     }
 
-    public void switchUser(String token) {
+    public boolean switchUser(String token) {
         this.token = token;
         Account account = verifyCredentials();
 
+        if (account == null)
+            return false;
+
         propertiesManager.setDbUser(account.getId());
+
+        return true;
     }
 
     public void setToken(String token) {
