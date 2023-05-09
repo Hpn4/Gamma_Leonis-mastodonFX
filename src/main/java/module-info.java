@@ -15,6 +15,7 @@ module eus.ehu.gleonis.gleonismastodonfx {
 
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
+    requires annotations;
 
     opens eus.ehu.gleonis.gleonismastodonfx to javafx.fxml;
     exports eus.ehu.gleonis.gleonismastodonfx;
@@ -24,6 +25,7 @@ module eus.ehu.gleonis.gleonismastodonfx {
 
     opens eus.ehu.gleonis.gleonismastodonfx.api to com.google.gson;
     opens eus.ehu.gleonis.gleonismastodonfx.api.apistruct to com.google.gson;
+    opens eus.ehu.gleonis.gleonismastodonfx.api.websocks to com.google.gson;
     exports eus.ehu.gleonis.gleonismastodonfx.api.apistruct;
     exports eus.ehu.gleonis.gleonismastodonfx.api;
 

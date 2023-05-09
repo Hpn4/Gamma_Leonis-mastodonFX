@@ -37,55 +37,53 @@ public class HTMLView extends TextFlow {
     private void parseNodeToText(Node node) {
         String type = node.nodeName();
 
-        if (type.equals("#text"))
-            addChildren(((TextNode) node).text(), "html-text");
-
-        else if (type.equals("p")) {
-            for (Node child : node.childNodes())
-                parseNodeToText(child);
-
-            getChildren().add(new Text("\n\n"));
-
-        } else if (type.equals("br"))
-            getChildren().add(new Text("\n"));
-
-        else if (type.equals("a")) {
-            String t = node.childNode(0).toString();
-
-            // Tag mention
-            if (t.startsWith("#")) {
-                String tag;
-                if (node.childNodes().size() > 1)
-                    tag = "#" + node.childNode(1).firstChild().toString();
-                else
-                    tag = t;
-
-                addChildren(tag, "html-tag").setOnMouseClicked(
-                        e -> MainApplication.getInstance().requestShowToots(MainApplication.getInstance().getAPI().getHashTagTimelines(tag.substring(1), 10), 10)
-                );
+        switch (type) {
+            case "#text" -> addChildren(((TextNode) node).text(), "html-text");
+            case "p" -> {
+                for (Node child : node.childNodes())
+                    parseNodeToText(child);
+                getChildren().add(new Text("\n\n"));
             }
+            case "br" -> getChildren().add(new Text("\n"));
+            case "a" -> {
+                String t = node.childNode(0).toString();
 
-            // Account mention
-            else if (t.startsWith("@")) {
-                String user = node.childNode(1).firstChild().toString();
-                String accId = getIDOfUser(user);
+                // Tag mention
+                if (t.startsWith("#")) {
+                    String tag;
+                    if (node.childNodes().size() > 1)
+                        tag = "#" + node.childNode(1).firstChild().toString();
+                    else
+                        tag = t;
 
-                addChildren("@" + user, "html-mention").setOnMouseClicked(
-                        e -> MainApplication.getInstance().requestShowAccount(accId)
-                );
+                    addChildren(tag, "html-tag").setOnMouseClicked(
+                            e -> MainApplication.getInstance().requestShowToots(MainApplication.getInstance().getAPI().getHashTagTimelines(tag.substring(1), 10), 10)
+                    );
+                }
+
+                // Account mention
+                else if (t.startsWith("@")) {
+                    String user = node.childNode(1).firstChild().toString();
+                    String accId = getIDOfUser(user);
+
+                    addChildren("@" + user, "html-mention").setOnMouseClicked(
+                            e -> MainApplication.getInstance().requestShowAccount(accId)
+                    );
+                }
+
+                // Weblink
+                else if (node.childNodeSize() > 1) {
+                    addChildren(node.childNode(1).firstChild() + "...", "html-link").setOnMouseClicked(
+                            e -> MainApplication.getInstance().getHostServices().showDocument(node.attr("href"))
+                    );
+                }
             }
-
-            // Weblink
-            else {
-                addChildren(node.childNode(1).firstChild() + "...", "html-link").setOnMouseClicked(
-                        e -> MainApplication.getInstance().getHostServices().showDocument(node.attr("href"))
-                );
+            case "span" -> {
+                for (Node child : node.childNodes())
+                    parseNodeToText(child);
             }
-        } else if (type.equals("span") && node.attr("class").equals("h-card"))
-            for (Node child : node.childNodes())
-                parseNodeToText(child);
-        else
-            logger.error("Unknown node type: " + node.outerHtml());
+            default -> logger.error("Unknown node type: " + node.outerHtml());
+        }
     }
 
     private String getIDOfUser(String user) {

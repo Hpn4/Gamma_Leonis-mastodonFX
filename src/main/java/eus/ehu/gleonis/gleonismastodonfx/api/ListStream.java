@@ -14,24 +14,29 @@ public class ListStream<E> {
     // When they are no pagination link, this variable will be used for pagination
     private int offset;
 
+    private final boolean supportOffset;
+
     private SearchList<E> searchList; // Used only for search stream
 
     private String nextQuery;
 
 
-    public ListStream(API api, String baseUrl, String link, int limit) {
+    public ListStream(API api, String baseUrl, String link, int limit, boolean supportOffset) {
         this.api = api;
         this.list = FXCollections.observableArrayList();
         this.baseUrl = baseUrl;
+        this.supportOffset = supportOffset;
         offset = limit;
 
         parsePaginationLink(link);
     }
 
     protected void parsePaginationLink(String link) {
-        if (link == null || !link.contains("max_id")) // No header or no next link (no links or only prev link)
+        if(baseUrl == null)
+            return;
+        if (supportOffset) // No header or no next link (no links or only prev link)
             nextQuery = baseUrl + (baseUrl.contains("?") ? "&" : "?") + "offset=" + offset;
-        else {
+        else if(link != null && link.contains("next")){
             String[] links = link.split(",");
             String nextLink = links[0].contains("next") ? links[0] : links[1];
 

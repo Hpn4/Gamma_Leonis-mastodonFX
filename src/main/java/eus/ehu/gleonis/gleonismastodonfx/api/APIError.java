@@ -9,13 +9,11 @@ public class APIError {
     /* 422(Unprocessable entity):
         (App) "error": "Validation failed: Redirect URI must be an absolute URI."
 
-
-
     */
 
-    private int error_code;
+    private final int error_code;
 
-    private String error;
+    private final String error;
 
     public APIError(int error_code, String error) {
         this.error_code = error_code;

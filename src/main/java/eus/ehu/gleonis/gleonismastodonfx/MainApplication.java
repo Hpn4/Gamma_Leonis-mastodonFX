@@ -84,6 +84,7 @@ public class MainApplication extends Application {
         stage.setOnCloseRequest(event -> {
             logger.info("Close Gamma Leonis Mastodon Client");
             dbManager.closeDb();
+            api.closeAPI(); // Close stream
         });
 
         logger.debug("Gamma Leonis Mastodon Client started in {} ms", System.currentTimeMillis() - start);
@@ -91,8 +92,7 @@ public class MainApplication extends Application {
 
     private void requestConfigFileScreen() {
         try {
-            logger.error("No config file found, switch to config file screen");
-            logger.debug("Switch to config file screen");
+            logger.info("No config file found, switch to config file screen");
 
             if (configWindow == null)
                 configWindow = load("configFile_window.fxml");
@@ -211,6 +211,14 @@ public class MainApplication extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void requestShowStreamToots(ListStream<Status> toots){
+        logger.debug("Switch to scrollable toots screen");
+
+        TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(toots, 0);
+
+        mainController.setCenter(tootsScrollableContent, false);
     }
 
     public void requestShowToots(ListStream<Status> toots, int itemPerPage) {

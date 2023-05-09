@@ -98,10 +98,15 @@ public class MainWindowController extends AbstractController {
         sendTootVBox.getChildren().add(fakeSendGridPane);
     }
 
-
     public void setCenter(Node pane) {
+        setCenter(pane, true);
+    }
+
+    public void setCenter(Node pane, boolean closeStream) {
         BorderPane.setAlignment(pane, Pos.TOP_CENTER);
 
+        if(closeStream)
+            api.closeStream();
         sceneContent.getChildren().clear();
         sceneContent.getChildren().add(pane);
         sceneContent.getChildren().add(sendTootVBox);
@@ -183,41 +188,6 @@ public class MainWindowController extends AbstractController {
     }
 
     @FXML
-    void onBookmarksClick() {
-        getApplication().requestShowToots(api.getBookmarks(10), 10);
-    }
-
-    @FXML
-    void onDirectMsgClick() {
-
-    }
-
-    @FXML
-    void onFavouritesClick() {
-        getApplication().requestShowToots(api.getFavourites(10), 10);
-    }
-
-    @FXML
-    void onGlobalTLClick() {
-
-    }
-
-    @FXML
-    void onHomeClick() {
-        getApplication().requestShowToots(api.getHomeTimeline(10), 10);
-    }
-
-    @FXML
-    void onListsClick() {
-
-    }
-
-    @FXML
-    void onLocalTLClick() {
-
-    }
-
-    @FXML
     void onSearchClick() {
         getApplication().requestSearch(searchTextField.getText());
     }
@@ -232,8 +202,59 @@ public class MainWindowController extends AbstractController {
         getApplication().requestLoginScreen();
     }
 
+    //*******************************************************************
+    // Timelines:
+    // - Home
+    // - Local
+    // - Global/Federated
+    // - Trendings
+    //
+    // *******************************************************************
+    @FXML
+    void onHomeClick() {
+        getApplication().requestShowToots(api.getHomeTimeline(10), 10);
+    }
+
+    @FXML
+    void onLocalTLClick() {
+        getApplication().requestShowStreamToots(api.getLocalTimelines());
+    }
+
+    @FXML
+    void onGlobalTLClick() {
+        getApplication().requestShowStreamToots(api.getFederatedTimeline());
+    }
+
     @FXML
     void onTrendingClick() {
         getApplication().requestShowTrending();
+    }
+
+    //*******************************************************************
+    // Personal categories:
+    // - Direct messages
+    // - Favourites
+    // - Bookmarks
+    // - Lists
+    //
+    // *******************************************************************
+    @FXML
+    void onDirectMsgClick() {
+
+    }
+
+    @FXML
+    void onFavouritesClick() {
+        getApplication().requestShowToots(api.getFavourites(10), 10);
+    }
+
+    @FXML
+    void onBookmarksClick() {
+        getApplication().requestShowToots(api.getBookmarks(10), 10);
+    }
+
+    @FXML
+    void onListsClick() {
+
     }
 }

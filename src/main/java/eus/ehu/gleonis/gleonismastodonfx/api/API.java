@@ -7,6 +7,7 @@ import eus.ehu.gleonis.gleonismastodonfx.api.adapter.MediaAttachmentTypeDeserial
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.NotificationTypeDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.adapter.VisibilityDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.*;
+import eus.ehu.gleonis.gleonismastodonfx.api.websocks.StatusTimeline;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBAccount;
 import eus.ehu.gleonis.gleonismastodonfx.db.IDBManager;
 import eus.ehu.gleonis.gleonismastodonfx.utils.PropertiesManager;
@@ -28,6 +29,11 @@ public class API {
 
     private final OkHttpClient client;
 
+    // Streaming timeline
+    private final StatusTimeline streamingLocalTimeline;
+
+    private final StatusTimeline streamingFederatedTimeline;
+
     private Application application;
 
     private String token;
@@ -44,6 +50,9 @@ public class API {
         client = new OkHttpClient();
 
         propertiesManager = PropertiesManager.getInstance();
+
+        streamingLocalTimeline = new StatusTimeline(gson);
+        streamingFederatedTimeline = new StatusTimeline(gson);
     }
 
     public void initAPI() {
@@ -180,23 +189,23 @@ public class API {
     }
 
     public ListStream<Status> getAccountStatuses(String id, int limit) {
-        return getStream("api/v1/accounts/" + id + "/statuses", limit, Status.class);
+        return getStream("api/v1/accounts/" + id + "/statuses", limit, Status.class, false);
     }
 
     public ListStream<Status> getBookmarks(int limit) {
-        return getStream("api/v1/bookmarks", limit, Status.class);
+        return getStream("api/v1/bookmarks", limit, Status.class, false);
     }
 
     public ListStream<Status> getFavourites(int limit) {
-        return getStream("api/v1/favourites", limit, Status.class);
+        return getStream("api/v1/favourites", limit, Status.class, false);
     }
 
     public ListStream<Account> getAccountFollowers(String id, int limit) {
-        return getStream("api/v1/accounts/" + id + "/followers", limit, Account.class);
+        return getStream("api/v1/accounts/" + id + "/followers", limit, Account.class, false);
     }
 
     public ListStream<Account> getAccountFollowing(String id, int limit) {
-        return getStream("api/v1/accounts/" + id + "/following", limit, Account.class);
+        return getStream("api/v1/accounts/" + id + "/following", limit, Account.class, false);
     }
 
     public ListStream<Relationship> getRelationships(String... ids) {
@@ -205,7 +214,7 @@ public class API {
         for (String id : ids)
             baseUrl.append("&id=").append(id);
 
-        return getStream(baseUrl.toString(), 0, Relationship.class);
+        return getStream(baseUrl.toString(), 0, Relationship.class, false);
     }
 
     public Relationship followAccount(String id) {
@@ -259,7 +268,7 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Account> getFollowRequests(int limit) {
-        return getStream("api/v1/follow_requests", limit, Account.class);
+        return getStream("api/v1/follow_requests", limit, Account.class, false);
     }
 
     public Relationship authorizeFollowRequest(String id) {
@@ -271,7 +280,7 @@ public class API {
     }
 
     public ListStream<Suggestion> getSuggestions() {
-        return getStream("api/v1/suggestions", 40, Suggestion.class);
+        return getStream("api/v2/suggestions", 40, Suggestion.class, false);
     }
 
     public void removeSuggestion(String id) {
@@ -282,7 +291,6 @@ public class API {
     // Statuses methods
     //
     // Remaining one to implement but not very useful:
-    // - getStatusContext
     // - getStatusCard
     // - muteConversation and unmuteConversation
     // - pinStatus and unpinStatus
@@ -290,6 +298,7 @@ public class API {
     // - viewEditHistory
     // - viewStatusSource
     // *******************************************************************
+
     /**
      * Post a new status
      *
@@ -301,7 +310,6 @@ public class API {
      * @param inReplyToId Id of the toots to reply to or null if none
      * @param spoilerText Text to be displayed as a warning before the status or null if none
      * @param medias      Medias to attach to the status
-     *
      * @return The posted status
      */
     public Status postStatus(String status, Visibility visibility, String inReplyToId, String spoilerText, MediaAttachment... medias) {
@@ -331,11 +339,15 @@ public class API {
     }
 
     public ListStream<Account> getStatusRebloggedBy(String id, int limit) {
-        return getStream("api/v1/statuses/" + id + "/reblogged_by", limit, Account.class);
+        return getStream("api/v1/statuses/" + id + "/reblogged_by", limit, Account.class, false);
     }
 
     public ListStream<Account> getStatusFavouritedBy(String id, int limit) {
-        return getStream("api/v1/statuses/" + id + "/favourited_by", limit, Account.class);
+        return getStream("api/v1/statuses/" + id + "/favourited_by", limit, Account.class, false);
+    }
+
+    public Context getStatusContext(String id) {
+        return getSingle("api/v1/statuses/" + id + "/context", Context.class);
     }
 
     public Status favouriteStatus(String id) {
@@ -367,11 +379,11 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Tag> getTrendingTags(int limit) {
-        return getStream("api/v1/trends/tags", limit, Tag.class);
+        return getStream("api/v1/trends/tags", limit, Tag.class, true);
     }
 
     public ListStream<Status> getTrendingStatuses(int limit) {
-        return getStream("api/v1/trends/statuses", limit, Status.class);
+        return getStream("api/v1/trends/statuses", limit, Status.class, true);
     }
 
     //*******************************************************************
@@ -404,7 +416,7 @@ public class API {
 
         Search searchRes = readSingleFromJson(requestResult.response(), Search.class);
 
-        ListStream<T> stream = new ListStream<>(this, baseUrl, requestResult.paginationLink(), limit);
+        ListStream<T> stream = new ListStream<>(this, baseUrl, requestResult.paginationLink(), limit, true);
         stream.setSearchList(testList);
         stream.getElement().addAll(testList.apply(searchRes));
 
@@ -447,15 +459,59 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Status> getPublicTimelines(int limit, boolean onlyLocal, boolean onlyRemote) {
-        return getStream("api/v1/timelines/public?local=" + onlyLocal + "&remote=" + onlyRemote, limit, Status.class);
+        return getStream("api/v1/timelines/public?local=" + onlyLocal + "&remote=" + onlyRemote, limit, Status.class, false);
     }
 
     public ListStream<Status> getHashTagTimelines(String tag, int limit) {
-        return getStream("api/v1/timelines/tag/" + tag, limit, Status.class);
+        return getStream("api/v1/timelines/tag/" + tag, limit, Status.class, false);
     }
 
     public ListStream<Status> getHomeTimeline(int limit) {
-        return getStream("api/v1/timelines/home", limit, Status.class);
+        return getStream("api/v1/timelines/home", limit, Status.class, false);
+    }
+
+    //*******************************************************************
+    // Streaming methods:
+    // - getLocalTimelines
+    // - getFederatedTimeline
+    //
+    // *******************************************************************
+    public ListStream<Status> getLocalTimelines() {
+        return getStreamedStatus("public:local", streamingLocalTimeline);
+    }
+
+    public ListStream<Status> getFederatedTimeline() {
+        return getStreamedStatus("public", streamingFederatedTimeline);
+    }
+
+    private ListStream<Status> getStreamedStatus(String type, StatusTimeline timeline) {
+        Request.Builder builder = new Request.Builder()
+                .url("wss://mastodon.social/api/v1/streaming" +
+                        "?access_token=" + token +
+                        "&stream=" + type +
+                        "&type=subscribe");
+
+        ListStream<Status> stream = new ListStream<>(this, null, null, 0, false);
+
+        // When new toot append it to stream
+        timeline.setOnNewStatus(e -> stream.getElement().add(0, e));
+
+        // Open the websocket
+        WebSocket webSocket = client.newWebSocket(builder.build(), timeline.buildWebSocketListener());
+
+        timeline.setWebSocket(webSocket);
+
+        return stream;
+    }
+
+    public void closeStream() {
+        streamingLocalTimeline.closeStream();
+        streamingFederatedTimeline.closeStream();
+    }
+
+    public void closeAPI() {
+        closeStream();
+        client.dispatcher().executorService().shutdown();
     }
 
     //*******************************************************************
@@ -466,7 +522,7 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Conversation> getConversations(int limit) {
-        return getStream("api/v1/conversations", limit, Conversation.class);
+        return getStream("api/v1/conversations", limit, Conversation.class, false);
     }
 
     public void removeConversation(String id) {
@@ -482,7 +538,7 @@ public class API {
     //
     // *******************************************************************
     public ListStream<Notification> getNotifications(int limit) {
-        return getStream("api/v1/notifications", limit, Notification.class);
+        return getStream("api/v1/notifications", limit, Notification.class, false);
     }
 
     public Notification getNotification(String id) {
@@ -518,14 +574,14 @@ public class API {
     //
     // *******************************************************************
 
-    private <E> ListStream<E> getStream(String baseUrl, int limit, Class<E> objClass) {
+    private <E> ListStream<E> getStream(String baseUrl, int limit, Class<E> objClass, boolean offset) {
         String url = baseUrl + (baseUrl.contains("?") ? "&" : "?") + "limit=" + limit;
 
         RequestResult requestResult = getRequest(url);
         if (errorOccurred())
             return null;
 
-        ListStream<E> listStream = new ListStream<>(this, baseUrl, requestResult.paginationLink(), limit);
+        ListStream<E> listStream = new ListStream<>(this, baseUrl, requestResult.paginationLink(), limit, offset);
 
         readArraysFromJson(requestResult.response(), objClass, listStream.getElement());
 

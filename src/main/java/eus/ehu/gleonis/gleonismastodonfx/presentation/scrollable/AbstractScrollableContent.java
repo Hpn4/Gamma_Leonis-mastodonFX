@@ -5,7 +5,6 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 public abstract class AbstractScrollableContent<E> extends ScrollPane {
@@ -42,7 +41,7 @@ public abstract class AbstractScrollableContent<E> extends ScrollPane {
 
     private void setupScrollBar() {
         vvalueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.doubleValue() == 1.0) {
+            if (newValue.doubleValue() == 1.0 && itemsPerPage > 0) {
                 Platform.runLater(() -> itemsStream.getNextElements(itemsPerPage));
             }
         });
