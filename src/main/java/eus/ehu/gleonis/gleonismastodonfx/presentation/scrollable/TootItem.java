@@ -4,7 +4,7 @@ import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.MediaAttachment;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.MediaAttachmentType;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
-import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.StatusVisibility;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
 import eus.ehu.gleonis.gleonismastodonfx.utils.CachedImage;
 import eus.ehu.gleonis.gleonismastodonfx.utils.HTMLView;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
@@ -88,7 +88,7 @@ public class TootItem extends AbstractItem<Status> {
 
     @FXML
     void onReplyClick() {
-        MainApplication.getInstance().requestShowSendToot("@" + elem.getAccount().getAcct(), StatusVisibility.DIRECT, elem.getId());
+        MainApplication.getInstance().requestShowSendToot("@" + elem.getAccount().getAcct(), Visibility.DIRECT, elem.getId());
     }
 
     @FXML
@@ -120,12 +120,12 @@ public class TootItem extends AbstractItem<Status> {
 
     @FXML
     void onMentionMenuClick() {
-        MainApplication.getInstance().requestShowSendToot("@" + elem.getAccount().getAcct() + " ", StatusVisibility.PUBLIC, null);
+        MainApplication.getInstance().requestShowSendToot("@" + elem.getAccount().getAcct() + " ", Visibility.PUBLIC, null);
     }
 
     @FXML
     void onPrivateMentionMenuClick() {
-        MainApplication.getInstance().requestShowSendToot("@" + elem.getAccount().getAcct() + " ", StatusVisibility.DIRECT, null);
+        MainApplication.getInstance().requestShowSendToot("@" + elem.getAccount().getAcct() + " ", Visibility.DIRECT, null);
     }
 
     protected void updateItem(Status status, boolean onlyInteractionPanel) {

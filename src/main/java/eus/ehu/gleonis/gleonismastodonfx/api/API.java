@@ -127,7 +127,7 @@ public class API {
             throw new RuntimeException("Error while getting account information.");
 
         propertiesManager.setDbUser(account.getId());
-        return db.insertAccount(account, token.getAccessToken());
+        return db.insertAccount(account, token.getAccessToken()) != null;
     }
 
     public void switchUser(String token) {
@@ -290,10 +290,6 @@ public class API {
     // - viewEditHistory
     // - viewStatusSource
     // *******************************************************************
-    public Status repplyToStatus(String statusId, String content, String spoilerText, MediaAttachment... medias) {
-        return postStatus(content, StatusVisibility.DIRECT, statusId, spoilerText, medias);
-    }
-
     /**
      * Post a new status
      *
@@ -308,10 +304,10 @@ public class API {
      *
      * @return The posted status
      */
-    public Status postStatus(String status, StatusVisibility visibility, String inReplyToId, String spoilerText, MediaAttachment... medias) {
+    public Status postStatus(String status, Visibility visibility, String inReplyToId, String spoilerText, MediaAttachment... medias) {
         FormBody.Builder form = new FormBody.Builder()
                 .add("status", status)
-                .add("visibility", visibility.getValue());
+                .add("visibility", visibility.getVisibility());
 
         if (inReplyToId != null)
             form.add("in_reply_to_id", inReplyToId);

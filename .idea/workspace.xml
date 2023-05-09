@@ -7,17 +7,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Send toot, toot more options button, respond to toot">
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/ConfigWindowController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/configFile_window.fxml" afterDir="false" />
+    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Fix crash on first launch">
+      <change afterPath="$PROJECT_DIR$/src/test/java/DBManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b7e21429-23da-443d-aac1-751da203128d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b7e21429-23da-443d-aac1-751da203128d.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config_template.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/MastoFx_Gamma.mdj" beforeDir="false" afterPath="$PROJECT_DIR$/docs/MastoFx_Gamma.mdj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/API.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/apistruct/StatusVisibility.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/DBManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/IDBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/IDBManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/PropertiesManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/PropertiesManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/APITest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/APITest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,8 +33,8 @@
         <option value="FxmlFile" />
         <option value="Interface" />
         <option value="CSS File" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -69,33 +71,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/senig/IntelliJProject/SE_Project/Gamma_Leonis-mastodonFX/src/main/resources/eus/ehu/gleonis/gleonismastodonfx",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.35632184",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/senig/IntelliJProject/SE_Project/Gamma_Leonis-mastodonFX/src/main/resources/eus/ehu/gleonis/gleonismastodonfx&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.35632184&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite",
-      "h2"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;,
+      &quot;h2&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources\eus\ehu\gleonis\gleonismastodonfx" />
@@ -123,7 +125,7 @@
       <module name="GLeonisMastodonFX" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.*" />
+          <option name="PATTERN" value="eus.ehu.gleonis.gleonismastodonfx.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -140,22 +142,31 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="APITest.testFavorites" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="APITest.testFollow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="GLeonisMastodonFX" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="APITest" />
-      <option name="METHOD_NAME" value="testFavorites" />
+      <option name="METHOD_NAME" value="testFollow" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="APITest.testGetAccount" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="APITest.testToots" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="GLeonisMastodonFX" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="APITest" />
-      <option name="METHOD_NAME" value="testGetAccount" />
+      <option name="METHOD_NAME" value="testToots" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DBManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GLeonisMastodonFX" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DBManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -164,8 +175,9 @@
       <list>
         <item itemvalue="Application.MainApplication" />
         <item itemvalue="JUnit.APITest" />
-        <item itemvalue="JUnit.APITest.testFavorites" />
-        <item itemvalue="JUnit.APITest.testGetAccount" />
+        <item itemvalue="JUnit.APITest.testFollow" />
+        <item itemvalue="JUnit.APITest.testToots" />
+        <item itemvalue="JUnit.DBManagerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -229,7 +241,8 @@
       <workItem from="1683303381010" duration="4454000" />
       <workItem from="1683362722730" duration="2494000" />
       <workItem from="1683388799153" duration="8510000" />
-      <workItem from="1683465744463" duration="7533000" />
+      <workItem from="1683465744463" duration="9248000" />
+      <workItem from="1683616346745" duration="4283000" />
     </task>
     <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
       <created>1679044335470</created>
@@ -434,7 +447,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683470870582</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Fix crash on first launch">
+      <created>1683475959796</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1683475959796</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -452,7 +472,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="API change + UI main screen" />
     <MESSAGE value="API change + UI account style and performances" />
     <MESSAGE value="UI account style and performances" />
     <MESSAGE value="UI account header" />
@@ -477,6 +496,7 @@
     <MESSAGE value="Refactoring, trending screen, bugs fix" />
     <MESSAGE value="Searching account, tags, toots. Tag history chart. API improvement" />
     <MESSAGE value="Send toot, toot more options button, respond to toot" />
-    <option name="LAST_COMMIT_MESSAGE" value="Send toot, toot more options button, respond to toot" />
+    <MESSAGE value="Fix crash on first launch" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix crash on first launch" />
   </component>
 </project>

@@ -3,7 +3,7 @@ package eus.ehu.gleonis.gleonismastodonfx;
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
-import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.StatusVisibility;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.*;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.AccountRPController;
@@ -176,7 +176,7 @@ public class MainApplication extends Application {
         }
     }
 
-    public void requestShowSendToot(String tootContent, StatusVisibility visibility, String inResponseTo) {
+    public void requestShowSendToot(String tootContent, Visibility visibility, String inResponseTo) {
         mainController.gainTootFocus(tootContent, visibility, inResponseTo);
     }
 

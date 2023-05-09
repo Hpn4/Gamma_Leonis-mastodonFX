@@ -173,5 +173,37 @@
     <user id="164" parent="2" name="SA">
       <Admin>1</Admin>
     </user>
+    <table id="165" parent="163" name="DBACCOUNT"/>
+    <column id="166" parent="165" name="ID">
+      <DasType>CHARACTER VARYING(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="167" parent="165" name="USERNAME">
+      <DasType>CHARACTER VARYING(255)|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="168" parent="165" name="AVATARURL">
+      <DasType>CHARACTER VARYING(255)|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="169" parent="165" name="LAST_ACCESS">
+      <DasType>CHARACTER VARYING(255)|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="170" parent="165" name="TOKEN">
+      <DasType>CHARACTER VARYING(255)|0s</DasType>
+      <Position>5</Position>
+    </column>
+    <index id="171" parent="165" name="PRIMARY_KEY_E">
+      <ColNames>ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="172" parent="165" name="CONSTRAINT_E">
+      <ColNames>ID</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

@@ -1,7 +1,7 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
-import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.StatusVisibility;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -59,7 +59,7 @@ public class MainWindowController extends AbstractController {
 
     private boolean sendTootPanelVisible;
 
-    private StatusVisibility tootVisibility;
+    private Visibility tootVisibility;
 
     private String inResponseTo;
 
@@ -83,7 +83,7 @@ public class MainWindowController extends AbstractController {
             if (sendTootPanelVisible)
                 return;
 
-            gainTootFocus("", StatusVisibility.PUBLIC, null);
+            gainTootFocus("", Visibility.PUBLIC, null);
         });
 
         // Hide or show the real panel to send toot when the user click in the region of the panel.
@@ -118,7 +118,7 @@ public class MainWindowController extends AbstractController {
         return false;
     }
 
-    public void gainTootFocus(String content, StatusVisibility visibility, String inResponseTo) {
+    public void gainTootFocus(String content, Visibility visibility, String inResponseTo) {
         sendTootPanelVisible = true;
         this.inResponseTo = inResponseTo;
         tootContentTextArea.setText(content);
@@ -129,7 +129,7 @@ public class MainWindowController extends AbstractController {
     }
 
     private void updateSendTootVisibilityCheckbox() {
-        if (tootVisibility == StatusVisibility.PUBLIC) {
+        if (tootVisibility == Visibility.PUBLIC) {
             visibilityCheckbox.getStyleClass().set(2, "toot-visibility-public");
             visibilityCheckbox.setSelected(true);
         } else {
@@ -141,7 +141,7 @@ public class MainWindowController extends AbstractController {
     private void loseTootFocus() {
         sendTootPanelVisible = false;
         inResponseTo = null;
-        tootVisibility = StatusVisibility.PUBLIC;
+        tootVisibility = Visibility.PUBLIC;
         sendTootVBox.getChildren().clear();
         sendTootVBox.getChildren().add(fakeSendGridPane);
         sceneContent.requestFocus();
@@ -151,9 +151,9 @@ public class MainWindowController extends AbstractController {
     void onVisibilityClick(ActionEvent event) {
         boolean selected = ((CheckBox) event.getSource()).isSelected();
         if (selected) {
-            tootVisibility = StatusVisibility.PUBLIC;
+            tootVisibility = Visibility.PUBLIC;
         } else {
-            tootVisibility = StatusVisibility.PRIVATE;
+            tootVisibility = Visibility.PRIVATE;
         }
 
         updateSendTootVisibilityCheckbox();
