@@ -94,7 +94,7 @@ public class AccountRPController extends AbstractPanelSwitchController {
 
     @FXML
     void onFollowingsClick() {
-        showScrollableAccounts(api.getAccountFollowers(account.getId(), 20), false);
+        showScrollableAccounts(api.getAccountFollowing(account.getId(), 20), false);
     }
 
     @FXML

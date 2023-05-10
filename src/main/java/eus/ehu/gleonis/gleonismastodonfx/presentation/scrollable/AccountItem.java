@@ -1,7 +1,6 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
-import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Relationship;
 import javafx.fxml.FXML;
@@ -15,15 +14,12 @@ import javafx.scene.layout.HBox;
 
 import java.util.List;
 
-public class AccountItemCell {
-
-    private final API api;
-
-    private final Account account;
+public class AccountItem extends AbstractItem<Account> {
 
     private boolean removeFromFollowers;
 
     private FXMLLoader loader;
+
     @FXML
     private ImageView accountAvatar;
     @FXML
@@ -38,33 +34,31 @@ public class AccountItemCell {
     @FXML
     private Button unfollowButton;
 
-    public AccountItemCell(Account account, boolean followersPanel ) {
-        super();
+    public AccountItem(AccountScrollableContent asc, Account account, boolean followersPanel) {
+        super(asc);
+        elem = account;
 
-        api = MainApplication.getInstance().getAPI();
-        this.account = account;
-
-        updateItem(account, followersPanel);
+        setupUI(account, followersPanel);
     }
 
     @FXML
     void onFollowClick() {
-        api.followAccount(account.getId());
+        api.followAccount(elem.getId());
         followButton.setVisible(false);
     }
 
     @FXML
     void onUnfollowClick() {
-        if(removeFromFollowers) {
-            api.removeAccountFromFollowers(account.getId());
-            //TODO: remove from the list in VBox
+        if (removeFromFollowers) {
+            api.removeAccountFromFollowers(elem.getId());
+            deleteItemFromUI();
         } else {
-            api.unfollowAccount(account.getId());
+            api.unfollowAccount(elem.getId());
             followButton.setVisible(true);
         }
     }
 
-    protected void updateItem(Account account, boolean followersPanel) {
+    private void setupUI(Account account, boolean followersPanel) {
         if (account == null)
             return;
 
@@ -81,7 +75,7 @@ public class AccountItemCell {
 
         // We are interested in only the first since we send 1 ID
         List<Relationship> relations = api.getRelationships(account.getId()).getElement();
-        if(relations.size() == 1) {
+        if (relations.size() == 1) {
             Relationship relation = relations.get(0);
 
             // Followers: remove from followers (always) & add to followings (if not already)
@@ -109,7 +103,7 @@ public class AccountItemCell {
         accountItem.setOnMouseClicked(e -> MainApplication.getInstance().requestShowAccount(account.getId()));
     }
 
-    public HBox getAccountItem() {
+    public HBox getParent() {
         return accountItem;
     }
 }

@@ -1,7 +1,6 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
-import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Tag;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.TagHistory;
 import javafx.fxml.FXML;
@@ -13,11 +12,7 @@ import javafx.scene.layout.GridPane;
 
 import java.util.List;
 
-public class HashTagItem {
-
-    private final API api;
-
-    private final Tag hashtag;
+public class HashTagItem extends AbstractItem<Tag> {
 
     @FXML
     private GridPane hashtagItem;
@@ -31,23 +26,16 @@ public class HashTagItem {
     @FXML
     private AreaChart<String, Number> frequenceCharts;
 
-    public HashTagItem(String hashtagName) {
-        api = MainApplication.getInstance().getAPI();
-        hashtag = api.getHashTagInfo(hashtagName);
+    public HashTagItem(TagsScrollableContent tsc, Tag hashtag) {
+        super(tsc);
+        elem = hashtag;
 
-        updateItem(hashtag);
-    }
-
-    public HashTagItem(Tag hashtag) {
-        api = MainApplication.getInstance().getAPI();
-        this.hashtag = hashtag;
-
-        updateItem(hashtag);
+        updateItem(elem);
     }
 
     @FXML
     void onItemClick() {
-        MainApplication.getInstance().requestShowToots(api.getHashTagTimelines(hashtag.getName(), 10), 10);
+        MainApplication.getInstance().requestShowToots(api.getHashTagTimelines(elem.getName(), 10), 10);
     }
 
     protected void updateItem(Tag hashtag) {
@@ -80,7 +68,7 @@ public class HashTagItem {
         usesLabel.setText(uses + " uses by " + accounts + " people in the past 2 days");
     }
 
-    public GridPane getHashtagItem() {
+    public GridPane getParent() {
         return hashtagItem;
     }
 }

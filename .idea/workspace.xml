@@ -7,24 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Refactoring, trending screen, bugs fix">
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/SearchList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/rootpane/SearchRPController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/search_root-pane.fxml" afterDir="false" />
+    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Add basic supports for the streaming API (global + local Timeline)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/MastoFx_Gamma.mdj" beforeDir="false" afterPath="$PROJECT_DIR$/docs/MastoFx_Gamma.mdj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/API.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/ListStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/ListStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/rootpane/AbstractPanelSwitchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/rootpane/AbstractPanelSwitchController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountItemCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountItemCell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/HashTagItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/HashTagItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsItemCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsItemCell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/HTMLView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/HTMLView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/hashtag_item.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/hashtag_item.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/hashtag_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/hashtag_item.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/main_window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/main_window.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/DBManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/IDBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/IDBManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/LoginWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/LoginWindowController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +23,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Kotlin Class" />
         <option value="FxmlFile" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -90,9 +79,9 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.35632184&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -106,6 +95,8 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources\eus\ehu\gleonis\gleonismastodonfx" />
+      <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\logs" />
+      <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources" />
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -116,6 +107,7 @@
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="eus.ehu.gleonis.gleonismastodonfx.presentation" />
       <recent name="eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane" />
       <recent name="eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable" />
       <recent name="eus.ehu.gleonis.gleonismastodonfx.api.adapter" />
@@ -127,7 +119,7 @@
       <module name="GLeonisMastodonFX" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.*" />
+          <option name="PATTERN" value="eus.ehu.gleonis.gleonismastodonfx.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -144,22 +136,31 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="APITest.testFavorites" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="APITest.testFollow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="GLeonisMastodonFX" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="APITest" />
-      <option name="METHOD_NAME" value="testFavorites" />
+      <option name="METHOD_NAME" value="testFollow" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="APITest.testGetAccount" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="APITest.testToots" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="GLeonisMastodonFX" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="APITest" />
-      <option name="METHOD_NAME" value="testGetAccount" />
+      <option name="METHOD_NAME" value="testToots" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DBManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GLeonisMastodonFX" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="DBManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -168,8 +169,9 @@
       <list>
         <item itemvalue="Application.MainApplication" />
         <item itemvalue="JUnit.APITest" />
-        <item itemvalue="JUnit.APITest.testFavorites" />
-        <item itemvalue="JUnit.APITest.testGetAccount" />
+        <item itemvalue="JUnit.APITest.testFollow" />
+        <item itemvalue="JUnit.APITest.testToots" />
+        <item itemvalue="JUnit.DBManagerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -226,7 +228,15 @@
       <workItem from="1683067763463" duration="6768000" />
       <workItem from="1683110431258" duration="7738000" />
       <workItem from="1683149303704" duration="1244000" />
-      <workItem from="1683184294347" duration="5607000" />
+      <workItem from="1683184294347" duration="7420000" />
+      <workItem from="1683208062588" duration="3918000" />
+      <workItem from="1683271630506" duration="7781000" />
+      <workItem from="1683303266641" duration="91000" />
+      <workItem from="1683303381010" duration="4454000" />
+      <workItem from="1683362722730" duration="2494000" />
+      <workItem from="1683388799153" duration="8510000" />
+      <workItem from="1683465744463" duration="9248000" />
+      <workItem from="1683616346745" duration="17340000" />
     </task>
     <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
       <created>1679044335470</created>
@@ -417,7 +427,42 @@
       <option name="project" value="LOCAL" />
       <updated>1683112511170</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Searching account, tags, toots. Tag history chart. API improvement">
+      <created>1683191253024</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1683191253024</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Send toot, toot more options button, respond to toot">
+      <created>1683470870582</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1683470870582</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Fix crash on first launch">
+      <created>1683475959796</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1683475959796</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Fix duplicate, add new JUnit tests">
+      <created>1683620729339</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1683620729339</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Add basic supports for the streaming API (global + local Timeline)">
+      <created>1683638317635</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1683638317635</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,11 +480,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update API and refactoring and start to create UI" />
-    <MESSAGE value="Add config + login fxml" />
-    <MESSAGE value="API change + UI main screen" />
-    <MESSAGE value="API change + UI account style and performances" />
-    <MESSAGE value="UI account style and performances" />
     <MESSAGE value="UI account header" />
     <MESSAGE value="UI toots" />
     <MESSAGE value="Remove config.properties" />
@@ -460,6 +500,11 @@
     <MESSAGE value="Support for log4j. Init translation system" />
     <MESSAGE value="Hibernate+JPA supported, log4j more msg, follow/unfollow account" />
     <MESSAGE value="Refactoring, trending screen, bugs fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring, trending screen, bugs fix" />
+    <MESSAGE value="Searching account, tags, toots. Tag history chart. API improvement" />
+    <MESSAGE value="Send toot, toot more options button, respond to toot" />
+    <MESSAGE value="Fix crash on first launch" />
+    <MESSAGE value="Fix duplicate, add new JUnit tests" />
+    <MESSAGE value="Add basic supports for the streaming API (global + local Timeline)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add basic supports for the streaming API (global + local Timeline)" />
   </component>
 </project>

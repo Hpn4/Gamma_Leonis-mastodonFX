@@ -1,12 +1,21 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
 public class MainWindowController extends AbstractController {
@@ -21,13 +30,42 @@ public class MainWindowController extends AbstractController {
     private Label accountWebfinger;
 
     @FXML
-    private BorderPane sceneContent;
+    private StackPane sceneContent;
 
     @FXML
     private TextField searchTextField;
 
+    // Send toot UI part
+    @FXML
+    private VBox sendTootVBox;
+
+    @FXML
+    private GridPane fakeSendGridPane;
+
+    @FXML
+    private TextField fakeSendTextField;
+
+    @FXML
+    private TextField spoilerTextField;
+
+    @FXML
+    private GridPane realSendTootGridPane;
+
+    @FXML
+    private TextArea tootContentTextArea;
+
+    @FXML
+    private CheckBox visibilityCheckbox;
+
+    private boolean sendTootPanelVisible;
+
+    private Visibility tootVisibility;
+
+    private String inResponseTo;
+
     // We don't use initilize because we need to wait for the API to be set
-    public void init() {
+    public void init(Scene scene) {
+        // Setup account information (webfinger, username and icon)
         Account account = api.verifyCredentials();
 
         accountUsername.setText(account.getUsername());
@@ -39,48 +77,114 @@ public class MainWindowController extends AbstractController {
 
         // Setup listener for textField to search when enter is pressed
         searchTextField.setOnAction(e -> onSearchClick());
-    }
 
+        // Display the real panel to send toot.
+        fakeSendTextField.setOnMouseClicked(e -> {
+            if (sendTootPanelVisible)
+                return;
+
+            gainTootFocus("", Visibility.PUBLIC, null);
+        });
+
+        // Hide or show the real panel to send toot when the user click in the region of the panel.
+        scene.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+            if (sendTootPanelVisible && !inHierarchyOf(e.getPickResult().getIntersectedNode(), sendTootVBox))
+                loseTootFocus();
+        });
+
+        sendTootPanelVisible = false;
+
+        sendTootVBox.getChildren().clear();
+        sendTootVBox.getChildren().add(fakeSendGridPane);
+    }
 
     public void setCenter(Node pane) {
+        setCenter(pane, true);
+    }
+
+    public void setCenter(Node pane, boolean closeStream) {
         BorderPane.setAlignment(pane, Pos.TOP_CENTER);
 
-        sceneContent.setCenter(pane);
+        if(closeStream)
+            api.closeStream();
+        sceneContent.getChildren().clear();
+        sceneContent.getChildren().add(pane);
+        sceneContent.getChildren().add(sendTootVBox);
+    }
+
+    private boolean inHierarchyOf(Node n, Node h) {
+        while (n != null) {
+            if (n == h)
+                return true;
+
+            n = n.getParent();
+        }
+
+        return false;
+    }
+
+    public void gainTootFocus(String content, Visibility visibility, String inResponseTo) {
+        sendTootPanelVisible = true;
+        this.inResponseTo = inResponseTo;
+        tootContentTextArea.setText(content);
+        sendTootVBox.getChildren().set(0, realSendTootGridPane);
+        tootVisibility = visibility;
+        tootContentTextArea.requestFocus();
+        updateSendTootVisibilityCheckbox();
+    }
+
+    private void updateSendTootVisibilityCheckbox() {
+        if (tootVisibility == Visibility.PUBLIC) {
+            visibilityCheckbox.getStyleClass().set(2, "toot-visibility-public");
+            visibilityCheckbox.setSelected(true);
+        } else {
+            visibilityCheckbox.getStyleClass().set(2, "toot-visibility-direct");
+            visibilityCheckbox.setSelected(false);
+        }
+    }
+
+    private void loseTootFocus() {
+        sendTootPanelVisible = false;
+        inResponseTo = null;
+        tootVisibility = Visibility.PUBLIC;
+        sendTootVBox.getChildren().clear();
+        sendTootVBox.getChildren().add(fakeSendGridPane);
+        sceneContent.requestFocus();
     }
 
     @FXML
-    void onBookmarksClick() {
-        getApplication().requestShowToots(api.getBookmarks(10), 10);
+    void onVisibilityClick(ActionEvent event) {
+        boolean selected = ((CheckBox) event.getSource()).isSelected();
+        if (selected) {
+            tootVisibility = Visibility.PUBLIC;
+        } else {
+            tootVisibility = Visibility.PRIVATE;
+        }
+
+        updateSendTootVisibilityCheckbox();
     }
 
     @FXML
-    void onDirectMsgClick() {
-
+    void onWarningContentClick(ActionEvent event) {
+        boolean selected = ((CheckBox) event.getSource()).isSelected();
+        if (selected) {
+            sendTootVBox.getChildren().add(0, spoilerTextField);
+            spoilerTextField.requestFocus();
+        } else {
+            sendTootVBox.getChildren().remove(0);
+            tootContentTextArea.requestFocus();
+        }
     }
 
     @FXML
-    void onFavouritesClick() {
-        getApplication().requestShowToots(api.getFavourites(10), 10);
-    }
+    void onSendToot() {
+        String content = tootContentTextArea.getText();
 
-    @FXML
-    void onGlobalTLClick() {
+        if (content.isEmpty())
+            return;
 
-    }
-
-    @FXML
-    void onHomeClick() {
-        getApplication().requestShowToots(api.getHomeTimeline(10), 10);
-    }
-
-    @FXML
-    void onListsClick() {
-
-    }
-
-    @FXML
-    void onLocalTLClick() {
-
+        api.postStatus(content, tootVisibility, inResponseTo, spoilerTextField.getText());
+        loseTootFocus();
     }
 
     @FXML
@@ -98,8 +202,59 @@ public class MainWindowController extends AbstractController {
         getApplication().requestLoginScreen();
     }
 
+    //*******************************************************************
+    // Timelines:
+    // - Home
+    // - Local
+    // - Global/Federated
+    // - Trendings
+    //
+    // *******************************************************************
+    @FXML
+    void onHomeClick() {
+        getApplication().requestShowToots(api.getHomeTimeline(10), 10);
+    }
+
+    @FXML
+    void onLocalTLClick() {
+        getApplication().requestShowStreamToots(api.getLocalTimelines());
+    }
+
+    @FXML
+    void onGlobalTLClick() {
+        getApplication().requestShowStreamToots(api.getFederatedTimeline());
+    }
+
     @FXML
     void onTrendingClick() {
         getApplication().requestShowTrending();
+    }
+
+    //*******************************************************************
+    // Personal categories:
+    // - Direct messages
+    // - Favourites
+    // - Bookmarks
+    // - Lists
+    //
+    // *******************************************************************
+    @FXML
+    void onDirectMsgClick() {
+
+    }
+
+    @FXML
+    void onFavouritesClick() {
+        getApplication().requestShowToots(api.getFavourites(10), 10);
+    }
+
+    @FXML
+    void onBookmarksClick() {
+        getApplication().requestShowToots(api.getBookmarks(10), 10);
+    }
+
+    @FXML
+    void onListsClick() {
+
     }
 }

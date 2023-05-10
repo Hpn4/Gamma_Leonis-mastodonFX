@@ -66,8 +66,13 @@ public class LoginWindowController extends AbstractController {
             accountBox.getChildren().add(lastAccess);
 
             accountBox.setOnMouseClicked(event -> {
-                api.switchUser(account.getToken());
-                getApplication().requestMainScreen();
+                if(api.switchUser(account.getToken()))
+                    getApplication().requestMainScreen();
+                else {
+                    dbManager.deleteAccount(account);
+                    init();
+                    showError("The token has expired or have changed, you need to authorize again.");
+                }
             });
 
             accountsList.getChildren().add(accountBox);

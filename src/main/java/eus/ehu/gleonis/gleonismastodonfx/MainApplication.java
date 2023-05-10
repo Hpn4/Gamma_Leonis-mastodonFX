@@ -3,6 +3,7 @@ package eus.ehu.gleonis.gleonismastodonfx;
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.*;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.AccountRPController;
@@ -39,6 +40,7 @@ public class MainApplication extends Application {
 
     private Window<MainWindowController> mainWindow;
     private Window<LoginWindowController> loginWindow;
+    private Window<ConfigWindowController> configWindow;
 
     public static MainApplication getInstance() {
         return instance;
@@ -59,12 +61,20 @@ public class MainApplication extends Application {
         instance = this;
         this.stage = stage;
 
-        // Request the first screen, login if there is no access token or main window if there is one
-        if (api.isUserConnected()) {
-            api.setupUser(dbManager);
-            requestMainScreen();
-        } else
-            requestLoginScreen();
+        // If there is no config file, we launch UI to fill it
+        if(api.isConfigFileEmpty())
+            requestConfigFileScreen();
+        else {
+            api.initAPI();
+            dbManager.initDB();
+
+            // Request the first screen, login if there is no access token or main window if there is one
+            if (api.isUserConnected()) {
+                api.setupUser(dbManager);
+                requestMainScreen();
+            } else
+                requestLoginScreen();
+        }
 
         stage.setTitle("Gamma Leonis Mastodon Client");
 
@@ -74,9 +84,32 @@ public class MainApplication extends Application {
         stage.setOnCloseRequest(event -> {
             logger.info("Close Gamma Leonis Mastodon Client");
             dbManager.closeDb();
+            api.closeAPI(); // Close stream
         });
 
         logger.debug("Gamma Leonis Mastodon Client started in {} ms", System.currentTimeMillis() - start);
+    }
+
+    private void requestConfigFileScreen() {
+        try {
+            logger.info("No config file found, switch to config file screen");
+
+            if (configWindow == null)
+                configWindow = load("configFile_window.fxml");
+
+            // When possible, we just change the root element of the Scene instead of creating a new one
+            // In fact creating a new Scene instance is performance heavy
+            if (stage.getScene() == null)
+                stage.setScene(new Scene(configWindow.ui));
+            else {
+                stage.getScene().setRoot(configWindow.ui);
+                stage.setWidth(700);
+                stage.setHeight(500);
+                stage.centerOnScreen();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void requestLoginScreen() {
@@ -110,9 +143,6 @@ public class MainApplication extends Application {
             if (mainWindow == null)
                 mainWindow = load("main_window.fxml");
 
-            mainController = mainWindow.controller;
-            mainController.init();
-
             if (stage.getScene() == null)
                 stage.setScene(new Scene(mainWindow.ui, 1400, 750));
             else {
@@ -121,6 +151,9 @@ public class MainApplication extends Application {
                 stage.setHeight(750);
                 stage.centerOnScreen();
             }
+
+            mainController = mainWindow.controller;
+            mainController.init(stage.getScene());
 
             requestShowAccount(null);
         } catch (IOException e) {
@@ -141,6 +174,10 @@ public class MainApplication extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void requestShowSendToot(String tootContent, Visibility visibility, String inResponseTo) {
+        mainController.gainTootFocus(tootContent, visibility, inResponseTo);
     }
 
     public void requestSearch(String query) {
@@ -174,6 +211,14 @@ public class MainApplication extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void requestShowStreamToots(ListStream<Status> toots){
+        logger.debug("Switch to scrollable toots screen");
+
+        TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(toots, 0);
+
+        mainController.setCenter(tootsScrollableContent, false);
     }
 
     public void requestShowToots(ListStream<Status> toots, int itemPerPage) {

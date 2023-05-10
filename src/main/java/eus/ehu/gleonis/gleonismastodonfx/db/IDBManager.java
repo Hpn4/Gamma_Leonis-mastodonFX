@@ -6,9 +6,17 @@ import java.util.List;
 
 public interface IDBManager {
 
+    void initDB();
+
     // Add a new account in the database
     // returns true if no problem, false if the account already exists
-    boolean insertAccount(Account account, String token);
+    DBAccount insertAccount(Account account, String token);
+
+    DBAccount insertAccount(String id, String username, String avatar, String token);
+
+    boolean deleteAccount(String id);
+
+    boolean deleteAccount(DBAccount account);
 
     // Get the currently logged in account or null if no account is logged in
     DBAccount getLoggedAccount();

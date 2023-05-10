@@ -29,13 +29,16 @@ public class TootsScrollableContent extends AbstractScrollableContent<Status> {
                 throw new RuntimeException(e);
             }
 
-            TootsItemCell toot = fxml.getController();
-
+            // Setup controller
+            TootItem toot = fxml.getController();
             toot.init(status);
+            toot.setScrollableContent(this);
 
-            Pane pane = toot.getGraphic();
+            // Small adjustment for the width
+            Pane pane = toot.getParent();
             pane.prefWidthProperty().bind(widthProperty().subtract(20));
 
+            // Reset the loader (i need to do it twice, i don't know why but sometimes stat are not cleared)
             fxml.setRoot(null);
             fxml.setController(null);
 

@@ -110,10 +110,13 @@ public class Utils {
                         targetList.remove(t);
                         sourceToTargetMap.remove(s);
                     }
+
+                    int i = c.getFrom();
                     for (S s : c.getAddedSubList()) {
                         T t = mapper.apply(s);
-                        targetList.add(t);
+                        targetList.add(i, t);
                         sourceToTargetMap.put(s, t);
+                        i += 1;
                     }
                 }
             }

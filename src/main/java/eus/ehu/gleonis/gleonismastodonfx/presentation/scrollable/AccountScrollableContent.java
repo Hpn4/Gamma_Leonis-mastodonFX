@@ -15,7 +15,7 @@ public class AccountScrollableContent extends AbstractScrollableContent<Account>
 
     private void setupListPropertyListener(boolean following) {
         Utils.mapByValue(itemsList, contentBox.getChildren(), p -> {
-            Pane pane = new AccountItemCell(p, following).getAccountItem();
+            Pane pane = new AccountItem(this, p, following).getParent();
             pane.prefWidthProperty().bind(widthProperty().subtract(20));
 
             reduceSpeed();
