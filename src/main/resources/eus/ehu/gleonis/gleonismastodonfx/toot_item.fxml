@@ -111,9 +111,9 @@
             </Button>
             <MenuButton fx:id="moreMenuButton" mnemonicParsing="false" popupSide="TOP" GridPane.columnIndex="7">
               <items>
-                <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#onDeleteTootClick" text="Delete" />
-                <MenuItem mnemonicParsing="false" onAction="#onMentionMenuClick" text="Mention" />
-                  <MenuItem mnemonicParsing="false" onAction="#onPrivateMentionMenuClick" text="Private mention" />
+                <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#onDeleteTootClick" text="%delete" />
+                <MenuItem mnemonicParsing="false" onAction="#onMentionMenuClick" text="%mention" />
+                  <MenuItem mnemonicParsing="false" onAction="#onPrivateMentionMenuClick" text="%private_mention" />
               </items>
                <styleClass>
                   <String fx:value="more-options-button" />

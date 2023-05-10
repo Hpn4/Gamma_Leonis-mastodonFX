@@ -44,7 +44,7 @@
             </VBox.margin>
          </Separator>
          <StackPane alignment="CENTER_RIGHT" prefHeight="74.0" prefWidth="211.0">
-            <TextField fx:id="searchTextField" prefHeight="54.0" prefWidth="233.0" promptText="Search..." />
+            <TextField fx:id="searchTextField" prefHeight="54.0" prefWidth="233.0" promptText="%search" />
             <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onSearchClick" prefHeight="20.0" prefWidth="20.0" styleClass="search-button" text="Search">
                <StackPane.margin>
                   <Insets right="15.0" />
