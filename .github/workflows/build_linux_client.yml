@@ -3,7 +3,7 @@ run-name: ${{ github.actor}} is build the linux mastodon client
 on:
   push:
     branches:
-      - installer
+      - main
 
 jobs:
   build:
@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Installer files
-          path: target/*
+          path: target/installer/*
