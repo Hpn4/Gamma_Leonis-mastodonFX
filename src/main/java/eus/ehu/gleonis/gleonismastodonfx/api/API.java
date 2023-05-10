@@ -115,8 +115,8 @@ public class API {
         return propertiesManager.empty();
     }
 
-    public boolean isUserConnected() {
-        return !propertiesManager.getDbUser().isEmpty() || verifyCredentials() == null;
+    public boolean isUserConnected(IDBManager db) {
+        return !propertiesManager.getDbUser().isEmpty() && db.getLoggedAccount() != null;
     }
 
     public void setupUser(IDBManager db) {

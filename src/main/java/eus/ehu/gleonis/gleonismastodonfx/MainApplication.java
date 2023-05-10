@@ -69,7 +69,7 @@ public class MainApplication extends Application {
             dbManager.initDB();
 
             // Request the first screen, login if there is no access token or main window if there is one
-            if (api.isUserConnected()) {
+            if (api.isUserConnected(dbManager)) {
                 api.setupUser(dbManager);
                 requestMainScreen();
             } else

@@ -105,14 +105,18 @@ public class DBManager implements IDBManager {
         if (dbUser.isEmpty())
             return null;
 
-        DBAccount account = dbConnector.getReference(DBAccount.class, dbUser);
+        //DBAccount account = dbConnector.getReference(DBAccount.class, dbUser);
+        List<DBAccount> accounts = dbConnector.createQuery(
+                "SELECT a FROM DBAccount a WHERE a.id = ?1", DBAccount.class)
+                .setParameter(1, dbUser)
+                .getResultList();
 
-        if (account == null) {
+        if (accounts == null || accounts.isEmpty()) {
             logger.error("Account not found");
             return null;
         }
 
-        return account;
+        return accounts.get(0);
     }
 
     public void updateAccount(Account ac) {
