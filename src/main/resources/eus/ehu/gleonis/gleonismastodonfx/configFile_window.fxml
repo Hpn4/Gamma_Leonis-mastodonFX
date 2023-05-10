@@ -22,19 +22,19 @@
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
-   <Label alignment="CENTER" text="%instruction_keys" textFill="WHITE" wrapText="true">
+   <Label alignment="CENTER" text="%config.instruction" textFill="WHITE" wrapText="true">
       <font>
          <Font size="14.0" />
       </font>
    </Label>
-   <TextField fx:id="keyTextField" prefHeight="31.0" prefWidth="362.0" promptText="%enter_client_key_here" GridPane.rowIndex="1">
+   <TextField fx:id="keyTextField" prefHeight="31.0" prefWidth="362.0" promptText="%config.client_key" GridPane.rowIndex="1">
       <opaqueInsets>
          <Insets />
       </opaqueInsets>
    </TextField>
-   <Label fx:id="errorLabel" text="Please fill the two text field" textFill="#c10303" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-   <Button mnemonicParsing="false" onAction="#onConfigureClick" text="%configure" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-   <TextField fx:id="secretTextField" prefHeight="31.0" prefWidth="362.0" promptText="%enter_client_secret_key_here" GridPane.rowIndex="2" GridPane.valignment="TOP">
+   <Label fx:id="errorLabel" text="%config.error_label" textFill="#c10303" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+   <Button mnemonicParsing="false" onAction="#onConfigureClick" text="%config.configure" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+   <TextField fx:id="secretTextField" prefHeight="31.0" prefWidth="362.0" promptText="%config.client_secret" GridPane.rowIndex="2" GridPane.valignment="TOP">
       <opaqueInsets>
          <Insets />
       </opaqueInsets>

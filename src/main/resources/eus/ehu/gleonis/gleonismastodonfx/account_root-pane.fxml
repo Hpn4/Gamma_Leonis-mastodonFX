@@ -31,7 +31,7 @@
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <Label alignment="CENTER" text="%status" textFill="#999999">
+               <Label alignment="CENTER" text="%posts" textFill="#999999">
                   <font>
                      <Font size="14.0" />
                   </font>
@@ -78,7 +78,7 @@
             <rowConstraints>
                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
-            <RadioButton mnemonicParsing="false" onAction="#onTootsClick" styleClass="account-selection-radio-button" text="Toots" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <RadioButton mnemonicParsing="false" onAction="#onTootsClick" styleClass="account-selection-radio-button" text="%posts" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

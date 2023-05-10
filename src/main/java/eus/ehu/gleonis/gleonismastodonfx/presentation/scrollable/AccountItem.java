@@ -3,6 +3,7 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Relationship;
+import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -13,12 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class AccountItem extends AbstractItem<Account> {
 
-    private final ResourceBundle translation = ResourceBundle.getBundle("translation", Locale.getDefault());
     private boolean removeFromFollowers;
 
     private FXMLLoader loader;
@@ -66,7 +64,7 @@ public class AccountItem extends AbstractItem<Account> {
             return;
 
         if (loader == null) {
-            loader = new FXMLLoader(MainApplication.class.getResource("account_item.fxml"), translation);
+            loader = Utils.loadAndTranslate(MainApplication.class.getResource("account_item.fxml"));
             loader.setController(this);
 
             try {
@@ -85,9 +83,9 @@ public class AccountItem extends AbstractItem<Account> {
             // Following: unfollow
             removeFromFollowers = followersPanel && relation.isFollowedBy();
             if (removeFromFollowers)
-                unfollowButton.setTooltip(new Tooltip("Remove from followers"));
+                unfollowButton.setTooltip(new Tooltip(Utils.getTranslation("account.remove_tooltips")));
             else {
-                unfollowButton.setTooltip(new Tooltip("Unfollow"));
+                unfollowButton.setTooltip(new Tooltip(Utils.getTranslation("account.unfollow_tooltips")));
                 unfollowButton.setVisible(relation.isFollowing());
             }
 

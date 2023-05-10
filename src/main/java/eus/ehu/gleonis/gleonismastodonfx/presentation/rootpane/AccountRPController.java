@@ -2,6 +2,7 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Relationship;
+import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -72,7 +73,7 @@ public class AccountRPController extends AbstractPanelSwitchController {
     }
 
     private void unfollowAccountButton() {
-        accountRelationButton.setText("Unfollow");
+        accountRelationButton.setText(Utils.getTranslation("account.unfollow_tooltips"));
         accountRelationButton.setOnAction(e -> {
             api.unfollowAccount(account.getId());
             followAccountButton(); // Switch button to follow
@@ -80,7 +81,7 @@ public class AccountRPController extends AbstractPanelSwitchController {
     }
 
     private void followAccountButton() {
-        accountRelationButton.setText("Follow");
+        accountRelationButton.setText(Utils.getTranslation("account.follow"));
         accountRelationButton.setOnAction(e -> {
             api.followAccount(account.getId());
             unfollowAccountButton(); // Switch button to unfollow

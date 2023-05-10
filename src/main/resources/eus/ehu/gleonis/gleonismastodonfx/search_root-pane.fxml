@@ -20,7 +20,7 @@
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
-         <RadioButton mnemonicParsing="false" onAction="#onHashtagsTypeClick" styleClass="account-selection-radio-button" text="Hashtags" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+         <RadioButton mnemonicParsing="false" onAction="#onHashtagsTypeClick" styleClass="account-selection-radio-button" text="%hashtags" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
@@ -28,7 +28,7 @@
                <ToggleGroup fx:id="searchingTypeSelection" />
             </toggleGroup>
          </RadioButton>
-         <RadioButton mnemonicParsing="false" onAction="#onTootsTypeClick" styleClass="account-selection-radio-button" text="Toots" textFill="WHITE" toggleGroup="$searchingTypeSelection" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+         <RadioButton mnemonicParsing="false" onAction="#onTootsTypeClick" styleClass="account-selection-radio-button" text="%posts" textFill="WHITE" toggleGroup="$searchingTypeSelection" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>

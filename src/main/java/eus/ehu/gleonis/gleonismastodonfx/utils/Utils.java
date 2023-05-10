@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
@@ -21,6 +22,16 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class Utils {
+
+    private static final ResourceBundle translation = ResourceBundle.getBundle("translation", Locale.getDefault());
+
+    public static FXMLLoader loadAndTranslate(URL path) {
+        return new FXMLLoader(path, translation);
+    }
+
+    public static String getTranslation(String key) {
+        return translation.getString(key);
+    }
 
     public static Instant ISODateToDate(String date) {
         return Instant.parse(date);
@@ -160,9 +171,5 @@ public class Utils {
     @FunctionalInterface
     public interface ProducerWithThrow<R> {
         R apply() throws Throwable;
-    }
-
-    public static String translate(String key) {
-        return ResourceBundle.getBundle("translation", Locale.getDefault()).getString(key);
     }
 }

@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class ConversationScrollableContent extends AbstractScrollableContent<Conversation> {
 
-    private static final FXMLLoader fxml = new FXMLLoader(MainApplication.class.getResource("conversation_item.fxml"));
+    private static final FXMLLoader fxml = Utils.loadAndTranslate(MainApplication.class.getResource("conversation_item.fxml"));
 
     public ConversationScrollableContent(ListStream<Conversation> itemsStream, int itemsPerPage) {
         super(itemsStream, itemsPerPage);

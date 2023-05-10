@@ -3,6 +3,7 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Tag;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.TagHistory;
+import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.AreaChart;
@@ -11,12 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class HashTagItem extends AbstractItem<Tag> {
 
-    private final ResourceBundle translation = ResourceBundle.getBundle("translation", Locale.getDefault());
     @FXML
     private GridPane hashtagItem;
 
@@ -42,7 +40,7 @@ public class HashTagItem extends AbstractItem<Tag> {
     }
 
     protected void updateItem(Tag hashtag) {
-        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("hashtag_item.fxml"), translation);
+        FXMLLoader loader = Utils.loadAndTranslate(MainApplication.class.getResource("hashtag_item.fxml"));
         loader.setController(this);
 
         try {
@@ -68,7 +66,7 @@ public class HashTagItem extends AbstractItem<Tag> {
 
         frequenceCharts.getData().add(series);
 
-        usesLabel.setText(uses + " uses by " + accounts + " people in the past 2 days");
+        usesLabel.setText(Utils.getTranslation("hash.uses").formatted(uses, accounts));
     }
 
     public GridPane getParent() {

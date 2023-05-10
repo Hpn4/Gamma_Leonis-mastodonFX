@@ -42,7 +42,7 @@
             <Label fx:id="webfingerLabel" prefHeight="18.0" prefWidth="97.0" text="Webfinger" textFill="#999999" />
          </VBox>
          <Region HBox.hgrow="ALWAYS" />
-         <GridPane fx:id="interactionPanel" focusTraversable="true">
+         <GridPane focusTraversable="true">
             <columnConstraints>
                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -59,11 +59,11 @@
                   <String fx:value="interaction-status-button" />
                </styleClass>
             </Button>
-            <MenuButton fx:id="moreMenuButton" mnemonicParsing="false" popupSide="TOP" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+            <MenuButton mnemonicParsing="false" popupSide="TOP" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#onViewConvClick" text="View conversation" />
-                <MenuItem mnemonicParsing="false" onAction="#onDeleteConvClick" text="Delete conversation" />
-                  <MenuItem fx:id="readConversationMenuItem" mnemonicParsing="false" onAction="#onReadConvClick" text="Mark conversation as read" />
+                <MenuItem mnemonicParsing="false" onAction="#onViewConvClick" text="%conv.show" />
+                <MenuItem mnemonicParsing="false" onAction="#onDeleteConvClick" text="%conv.delete" />
+                  <MenuItem fx:id="readConversationMenuItem" mnemonicParsing="false" onAction="#onReadConvClick" text="%conv.mark" />
               </items>
                <styleClass>
                   <String fx:value="more-options-button" />

@@ -2,6 +2,7 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Token;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBAccount;
+import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -66,12 +67,12 @@ public class LoginWindowController extends AbstractController {
             accountBox.getChildren().add(lastAccess);
 
             accountBox.setOnMouseClicked(event -> {
-                if(api.switchUser(account.getToken()))
+                if (api.switchUser(account.getToken()))
                     getApplication().requestMainScreen();
                 else {
                     dbManager.deleteAccount(account);
                     init();
-                    showError("The token has expired or have changed, you need to authorize again.");
+                    showError(Utils.getTranslation("login.error_expired"));
                 }
             });
 
@@ -94,7 +95,7 @@ public class LoginWindowController extends AbstractController {
         errorLabel.setText(label);
 
         authorizeButton.setDisable(false);
-        authorizeButton.setText("Generate new authorization");
+        authorizeButton.setText(Utils.getTranslation("login.generate_new"));
     }
 
     @FXML
@@ -102,9 +103,9 @@ public class LoginWindowController extends AbstractController {
         Token token = api.getToken(codeTextField.getText());
 
         if (token == null)
-            showError("Error getting token. Please try again.");
+            showError(Utils.getTranslation("login.error_get_token"));
         else if (!api.addNewUser(dbManager, token))
-            showError("Error adding new user. Please try again.");
+            showError(Utils.getTranslation("login.error_add_user"));
         else
             getApplication().requestMainScreen();
 

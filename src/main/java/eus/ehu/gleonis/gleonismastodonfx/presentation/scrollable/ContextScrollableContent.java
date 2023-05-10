@@ -3,6 +3,7 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Context;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
+import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.ScrollEvent;
@@ -13,7 +14,7 @@ import java.io.IOException;
 
 public class ContextScrollableContent extends ScrollPane {
 
-    private static final FXMLLoader fxml = new FXMLLoader(MainApplication.class.getResource("toot_item.fxml"), MainApplication.getInstance().getTranslation());
+    private static final FXMLLoader fxml = Utils.loadAndTranslate(MainApplication.class.getResource("toot_item.fxml"));
 
     protected final VBox contentBox;
 

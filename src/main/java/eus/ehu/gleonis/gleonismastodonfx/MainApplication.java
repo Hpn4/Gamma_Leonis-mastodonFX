@@ -15,6 +15,7 @@ import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.TrendingRPControl
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.ContextScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.ConversationScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsScrollableContent;
+import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,16 +25,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class MainApplication extends Application {
 
     private static final Logger logger = LogManager.getLogger("Main");
 
     private static MainApplication instance;
-
-    private final ResourceBundle translation = ResourceBundle.getBundle("translation", Locale.getDefault());
 
     private API api;
 
@@ -259,14 +256,10 @@ public class MainApplication extends Application {
         return api;
     }
 
-    public ResourceBundle getTranslation() {
-        return translation;
-    }
-
     private <E extends AbstractController> Window<E> load(String url) throws IOException {
         Window<E> ref = new Window<>();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(url), translation);
+        FXMLLoader fxmlLoader = Utils.loadAndTranslate(MainApplication.class.getResource(url));
         ref.ui = fxmlLoader.load();
         ref.controller = fxmlLoader.getController();
         ref.controller.setApplication(this);
