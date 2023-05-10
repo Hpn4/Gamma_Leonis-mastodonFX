@@ -59,7 +59,7 @@
                <Insets left="20.0" right="20.0" />
             </VBox.margin>
          </Separator>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onHomeClick" prefHeight="54.0" prefWidth="217.0" text="Home" textAlignment="CENTER" textFill="#666666">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onHomeClick" prefHeight="54.0" prefWidth="217.0" text="%home" textAlignment="CENTER" textFill="#666666">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
@@ -74,7 +74,7 @@
                <String fx:value="window-menu-radio-button" />
             </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onGlobalTLClick" prefHeight="54.0" prefWidth="217.0" text="Global Timelines" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onGlobalTLClick" prefHeight="54.0" prefWidth="217.0" text="%global_timelines" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
@@ -86,7 +86,7 @@
                <String fx:value="window-menu-radio-button" />
             </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onLocalTLClick" prefHeight="54.0" prefWidth="217.0" text="Local Timelines" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onLocalTLClick" prefHeight="54.0" prefWidth="217.0" text="%local_timelines" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
@@ -98,7 +98,7 @@
                <String fx:value="window-menu-radio-button" />
             </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onTrendingClick" prefHeight="54.0" prefWidth="217.0" text="Trending" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onTrendingClick" prefHeight="54.0" prefWidth="217.0" text="%trending" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
@@ -115,7 +115,7 @@
                <Insets left="20.0" right="20.0" />
             </VBox.margin>
          </Separator>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onDirectMsgClick" prefHeight="54.0" prefWidth="217.0" text="Direct Message" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onDirectMsgClick" prefHeight="54.0" prefWidth="217.0" text="%direct_message" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
@@ -127,7 +127,7 @@
                <String fx:value="window-menu-radio-button" />
             </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onFavouritesClick" prefHeight="54.0" prefWidth="217.0" text="Favourites" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onFavouritesClick" prefHeight="54.0" prefWidth="217.0" text="%favorites" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
@@ -139,7 +139,7 @@
                <String fx:value="window-menu-radio-button" />
             </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onBookmarksClick" prefHeight="54.0" prefWidth="217.0" text="Bookmarks" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onBookmarksClick" prefHeight="54.0" prefWidth="217.0" text="%bookmarks" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
@@ -151,7 +151,7 @@
                <String fx:value="window-menu-radio-button" />
             </styleClass>
          </RadioButton>
-         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onListsClick" prefHeight="54.0" prefWidth="217.0" text="Lists" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
+         <RadioButton contentDisplay="TOP" mnemonicParsing="false" onAction="#onListsClick" prefHeight="54.0" prefWidth="217.0" text="%lists" textAlignment="CENTER" textFill="#666666" toggleGroup="$menuChoice">
             <font>
                <Font name="System Bold" size="16.0" />
             </font>
@@ -171,7 +171,7 @@
             <padding>
                <Insets bottom="10.0" top="10.0" />
             </padding>
-            <TextField fx:id="spoilerTextField" promptText="Spoiler description...">
+            <TextField fx:id="spoilerTextField" promptText="%spoiler_description">
                <VBox.margin>
                   <Insets right="30.0" />
                </VBox.margin>
@@ -221,7 +221,7 @@
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
-               <TextField fx:id="fakeSendTextField" promptText="Send toot...">
+               <TextField fx:id="fakeSendTextField" promptText="%send_toot">
                   <GridPane.margin>
                      <Insets />
                   </GridPane.margin>

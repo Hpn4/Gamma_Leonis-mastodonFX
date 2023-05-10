@@ -13,9 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class AccountItem extends AbstractItem<Account> {
 
+    private final ResourceBundle translation = ResourceBundle.getBundle("translation", Locale.getDefault());
     private boolean removeFromFollowers;
 
     private FXMLLoader loader;
@@ -63,7 +66,7 @@ public class AccountItem extends AbstractItem<Account> {
             return;
 
         if (loader == null) {
-            loader = new FXMLLoader(MainApplication.class.getResource("account_item.fxml"));
+            loader = new FXMLLoader(MainApplication.class.getResource("account_item.fxml"), translation);
             loader.setController(this);
 
             try {

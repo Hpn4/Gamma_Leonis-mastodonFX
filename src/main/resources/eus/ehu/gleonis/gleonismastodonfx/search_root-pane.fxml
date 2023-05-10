@@ -33,7 +33,7 @@
                <Font name="System Bold" size="14.0" />
             </font>
          </RadioButton>
-         <RadioButton mnemonicParsing="false" onAction="#onAccountsTypeClick" styleClass="account-selection-radio-button" text="Accounts" textFill="WHITE" toggleGroup="$searchingTypeSelection" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+         <RadioButton mnemonicParsing="false" onAction="#onAccountsTypeClick" styleClass="account-selection-radio-button" text="%accounts" textFill="WHITE" toggleGroup="$searchingTypeSelection" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>

@@ -107,6 +107,6 @@ public class LoginWindowController extends AbstractController {
             showError("Error adding new user. Please try again.");
         else
             getApplication().requestMainScreen();
-    }
 
+    }
 }

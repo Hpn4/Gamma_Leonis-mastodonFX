@@ -20,11 +20,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MainApplication extends Application {
 
     private static final Logger logger = LogManager.getLogger("Main");
     private static MainApplication instance;
+    private final ResourceBundle translation = ResourceBundle.getBundle("translation", Locale.getDefault());
 
     private API api;
 
@@ -245,7 +248,7 @@ public class MainApplication extends Application {
     private <E extends AbstractController> Window<E> load(String url) throws IOException {
         Window<E> ref = new Window<>();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(url));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(url), translation);
         ref.ui = fxmlLoader.load();
         ref.controller = fxmlLoader.getController();
         ref.controller.setApplication(this);

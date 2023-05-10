@@ -11,9 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class HashTagItem extends AbstractItem<Tag> {
 
+    private final ResourceBundle translation = ResourceBundle.getBundle("translation", Locale.getDefault());
     @FXML
     private GridPane hashtagItem;
 
@@ -39,7 +42,7 @@ public class HashTagItem extends AbstractItem<Tag> {
     }
 
     protected void updateItem(Tag hashtag) {
-        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("hashtag_item.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("hashtag_item.fxml"), translation);
         loader.setController(this);
 
         try {
