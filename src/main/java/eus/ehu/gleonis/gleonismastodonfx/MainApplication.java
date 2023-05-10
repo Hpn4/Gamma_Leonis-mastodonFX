@@ -9,6 +9,7 @@ import eus.ehu.gleonis.gleonismastodonfx.presentation.*;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.AccountRPController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.SearchRPController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.TrendingRPController;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.ContextScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsScrollableContent;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -227,6 +228,14 @@ public class MainApplication extends Application {
         TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(toots, itemPerPage);
 
         mainController.setCenter(tootsScrollableContent);
+    }
+
+    public void requestShowTootContext(Status status) {
+        logger.debug("Switch to toot context screen");
+
+        ContextScrollableContent tootContextContent = new ContextScrollableContent(status, api.getStatusContext(status.getId()));
+
+        mainController.setCenter(tootContextContent);
     }
 
     public API getAPI() {

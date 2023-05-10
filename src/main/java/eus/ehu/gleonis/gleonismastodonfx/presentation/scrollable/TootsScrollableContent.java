@@ -31,7 +31,7 @@ public class TootsScrollableContent extends AbstractScrollableContent<Status> {
 
             // Setup controller
             TootItem toot = fxml.getController();
-            toot.init(status);
+            toot.init(status, false);
             toot.setScrollableContent(this);
 
             // Small adjustment for the width

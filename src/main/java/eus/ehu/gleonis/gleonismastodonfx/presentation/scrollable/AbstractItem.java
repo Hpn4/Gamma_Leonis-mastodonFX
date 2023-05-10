@@ -18,10 +18,13 @@ public abstract class AbstractItem<E> {
     }
 
     protected void deleteItemFromUI() {
-        parent.deleteItem(elem);
+        if (parent != null)
+            parent.deleteItem(elem);
     }
 
-    public void setScrollableContent(AbstractScrollableContent<E> parent) {this.parent = parent; }
+    public void setScrollableContent(AbstractScrollableContent<E> parent) {
+        this.parent = parent;
+    }
 
     public abstract Node getParent();
 }
