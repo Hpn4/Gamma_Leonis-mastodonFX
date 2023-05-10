@@ -3,7 +3,6 @@ run-name: ${{ github.actor}} is build the linux mastodon client
 on:
   push:
     branches:
-      - main
       - installer
 
 jobs:
