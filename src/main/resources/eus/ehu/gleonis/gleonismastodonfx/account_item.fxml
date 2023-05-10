@@ -12,12 +12,12 @@
 <HBox fx:id="accountItem" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="419.0" spacing="10.0" styleClass="account-region" stylesheets="@css/account_item.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <ImageView fx:id="accountAvatar" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
     <VBox alignment="CENTER_LEFT">
-        <Label fx:id="accountName" minWidth="-Infinity" text="\@username" textFill="WHITE">
+        <Label fx:id="accountName" minWidth="-Infinity" text="%at_username" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="accountWebfinger" minWidth="-Infinity" text="\@webfinger" textFill="#666666" />
+        <Label fx:id="accountWebfinger" minWidth="-Infinity" text="%at_webfinger" textFill="#666666" />
     </VBox>
     <Region HBox.hgrow="ALWAYS" />
     <Button fx:id="followButton" cache="true" cacheHint="SPEED" mnemonicParsing="false" onAction="#onFollowClick" prefHeight="30.0" prefWidth="35.0" styleClass="follow-button" />

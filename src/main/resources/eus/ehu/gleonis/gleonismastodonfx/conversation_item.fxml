@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="messageBorder" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="658.0" styleClass="toots-border-pane" stylesheets="@css/toots.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.ConversationItem">
+   <top>
+      <HBox prefHeight="64.0" prefWidth="892.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets right="10.0" />
+         </BorderPane.margin>
+         <StackPane>
+            <Rectangle fx:id="accountProfilePicture" arcHeight="15.0" arcWidth="15.0" fill="DODGERBLUE" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="40.0">
+               <StackPane.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </StackPane.margin>
+            </Rectangle>
+         </StackPane>
+         <VBox>
+            <padding>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <Label fx:id="userLabel" text="Username" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="webfingerLabel" prefHeight="18.0" prefWidth="97.0" text="Webfinger" textFill="#999999" />
+         </VBox>
+         <Region HBox.hgrow="ALWAYS" />
+         <GridPane fx:id="interactionPanel" focusTraversable="true">
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <Button cache="true" mnemonicParsing="false" onAction="#onReplyClick" prefHeight="50.0" prefWidth="25.0" GridPane.halignment="CENTER">
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin>
+               <styleClass>
+                  <String fx:value="reply-button" />
+                  <String fx:value="interaction-status-button" />
+               </styleClass>
+            </Button>
+            <MenuButton fx:id="moreMenuButton" mnemonicParsing="false" popupSide="TOP" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#onViewConvClick" text="View conversation" />
+                <MenuItem mnemonicParsing="false" onAction="#onDeleteConvClick" text="Delete conversation" />
+                  <MenuItem fx:id="readConversationMenuItem" mnemonicParsing="false" onAction="#onReadConvClick" text="Mark conversation as read" />
+              </items>
+               <styleClass>
+                  <String fx:value="more-options-button" />
+                  <String fx:value="interaction-status-button" />
+               </styleClass>
+            </MenuButton>
+         </GridPane>
+         <Label fx:id="dateMessageLabel" alignment="CENTER" text="Date" textFill="#999999">
+            <padding>
+               <Insets top="10.0" />
+            </padding>
+         </Label>
+      </HBox>
+   </top>
+</BorderPane>

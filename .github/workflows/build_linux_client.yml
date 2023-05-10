@@ -1,0 +1,32 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Linux Client
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - sprint*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 19
+        uses: actions/setup-java@v3
+        with:
+          java-version: '19'
+          distribution: 'adopt'
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B install -DskipTests --file pom.xml
+      - name: Upload DEB package
+        uses: actions/upload-artifact@v3
+        with:
+          name: Installer files
+          path: target/installer/*

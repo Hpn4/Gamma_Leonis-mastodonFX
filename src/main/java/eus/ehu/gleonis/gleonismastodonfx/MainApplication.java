@@ -5,10 +5,15 @@ import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
-import eus.ehu.gleonis.gleonismastodonfx.presentation.*;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.AbstractController;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.ConfigWindowController;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.LoginWindowController;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.MainWindowController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.AccountRPController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.SearchRPController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.TrendingRPController;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.ContextScrollableContent;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.ConversationScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsScrollableContent;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,11 +24,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MainApplication extends Application {
 
     private static final Logger logger = LogManager.getLogger("Main");
+
     private static MainApplication instance;
+
+    private final ResourceBundle translation = ResourceBundle.getBundle("translation", Locale.getDefault());
 
     private API api;
 
@@ -62,14 +72,14 @@ public class MainApplication extends Application {
         this.stage = stage;
 
         // If there is no config file, we launch UI to fill it
-        if(api.isConfigFileEmpty())
+        if (api.isConfigFileEmpty())
             requestConfigFileScreen();
         else {
             api.initAPI();
             dbManager.initDB();
 
             // Request the first screen, login if there is no access token or main window if there is one
-            if (api.isUserConnected()) {
+            if (api.isUserConnected(dbManager)) {
                 api.setupUser(dbManager);
                 requestMainScreen();
             } else
@@ -181,7 +191,7 @@ public class MainApplication extends Application {
     }
 
     public void requestSearch(String query) {
-        if(query == null || query.isEmpty())
+        if (query == null || query.isEmpty())
             return;
 
         try {
@@ -213,7 +223,7 @@ public class MainApplication extends Application {
         }
     }
 
-    public void requestShowStreamToots(ListStream<Status> toots){
+    public void requestShowStreamToots(ListStream<Status> toots) {
         logger.debug("Switch to scrollable toots screen");
 
         TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(toots, 0);
@@ -229,14 +239,34 @@ public class MainApplication extends Application {
         mainController.setCenter(tootsScrollableContent);
     }
 
+    public void requestShowConversation() {
+        logger.debug("Switch to conversation screen");
+
+        ConversationScrollableContent conversationScrollableContent = new ConversationScrollableContent(api.getConversations(10), 10);
+
+        mainController.setCenter(conversationScrollableContent);
+    }
+
+    public void requestShowTootContext(Status status) {
+        logger.debug("Switch to toot context screen");
+
+        ContextScrollableContent tootContextContent = new ContextScrollableContent(status, api.getStatusContext(status.getId()));
+
+        mainController.setCenter(tootContextContent);
+    }
+
     public API getAPI() {
         return api;
+    }
+
+    public ResourceBundle getTranslation() {
+        return translation;
     }
 
     private <E extends AbstractController> Window<E> load(String url) throws IOException {
         Window<E> ref = new Window<>();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(url));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(url), translation);
         ref.ui = fxmlLoader.load();
         ref.controller = fxmlLoader.getController();
         ref.controller.setApplication(this);

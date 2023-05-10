@@ -76,12 +76,15 @@ public class TootItem extends AbstractItem<Status> {
     @FXML
     private MenuItem deleteMenuItem;
 
+    private boolean context;
+
     public TootItem() {
         super(null);
     }
 
-    public void init(Status status) {
+    public void init(Status status, boolean context) {
         elem = status;
+        this.context = context;
 
         updateItem(elem, false);
     }
@@ -128,6 +131,11 @@ public class TootItem extends AbstractItem<Status> {
         MainApplication.getInstance().requestShowSendToot("@" + elem.getAccount().getAcct() + " ", Visibility.DIRECT, null);
     }
 
+    @FXML
+    void onContextClick() {
+        MainApplication.getInstance().requestShowTootContext(elem);
+    }
+
     protected void updateItem(Status status, boolean onlyInteractionPanel) {
 
         if (onlyInteractionPanel) {
@@ -160,7 +168,7 @@ public class TootItem extends AbstractItem<Status> {
         userLabel.setText(finalStatus.getAccount().getDisplayName());
         webfingerLabel.setText(finalStatus.getAccount().getAcct());
 
-        HTMLView htmlView = new HTMLView(finalStatus, finalStatus.getContent());
+        HTMLView htmlView = new HTMLView(finalStatus, finalStatus.getContent(), context);
         htmlView.setPadding(new Insets(10));
 
         if (finalStatus.isSensitive()) {

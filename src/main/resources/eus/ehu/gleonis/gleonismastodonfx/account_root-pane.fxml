@@ -31,7 +31,7 @@
                      <Font name="System Bold" size="14.0" />
                   </font>
                </Label>
-               <Label alignment="CENTER" text="Status" textFill="#999999">
+               <Label alignment="CENTER" text="%status" textFill="#999999">
                   <font>
                      <Font size="14.0" />
                   </font>
@@ -44,7 +44,7 @@
                      <Insets left="10.0" />
                   </padding>
                </Label>
-               <Label text="Followers" textFill="#999999">
+               <Label text="%followers" textFill="#999999">
                   <font>
                      <Font size="14.0" />
                   </font>
@@ -57,7 +57,7 @@
                      <Insets left="10.0" />
                   </padding>
                </Label>
-               <Label text="Followings" textFill="#999999">
+               <Label text="%followings" textFill="#999999">
                   <font>
                      <Font size="14.0" />
                   </font>
@@ -86,12 +86,12 @@
                   <ToggleGroup fx:id="accountDataSelection" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" onAction="#onFollowersClick" styleClass="account-selection-radio-button" text="Followers" textFill="WHITE" toggleGroup="$accountDataSelection" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <RadioButton mnemonicParsing="false" onAction="#onFollowersClick" styleClass="account-selection-radio-button" text="%followers" textFill="WHITE" toggleGroup="$accountDataSelection" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" onAction="#onFollowingsClick" styleClass="account-selection-radio-button" text="Followings" textFill="WHITE" toggleGroup="$accountDataSelection" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <RadioButton mnemonicParsing="false" onAction="#onFollowingsClick" styleClass="account-selection-radio-button" text="%followings" textFill="WHITE" toggleGroup="$accountDataSelection" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

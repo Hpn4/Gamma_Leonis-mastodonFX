@@ -240,7 +240,7 @@ public class MainWindowController extends AbstractController {
     // *******************************************************************
     @FXML
     void onDirectMsgClick() {
-
+        getApplication().requestShowConversation();
     }
 
     @FXML

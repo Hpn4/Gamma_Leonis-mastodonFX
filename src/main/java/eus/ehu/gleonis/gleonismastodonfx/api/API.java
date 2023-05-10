@@ -115,8 +115,8 @@ public class API {
         return propertiesManager.empty();
     }
 
-    public boolean isUserConnected() {
-        return !propertiesManager.getDbUser().isEmpty() && verifyCredentials() != null;
+    public boolean isUserConnected(IDBManager db) {
+        return !propertiesManager.getDbUser().isEmpty() && db.getLoggedAccount() != null;
     }
 
     public void setupUser(IDBManager db) {
@@ -133,7 +133,7 @@ public class API {
         this.token = token.getAccessToken();
         Account account = getSingle("api/v1/accounts/verify_credentials", Account.class);
         if (account == null)
-            throw new RuntimeException("Error while getting account information.");
+            return false;
 
         propertiesManager.setDbUser(account.getId());
         return db.insertAccount(account, token.getAccessToken()) != null;

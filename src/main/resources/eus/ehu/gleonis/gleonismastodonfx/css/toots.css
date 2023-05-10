@@ -10,27 +10,43 @@
     -fx-background-color: #383838;
 }
 
+.context {
+    -fx-padding: 0 0 0 50px;
+}
+
+.context-selected {
+    -fx-background-color: #343434;
+}
+
+.context-selected:hover {
+    -fx-background-color: #323232;
+}
+
 /*
 * Style for toot's content
  */
-.html-text {
+.html-text-master {
     -fx-font-size: 14px;
+}
+
+.html-text-master-context {
+    -fx-font-size: 20px;
+}
+
+.html-text {
     -fx-text-fill: #FFFFFF;
     -fx-fill: #FFFFFF;
 }
 
 .html-tag {
-    -fx-font-size: 14px;
     -fx-fill: #afc2d9;
 }
 
 .html-mention {
-    -fx-font-size: 14px;
     -fx-fill: #638bcb;
 }
 
 .html-link {
-    -fx-font-size: 14px;
     -fx-fill: #3e92ff;
 }
 

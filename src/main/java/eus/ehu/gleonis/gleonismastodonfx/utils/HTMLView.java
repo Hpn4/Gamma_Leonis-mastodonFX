@@ -18,9 +18,12 @@ public class HTMLView extends TextFlow {
 
     private final Status status;
 
-    public HTMLView(Status status, String html) {
+    private final boolean context;
+
+    public HTMLView(Status status, String html, boolean context) {
         super();
         this.status = status;
+        this.context = context;
 
         setHtml(html);
     }
@@ -62,7 +65,7 @@ public class HTMLView extends TextFlow {
                 }
 
                 // Account mention
-                else if (t.startsWith("@")) {
+                else if (t.startsWith("@") && node.childNodeSize() > 1) {
                     String user = node.childNode(1).firstChild().toString();
                     String accId = getIDOfUser(user);
 
@@ -98,6 +101,11 @@ public class HTMLView extends TextFlow {
     private Text addChildren(String text, String cssClass) {
         Text t = new Text(text);
         t.getStyleClass().add(cssClass);
+        if(context)
+            t.getStyleClass().add("html-text-master-context");
+        else
+            t.getStyleClass().add("html-text-master");
+
         getChildren().add(t);
 
         return t;

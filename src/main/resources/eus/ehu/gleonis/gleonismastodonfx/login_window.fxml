@@ -27,19 +27,19 @@
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
-   <Label alignment="CENTER" text="You need to login" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+   <Label alignment="CENTER" text="%you_need_to_login" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="2">
       <font>
          <Font size="14.0" />
       </font>
    </Label>
-   <TextField fx:id="codeTextField" prefHeight="31.0" prefWidth="362.0" promptText="Enter code here" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+   <TextField fx:id="codeTextField" prefHeight="31.0" prefWidth="362.0" promptText="%enter_code_here" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
       <opaqueInsets>
          <Insets />
       </opaqueInsets>
    </TextField>
    <Label fx:id="errorLabel" text="Error" textFill="#ff5555" visible="false" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-   <Button fx:id="authorizeButton" mnemonicParsing="false" onAction="#onAuthorizeClick" text="Authorize in browser" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-   <Button fx:id="loginButton" alignment="CENTER_RIGHT" disable="true" mnemonicParsing="false" onAction="#onLoginClick" text="Login" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+   <Button fx:id="authorizeButton" mnemonicParsing="false" onAction="#onAuthorizeClick" text="%authorize_in_browser" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+   <Button fx:id="loginButton" alignment="CENTER_RIGHT" disable="true" mnemonicParsing="false" onAction="#onLoginClick" text="%login" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="4" GridPane.valignment="CENTER">
       <GridPane.margin>
          <Insets right="10.0" />
@@ -52,7 +52,7 @@
             <padding>
                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
-            <Label alignment="CENTER" text="New account" textFill="#999999" />
+            <Label alignment="CENTER" text="%new_account" textFill="#999999" />
          </VBox>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

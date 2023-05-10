@@ -2,27 +2,25 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
-import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Conversation;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
-public class TootsScrollableContent extends AbstractScrollableContent<Status> {
+public class ConversationScrollableContent extends AbstractScrollableContent<Conversation> {
 
-    private static final FXMLLoader fxml = new FXMLLoader(MainApplication.class.getResource("toot_item.fxml"), MainApplication.getInstance().getTranslation());
+    private static final FXMLLoader fxml = new FXMLLoader(MainApplication.class.getResource("conversation_item.fxml"));
 
-    public TootsScrollableContent(ListStream<Status> itemsStream, int itemsPerPage) {
+    public ConversationScrollableContent(ListStream<Conversation> itemsStream, int itemsPerPage) {
         super(itemsStream, itemsPerPage);
 
         setupListPropertyListener();
     }
 
     private void setupListPropertyListener() {
-        Utils.mapByValue(itemsList, contentBox.getChildren(), status -> {
+        Utils.mapByValue(itemsList, contentBox.getChildren(), conv -> {
             fxml.setRoot(null);
             fxml.setController(null);
             try {
@@ -32,12 +30,12 @@ public class TootsScrollableContent extends AbstractScrollableContent<Status> {
             }
 
             // Setup controller
-            TootItem toot = fxml.getController();
-            toot.init(status, false);
-            toot.setScrollableContent(this);
+            ConversationItem convItem = fxml.getController();
+            convItem.init(conv);
+            convItem.setScrollableContent(this);
 
             // Small adjustment for the width
-            Pane pane = toot.getParent();
+            Pane pane = convItem.getParent();
             pane.prefWidthProperty().bind(widthProperty().subtract(20));
 
             // Reset the loader (i need to do it twice, i don't know why but sometimes stat are not cleared)
