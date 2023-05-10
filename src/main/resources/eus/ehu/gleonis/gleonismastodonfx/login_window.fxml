@@ -27,7 +27,7 @@
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
-   <Label alignment="CENTER" text="%you_need_to_login" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2">
+   <Label alignment="CENTER" text="%you_need_to_login" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="2">
       <font>
          <Font size="14.0" />
       </font>

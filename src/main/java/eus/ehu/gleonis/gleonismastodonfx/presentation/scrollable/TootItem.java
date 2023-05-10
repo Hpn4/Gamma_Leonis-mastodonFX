@@ -131,6 +131,11 @@ public class TootItem extends AbstractItem<Status> {
         MainApplication.getInstance().requestShowSendToot("@" + elem.getAccount().getAcct() + " ", Visibility.DIRECT, null);
     }
 
+    @FXML
+    void onContextClick() {
+        MainApplication.getInstance().requestShowTootContext(elem);
+    }
+
     protected void updateItem(Status status, boolean onlyInteractionPanel) {
 
         if (onlyInteractionPanel) {
@@ -207,8 +212,6 @@ public class TootItem extends AbstractItem<Status> {
                 messageBorder.setOnMouseExited(e -> interactionPanel.setVisible(false));
             }
         });
-
-        messageBorder.setOnMouseClicked(e -> MainApplication.getInstance().requestShowTootContext(finalStatus));
     }
 
     private void setupMediaAttachments(Status status, boolean sensitive) {

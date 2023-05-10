@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class ContextScrollableContent extends ScrollPane {
 
-    private static final FXMLLoader fxml = new FXMLLoader(MainApplication.class.getResource("toot_item.fxml"));
+    private static final FXMLLoader fxml = new FXMLLoader(MainApplication.class.getResource("toot_item.fxml"), MainApplication.getInstance().getTranslation());
 
     protected final VBox contentBox;
 
