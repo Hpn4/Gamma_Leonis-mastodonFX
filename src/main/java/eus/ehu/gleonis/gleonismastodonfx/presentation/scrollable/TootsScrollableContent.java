@@ -8,10 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class TootsScrollableContent extends AbstractScrollableContent<Status> {
 
-    private static final FXMLLoader fxml = new FXMLLoader(MainApplication.class.getResource("toot_item.fxml"));
+    private static final FXMLLoader fxml = new FXMLLoader(MainApplication.class.getResource("toot_item.fxml"), ResourceBundle.getBundle("translation", Locale.getDefault()));
 
     public TootsScrollableContent(ListStream<Status> itemsStream, int itemsPerPage) {
         super(itemsStream, itemsPerPage);

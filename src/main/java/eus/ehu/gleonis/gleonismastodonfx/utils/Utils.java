@@ -15,9 +15,7 @@ import java.io.DataInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.time.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -162,5 +160,9 @@ public class Utils {
     @FunctionalInterface
     public interface ProducerWithThrow<R> {
         R apply() throws Throwable;
+    }
+
+    public static String translate(String key) {
+        return ResourceBundle.getBundle("translation", Locale.getDefault()).getString(key);
     }
 }
