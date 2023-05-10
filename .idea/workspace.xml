@@ -8,23 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Added internationalization">
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ConversationItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ConversationScrollableContent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/conversation_item.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b7e21429-23da-443d-aac1-751da203128d/storage_v2/_src_/database/GLMC.O20hAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b7e21429-23da-443d-aac1-751da203128d/storage_v2/_src_/database/GLMC.O20hAA/schema/INFORMATION_SCHEMA.NBgcMw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b7e21429-23da-443d-aac1-751da203128d/storage_v2/_src_/database/GLMC.O20hAA/schema/PUBLIC.aaZQjQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_25_04_2023_15_52_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ContextScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ContextScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/login_window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/login_window.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/toot_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/toot_item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,6 +227,7 @@
       <workItem from="1683465744463" duration="9248000" />
       <workItem from="1683616346745" duration="17340000" />
       <workItem from="1683730201878" duration="335000" />
+      <workItem from="1683731469555" duration="363000" />
     </task>
     <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
       <created>1679044335470</created>
