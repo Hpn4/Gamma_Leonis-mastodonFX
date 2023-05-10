@@ -8,6 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Setup Toot Context UI">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/build_windows_client.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
