@@ -7,20 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Update domain model, IT'S NOT A CLASS MODEL !!!">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/ci-build.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build_app_linux.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build_app_mac.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build_app_windows.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/build_mac_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_mac_client.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/build_windows_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_windows_client.yml" afterDir="false" />
+    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Installers big changes. Update use case+domain model in copy.">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci-build.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/MastoFx_Gamma.mdj" beforeDir="false" afterPath="$PROJECT_DIR$/docs/MastoFx_Gamma.mdj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/DBManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/PropertiesManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/PropertiesManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_app_linux.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build_app_linux.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_app_mac.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build_app_mac.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_app_windows.bat" beforeDir="false" afterPath="$PROJECT_DIR$/build_app_windows.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,7 +234,7 @@
       <workItem from="1683616346745" duration="17340000" />
       <workItem from="1683730201878" duration="335000" />
       <workItem from="1683741897404" duration="8560000" />
-      <workItem from="1683790995349" duration="6001000" />
+      <workItem from="1683790995349" duration="6817000" />
     </task>
     <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
       <created>1679044335470</created>
@@ -489,7 +481,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683755987310</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Installers big changes. Update use case+domain model in copy.">
+      <created>1683798658393</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1683798658393</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -510,7 +509,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update toots" />
     <MESSAGE value="Update toots html view" />
     <MESSAGE value="Update toots and account" />
     <MESSAGE value="Update toots UI, modify style, add style, refactoring, API change and Image cache system" />
@@ -535,6 +533,7 @@
     <MESSAGE value="Added conversation" />
     <MESSAGE value="Finish internalization and fix bug in translation" />
     <MESSAGE value="Update domain model, IT'S NOT A CLASS MODEL !!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update domain model, IT'S NOT A CLASS MODEL !!!" />
+    <MESSAGE value="Installers big changes. Update use case+domain model in copy." />
+    <option name="LAST_COMMIT_MESSAGE" value="Installers big changes. Update use case+domain model in copy." />
   </component>
 </project>
