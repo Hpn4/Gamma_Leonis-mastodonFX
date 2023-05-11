@@ -3,6 +3,7 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Conversation;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.comp.ConversationItem;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;

@@ -1,7 +1,8 @@
-package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
+package eus.ehu.gleonis.gleonismastodonfx.presentation.comp;
 
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.AbstractScrollableContent;
 import javafx.scene.Node;
 
 public abstract class AbstractItem<E> {

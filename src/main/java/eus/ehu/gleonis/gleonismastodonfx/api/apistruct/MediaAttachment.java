@@ -16,6 +16,8 @@ public class MediaAttachment {
 
     String blurhash;
 
+    Map<?, ?> meta;
+
     public String getId() {
         return id;
     }
@@ -40,8 +42,6 @@ public class MediaAttachment {
         return blurhash;
     }
 
-    Map<?, ?> meta;
-
     private double getMetaDouble(String key) {
         if (meta.containsKey(key))
             return (double) meta.get(key);
@@ -62,5 +62,9 @@ public class MediaAttachment {
 
     public int getHeight() {
         return (int) getMetaDouble("height");
+    }
+
+    public double getDuration() {
+        return getMetaDouble("duration");
     }
 }

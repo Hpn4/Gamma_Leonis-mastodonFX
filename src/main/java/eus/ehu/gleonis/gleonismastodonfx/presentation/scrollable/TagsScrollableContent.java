@@ -2,6 +2,7 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Tag;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.comp.HashTagItem;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.scene.layout.Pane;
 

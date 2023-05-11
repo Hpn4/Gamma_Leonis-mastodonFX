@@ -7,11 +7,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Compiling only windows">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/build_mac_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_mac_client.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/build_windows_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_windows_client.yml" afterDir="false" />
+    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Refactoring + audio and sound playing in toots">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/AudioPlayerNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/audio_player.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_app_linux.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build_app_linux.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_app_mac.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build_app_mac.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_app_windows.bat" beforeDir="false" afterPath="$PROJECT_DIR$/build_app_windows.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/apistruct/MediaAttachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/apistruct/MediaAttachment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AbstractItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/AbstractItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/AccountItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountScrollableContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ContextScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ContextScrollableContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ConversationItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/ConversationItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ConversationScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ConversationScrollableContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/HashTagItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/HashTagItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TagsScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TagsScrollableContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/TootItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsScrollableContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/conversation_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/conversation_item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/toot_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/toot_item.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,9 +42,9 @@
         <option value="Kotlin Class" />
         <option value="FxmlFile" />
         <option value="Interface" />
-        <option value="CSS File" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -233,7 +251,7 @@
       <workItem from="1683616346745" duration="17340000" />
       <workItem from="1683730201878" duration="335000" />
       <workItem from="1683741897404" duration="8560000" />
-      <workItem from="1683790995349" duration="11598000" />
+      <workItem from="1683790995349" duration="21038000" />
     </task>
     <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
       <created>1679044335470</created>
@@ -515,7 +533,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683816016065</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Use case + domain + sequence merged, all installers fixed">
+      <created>1683817291536</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1683817291536</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,8 +561,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Change style + ListView to VBox + refactoring + performance + rename" />
-    <MESSAGE value="ScrollableContent" />
     <MESSAGE value="MainWindow start implementation" />
     <MESSAGE value="Switch account" />
     <MESSAGE value="Account + tag navigation, home timeline, favourites, bookmarked. Performance + image in toots + senstivie content" />
@@ -561,6 +584,8 @@
     <MESSAGE value="Try fix bugs in installer" />
     <MESSAGE value="Installer only windows" />
     <MESSAGE value="Compiling only windows" />
-    <option name="LAST_COMMIT_MESSAGE" value="Compiling only windows" />
+    <MESSAGE value="Use case + domain + sequence merged, all installers fixed" />
+    <MESSAGE value="Refactoring + audio and sound playing in toots" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring + audio and sound playing in toots" />
   </component>
 </project>

@@ -55,7 +55,7 @@ rem e.g., --include-locales=en,de.
 rem
 rem Don't forget the leading ','!
 
-set manual_modules=,jdk.crypto.ec,jdk.localedata,java.xml,java.scripting,jdk.unsupported,javafx.controls,javafx.fxml,javafx.graphics,javafx.web
+set manual_modules=,jdk.crypto.ec,jdk.localedata,java.xml,java.scripting,jdk.unsupported,javafx.controls,javafx.fxml,javafx.graphics,javafx.web,javafx.media
 echo manual modules: %manual_modules%
 
 rem ------ RUNTIME IMAGE ------------------------------------------------------

@@ -2,6 +2,7 @@ module eus.ehu.gleonis.gleonismastodonfx {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires javafx.media;
 
     requires okhttp3;
     requires com.google.gson;
@@ -38,5 +39,7 @@ module eus.ehu.gleonis.gleonismastodonfx {
     exports eus.ehu.gleonis.gleonismastodonfx.utils;
     exports eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane;
     opens eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane to javafx.fxml;
+    exports eus.ehu.gleonis.gleonismastodonfx.presentation.comp;
+    opens eus.ehu.gleonis.gleonismastodonfx.presentation.comp to javafx.fxml, javafx.media;
 
 }

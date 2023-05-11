@@ -1,4 +1,4 @@
-package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
+package eus.ehu.gleonis.gleonismastodonfx.presentation.comp;
 
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.MediaAttachment;
@@ -10,6 +10,7 @@ import eus.ehu.gleonis.gleonismastodonfx.utils.HTMLView;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -215,7 +216,7 @@ public class TootItem extends AbstractItem<Status> {
     }
 
     private void setupMediaAttachments(Status status, boolean sensitive) {
-        for (MediaAttachment media : status.getMedia_attachments())
+        for (MediaAttachment media : status.getMedia_attachments()) {
             if (media.getType() == MediaAttachmentType.IMAGE) {
                 CachedImage cachedImage = new CachedImage(media);
                 ImageView imageView = new ImageView();
@@ -232,9 +233,19 @@ public class TootItem extends AbstractItem<Status> {
 
                 mediasPane.getChildren().add(imageView);
                 VBox.setMargin(imageView, new Insets(5));
-            }
+            } else if(media.getType() == MediaAttachmentType.AUDIO){
+                AudioPlayerNode audioPlayerNode = new AudioPlayerNode(media);
 
-        mediasPane.setAlignment(javafx.geometry.Pos.CENTER);
+                mediasPane.getChildren().add(audioPlayerNode);
+                audioPlayerNode.setAlignment(Pos.CENTER);
+                audioPlayerNode.maxWidthProperty().bind(messageBorder.widthProperty().divide(2));
+                VBox.setMargin(audioPlayerNode, new Insets(10));
+            } else {
+                System.out.println("Unsupported media type: " + media.getType());
+            }
+        }
+
+        mediasPane.setAlignment(Pos.CENTER);
     }
 
     private void setupInteractionPanel(Status status) {

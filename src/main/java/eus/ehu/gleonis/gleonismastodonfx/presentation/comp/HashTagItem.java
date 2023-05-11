@@ -1,8 +1,9 @@
-package eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable;
+package eus.ehu.gleonis.gleonismastodonfx.presentation.comp;
 
 import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Tag;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.TagHistory;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TagsScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
