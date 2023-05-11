@@ -72,7 +72,7 @@ call "%JAVA_HOME%\bin\jlink" ^
   --no-man-pages ^
   --compress=2 ^
   --strip-debug ^
-  --module-path target/installer/input/libs/
+  --module-path target/installer/input/libs/ ^
   --add-modules %detected_modules%%manual_modules% ^
   --include-locales=en,de ^
   --output target/java-runtime
