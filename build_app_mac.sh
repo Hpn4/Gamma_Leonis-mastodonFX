@@ -88,7 +88,7 @@ echo "Creating installer of type $INSTALLER_TYPE"
 $JAVA_HOME/bin/jpackage \
 --type $INSTALLER_TYPE \
 --dest target/installer \
---input target/installer/input/libs \
+--input target/installer/input/libs/ \
 --name GammaLeonisMastodonFX \
 --main-class eus.ehu.gleonis.gleonismastodonfx.MainApplication \
 --main-jar ${MAIN_JAR} \

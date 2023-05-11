@@ -55,7 +55,7 @@ rem e.g., --include-locales=en,de.
 rem
 rem Don't forget the leading ','!
 
-set manual_modules=,jdk.crypto.ec,jdk.localedata,java.xml,java.scripting,jdk.unsupported
+set manual_modules=,jdk.crypto.ec,jdk.localedata,java.xml,java.scripting,jdk.unsupported,javafx.controls,javafx.fxml,javafx.graphics,javafx.web,java.sql
 echo manual modules: %manual_modules%
 
 rem ------ RUNTIME IMAGE ------------------------------------------------------
@@ -72,6 +72,7 @@ call "%JAVA_HOME%\bin\jlink" ^
   --no-man-pages ^
   --compress=2 ^
   --strip-debug ^
+  --module-path "target/installer/input/libs/"
   --add-modules %detected_modules%%manual_modules% ^
   --include-locales=en,de ^
   --output target/java-runtime
@@ -83,7 +84,7 @@ rem In the end we will find the package inside the target/installer directory.
 call "%JAVA_HOME%\bin\jpackage" ^
   --type %INSTALLER_TYPE% ^
   --dest target/installer ^
-  --input target/installer/input/libs ^
+  --input target/installer/input/libs/ ^
   --name GammaLeonisMastodonFX ^
   --main-class eus.ehu.gleonis.gleonismastodonfx.MainApplication ^
   --main-jar %MAIN_JAR% ^
