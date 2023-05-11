@@ -7,9 +7,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Finish internalization and fix bug in translation">
+    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Update domain model, IT'S NOT A CLASS MODEL !!!">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/ci-build.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build_app_linux.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build_app_mac.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build_app_windows.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build_mac_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_mac_client.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build_windows_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_windows_client.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/MastoFx_Gamma .mdj" beforeDir="false" afterPath="$PROJECT_DIR$/docs/MastoFx_Gamma .mdj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/MastoFx_Gamma.mdj" beforeDir="false" afterPath="$PROJECT_DIR$/docs/MastoFx_Gamma.mdj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/db/DBManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/PropertiesManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/PropertiesManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,8 +116,10 @@
   </component>
   <component name="RunManager" selected="Application.MainApplication">
     <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="19" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="eus.ehu.gleonis.gleonismastodonfx.MainApplication" />
-      <module name="GLeonisMastodonFX" />
+      <module name="gleonismastodonfx" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="eus.ehu.gleonis.gleonismastodonfx.*" />
@@ -228,7 +241,8 @@
       <workItem from="1683465744463" duration="9248000" />
       <workItem from="1683616346745" duration="17340000" />
       <workItem from="1683730201878" duration="335000" />
-      <workItem from="1683741897404" duration="8253000" />
+      <workItem from="1683741897404" duration="8560000" />
+      <workItem from="1683790995349" duration="6001000" />
     </task>
     <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
       <created>1679044335470</created>
@@ -468,11 +482,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683755552277</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Update domain model, IT'S NOT A CLASS MODEL !!!">
+      <created>1683755987310</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1683755987310</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.bat" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -486,7 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Remove config.properties" />
     <MESSAGE value="update toots" />
     <MESSAGE value="Update toots html view" />
     <MESSAGE value="Update toots and account" />
@@ -511,6 +534,7 @@
     <MESSAGE value="Add basic supports for the streaming API (global + local Timeline)" />
     <MESSAGE value="Added conversation" />
     <MESSAGE value="Finish internalization and fix bug in translation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finish internalization and fix bug in translation" />
+    <MESSAGE value="Update domain model, IT'S NOT A CLASS MODEL !!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update domain model, IT'S NOT A CLASS MODEL !!!" />
   </component>
 </project>

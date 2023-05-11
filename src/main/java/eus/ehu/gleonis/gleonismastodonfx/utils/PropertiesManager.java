@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class PropertiesManager {
 
-    private static final String path = "config.properties";
+    private static String path = "config.properties";
 
     private static PropertiesManager instance;
 
@@ -33,6 +33,22 @@ public class PropertiesManager {
 
     private void loadProperties() {
         prop = new Properties();
+
+        // Get some system specific paths
+        String fileSep = System.getProperty("file.separator");
+        String home = System.getProperty("user.home") + fileSep + ".glmastodonfx";
+
+        // Create the empty directory for config if it does not exist
+        Path prentDir = Paths.get(home);
+        if (!Files.exists(prentDir)) {
+            try {
+                Files.createDirectory(prentDir);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        path = home + fileSep + path;
 
         // If the file does not exist, we create it
         Path path1 = Paths.get(path);

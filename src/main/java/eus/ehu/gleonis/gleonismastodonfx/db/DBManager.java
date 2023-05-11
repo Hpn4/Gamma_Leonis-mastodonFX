@@ -135,8 +135,10 @@ public class DBManager implements IDBManager {
 
     // later we will add further operations here
     public void closeDb() {
-        dbConnector.close();
-        logger.info("DataBase closed");
+        if(dbConnector != null) {
+            dbConnector.close();
+            logger.info("DataBase closed");
+        }
     }
 
 }
