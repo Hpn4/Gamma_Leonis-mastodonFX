@@ -2,8 +2,6 @@ name: Mac Client
 
 on:
   push:
-    branches:
-      - maina
     tags:
       - sprint*
 

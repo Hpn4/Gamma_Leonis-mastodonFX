@@ -7,8 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Installer only windows">
-      <change beforePath="$PROJECT_DIR$/build_app_windows.bat" beforeDir="false" afterPath="$PROJECT_DIR$/build_app_windows.bat" afterDir="false" />
+    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Compiling only windows">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_linux_client.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build_mac_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_mac_client.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build_windows_client.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build_windows_client.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +233,7 @@
       <workItem from="1683616346745" duration="17340000" />
       <workItem from="1683730201878" duration="335000" />
       <workItem from="1683741897404" duration="8560000" />
-      <workItem from="1683790995349" duration="10778000" />
+      <workItem from="1683790995349" duration="11598000" />
     </task>
     <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
       <created>1679044335470</created>
@@ -505,7 +508,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683815779056</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Compiling only windows">
+      <created>1683816016065</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1683816016065</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -526,7 +536,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Toots interraction" />
     <MESSAGE value="Change style + ListView to VBox + refactoring + performance + rename" />
     <MESSAGE value="ScrollableContent" />
     <MESSAGE value="MainWindow start implementation" />
@@ -551,6 +560,7 @@
     <MESSAGE value="Installers wrong path and permission fixed." />
     <MESSAGE value="Try fix bugs in installer" />
     <MESSAGE value="Installer only windows" />
-    <option name="LAST_COMMIT_MESSAGE" value="Installer only windows" />
+    <MESSAGE value="Compiling only windows" />
+    <option name="LAST_COMMIT_MESSAGE" value="Compiling only windows" />
   </component>
 </project>
