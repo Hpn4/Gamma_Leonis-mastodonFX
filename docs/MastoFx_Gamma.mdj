@@ -17964,7 +17964,7 @@
 													"top": 87,
 													"width": 165.42626953125,
 													"height": 13,
-													"text": "Lifeline1: First launch user"
+													"text": "Lifeline1"
 												},
 												{
 													"_type": "LabelView",
@@ -20494,9 +20494,6 @@
 								"$ref": "AAAAAAGICfMJtZizv7I="
 							},
 							"name": "Lifeline1",
-							"represent": {
-								"$ref": "AAAAAAGICfOY15k7bYI="
-							},
 							"isMultiInstance": false
 						},
 						{
@@ -20506,9 +20503,6 @@
 								"$ref": "AAAAAAGICfMJtZizv7I="
 							},
 							"name": "MainApplication",
-							"represent": {
-								"$ref": "AAAAAAGICfQjbZlmxX8="
-							},
 							"isMultiInstance": false
 						},
 						{
@@ -20518,9 +20512,6 @@
 								"$ref": "AAAAAAGICfMJtZizv7I="
 							},
 							"name": "PropertiesManager",
-							"represent": {
-								"$ref": "AAAAAAGICfxZLZotIHY="
-							},
 							"isMultiInstance": false
 						},
 						{
@@ -20530,9 +20521,6 @@
 								"$ref": "AAAAAAGICfMJtZizv7I="
 							},
 							"name": "ConfigWindowUI",
-							"represent": {
-								"$ref": "AAAAAAGICggtRstzxqM="
-							},
 							"isMultiInstance": false
 						},
 						{
@@ -20542,9 +20530,6 @@
 								"$ref": "AAAAAAGICfMJtZizv7I="
 							},
 							"name": "API",
-							"represent": {
-								"$ref": "AAAAAAGICgy+PMwpCx4="
-							},
 							"isMultiInstance": false
 						},
 						{
@@ -20554,9 +20539,6 @@
 								"$ref": "AAAAAAGICfMJtZizv7I="
 							},
 							"name": "DB",
-							"represent": {
-								"$ref": "AAAAAAGICgzPDMxJbCc="
-							},
 							"isMultiInstance": false
 						},
 						{
@@ -20566,73 +20548,9 @@
 								"$ref": "AAAAAAGICfMJtZizv7I="
 							},
 							"name": "LoginScreenUI",
-							"represent": {
-								"$ref": "AAAAAAGICg9LJszSE1A="
-							},
 							"isMultiInstance": false
 						}
 					]
-				}
-			],
-			"attributes": [
-				{
-					"_type": "UMLAttribute",
-					"_id": "AAAAAAGICfOY15k7bYI=",
-					"_parent": {
-						"$ref": "AAAAAAGICfMJtZiyN/Q="
-					},
-					"name": "Role1",
-					"type": {
-						"$ref": "AAAAAAGH9whjMDYoA58="
-					}
-				},
-				{
-					"_type": "UMLAttribute",
-					"_id": "AAAAAAGICfQjbZlmxX8=",
-					"_parent": {
-						"$ref": "AAAAAAGICfMJtZiyN/Q="
-					},
-					"name": "Role2"
-				},
-				{
-					"_type": "UMLAttribute",
-					"_id": "AAAAAAGICfxZLZotIHY=",
-					"_parent": {
-						"$ref": "AAAAAAGICfMJtZiyN/Q="
-					},
-					"name": "Role3"
-				},
-				{
-					"_type": "UMLAttribute",
-					"_id": "AAAAAAGICggtRstzxqM=",
-					"_parent": {
-						"$ref": "AAAAAAGICfMJtZiyN/Q="
-					},
-					"name": "Role4"
-				},
-				{
-					"_type": "UMLAttribute",
-					"_id": "AAAAAAGICgy+PMwpCx4=",
-					"_parent": {
-						"$ref": "AAAAAAGICfMJtZiyN/Q="
-					},
-					"name": "Role5"
-				},
-				{
-					"_type": "UMLAttribute",
-					"_id": "AAAAAAGICgzPDMxJbCc=",
-					"_parent": {
-						"$ref": "AAAAAAGICfMJtZiyN/Q="
-					},
-					"name": "Role6"
-				},
-				{
-					"_type": "UMLAttribute",
-					"_id": "AAAAAAGICg9LJszSE1A=",
-					"_parent": {
-						"$ref": "AAAAAAGICfMJtZiyN/Q="
-					},
-					"name": "Role7"
 				}
 			]
 		}

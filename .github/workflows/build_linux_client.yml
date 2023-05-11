@@ -6,7 +6,7 @@ name: Linux Client
 on:
   push:
     branches:
-      - main
+      - maina
     tags:
       - sprint*
 
