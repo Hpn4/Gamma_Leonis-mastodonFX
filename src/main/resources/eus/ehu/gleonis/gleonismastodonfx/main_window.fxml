@@ -6,6 +6,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -14,6 +15,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -186,9 +189,9 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
                </rowConstraints>
-               <TextArea fx:id="tootContentTextArea" wrapText="true" GridPane.halignment="CENTER" GridPane.rowSpan="5" GridPane.valignment="CENTER">
+               <TextArea fx:id="tootContentTextArea" wrapText="true" GridPane.halignment="CENTER" GridPane.rowSpan="4" GridPane.valignment="CENTER">
                   <opaqueInsets>
                      <Insets />
                   </opaqueInsets>
@@ -212,6 +215,28 @@
                      <String fx:value="send-toot-checkbox" />
                      <String fx:value="toot-visibility-public" />
                   </styleClass></CheckBox>
+               <Region styleClass="fake-media-region" GridPane.rowIndex="4">
+                  <GridPane.margin>
+                     <Insets left="10.0" />
+                  </GridPane.margin>
+               </Region>
+               <HBox alignment="BOTTOM_RIGHT" minHeight="0.0" minWidth="0.0" spacing="10.0" GridPane.rowIndex="4"
+                     GridPane.valignment="BOTTOM">
+                  <padding>
+                     <Insets bottom="2.0" left="5.0" right="8.0" top="5.0"/>
+                  </padding>
+                  <GridPane.margin>
+                     <Insets/>
+                  </GridPane.margin>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onMediAttachmentClick"
+                          styleClass="send-toot-attachment"/>
+                  <Text fx:id="charCountText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+               </HBox>
+               <ScrollPane fx:id="mediaAttachmentScroll" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" styleClass="media-attachment-pane" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP">
+                  <padding>
+                     <Insets bottom="2.0" left="20.0" />
+                  </padding>
+               </ScrollPane>
             </GridPane>
             <GridPane fx:id="fakeSendGridPane">
                <columnConstraints>

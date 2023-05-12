@@ -86,7 +86,6 @@ public class ConversationItem extends AbstractItem<Conversation> {
 
         messageBorder.setCenter(htmlView);
 
-        System.out.println(conv.isUnread());
         readConversationMenuItem.setVisible(!conv.isUnread());
 
         // Layout constraints

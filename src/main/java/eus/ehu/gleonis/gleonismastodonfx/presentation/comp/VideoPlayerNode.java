@@ -39,7 +39,8 @@ public class VideoPlayerNode extends BorderPane {
 
         MediaView video = new MediaView(mediaPlayer);
         video.setOnError(e -> player.reloadMediaPlayer());
-        video.fitHeightProperty().bind(widthProperty().map(w -> w.doubleValue() * 9 / 16)); // 16:9 aspect ratio
+        video.setPreserveRatio(true);
+        video.fitHeightProperty().bind(maxWidthProperty().map(w -> w.doubleValue() * 9 / 16)); // 16:9 aspect ratio
 
         setCenter(video);
         setupVideoPane();

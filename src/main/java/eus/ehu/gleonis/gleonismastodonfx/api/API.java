@@ -15,10 +15,12 @@ import javafx.collections.ObservableList;
 import okhttp3.*;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Objects;
 
 public class API {
@@ -305,7 +307,7 @@ public class API {
     // *******************************************************************
 
     /**
-     * Post a new status
+     * Post a new status. This function should be executed in another thread
      *
      * @param status      The content of the status
      * @param visibility  The visibility: public (visible by everyone),
@@ -329,10 +331,66 @@ public class API {
             form.add("sensitive", "true")
                     .add("spoiler_text", spoilerText);
 
-        for (int i = 0; i < medias.length; ++i)
-            form.add("media_ids[" + i + "]", medias[i].getId());
+        for (MediaAttachment media : medias) {
+            while(!isMediaFullyProcessed(media)) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            form.add("media_ids[]", media.getId());
+        }
 
         return postSingle("api/v1/statuses", Status.class, form.build());
+    }
+
+    private String constructMediaType(File file) {
+        try {
+            return Files.probeContentType(file.toPath());
+        } catch (IOException ignored) {
+        }
+
+        return null;
+    }
+
+    public boolean isMediaFullyProcessed(MediaAttachment media) {
+        return getRequest("api/v1/media/" + media.getId()).responseCode() == 200;
+    }
+
+    public MediaAttachment uploadFile(File file) {
+        String mimeType = constructMediaType(file);
+        if (mimeType == null)
+            return null;
+
+        MediaType mediaType = MediaType.parse(mimeType);
+        RequestBody requestBody = RequestBody.create(mediaType, file);
+
+        MultipartBody multipartBody = new MultipartBody.Builder()
+                .addFormDataPart("file", file.getName(), requestBody)
+                .build();
+
+        Request.Builder builder = new Request.Builder()
+                .url("https://mastodon.social/api/v2/media")
+                .addHeader("Authorization", "Bearer " + token)
+                .addHeader("content-type", "multipart/form-data;")
+                .post(multipartBody);
+
+        try {
+            Response response = client.newCall(builder.build()).execute();
+
+            if (response.code() == 200 || response.code() == 202) {
+                String json = response.body().string();
+                return gson.fromJson(json, MediaAttachment.class);
+            }
+
+            error = new APIError(response.code(), response.message());
+        } catch (IOException e) {
+            error = new APIError(-1, e.getMessage());
+        }
+
+        return null;
     }
 
     public Status getStatus(String id) {

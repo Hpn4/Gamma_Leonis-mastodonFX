@@ -67,4 +67,8 @@ public class MediaAttachment {
     public double getDuration() {
         return getMetaDouble("duration");
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

@@ -2,6 +2,7 @@ package eus.ehu.gleonis.gleonismastodonfx;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.ListStream;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Context;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBManager;
@@ -254,16 +255,26 @@ public class MainApplication extends Application {
     }
 
     public void requestShowTootContext(Status status) {
+        Context context = api.getStatusContext(status.getId());
+        if (context == null) {
+            logger.error("Unable to get toot context");
+            return;
+        }
+
         MediaPlayerNode.freeAndStopMedias();
         logger.debug("Switch to toot context screen");
 
-        ContextScrollableContent tootContextContent = new ContextScrollableContent(status, api.getStatusContext(status.getId()));
+        ContextScrollableContent tootContextContent = new ContextScrollableContent(status, context);
 
         mainController.setCenter(tootContextContent);
     }
 
     public API getAPI() {
         return api;
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 
     private <E extends AbstractController> Window<E> load(String url) throws IOException {

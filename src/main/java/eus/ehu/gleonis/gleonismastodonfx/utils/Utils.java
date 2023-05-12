@@ -45,8 +45,10 @@ public class Utils {
         if (d.getYears() >= 1)
             return realDate.getDayOfMonth() + " " + realDate.getMonth().toString() + " " + realDate.getYear();
 
-        if (d.getMonths() >= 1 || d.getDays() > 14)
-            return realDate.getDayOfMonth() + " " + realDate.getMonth().toString();
+        if (d.getMonths() >= 1 || d.getDays() > 14) {
+            String month = realDate.getMonth().toString();
+            return realDate.getDayOfMonth() + " " + month.charAt(0) + month.substring(1).toLowerCase();
+        }
 
         if (d.getDays() >= 7)
             return (d.getDays() / 7) + "w";

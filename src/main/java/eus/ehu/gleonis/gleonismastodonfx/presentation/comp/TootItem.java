@@ -200,6 +200,7 @@ public class TootItem extends AbstractItem<Status> {
         );
 
         deleteMenuItem.setVisible(api.isUser(status.getAccount()));
+        dateMessageLabel.setText(Utils.getDateString(status.getCreated_at()));
 
         setupInteractionPanel(finalStatus);
         interactionPanel.setVisible(false);
@@ -224,6 +225,7 @@ public class TootItem extends AbstractItem<Status> {
                 CachedImage cachedImage = new CachedImage(media);
                 ImageView imageView = new ImageView();
                 imageView.fitWidthProperty().bind(messageBorder.widthProperty().divide(2));
+               // imageView.fitHeightProperty().bind(messageBorder.widthProperty().divide(2).map(w -> w.doubleValue() * 9 / 16)); // 16:9 aspect ratio
                 imageView.setPreserveRatio(true);
 
                 // Enable ability to disable/activate image spoiler
@@ -259,8 +261,6 @@ public class TootItem extends AbstractItem<Status> {
         repliesCount.setText(String.valueOf(status.getReplies_count()));
         reblogsCount.setText(String.valueOf(status.getReblogs_count()));
         favouritesCount.setText(String.valueOf(status.getFavourites_count()));
-
-        dateMessageLabel.setText(Utils.getDateString(status.getCreated_at()));
 
         setupButtonColor(reblogButton, status.isReblogged(), "rebloged-toots-button");
         setupButtonColor(favouriteButton, status.isFavourited(), "favourited-toots-button");
