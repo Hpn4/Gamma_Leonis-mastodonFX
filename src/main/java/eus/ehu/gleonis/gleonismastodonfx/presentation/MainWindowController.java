@@ -7,15 +7,13 @@ import eus.ehu.gleonis.gleonismastodonfx.presentation.comp.MediaAttachmentViewer
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -136,15 +134,18 @@ public class MainWindowController extends AbstractController {
         sendTootVBox.getChildren().add(fakeSendGridPane);
     }
 
-    public void setCenter(Node pane) {
+    public void setCenter(Region pane) {
         setCenter(pane, true);
     }
 
-    public void setCenter(Node pane, boolean closeStream) {
+    public void setCenter(Region pane, boolean closeStream) {
         BorderPane.setAlignment(pane, Pos.TOP_CENTER);
 
         if (closeStream)
             api.closeStream();
+
+        // We add some paddings so that the send toot panel doesn't hide the content
+        pane.setPadding(new Insets(0, 0, 50, 0));
 
         sceneContent.getChildren().clear();
         sceneContent.getChildren().add(pane);

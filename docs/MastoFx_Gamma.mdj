@@ -20859,7 +20859,7 @@
 							}
 						}
 					],
-					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The System fetches the posted toots of the selected account.\n2. The System displays a list of toots.\n3. The user can interact with them:\n\t- Favourite/Unfavourite\n    - Bookmark/Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n4. The user can also load more toots by scrolling down multiple times, the system will automatically add new elements.\n\n## Alternative Flow\n\n2A. The account has not posted any message. Nothing will be shown."
+					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The System fetches the posted toots of the selected account.\n2. The System displays a list of toots.\n3. The user can interact with them:\n\t- Favourite/Unfavourite\n    - Bookmark/Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n    - He can play media:\n    \t- Play a video.\n        - Play a gif (will play indefinitely until paused by the user or other).\n        - Play a sound.\n        - For all of them he can play, pause, reset time or seek time at a particular moment.\n4. The user can also load more toots by scrolling down multiple times, the system will automatically add new elements.\n\n## Alternative Flow\n\n2A. The account has not posted any message. Nothing will be shown."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -20934,7 +20934,7 @@
 						"$ref": "AAAAAAGH9wPjHSQsDVc="
 					},
 					"name": "See favourites toots",
-					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the \"Favourites\" section in the left menu bar.\n2. The System fetches the favourited toots of the current account.\n3. The System displays a list of toots.\n4. The user can interact with them:\n\t- Unfavourite\n    - Bookmark/Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n    - ....\n5. The user can also load more toots by scrolling down multiple times, the system will automatically add new elements.\n\n## Alternative Flow\n\n2A. The account has not favourited any message. Nothing will be shown."
+					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the \"Favourites\" section in the left menu bar.\n2. The System fetches the favourited toots of the current account.\n3. The System displays a list of toots.\n4. The user can interact with them:\n\t- Unfavourite\n    - Bookmark/Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n    - He can play media:\n    \t- Play a video.\n        - Play a gif (will play indefinitely until paused by the user or other).\n        - Play a sound.\n        - For all of them he can play, pause, reset time or seek time at a particular moment.\n    - ....\n5. The user can also load more toots by scrolling down multiple times, the system will automatically add new elements.\n\n## Alternative Flow\n\n2A. The account has not favourited any message. Nothing will be shown."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -20943,7 +20943,7 @@
 						"$ref": "AAAAAAGH9wPjHSQsDVc="
 					},
 					"name": "See bookmarked toots",
-					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the \"Bookmarks\" section in the left menu bar.\n2. The System fetches the bookmarked toots of the current account.\n3. The System displays a list of toots.\n4. The user can interact with them:\n\t- Favourite/Unfavourite\n    - Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n    - ....\n5. The user can also load more toots by scrolling down multiple times, the system will automatically add new elements.\n\n## Alternative Flow\n\n2A. The account has not bookmarked any message. Nothing will be shown."
+					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the \"Bookmarks\" section in the left menu bar.\n2. The System fetches the bookmarked toots of the current account.\n3. The System displays a list of toots.\n4. The user can interact with them:\n\t- Favourite/Unfavourite\n    - Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n    - He can play media:\n    \t- Play a video.\n        - Play a gif (will play indefinitely until paused by the user or other).\n        - Play a sound.\n        - For all of them he can play, pause, reset time or seek time at a particular moment.\n    - ....\n5. The user can also load more toots by scrolling down multiple times, the system will automatically add new elements.\n\n## Alternative Flow\n\n2A. The account has not bookmarked any message. Nothing will be shown."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -20952,7 +20952,7 @@
 						"$ref": "AAAAAAGH9wPjHSQsDVc="
 					},
 					"name": "See home timeline",
-					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the \"Home\" section in the left menu bar.\n2. The System fetches the latest toots from the home timeline.\n3. The System displays a list of toots.\n4. The user can interact with them:\n\t- Favourite/Unfavourite\n    - Bookmark/Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n    - ....\n5. The user can also load more toots by scrolling down multiple times, the system will automatically add new elements.\n\n## Alternative Flow\n\n2A. The account follows nobody and has not posted a single toot. Nothing will be shown."
+					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the \"Home\" section in the left menu bar.\n2. The System fetches the latest toots from the home timeline.\n3. The System displays a list of toots.\n4. The user can interact with them:\n\t- Favourite/Unfavourite\n    - Bookmark/Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n    - He can play media:\n    \t- Play a video.\n        - Play a gif (will play indefinitely until paused by the user or other).\n        - Play a sound.\n        - For all of them he can play, pause, reset time or seek time at a particular moment.\n    - ....\n5. The user can also load more toots by scrolling down multiple times, the system will automatically add new elements.\n\n## Alternative Flow\n\n2A. The account follows nobody and has not posted a single toot. Nothing will be shown."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -20961,7 +20961,7 @@
 						"$ref": "AAAAAAGH9wPjHSQsDVc="
 					},
 					"name": "Send toot",
-					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the TextField in the bottom of the window\n2. A text area will appear with multiple buttons.\n3. The user can interact with them:\n\t- The user can change the visibility by clicking on the globe icon. Two of them are supported: public and direct\n    - The user can add warning content to his toots by clicking on the warning icon. A text field will appear.\n4. The user can mention accounts and hashtags or add links to his toot.\n5. Once the user is happy, he can publish the toot by clicking on the blue arrow button.\n\n## Alternative Flow\n\n2A. The user doesn't want to send a message, he can click anywhere else on the window and the text area will disappear."
+					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the TextField in the bottom of the window\n2. A text area will appear with multiple buttons.\n3. The user can interact with them:\n\t- The user can change the visibility by clicking on the globe icon. Two of them are supported: public and direct\n    - The user can add warning content to his toots by clicking on the warning icon. A text field will appear.\n4. The user can mention accounts and hashtags or add links to his toot.\n5. The user can add one or more media:\n\t- He can click on the icon at the bottom of the text area and select any number of media (images, videos, and audio) he wants.\n    - He can do this action multiple times.\n    - All the included media will be displayed in the text area by: an image for images, a label with a name for audio and videos.\n    - He can click on the thumbnails of a media to remove it.\n6. Once the user is happy, he can publish the toot by clicking on the blue arrow button.\n\n## Alternative Flow\n\n2A. The user doesn't want to send a message, he can click anywhere else on the window and the text area will disappear."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -21042,7 +21042,7 @@
 						"$ref": "AAAAAAGH9wPjHSQsDVc="
 					},
 					"name": "See Local timeline",
-					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the \"Local\" section in the left menu bar.\n2. The System setups a stream of the local timeline.\n3. The System displays a list of toots.\n4. The user can interact with them:\n\t- Favourite/Unfavourite\n    - Bookmark/Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n    - ....\n5. The system will automatically add new toot as they are posted."
+					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the \"Local\" section in the left menu bar.\n2. The System setups a stream of the local timeline.\n3. The System displays a list of toots.\n4. The user can interact with them:\n\t- Favourite/Unfavourite\n    - Bookmark/Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n    - He can play media:\n    \t- Play a video.\n        - Play a gif (will play indefinitely until paused by the user or other).\n        - Play a sound.\n        - For all of them he can play, pause, reset time or seek time at a particular moment.\n    - ....\n5. The system will automatically add new toot as they are posted."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -21051,7 +21051,7 @@
 						"$ref": "AAAAAAGH9wPjHSQsDVc="
 					},
 					"name": "See global timeline",
-					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the \"Global\" section in the left menu bar.\n2. The System setups a stream of the global timeline.\n3. The System displays a list of toots.\n4. The user can interact with them:\n\t- Favourite/Unfavourite\n    - Bookmark/Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n    - ....\n5. The system will automatically add new toot as they are posted."
+					"documentation": "# Event Flow\n\n## Main Flow\n\n1. The user clicks on the \"Global\" section in the left menu bar.\n2. The System setups a stream of the global timeline.\n3. The System displays a list of toots.\n4. The user can interact with them:\n\t- Favourite/Unfavourite\n    - Bookmark/Unbookmark\n    - Reply to this toot\n    - Blur or unblur a media attachment image (click on it).\n    - Reveal spoiler text (by clicking on the warning spoiler)\n    - Delete (if owner of the toot)\n    - Send a private message to the owner of the toot\n    - Mention the owner of the message\n    - Unreblog\n    - Click on the avatar of the owner of the toot\n    - Show the context of a toot (conversation, replies, ancestors...)\n    - He can play media:\n    \t+ Play a video.\n        + Play a gif (will play indefinitely until paused by the user or other).\n        + Play a sound.\n        + For all of them he can play, pause, reset time or seek time at a particular moment.\n    - ....\n5. The system will automatically add new toot as they are posted."
 				},
 				{
 					"_type": "UMLUseCase",
@@ -21105,9 +21105,9 @@
 												"$ref": "AAAAAAGIC1Nx8nmj6RE="
 											},
 											"font": "Arial;13;0",
-											"left": 48.72998046875,
+											"left": 46.55908203125,
 											"top": 5,
-											"width": 79.03173828125,
+											"width": 72.86181640625,
 											"height": 13,
 											"text": "First Opening"
 										},
@@ -21120,7 +21120,7 @@
 											"font": "Arial;13;1",
 											"left": 29,
 											"top": 5,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}

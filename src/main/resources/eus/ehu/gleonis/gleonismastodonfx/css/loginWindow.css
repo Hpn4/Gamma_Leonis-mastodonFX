@@ -23,6 +23,10 @@
     -fx-background-color: #404040;
 }
 
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
 .scroll-pane .scroll-bar:vertical {
     -fx-background-color: #404040;
 }
