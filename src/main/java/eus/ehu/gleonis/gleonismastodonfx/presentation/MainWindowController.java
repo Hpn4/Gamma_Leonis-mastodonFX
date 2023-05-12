@@ -4,6 +4,7 @@ import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.MediaAttachment;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.comp.MediaAttachmentViewer;
+import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -85,7 +86,8 @@ public class MainWindowController extends AbstractController {
 
         account.getAvatarCachedImage().setImage(accountImage);
 
-        accountImage.setOnMouseClicked(e -> getApplication().requestShowAccount(null));
+        // Redirect to the account of the user by clicking on his avatar, username or webfinger.
+        Utils.redirectToAccount(null, accountImage, accountUsername, accountWebfinger);
 
         // Setup listener for textField to search when enter is pressed
         searchTextField.setOnAction(e -> onSearchClick());
@@ -264,7 +266,7 @@ public class MainWindowController extends AbstractController {
 
     @FXML
     void onNotificationsClick() {
-
+        getApplication().requestShowNotification();
     }
 
     @FXML

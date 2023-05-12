@@ -12,7 +12,7 @@ public class NotificationTypeDeserializer implements JsonDeserializer<Notificati
     @Override
     public NotificationType deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         for (NotificationType notificationType: NotificationType.values())
-            if (notificationType.toString().equals(json.getAsString()))
+            if (notificationType.getType().equals(json.getAsString()))
                 return notificationType;
 
         return NotificationType.UNKNOWN;

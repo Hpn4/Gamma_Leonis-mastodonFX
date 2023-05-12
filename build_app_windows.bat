@@ -91,11 +91,10 @@ call "%JAVA_HOME%\bin\jpackage" ^
   --java-options -Xmx2048m ^
   --runtime-image target/java-runtime ^
   --app-version %APP_VERSION% ^
+  --icon src/main/resources/logo/windows/mastodon.ico ^
   --vendor "UPV/EHU" ^
   --copyright "Copyright © 2022-23 Gamma-Leonis." ^
   --win-dir-chooser ^
   --win-shortcut ^
   --win-per-user-install ^
   --win-menu
-
-rem To add later:  --icon src/main/logo/windows/duke.ico ^

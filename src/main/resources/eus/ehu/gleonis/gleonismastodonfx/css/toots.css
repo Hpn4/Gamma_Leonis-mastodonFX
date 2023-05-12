@@ -96,6 +96,10 @@
     -fx-background-color: #999999;
 }
 
+.underlined:hover {
+    -fx-underline: true;
+}
+
 /*
 * CSS style to change color of the favourite, bookmark and reblog button
  */
@@ -136,9 +140,3 @@
 .menu-item:hover .label {
     -fx-text-fill: white;
 }
-
-.menu-item-delete {
-
-}
-
-

@@ -96,9 +96,8 @@ $JAVA_HOME/bin/jpackage \
 --java-options -Xmx2048m \
 --runtime-image target/java-runtime \
 --app-version ${APP_VERSION} \
+--icon src/main/resources/logo/macOS/mastodon.icns \
 --vendor "UPV/EHU" \
 --copyright "Copyright © 2022-23 Gamma-Leonis." \
 --mac-package-identifier eus.ehu.app \
 --mac-package-name UPV-EHU
-
-# Maybe add it later --icon src/main/logo/macosx/duke.icns \

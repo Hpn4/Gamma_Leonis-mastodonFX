@@ -102,7 +102,8 @@ public class AccountItem extends AbstractItem<Account> {
         Image avatar = new Image(account.getAvatar(), true);
         accountAvatar.setImage(avatar);
 
-        accountItem.setOnMouseClicked(e -> MainApplication.getInstance().requestShowAccount(account.getId()));
+        // Redirection for the account
+        Utils.redirectToAccount(account.getId(), accountItem);
     }
 
     public HBox getParent() {

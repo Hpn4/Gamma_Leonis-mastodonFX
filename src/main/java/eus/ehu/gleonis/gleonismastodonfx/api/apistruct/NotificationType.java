@@ -18,7 +18,7 @@ public enum NotificationType {
 
     REPORT("admin.report"); // A status has been reported
 
-    String type;
+    final String type;
 
     NotificationType(String type) {
         this.type = type;
@@ -30,5 +30,9 @@ public enum NotificationType {
 
     public boolean hasStatusAttached() {
         return this == MENTION || this == STATUS || this == REBLOG || this == FAVOURITE || this == POLL || this == UPDATE;
+    }
+
+    public String getType() {
+        return type;
     }
 }

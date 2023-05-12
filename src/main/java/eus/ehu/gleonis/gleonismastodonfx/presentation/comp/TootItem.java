@@ -165,7 +165,8 @@ public class TootItem extends AbstractItem<Status> {
 
         finalStatus.getAccount().getAvatarCachedImage().setImage(accountProfilePicture);
 
-        accountProfilePicture.setOnMouseClicked(e -> MainApplication.getInstance().requestShowAccount(finalStatus.getAccount().getId()));
+        // Redirection to the account by clicking on the avatar, the name and the webfinger
+        Utils.redirectToAccount(finalStatus.getAccount().getId(), accountProfilePicture, userLabel, webfingerLabel);
 
         userLabel.setText(finalStatus.getAccount().getDisplayName());
         webfingerLabel.setText(finalStatus.getAccount().getAcct());

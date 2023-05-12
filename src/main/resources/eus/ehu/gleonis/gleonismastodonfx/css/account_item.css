@@ -29,3 +29,7 @@
 .follow-button:pressed, .unfollow-account:pressed {
     -fx-border-color: #666666;
 }
+
+.underlined:hover {
+    -fx-underline: true;
+}

@@ -16,6 +16,7 @@ import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.SearchRPControlle
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.TrendingRPController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.ContextScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.ConversationScrollableContent;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.NotificationScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsScrollableContent;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.application.Application;
@@ -252,6 +253,15 @@ public class MainApplication extends Application {
         ConversationScrollableContent conversationScrollableContent = new ConversationScrollableContent(api.getConversations(10), 10);
 
         mainController.setCenter(conversationScrollableContent);
+    }
+
+    public void requestShowNotification() {
+        MediaPlayerNode.freeAndStopMedias();
+        logger.debug("Switch to notifications screen");
+
+        NotificationScrollableContent notificationScrollableContent = new NotificationScrollableContent(api.getNotifications(10), 10);
+
+        mainController.setCenter(notificationScrollableContent);
     }
 
     public void requestShowTootContext(Status status) {

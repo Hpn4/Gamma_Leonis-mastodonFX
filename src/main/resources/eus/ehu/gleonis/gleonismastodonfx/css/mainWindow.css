@@ -284,3 +284,27 @@
     -fx-border-radius: 0 0 5 5;
     -fx-background-radius: 0 0 5 5;
 }
+
+/* CSS for Context menu */
+.context-menu {
+    -fx-background-color: #404040;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px;
+    -fx-translate-y: -10px;
+}
+
+.menu-item {
+    -fx-background-color: #404040;
+}
+
+.menu-item .label {
+    -fx-text-fill: #999999;
+}
+
+.menu-item:hover .label {
+    -fx-text-fill: white;
+}
+
+.underlined:hover {
+    -fx-underline: true;
+}

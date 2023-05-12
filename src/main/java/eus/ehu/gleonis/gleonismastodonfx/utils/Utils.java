@@ -1,13 +1,17 @@
 package eus.ehu.gleonis.gleonismastodonfx.utils;
 
+import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -168,6 +172,12 @@ public class Utils {
         }
 
         return new Image(url);
+    }
+
+    public static void redirectToAccount(String accId, Node... nodes) {
+        EventHandler<? super MouseEvent> handler = event -> MainApplication.getInstance().requestShowAccount(accId);
+
+        for (Node node : nodes) node.setOnMouseClicked(handler);
     }
 
     @FunctionalInterface

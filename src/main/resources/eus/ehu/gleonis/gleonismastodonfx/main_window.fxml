@@ -33,12 +33,12 @@
             </VBox.margin>
             <Button mnemonicParsing="false" onAction="#onSettingsClick" prefHeight="30.0" prefWidth="30.0" styleClass="settings-button" />
             <Button layoutY="46.0" mnemonicParsing="false" onAction="#onNotificationsClick" prefHeight="30.0" prefWidth="30.0" styleClass="notification-button" />
-            <Label fx:id="accountUsername" layoutX="116.0" layoutY="20.0" text="Hpn4" textFill="WHITE">
+            <Label fx:id="accountUsername" styleClass="underlined" layoutX="116.0" layoutY="20.0" text="Hpn4" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="accountWebfinger" layoutX="112.0" layoutY="37.0" text="\@Hpn4" textFill="#666666" />
+            <Label fx:id="accountWebfinger" styleClass="underlined" layoutX="112.0" layoutY="37.0" text="\@Hpn4" textFill="#666666" />
             <Circle fx:id="accountImage" fill="DODGERBLUE" layoutX="71.0" layoutY="38.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
          </AnchorPane>
          <Separator prefWidth="200.0" styleClass="menu-separator">
