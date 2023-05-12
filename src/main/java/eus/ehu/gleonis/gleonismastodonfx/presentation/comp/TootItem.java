@@ -18,6 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
@@ -217,7 +218,9 @@ public class TootItem extends AbstractItem<Status> {
 
     private void setupMediaAttachments(Status status, boolean sensitive) {
         for (MediaAttachment media : status.getMedia_attachments()) {
-            if (media.getType() == MediaAttachmentType.IMAGE) {
+            MediaAttachmentType type = media.getType();
+
+            if (type == MediaAttachmentType.IMAGE) {
                 CachedImage cachedImage = new CachedImage(media);
                 ImageView imageView = new ImageView();
                 imageView.fitWidthProperty().bind(messageBorder.widthProperty().divide(2));
@@ -233,15 +236,18 @@ public class TootItem extends AbstractItem<Status> {
 
                 mediasPane.getChildren().add(imageView);
                 VBox.setMargin(imageView, new Insets(5));
-            } else if(media.getType() == MediaAttachmentType.AUDIO){
-                AudioPlayerNode audioPlayerNode = new AudioPlayerNode(media);
+            } else if (type != MediaAttachmentType.UNKNOWN) {
+                Pane mediaPane;
+                if (type == MediaAttachmentType.AUDIO) {
+                    MediaPlayerNode audio = new MediaPlayerNode(media, false);
+                    audio.setAlignment(Pos.CENTER);
+                    mediaPane = audio;
+                } else
+                    mediaPane = new VideoPlayerNode(media);
 
-                mediasPane.getChildren().add(audioPlayerNode);
-                audioPlayerNode.setAlignment(Pos.CENTER);
-                audioPlayerNode.maxWidthProperty().bind(messageBorder.widthProperty().divide(2));
-                VBox.setMargin(audioPlayerNode, new Insets(10));
-            } else {
-                System.out.println("Unsupported media type: " + media.getType());
+                mediasPane.getChildren().add(mediaPane);
+                mediaPane.maxWidthProperty().bind(messageBorder.widthProperty().divide(2));
+                VBox.setMargin(mediaPane, new Insets(10));
             }
         }
 

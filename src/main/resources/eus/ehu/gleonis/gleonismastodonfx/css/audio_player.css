@@ -35,6 +35,12 @@
     -fx-background-color: #343434;
 }
 
+.video-player {
+    -fx-background-color: #363636;
+    -fx-background-radius: 0px;
+    -fx-padding: 2px 10px 2px 10px;
+}
+
 .slider .track {
     -fx-background-color: #252525;
 }
@@ -44,6 +50,10 @@
     -fx-border-color: #505050;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
+}
+
+.slider .thumb:hover {
+    -fx-border-color: #647dff;
 }
 
 .slider .thumb:pressed {

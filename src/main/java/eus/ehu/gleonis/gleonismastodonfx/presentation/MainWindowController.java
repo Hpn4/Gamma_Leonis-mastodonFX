@@ -107,6 +107,7 @@ public class MainWindowController extends AbstractController {
 
         if(closeStream)
             api.closeStream();
+
         sceneContent.getChildren().clear();
         sceneContent.getChildren().add(pane);
         sceneContent.getChildren().add(sendTootVBox);

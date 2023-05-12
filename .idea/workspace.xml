@@ -7,29 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Refactoring + audio and sound playing in toots">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/AudioPlayerNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/audio_player.css" afterDir="false" />
+    <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Video and GIFV support. Fix bugs">
+      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/VideoPlayerNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_app_linux.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build_app_linux.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_app_mac.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build_app_mac.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build_app_windows.bat" beforeDir="false" afterPath="$PROJECT_DIR$/build_app_windows.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/apistruct/MediaAttachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/apistruct/MediaAttachment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AbstractItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/AbstractItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/AccountItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ContextScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ContextScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ConversationItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/ConversationItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ConversationScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ConversationScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/HashTagItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/HashTagItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TagsScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TagsScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/TootItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/conversation_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/conversation_item.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/toot_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/toot_item.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/AudioPlayerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/MediaPlayerNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/TootItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/TootItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/audio_player.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/audio_player.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +28,8 @@
         <option value="FxmlFile" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -117,6 +102,7 @@
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="eus.ehu.gleonis.gleonismastodonfx.presentation.comp" />
       <recent name="eus.ehu.gleonis.gleonismastodonfx.presentation" />
       <recent name="eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane" />
       <recent name="eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable" />
@@ -251,7 +237,8 @@
       <workItem from="1683616346745" duration="17340000" />
       <workItem from="1683730201878" duration="335000" />
       <workItem from="1683741897404" duration="8560000" />
-      <workItem from="1683790995349" duration="21038000" />
+      <workItem from="1683790995349" duration="26436000" />
+      <workItem from="1683840993934" duration="6825000" />
     </task>
     <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
       <created>1679044335470</created>
@@ -540,7 +527,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683817291536</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Refactoring + audio and sound playing in toots">
+      <created>1683830077796</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1683830077796</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,7 +555,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="MainWindow start implementation" />
     <MESSAGE value="Switch account" />
     <MESSAGE value="Account + tag navigation, home timeline, favourites, bookmarked. Performance + image in toots + senstivie content" />
     <MESSAGE value="Login screen, scrollbar speed, bug fix, readme, improve global performance" />
@@ -586,6 +579,7 @@
     <MESSAGE value="Compiling only windows" />
     <MESSAGE value="Use case + domain + sequence merged, all installers fixed" />
     <MESSAGE value="Refactoring + audio and sound playing in toots" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring + audio and sound playing in toots" />
+    <MESSAGE value="Video and GIFV support. Fix bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Video and GIFV support. Fix bugs" />
   </component>
 </project>

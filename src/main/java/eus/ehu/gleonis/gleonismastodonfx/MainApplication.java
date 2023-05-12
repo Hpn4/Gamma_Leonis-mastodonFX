@@ -9,6 +9,7 @@ import eus.ehu.gleonis.gleonismastodonfx.presentation.AbstractController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.ConfigWindowController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.LoginWindowController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.MainWindowController;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.comp.MediaPlayerNode;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.AccountRPController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.SearchRPController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.TrendingRPController;
@@ -120,6 +121,7 @@ public class MainApplication extends Application {
     }
 
     public void requestLoginScreen() {
+        MediaPlayerNode.freeAndStopMedias();
         try {
             logger.debug("Switch to login screen");
 
@@ -144,6 +146,7 @@ public class MainApplication extends Application {
     }
 
     public void requestMainScreen() {
+        MediaPlayerNode.freeAndStopMedias();
         try {
             logger.debug("Switch to main screen");
 
@@ -169,6 +172,7 @@ public class MainApplication extends Application {
     }
 
     public void requestShowAccount(String account) {
+        MediaPlayerNode.freeAndStopMedias();
         try {
             logger.debug("Switch to account screen");
 
@@ -188,6 +192,7 @@ public class MainApplication extends Application {
     }
 
     public void requestSearch(String query) {
+        MediaPlayerNode.freeAndStopMedias();
         if (query == null || query.isEmpty())
             return;
 
@@ -206,6 +211,7 @@ public class MainApplication extends Application {
     }
 
     public void requestShowTrending() {
+        MediaPlayerNode.freeAndStopMedias();
         try {
             logger.debug("Switch to trending screen");
 
@@ -221,6 +227,7 @@ public class MainApplication extends Application {
     }
 
     public void requestShowStreamToots(ListStream<Status> toots) {
+        MediaPlayerNode.freeAndStopMedias();
         logger.debug("Switch to scrollable toots screen");
 
         TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(toots, 0);
@@ -229,6 +236,7 @@ public class MainApplication extends Application {
     }
 
     public void requestShowToots(ListStream<Status> toots, int itemPerPage) {
+        MediaPlayerNode.freeAndStopMedias();
         logger.debug("Switch to scrollable toots screen");
 
         TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(toots, itemPerPage);
@@ -237,6 +245,7 @@ public class MainApplication extends Application {
     }
 
     public void requestShowConversation() {
+        MediaPlayerNode.freeAndStopMedias();
         logger.debug("Switch to conversation screen");
 
         ConversationScrollableContent conversationScrollableContent = new ConversationScrollableContent(api.getConversations(10), 10);
@@ -245,6 +254,7 @@ public class MainApplication extends Application {
     }
 
     public void requestShowTootContext(Status status) {
+        MediaPlayerNode.freeAndStopMedias();
         logger.debug("Switch to toot context screen");
 
         ContextScrollableContent tootContextContent = new ContextScrollableContent(status, api.getStatusContext(status.getId()));
