@@ -3,7 +3,8 @@
 * Global background color of the toots
  */
 .toots-border-pane {
-    -fx-background-color: #404040;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
 }
 
 .toots-border-pane:hover {
@@ -96,10 +97,6 @@
     -fx-background-color: #999999;
 }
 
-.underlined:hover {
-    -fx-underline: true;
-}
-
 /*
 * CSS style to change color of the favourite, bookmark and reblog button
  */
@@ -113,30 +110,4 @@
 
 .rebloged-toots-button {
     -fx-background-color: #3D4FAD;
-}
-
-/*
-* CSS style to change the style of menu button and menu
- */
-.menu-button > .arrow-button > .arrow {
-    -fx-padding: 0;
-}
-
-.context-menu {
-    -fx-background-color: #404040;
-    -fx-background-radius: 5px;
-    -fx-padding: 5px;
-    -fx-translate-y: -10px;
-}
-
-.menu-item {
-    -fx-background-color: #404040;
-}
-
-.menu-item .label {
-    -fx-text-fill: #999999;
-}
-
-.menu-item:hover .label {
-    -fx-text-fill: white;
 }

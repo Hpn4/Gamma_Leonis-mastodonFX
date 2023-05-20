@@ -14,10 +14,7 @@ import eus.ehu.gleonis.gleonismastodonfx.presentation.comp.MediaPlayerNode;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.AccountRPController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.SearchRPController;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.TrendingRPController;
-import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.ContextScrollableContent;
-import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.ConversationScrollableContent;
-import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.NotificationScrollableContent;
-import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.TootsScrollableContent;
+import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.*;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -101,92 +98,49 @@ public class MainApplication extends Application {
     }
 
     private void requestConfigFileScreen() {
-        try {
-            logger.info("No config file found, switch to config file screen");
+        configWindow = load("configFile_window.fxml", "config file", configWindow);
 
-            if (configWindow == null)
-                configWindow = load("configFile_window.fxml");
-
-            // When possible, we just change the root element of the Scene instead of creating a new one
-            // In fact creating a new Scene instance is performance heavy
-            if (stage.getScene() == null)
-                stage.setScene(new Scene(configWindow.ui));
-            else {
-                stage.getScene().setRoot(configWindow.ui);
-                stage.setWidth(700);
-                stage.setHeight(500);
-                stage.centerOnScreen();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        setupScene(700, 500, configWindow.ui);
     }
 
     public void requestLoginScreen() {
         MediaPlayerNode.freeAndStopMedias();
-        try {
-            logger.debug("Switch to login screen");
+        loginWindow = load("login_window.fxml", "login", loginWindow);
 
-            if (loginWindow == null)
-                loginWindow = load("login_window.fxml");
+        loginWindow.controller.init();
 
-            loginWindow.controller.init();
-
-            // When possible, we just change the root element of the Scene instead of creating a new one
-            // In fact creating a new Scene instance is performance heavy
-            if (stage.getScene() == null)
-                stage.setScene(new Scene(loginWindow.ui));
-            else {
-                stage.getScene().setRoot(loginWindow.ui);
-                stage.setWidth(700);
-                stage.setHeight(500);
-                stage.centerOnScreen();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        setupScene(700, 500, loginWindow.ui);
     }
 
     public void requestMainScreen() {
         MediaPlayerNode.freeAndStopMedias();
-        try {
-            logger.debug("Switch to main screen");
+        mainWindow = load("main_window.fxml", "main", mainWindow);
+        setupScene(1400, 750, mainWindow.ui);
 
-            if (mainWindow == null)
-                mainWindow = load("main_window.fxml");
+        mainController = mainWindow.controller;
+        mainController.init(stage.getScene());
 
-            if (stage.getScene() == null)
-                stage.setScene(new Scene(mainWindow.ui, 1400, 750));
-            else {
-                stage.getScene().setRoot(mainWindow.ui);
-                stage.setWidth(1400);
-                stage.setHeight(750);
-                stage.centerOnScreen();
-            }
+        requestShowAccount(null);
+    }
 
-            mainController = mainWindow.controller;
-            mainController.init(stage.getScene());
-
-            requestShowAccount(null);
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void setupScene(int width, int height, Pane root) {
+        if (stage.getScene() == null)
+            stage.setScene(new Scene(root, width, height));
+        else {
+            stage.getScene().setRoot(root);
+            stage.setWidth(width);
+            stage.setHeight(height);
+            stage.centerOnScreen();
         }
     }
 
     public void requestShowAccount(String account) {
+        mainController.uncheckCategory();
         MediaPlayerNode.freeAndStopMedias();
-        try {
-            logger.debug("Switch to account screen");
+        accountsWindow = load("account_root-pane.fxml", "account", accountsWindow);
 
-            if (accountsWindow == null)
-                accountsWindow = load("account_root-pane.fxml");
-
-            accountsWindow.controller.setAccount(account);
-
-            mainController.setCenter(accountsWindow.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        accountsWindow.controller.setAccount(account);
+        mainController.setCenter(accountsWindow.ui);
     }
 
     public void requestShowSendToot(String tootContent, Visibility visibility, String inResponseTo) {
@@ -194,38 +148,23 @@ public class MainApplication extends Application {
     }
 
     public void requestSearch(String query) {
+        mainController.uncheckCategory();
         MediaPlayerNode.freeAndStopMedias();
         if (query == null || query.isEmpty())
             return;
 
-        try {
-            logger.debug("Switch to search screen");
+        searchWindow = load("search_root-pane.fxml", "search", searchWindow);
 
-            if (searchWindow == null)
-                searchWindow = load("search_root-pane.fxml");
-
-            searchWindow.controller.doSearch(query);
-
-            mainController.setCenter(searchWindow.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        searchWindow.controller.doSearch(query);
+        mainController.setCenter(searchWindow.ui);
     }
 
     public void requestShowTrending() {
         MediaPlayerNode.freeAndStopMedias();
-        try {
-            logger.debug("Switch to trending screen");
+        trendingWindow = load("trending_root-pane.fxml", "trending", trendingWindow);
 
-            if (trendingWindow == null)
-                trendingWindow = load("trending_root-pane.fxml");
-
-            trendingWindow.controller.refreshTrending();
-
-            mainController.setCenter(trendingWindow.ui);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        trendingWindow.controller.refreshTrending();
+        mainController.setCenter(trendingWindow.ui);
     }
 
     public void requestShowStreamToots(ListStream<Status> toots) {
@@ -237,34 +176,22 @@ public class MainApplication extends Application {
         mainController.setCenter(tootsScrollableContent, false);
     }
 
-    public void requestShowToots(ListStream<Status> toots, int itemPerPage) {
-        MediaPlayerNode.freeAndStopMedias();
-        logger.debug("Switch to scrollable toots screen");
-
-        TootsScrollableContent tootsScrollableContent = new TootsScrollableContent(toots, itemPerPage);
-
-        mainController.setCenter(tootsScrollableContent);
+    public void requestShowToots(ListStream<Status> toots, int itemPerPage, boolean clearSelection) {
+        if (clearSelection)
+            mainController.uncheckCategory();
+        requestScrollableContent(new TootsScrollableContent(toots, itemPerPage), "toots");
     }
 
     public void requestShowConversation() {
-        MediaPlayerNode.freeAndStopMedias();
-        logger.debug("Switch to conversation screen");
-
-        ConversationScrollableContent conversationScrollableContent = new ConversationScrollableContent(api.getConversations(10), 10);
-
-        mainController.setCenter(conversationScrollableContent);
+        requestScrollableContent(new ConversationScrollableContent(api.getConversations(10), 10), "conversations");
     }
 
     public void requestShowNotification() {
-        MediaPlayerNode.freeAndStopMedias();
-        logger.debug("Switch to notifications screen");
-
-        NotificationScrollableContent notificationScrollableContent = new NotificationScrollableContent(api.getNotifications(10), 10);
-
-        mainController.setCenter(notificationScrollableContent);
+        requestScrollableContent(new NotificationScrollableContent(api.getNotifications(10), 10), "notifications");
     }
 
     public void requestShowTootContext(Status status) {
+        mainController.uncheckCategory();
         Context context = api.getStatusContext(status.getId());
         if (context == null) {
             logger.error("Unable to get toot context");
@@ -279,6 +206,13 @@ public class MainApplication extends Application {
         mainController.setCenter(tootContextContent);
     }
 
+    private void requestScrollableContent(AbstractScrollableContent<?> content, String title) {
+        MediaPlayerNode.freeAndStopMedias();
+        logger.debug("Switch to " + title + " screen");
+
+        mainController.setCenter(content);
+    }
+
     public API getAPI() {
         return api;
     }
@@ -287,15 +221,23 @@ public class MainApplication extends Application {
         return stage;
     }
 
-    private <E extends AbstractController> Window<E> load(String url) throws IOException {
+    private <E extends AbstractController> Window<E> load(String url, String logTitle, Window<E> window) {
+        logger.debug("Switch to " + logTitle + " screen");
+        if (window != null)
+            return window;
+
         Window<E> ref = new Window<>();
 
-        FXMLLoader fxmlLoader = Utils.loadAndTranslate(MainApplication.class.getResource(url));
-        ref.ui = fxmlLoader.load();
-        ref.controller = fxmlLoader.getController();
-        ref.controller.setApplication(this);
-        ref.controller.setDBManager(dbManager);
-        ref.controller.setAPI(api);
+        try {
+            FXMLLoader fxmlLoader = Utils.loadAndTranslate(MainApplication.class.getResource(url));
+            ref.ui = fxmlLoader.load();
+            ref.controller = fxmlLoader.getController();
+            ref.controller.setApplication(this);
+            ref.controller.setDBManager(dbManager);
+            ref.controller.setAPI(api);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return ref;
     }

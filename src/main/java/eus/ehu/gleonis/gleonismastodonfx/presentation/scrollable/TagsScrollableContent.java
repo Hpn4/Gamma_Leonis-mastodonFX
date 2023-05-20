@@ -17,7 +17,7 @@ public class TagsScrollableContent extends AbstractScrollableContent<Tag> {
         Utils.mapByValue(itemsList, contentBox.getChildren(), tag -> {
             Pane pane = new HashTagItem(this, tag).getParent();
 
-            pane.prefWidthProperty().bind(widthProperty().subtract(20));
+            pane.prefWidthProperty().bind(widthProperty().subtract(10));
 
             reduceSpeed();
 

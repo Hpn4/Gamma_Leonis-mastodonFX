@@ -226,7 +226,7 @@ public class TootItem extends AbstractItem<Status> {
                 CachedImage cachedImage = new CachedImage(media);
                 ImageView imageView = new ImageView();
                 imageView.fitWidthProperty().bind(messageBorder.widthProperty().divide(2));
-               // imageView.fitHeightProperty().bind(messageBorder.widthProperty().divide(2).map(w -> w.doubleValue() * 9 / 16)); // 16:9 aspect ratio
+                // imageView.fitHeightProperty().bind(messageBorder.widthProperty().divide(2).map(w -> w.doubleValue() * 9 / 16)); // 16:9 aspect ratio
                 imageView.setPreserveRatio(true);
 
                 // Enable ability to disable/activate image spoiler
@@ -240,13 +240,8 @@ public class TootItem extends AbstractItem<Status> {
                 mediasPane.getChildren().add(imageView);
                 VBox.setMargin(imageView, new Insets(5));
             } else if (type != MediaAttachmentType.UNKNOWN) {
-                Pane mediaPane;
-                if (type == MediaAttachmentType.AUDIO) {
-                    MediaPlayerNode audio = new MediaPlayerNode(media, false);
-                    audio.setAlignment(Pos.CENTER);
-                    mediaPane = audio;
-                } else
-                    mediaPane = new VideoPlayerNode(media);
+                Pane mediaPane = type == MediaAttachmentType.AUDIO ?
+                                new MediaPlayerNode(media, false) : new VideoPlayerNode(media);
 
                 mediasPane.getChildren().add(mediaPane);
                 mediaPane.maxWidthProperty().bind(messageBorder.widthProperty().divide(2));

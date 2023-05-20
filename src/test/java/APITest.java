@@ -1,8 +1,6 @@
 import eus.ehu.gleonis.gleonismastodonfx.api.API;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Relationship;
-import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
-import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
 import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -43,26 +41,6 @@ public class APITest {
 
         api.unbookmarkStatus(idS);
         Assertions.assertFalse(api.getStatus(idS).isBookmarked());
-    }
-
-    @Test
-    public void testToots() {
-        Status send = api.postStatus("Hey i am a new toot", Visibility.PUBLIC, null, null);
-
-        // Test if it's the same toot
-        Assertions.assertEquals("<p>Hey i am a new toot</p>", send.getContent());
-        Assertions.assertEquals(Visibility.PUBLIC, send.getVisibility());
-
-        // Test if the retrieved toot is the same
-        send = api.getStatus(send.getId());
-        Assertions.assertEquals("<p>Hey i am a new toot</p>", send.getContent());
-        Assertions.assertEquals(Visibility.PUBLIC, send.getVisibility());
-
-        // Test if the toot is deleted
-        Assertions.assertNotNull(api.deleteStatus(send.getId()));
-
-        // Test if the toot is deleted
-        Assertions.assertNull(api.getStatus(send.getId()));
     }
 
     @Test

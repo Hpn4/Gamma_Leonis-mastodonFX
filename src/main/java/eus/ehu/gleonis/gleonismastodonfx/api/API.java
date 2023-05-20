@@ -12,6 +12,7 @@ import eus.ehu.gleonis.gleonismastodonfx.db.DBAccount;
 import eus.ehu.gleonis.gleonismastodonfx.db.IDBManager;
 import eus.ehu.gleonis.gleonismastodonfx.utils.PropertiesManager;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import okhttp3.*;
 
 import java.io.BufferedReader;
@@ -22,6 +23,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class API {
 
@@ -316,34 +318,55 @@ public class API {
      *                    unlisted (visible by everyone but not in the public timeline)
      * @param inReplyToId Id of the toots to reply to or null if none
      * @param spoilerText Text to be displayed as a warning before the status or null if none
-     * @param medias      Medias to attach to the status
-     * @return The posted status
+     * @param files       Files to upload and to attach to the status
      */
-    public Status postStatus(String status, Visibility visibility, String inReplyToId, String spoilerText, MediaAttachment... medias) {
-        FormBody.Builder form = new FormBody.Builder()
-                .add("status", status)
-                .add("visibility", visibility.getVisibility());
+    public Task<Status> postStatus(String status, Visibility visibility, String inReplyToId, String spoilerText, File... files) {
+        Task<Status> task = new Task<>() {
+            @Override
+            public Status call() {
+                // We first upload each file
+                MediaAttachment[] medias = new MediaAttachment[files.length];
 
-        if (inReplyToId != null)
-            form.add("in_reply_to_id", inReplyToId);
-
-        if (spoilerText != null && !spoilerText.isEmpty())
-            form.add("sensitive", "true")
-                    .add("spoiler_text", spoilerText);
-
-        for (MediaAttachment media : medias) {
-            while(!isMediaFullyProcessed(media)) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                for (int i = 0; i < files.length; i++) {
+                    int finalI = i;
+                    medias[i] = uploadFile(files[i], e -> updateProgress(e + finalI, files.length + 1));
                 }
+
+                // We then create the request form body
+                FormBody.Builder form = new FormBody.Builder()
+                        .add("status", status)
+                        .add("visibility", visibility.getVisibility());
+
+                if (inReplyToId != null)
+                    form.add("in_reply_to_id", inReplyToId);
+
+                if (spoilerText != null && !spoilerText.isEmpty())
+                    form.add("sensitive", "true")
+                            .add("spoiler_text", spoilerText);
+
+                // Before linking the medias to the status, we wait for them to be fully processed by Mastodon
+                for (MediaAttachment media : medias) {
+                    while (!isMediaFullyProcessed(media)) {
+                        System.out.println("Waiting for media " + media.getId() + " to be fully processed");
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                    form.add("media_ids[]", media.getId());
+                }
+
+                updateProgress(medias.length + 1, medias.length + 1);
+
+                return postSingle("api/v1/statuses", Status.class, form.build());
             }
+        };
 
-            form.add("media_ids[]", media.getId());
-        }
+        new Thread(task).start();
 
-        return postSingle("api/v1/statuses", Status.class, form.build());
+        return task;
     }
 
     private String constructMediaType(File file) {
@@ -359,13 +382,13 @@ public class API {
         return getRequest("api/v1/media/" + media.getId()).responseCode() == 200;
     }
 
-    public MediaAttachment uploadFile(File file) {
+    private MediaAttachment uploadFile(File file, Consumer<Double> progress) {
         String mimeType = constructMediaType(file);
         if (mimeType == null)
             return null;
 
         MediaType mediaType = MediaType.parse(mimeType);
-        RequestBody requestBody = RequestBody.create(mediaType, file);
+        RequestBody requestBody = new FileTrackRequestBody(file, mediaType, progress);
 
         MultipartBody multipartBody = new MultipartBody.Builder()
                 .addFormDataPart("file", file.getName(), requestBody)

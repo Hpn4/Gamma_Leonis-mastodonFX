@@ -61,7 +61,7 @@ public class ContextScrollableContent extends ScrollPane {
 
         // Small adjustment for the width
         Pane pane = toot.getParent();
-        pane.prefWidthProperty().bind(widthProperty().subtract(20));
+        pane.prefWidthProperty().bind(widthProperty().subtract(10));
         pane.getStyleClass().add(style);
 
         // Reset the loader (i need to do it twice, i don't know why but sometimes stat are not cleared)

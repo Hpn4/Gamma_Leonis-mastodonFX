@@ -37,7 +37,7 @@ public class ConversationScrollableContent extends AbstractScrollableContent<Con
 
             // Small adjustment for the width
             Pane pane = convItem.getParent();
-            pane.prefWidthProperty().bind(widthProperty().subtract(20));
+            pane.prefWidthProperty().bind(widthProperty().subtract(10));
 
             // Reset the loader (i need to do it twice, i don't know why but sometimes stat are not cleared)
             fxml.setRoot(null);

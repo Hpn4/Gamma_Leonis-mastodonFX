@@ -1,26 +1,3 @@
-.scroll-pane, .top-account-region, .vbox-items, .rootBorderPane {
-    -fx-background-color: #404040;
-}
-
-.scroll-pane .viewport {
-    -fx-background-color: transparent;
-}
-
-.scroll-pane .scroll-bar:vertical {
-    -fx-background-color: #404040;
-}
-
-.scroll-pane .scroll-bar:vertical .increment-button:hover,
-.scroll-pane .scroll-bar:vertical .decrement-button:hover,
-.selection-action-region {
-    -fx-background-color: #333333;
-}
-
-.scroll-pane .scroll-bar:vertical .thumb {
-    -fx-background-color: #333333;
-    -fx-background-radius: 15px;
-    -fx-scale-x: 70%;
-}
 
 /* CSS for all radio button (Toots, Followers, Followings) */
 .account-selection-radio-button {

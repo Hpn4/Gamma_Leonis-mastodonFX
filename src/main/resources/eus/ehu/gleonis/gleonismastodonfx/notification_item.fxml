@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -30,8 +31,12 @@
         </GridPane.margin>
     </Label>
     <Button mnemonicParsing="false" onAction="#onDeleteNotifClick" styleClass="notif-delete-button" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
-    <Text fx:id="viewTootText" onMouseClicked="#onViewTootClick" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="open-toot-text" text="%notif.view_toot" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-    <Rectangle fx:id="notifAccountImg" fill="#0084ff" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="notif-account-picture" width="50.0" GridPane.rowIndex="1" />
+    <Text fx:id="viewTootText" onMouseClicked="#onViewTootClick" strokeType="OUTSIDE" strokeWidth="0.0" text="%notif.view_toot" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+      <styleClass>
+         <String fx:value="open-toot-text" />
+         <String fx:value="underlined" />
+      </styleClass></Text>
+    <Rectangle fx:id="notifAccountImg" fill="#0084ff" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="account-picture" width="50.0" GridPane.rowIndex="1" />
     <VBox maxHeight="-Infinity" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
         <GridPane.margin>
             <Insets left="60.0" />

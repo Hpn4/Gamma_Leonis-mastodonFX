@@ -1,7 +1,7 @@
 package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
-import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.MediaAttachment;
+import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Status;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Visibility;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.comp.MediaAttachmentViewer;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
@@ -25,55 +25,42 @@ import java.util.List;
 
 public class MainWindowController extends AbstractController {
 
+    private final TootSendData tootSendData = new TootSendData();
+
+    @FXML
+    private ToggleGroup menuChoice;
+
     @FXML
     private Circle accountImage;
-
     @FXML
     private Label accountUsername;
-
     @FXML
     private Label accountWebfinger;
-
     @FXML
     private StackPane sceneContent;
-
     @FXML
     private TextField searchTextField;
-
     // Send toot UI part
     @FXML
     private VBox sendTootVBox;
-
     @FXML
     private GridPane fakeSendGridPane;
-
     @FXML
     private TextField fakeSendTextField;
-
     @FXML
     private TextField spoilerTextField;
-
     @FXML
     private GridPane realSendTootGridPane;
-
     @FXML
     private TextArea tootContentTextArea;
-
     @FXML
     private CheckBox visibilityCheckbox;
-
     @FXML
     private Text charCountText;
-
     @FXML
     private ScrollPane mediaAttachmentScroll;
-
     private MediaAttachmentViewer mediaAttachmentViewer;
-
     private FileChooser fileChooser;
-
-    private final TootSendData tootSendData = new TootSendData();
-
     private boolean sendTootPanelVisible;
 
     // We don't use initilize because we need to wait for the API to be set
@@ -140,6 +127,11 @@ public class MainWindowController extends AbstractController {
         setCenter(pane, true);
     }
 
+    public void uncheckCategory() {
+        if (menuChoice.getSelectedToggle() != null)
+            menuChoice.getSelectedToggle().setSelected(false);
+    }
+
     public void setCenter(Region pane, boolean closeStream) {
         BorderPane.setAlignment(pane, Pos.TOP_CENTER);
 
@@ -147,7 +139,8 @@ public class MainWindowController extends AbstractController {
             api.closeStream();
 
         // We add some paddings so that the send toot panel doesn't hide the content
-        pane.setPadding(new Insets(0, 0, 50, 0));
+        //pane.setPadding(new Insets(0, 0, 50, 0));
+        StackPane.setMargin(pane, new Insets(0, 0, 50, 0));
 
         sceneContent.getChildren().clear();
         sceneContent.getChildren().add(pane);
@@ -240,23 +233,21 @@ public class MainWindowController extends AbstractController {
         if (content.isEmpty() && tootSendData.mediaAttachments.isEmpty())
             return;
 
-        MediaAttachment[] mediaAttachments = new MediaAttachment[tootSendData.mediaAttachments.size()];
-        for (int i = 0; i < tootSendData.mediaAttachments.size(); i++)
-            mediaAttachments[i] = api.uploadFile(tootSendData.mediaAttachments.get(i));
-
-        Task<Void> task = new Task<>() {
-            @Override public Void call() {
-                api.postStatus(content, tootSendData.visibility, tootSendData.inResponseTo, spoilerTextField.getText(), mediaAttachments);
-                updateProgress(1, 1);
-                return null;
-            }
-        };
+        Task<Status> task = api.postStatus(content,
+                tootSendData.visibility,
+                tootSendData.inResponseTo,
+                spoilerTextField.getText(),
+                tootSendData.mediaAttachments.toArray(File[]::new));
 
         task.setOnSucceeded(e -> {
             resetToot();
             loseTootFocus();
+            PopupManager.hideProgressPopup();
         });
-        new Thread(task).start();
+
+        PopupManager.showProgressPopup("Sending Toot...", task.progressProperty());
+
+        System.out.println("Toot sent don't freeze the UI");
     }
 
     @FXML
@@ -284,7 +275,7 @@ public class MainWindowController extends AbstractController {
     // *******************************************************************
     @FXML
     void onHomeClick() {
-        getApplication().requestShowToots(api.getHomeTimeline(10), 10);
+        getApplication().requestShowToots(api.getHomeTimeline(10), 10, false);
     }
 
     @FXML
@@ -317,12 +308,12 @@ public class MainWindowController extends AbstractController {
 
     @FXML
     void onFavouritesClick() {
-        getApplication().requestShowToots(api.getFavourites(10), 10);
+        getApplication().requestShowToots(api.getFavourites(10), 10, false);
     }
 
     @FXML
     void onBookmarksClick() {
-        getApplication().requestShowToots(api.getBookmarks(10), 10);
+        getApplication().requestShowToots(api.getBookmarks(10), 10, false);
     }
 
     @FXML

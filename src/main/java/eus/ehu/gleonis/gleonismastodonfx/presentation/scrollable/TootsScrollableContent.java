@@ -37,7 +37,7 @@ public class TootsScrollableContent extends AbstractScrollableContent<Status> {
 
             // Small adjustment for the width
             Pane pane = toot.getParent();
-            pane.prefWidthProperty().bind(widthProperty().subtract(20));
+            pane.prefWidthProperty().bind(widthProperty().subtract(10));
 
             // Reset the loader (i need to do it twice, i don't know why but sometimes stat are not cleared)
             fxml.setRoot(null);

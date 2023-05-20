@@ -2,6 +2,7 @@
 /* Define some useful color */
 .root {
     -fx-container-color: #404040;
+    -fx-dark-gray-color: #333333;
     -fx-eoi-color: #3D4FAD;
     -fx-black-color: #1A1A1A;
     -fx-text-color: #999999;
@@ -9,7 +10,7 @@
 }
 
 .background-region {
-    -fx-background-color: #333333;
+    -fx-background-color: -fx-dark-gray-color;
 }
 
 .content-region {
@@ -135,36 +136,30 @@
     -fx-border-width: 2px;
 }
 
-.notification-button:hover,.settings-button:hover,.search-button:hover {
+.notification-button:hover, .settings-button:hover, .search-button:hover {
     -fx-border-color: -fx-eoi-color;
 }
+
 .notification-button:pressed,.settings-button:pressed, .search-button:pressed {
-    -fx-border-color: -fx-text-color;
+    -fx-border-color: -fx-text-c²olor;
 }
 
 /*
 * Scroll pane and scroll bar/button styling
  */
-.scroll-pane, .top-account-region, .vbox-items, .rootBorderPane {
-    -fx-background-color: #404040;
-}
-
-.scroll-pane .viewport {
+.top-account-region, .rootBorderPane, .vbox-items, .scroll-pane, .scroll-pane .viewport, .scroll-pane .scroll-bar:vertical {
     -fx-background-color: transparent;
-}
-
-.scroll-pane .scroll-bar:vertical {
-    -fx-background-color: #404040;
+    -fx-border-color: transparent;
 }
 
 .scroll-pane .scroll-bar:vertical .increment-button:hover,
 .scroll-pane .scroll-bar:vertical .decrement-button:hover,
 .selection-action-region {
-    -fx-background-color: #333333;
+    -fx-background-color: -fx-dark-gray-color;
 }
 
 .scroll-pane .scroll-bar:vertical .thumb {
-    -fx-background-color: #333333;
+    -fx-background-color: -fx-dark-gray-color;
     -fx-background-radius: 15px;
     -fx-scale-x: 70%;
 }
@@ -174,6 +169,9 @@
  */
 .send-toot-region {
     -fx-background-color: -fx-container-color;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0 0 10px 10px;
+    -fx-border-radius: 0 0 10px 10px;
 }
 
 .send-toot-button {
@@ -223,7 +221,7 @@
 .send-toot-attachment {
     -fx-shape: "M26.3,20.3L15.1,9.1c-1.2-1.2-3.4-1.2-4.6,0c-0.6,0.6-1,1.4-1,2.3c0,0.9,0.3,1.7,1,2.3l7.2,7.2c0.4,0.4,1,0.4,1.4,0 s0.4-1,0-1.4l-7.2-7.2c-0.2-0.2-0.4-0.6-0.4-0.9c0-0.3,0.1-0.7,0.4-0.9c0.5-0.5,1.3-0.5,1.8,0l11.2,11.2c0.7,0.7,1,1.6,1,2.5 c0,0.9-0.4,1.8-1,2.5c-1.3,1.3-3.7,1.3-5,0L7.1,13.9c-2.3-2.3-2.3-5.9,0-8.2c2.3-2.3,5.9-2.3,8.2,0l8.8,8.8c0.4,0.4,1,0.4,1.4,0 s0.4-1,0-1.4l-8.8-8.8c-3-3-8-3-11,0C4.2,5.7,3.4,7.7,3.4,9.8c0,2.1,0.8,4,2.3,5.5l12.8,12.8c1,1,2.4,1.6,3.9,1.6  c1.5,0,2.9-0.6,3.9-1.6s1.6-2.4,1.6-3.9S27.3,21.3,26.3,20.3z";
     -fx-scale-y: 80%;
-    -fx-background-color: #999999;
+    -fx-background-color: -fx-text-color;
 }
 
 .send-toot-attachment:hover {
@@ -286,19 +284,25 @@
 }
 
 /* CSS for Context menu */
+.menu-button > .arrow-button > .arrow {
+    -fx-padding: 0;
+}
+
 .context-menu {
-    -fx-background-color: #404040;
+    -fx-background-color: -fx-container-color;
+    -fx-border-color: #383838;
+    -fx-border-radius: 5px;
     -fx-background-radius: 5px;
     -fx-padding: 5px;
     -fx-translate-y: -10px;
 }
 
 .menu-item {
-    -fx-background-color: #404040;
+    -fx-background-color: transparent;
 }
 
 .menu-item .label {
-    -fx-text-fill: #999999;
+    -fx-text-fill: -fx-text-color;
 }
 
 .menu-item:hover .label {
@@ -307,4 +311,9 @@
 
 .underlined:hover {
     -fx-underline: true;
+}
+
+.account-picture {
+    -fx-arc-height: 25px;
+    -fx-arc-width: 25px;
 }

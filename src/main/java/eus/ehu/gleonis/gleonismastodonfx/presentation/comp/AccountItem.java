@@ -4,15 +4,15 @@ import eus.ehu.gleonis.gleonismastodonfx.MainApplication;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Account;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Relationship;
 import eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable.AccountScrollableContent;
+import eus.ehu.gleonis.gleonismastodonfx.utils.CachedImage;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Rectangle;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class AccountItem extends AbstractItem<Account> {
     private FXMLLoader loader;
 
     @FXML
-    private ImageView accountAvatar;
+    private Rectangle accountAvatar;
     @FXML
     private HBox accountItem;
     @FXML
@@ -99,8 +99,8 @@ public class AccountItem extends AbstractItem<Account> {
         accountName.setText(account.getUsername());
         accountWebfinger.setText("@" + account.getAcct());
 
-        Image avatar = new Image(account.getAvatar(), true);
-        accountAvatar.setImage(avatar);
+        CachedImage cache = new CachedImage(null, account.getAvatar());
+        cache.setImage(accountAvatar);
 
         // Redirection for the account
         Utils.redirectToAccount(account.getId(), accountItem);

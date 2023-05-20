@@ -60,7 +60,8 @@ public class HTMLView extends TextFlow {
                         tag = t;
 
                     addChildren(tag, "html-tag").setOnMouseClicked(
-                            e -> MainApplication.getInstance().requestShowToots(MainApplication.getInstance().getAPI().getHashTagTimelines(tag.substring(1), 10), 10)
+                            e -> MainApplication.getInstance().requestShowToots(
+                                    MainApplication.getInstance().getAPI().getHashTagTimelines(tag.substring(1), 10), 10, true)
                     );
                 }
 
@@ -101,7 +102,7 @@ public class HTMLView extends TextFlow {
     private Text addChildren(String text, String cssClass) {
         Text t = new Text(text);
         t.getStyleClass().add(cssClass);
-        if(context)
+        if (context)
             t.getStyleClass().add("html-text-master-context");
         else
             t.getStyleClass().add("html-text-master");

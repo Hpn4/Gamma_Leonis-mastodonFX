@@ -1,0 +1,31 @@
+.popup {
+    -fx-background-color: #303030;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+    -fx-border-color: #1A1A1A;
+    -fx-border-radius: 5px;
+}
+
+.label {
+    -fx-text-fill: #999999;
+    -fx-font-size: 14px;
+}
+
+.progress-bar {
+    -fx-accent: rgba(25, 161, 255, 0.85);
+}
+
+.progress-bar .bar {
+    -fx-padding: 5px;
+    -fx-background-insets: 0;
+    -fx-background-radius: 2px;
+}
+
+.progress-bar > .track {
+    -fx-background-radius: 2px;
+    -fx-text-box-border: transparent;
+    -fx-border-color: #666666;
+    -fx-border-radius: 2px;
+    -fx-control-inner-background: transparent;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}

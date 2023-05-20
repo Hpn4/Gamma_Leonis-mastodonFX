@@ -2,7 +2,7 @@
 * Global background color of the toots
  */
 .hashtag-item {
-    -fx-background-color: #404040;
+    -fx-background-color: transparent;
 }
 
 .hashtag-item:hover {
@@ -32,7 +32,7 @@
 
 .default-color0.chart-area-symbol {
     -fx-background-color: #3D4FAD;
-    -fx-padding: 2px;
+    -fx-padding: 0px;
 }
 
 .default-color0.chart-series-area-line {

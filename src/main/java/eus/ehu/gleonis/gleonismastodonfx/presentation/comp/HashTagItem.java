@@ -37,7 +37,7 @@ public class HashTagItem extends AbstractItem<Tag> {
 
     @FXML
     void onItemClick() {
-        MainApplication.getInstance().requestShowToots(api.getHashTagTimelines(elem.getName(), 10), 10);
+        MainApplication.getInstance().requestShowToots(api.getHashTagTimelines(elem.getName(), 10), 10, true);
     }
 
     protected void updateItem(Tag hashtag) {
