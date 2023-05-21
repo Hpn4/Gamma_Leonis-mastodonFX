@@ -8,39 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b46cf13f-ad0c-447f-9bcc-d16dabcd2d0b" name="Changes" comment="Asynchronous upload of files, popup for file upload, bug fix, css improve, refactoring">
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/FileTrackRequestBody.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/PopupManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/popup.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2023_16_56__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2023_20_05_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_05_2023_20_05__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_05_2023_11_48_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_05_2023_11_48__Changes_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/img/configure.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/img/login.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/img/main.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/API.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/api/API.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/AccountItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/AccountItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/HashTagItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/HashTagItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/TootItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/comp/TootItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/AccountScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ContextScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ContextScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ConversationScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/ConversationScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TagsScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TagsScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsScrollableContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/presentation/scrollable/TootsScrollableContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/HTMLView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/eus/ehu/gleonis/gleonismastodonfx/utils/HTMLView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/account_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/account_item.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/account_root-pane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/account_root-pane.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/account_content.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/account_content.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/account_item.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/account_item.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/audio_player.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/audio_player.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/hashtag_item.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/hashtag_item.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/loginWindow.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/loginWindow.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/mainWindow.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/mainWindow.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/notification_item.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/notification_item.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/toots.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/css/toots.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/notification_item.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/eus/ehu/gleonis/gleonismastodonfx/notification_item.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/APITest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/APITest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,11 +95,11 @@
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\docs\img" />
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources" />
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources\hibernate" />
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources\eus\ehu\gleonis\gleonismastodonfx\css" />
       <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX\src\main\resources\eus\ehu\gleonis\gleonismastodonfx" />
-      <recent name="C:\Users\senig\IntelliJProject\SE_Project\Gamma_Leonis-mastodonFX" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="eus.ehu.gleonis.gleonismastodonfx.presentation.scrollable" />
@@ -272,7 +244,7 @@
       <workItem from="1684397839170" duration="45000" />
       <workItem from="1684572300893" duration="3916000" />
       <workItem from="1684579696744" duration="4153000" />
-      <workItem from="1684598032457" duration="11968000" />
+      <workItem from="1684598032457" duration="15656000" />
     </task>
     <task id="LOCAL-00001" summary="Init repository + load all dependencies + blurhash + mockup">
       <created>1679044335470</created>
@@ -589,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683896835950</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Asynchronous upload of files, popup for file upload, bug fix, css improve, refactoring">
+      <created>1684621537239</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1684621537240</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
