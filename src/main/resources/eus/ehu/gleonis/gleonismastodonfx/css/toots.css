@@ -1,16 +1,7 @@
 
 /*
-* Global background color of the toots
+* Special background color of the selected toot in a context
  */
-.toots-border-pane {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-.toots-border-pane:hover {
-    -fx-background-color: #383838;
-}
-
 .context {
     -fx-padding: 0 0 0 50px;
 }

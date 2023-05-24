@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rootBorderPane" prefHeight="500.0" prefWidth="500.0" styleClass="rootBorderPane" stylesheets="@css/account_content.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.AccountRPController">
+<BorderPane fx:id="rootBorderPane" prefHeight="500.0" prefWidth="500.0" styleClass="transparent-region" stylesheets="@css/account_content.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.rootpane.AccountRPController">
    <top>
-      <VBox styleClass="top-account-region" BorderPane.alignment="CENTER">
+      <VBox styleClass="transparent-region" BorderPane.alignment="CENTER">
          <StackPane>
             <ImageView fx:id="accountBanner" fitHeight="150.0" fitWidth="550.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_RIGHT" />
             <HBox alignment="CENTER_LEFT" spacing="5.0">

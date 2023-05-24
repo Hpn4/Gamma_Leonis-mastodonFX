@@ -5,6 +5,8 @@ The application is available in French, Spanish and English.
 
 Installers can be found for MacOS, Linux and Windows in the [Action](https://github.com/Hpn4/Gamma_Leonis-mastodonFX/actions) section.
 
+**The last commit made significant change to the database. You need to delete the `.glmastodonfx` folder in your home directory before launching the app.**
+
 ## 1. UI
 
 ![Main window](docs/img/main.png)

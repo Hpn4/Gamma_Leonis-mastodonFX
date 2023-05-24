@@ -89,7 +89,7 @@ public class MainWindowController extends AbstractController {
             if (sendTootPanelVisible)
                 return;
 
-            gainTootFocus(tootContentTextArea.getText(), tootSendData.visibility, tootSendData.inResponseTo);
+            gainTootFocus(tootContentTextArea.getText(), Visibility.UNKNOWN, tootSendData.inResponseTo);
         });
 
         // Hide the real panel to send toot when the user click outside
@@ -99,6 +99,7 @@ public class MainWindowController extends AbstractController {
         });
 
         // Bind remaining char count
+
         charCountText.textProperty().bind(tootContentTextArea.textProperty().length().asString().concat("/500"));
 
         // Setup file chooser
@@ -162,23 +163,14 @@ public class MainWindowController extends AbstractController {
         sendTootPanelVisible = true;
 
         tootSendData.inResponseTo = inResponseTo;
-        tootSendData.visibility = visibility;
+
+        if (visibility != Visibility.UNKNOWN)
+            visibilityCheckbox.setSelected(visibility == Visibility.PRIVATE);
 
         tootContentTextArea.setText(content);
         sendTootVBox.getChildren().set(0, realSendTootGridPane);
 
         tootContentTextArea.requestFocus();
-        updateSendTootVisibilityCheckbox();
-    }
-
-    private void updateSendTootVisibilityCheckbox() {
-        if (tootSendData.visibility == Visibility.PUBLIC) {
-            visibilityCheckbox.getStyleClass().set(2, "toot-visibility-public");
-            visibilityCheckbox.setSelected(true);
-        } else {
-            visibilityCheckbox.getStyleClass().set(2, "toot-visibility-direct");
-            visibilityCheckbox.setSelected(false);
-        }
     }
 
     private void loseTootFocus() {
@@ -191,17 +183,9 @@ public class MainWindowController extends AbstractController {
 
     private void resetToot() {
         tootSendData.inResponseTo = null;
-        tootSendData.visibility = Visibility.PUBLIC;
+        visibilityCheckbox.setSelected(false); // Select: private, Unselect: public
         tootSendData.mediaAttachments.clear();
         mediaAttachmentViewer.clearMedia();
-    }
-
-    @FXML
-    void onVisibilityClick(ActionEvent event) {
-        boolean selected = ((CheckBox) event.getSource()).isSelected();
-        tootSendData.visibility = selected ? Visibility.PUBLIC : Visibility.PRIVATE;
-
-        updateSendTootVisibilityCheckbox();
     }
 
     @FXML
@@ -220,6 +204,9 @@ public class MainWindowController extends AbstractController {
     void onMediAttachmentClick() {
         List<File> files = fileChooser.showOpenMultipleDialog(getApplication().getStage());
 
+        if (files == null)
+            return;
+
         for (File file : files)
             mediaAttachmentViewer.addMedia(file, tootSendData.mediaAttachments);
 
@@ -233,19 +220,21 @@ public class MainWindowController extends AbstractController {
         if (content.isEmpty() && tootSendData.mediaAttachments.isEmpty())
             return;
 
+        Visibility visibility = visibilityCheckbox.isSelected() ? Visibility.PRIVATE : Visibility.PUBLIC;
+
         Task<Status> task = api.postStatus(content,
-                tootSendData.visibility,
+                visibility,
                 tootSendData.inResponseTo,
                 spoilerTextField.getText(),
                 tootSendData.mediaAttachments.toArray(File[]::new));
 
+        Integer i = PopupManager.showProgressPopup("Sending Toot...", task.progressProperty());
+
         task.setOnSucceeded(e -> {
             resetToot();
             loseTootFocus();
-            PopupManager.hideProgressPopup();
+            PopupManager.hideProgressPopup(i);
         });
-
-        PopupManager.showProgressPopup("Sending Toot...", task.progressProperty());
 
         System.out.println("Toot sent don't freeze the UI");
     }
@@ -322,8 +311,6 @@ public class MainWindowController extends AbstractController {
     }
 
     private static class TootSendData {
-        public Visibility visibility;
-
         public String inResponseTo;
 
         public List<File> mediaAttachments;

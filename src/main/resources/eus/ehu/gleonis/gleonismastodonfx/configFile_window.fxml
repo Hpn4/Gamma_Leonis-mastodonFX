@@ -12,8 +12,10 @@
 <GridPane prefHeight="400.0" prefWidth="676.0" styleClass="background-region" stylesheets="@css/loginWindow.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.ConfigWindowController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
    </columnConstraints>
    <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -22,21 +24,23 @@
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
-   <Label alignment="CENTER" text="%config.instruction" textFill="WHITE" wrapText="true">
+   <Label alignment="CENTER" text="%config.instruction" textFill="WHITE" wrapText="true" GridPane.columnSpan="2">
       <font>
          <Font size="14.0" />
       </font>
    </Label>
-   <TextField fx:id="keyTextField" prefHeight="31.0" prefWidth="362.0" promptText="%config.client_key" GridPane.rowIndex="1">
+   <TextField fx:id="keyTextField" prefHeight="30.0" promptText="%config.client_key" GridPane.columnSpan="2" GridPane.rowIndex="2">
       <opaqueInsets>
          <Insets />
       </opaqueInsets>
    </TextField>
-   <Label fx:id="errorLabel" text="%config.error_label" textFill="#c10303" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-   <Button mnemonicParsing="false" onAction="#onConfigureClick" text="%config.configure" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-   <TextField fx:id="secretTextField" prefHeight="31.0" prefWidth="362.0" promptText="%config.client_secret" GridPane.rowIndex="2" GridPane.valignment="TOP">
+   <Label fx:id="errorLabel" styleClass="error-label" text="%config.error_label" visible="false" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
+   <Button mnemonicParsing="false" onAction="#onConfigureClick" text="%config.configure" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+   <TextField fx:id="secretTextField" prefHeight="30.0" promptText="%config.client_secret" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
       <opaqueInsets>
          <Insets />
       </opaqueInsets>
    </TextField>
+   <TextField fx:id="domainTextField" prefHeight="30.0" promptText="%config.domain" GridPane.rowIndex="1" />
+   <Button mnemonicParsing="false" onAction="#onAutoGenerateClick" text="%config.auto_generate" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
 </GridPane>

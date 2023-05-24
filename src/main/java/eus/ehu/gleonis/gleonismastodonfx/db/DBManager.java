@@ -19,6 +19,8 @@ public class DBManager implements IDBManager {
 
     private static final Logger logger = LogManager.getLogger("DBManager");
 
+    private boolean configured = false;
+
     private PropertiesManager propManager;
 
     private EntityManager dbConnector;
@@ -26,9 +28,14 @@ public class DBManager implements IDBManager {
     private EntityManagerFactory emf;
 
     public DBManager() {
+        initDB();
     }
 
-    public void initDB() {
+    private void initDB() {
+        if(configured)
+            return;
+
+        configured = true;
         long start = System.currentTimeMillis();
         propManager = PropertiesManager.getInstance();
 
@@ -50,14 +57,14 @@ public class DBManager implements IDBManager {
         logger.debug("Time to open DB: " + (System.currentTimeMillis() - start) + "ms");
     }
 
-    public DBAccount insertAccount(Account account, String token) {
-        return insertAccount(account.getId(), account.getUsername(), account.getAvatar(), token);
+    public DBAccount insertAccount(Account account, String domain, String token) {
+        return insertAccount(account.getId(), domain, account.getUsername(), account.getAvatar(), token);
     }
 
-    public DBAccount insertAccount(String id, String username, String avatar, String token) {
+    public DBAccount insertAccount(String id, String domain, String username, String avatar, String token) {
         try {
             dbConnector.getTransaction().begin();
-            DBAccount dbAccount = new DBAccount(id, username, avatar, LocalDate.now().toString(), token);
+            DBAccount dbAccount = new DBAccount(id, domain, username, avatar, LocalDate.now().toString(), token);
             dbConnector.persist(dbAccount);
             dbConnector.getTransaction().commit();
 
@@ -102,7 +109,7 @@ public class DBManager implements IDBManager {
     public DBAccount getLoggedAccount() {
         String dbUser = propManager.getDbUser();
 
-        if (dbUser.isEmpty())
+        if (dbUser == null || dbUser.isEmpty())
             return null;
 
         //DBAccount account = dbConnector.getReference(DBAccount.class, dbUser);
@@ -130,6 +137,48 @@ public class DBManager implements IDBManager {
         dbConnector.getTransaction().commit();
 
         logger.debug("Account updated");
+    }
+
+    public List<DBApplication> getApplications() {
+        List<DBApplication> apps = dbConnector.createQuery("SELECT a FROM DBApplication a", DBApplication.class).getResultList();
+        logger.debug(apps.size() + " Applications retrieved");
+
+        return apps;
+    }
+
+    public DBApplication insertApplication(String domain, String id, String secret) {
+        try {
+            dbConnector.getTransaction().begin();
+            DBApplication dbApp = new DBApplication(domain, id, secret);
+            dbConnector.persist(dbApp);
+            dbConnector.getTransaction().commit();
+
+            logger.debug("Application inserted");
+
+            return dbApp;
+        }catch (EntityExistsException | ConstraintViolationException e) {
+            dbConnector.getTransaction().rollback();
+
+            return null;
+        }
+    }
+
+    public DBApplication getApplication(DBAccount account) {
+        return getApplicationByDomain(account.getAppDomain());
+    }
+
+    public DBApplication getApplicationByDomain(String domain) {
+        List<DBApplication> apps = dbConnector.createQuery(
+                        "SELECT a FROM DBApplication a WHERE a.domain = ?1", DBApplication.class)
+                .setParameter(1, domain)
+                .getResultList();
+
+        if (apps == null || apps.isEmpty()) {
+            logger.error("Application not found");
+            return null;
+        }
+
+        return apps.get(0);
     }
 
 

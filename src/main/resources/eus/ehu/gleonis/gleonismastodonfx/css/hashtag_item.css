@@ -1,14 +1,6 @@
 /*
 * Global background color of the toots
  */
-.hashtag-item {
-    -fx-background-color: transparent;
-}
-
-.hashtag-item:hover {
-    -fx-background-color: #383838;
-}
-
 .hashtag-name-label {
     -fx-text-fill: #CCCCCC;
 }
@@ -17,7 +9,6 @@
     -fx-text-fill: #FFFFFF;
     -fx-underline: true;
 }
-
 
 /*
 * Chart styling

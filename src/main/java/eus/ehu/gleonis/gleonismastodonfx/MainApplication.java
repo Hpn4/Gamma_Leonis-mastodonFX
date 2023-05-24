@@ -19,6 +19,7 @@ import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -68,22 +69,12 @@ public class MainApplication extends Application {
         instance = this;
         this.stage = stage;
 
-        // If there is no config file, we launch UI to fill it
-        if (api.isConfigFileEmpty())
-            requestConfigFileScreen();
-        else {
-            api.initAPI();
-            dbManager.initDB();
+        if(api.setupAPIWithUser(dbManager, null))
+            requestMainScreen();
+        else // If there is no connected user, we go to the login screen
+            requestLoginScreen();
 
-            // Request the first screen, login if there is no access token or main window if there is one
-            if (api.isUserConnected(dbManager)) {
-                api.setupUser(dbManager);
-                requestMainScreen();
-            } else
-                requestLoginScreen();
-        }
-
-        stage.setTitle("Gamma Leonis Mastodon Client");
+        stage.getIcons().add(new Image(MainApplication.class.getResourceAsStream("icon.png")));
 
         stage.show();
 
@@ -97,8 +88,11 @@ public class MainApplication extends Application {
         logger.debug("Gamma Leonis Mastodon Client started in {} ms", System.currentTimeMillis() - start);
     }
 
-    private void requestConfigFileScreen() {
+    public void requestConfigFileScreen() {
         configWindow = load("configFile_window.fxml", "config file", configWindow);
+        stage.setTitle("Gamma Leonis Mastodon Client - Config File");
+
+        configWindow.controller.init();
 
         setupScene(700, 500, configWindow.ui);
     }
@@ -106,15 +100,17 @@ public class MainApplication extends Application {
     public void requestLoginScreen() {
         MediaPlayerNode.freeAndStopMedias();
         loginWindow = load("login_window.fxml", "login", loginWindow);
+        stage.setTitle("Gamma Leonis Mastodon Client - Login");
 
         loginWindow.controller.init();
 
-        setupScene(700, 500, loginWindow.ui);
+        setupScene(800, 500, loginWindow.ui);
     }
 
     public void requestMainScreen() {
         MediaPlayerNode.freeAndStopMedias();
         mainWindow = load("main_window.fxml", "main", mainWindow);
+        stage.setTitle("Gamma Leonis Mastodon Client");
         setupScene(1400, 750, mainWindow.ui);
 
         mainController = mainWindow.controller;

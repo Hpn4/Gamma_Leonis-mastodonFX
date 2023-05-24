@@ -1,11 +1,3 @@
-.account-region {
-    -fx-background-color: transparent;
-}
-
-.account-region:hover {
-    -fx-background-color: #383838;
-}
-
 .follow-button, .unfollow-account {
     -fx-background-color: none;
 

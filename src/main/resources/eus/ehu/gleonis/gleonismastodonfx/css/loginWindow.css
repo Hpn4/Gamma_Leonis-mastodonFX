@@ -2,10 +2,22 @@
     -fx-container-color: #404040;
     -fx-eoi-color: #3D4FAD;
     -fx-black-color: #1A1A1A;
+    -fx-darker-container-color: #333333;
+    -fx-text-color: #999999;
+
+    -fx-account-box-color: #373737;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.error-label {
+    -fx-text-fill: #c10303;
 }
 
 .account-box:hover {
-    -fx-background-color: #373737;
+    -fx-background-color: -fx-account-box-color;
 }
 
 .account-box {
@@ -14,12 +26,16 @@
 }
 
 .account-box-new {
-    -fx-background-color: #373737;
+    -fx-background-color: -fx-account-box-color;
     -fx-background-radius: 5px;
 }
 
 .scroll-pane, .scroll-pane .scroll-bar:vertical {
     -fx-background-color: -fx-container-color;
+}
+
+.scroll-pane {
+    -fx-background-radius: 5px;
 }
 
 .scroll-pane .viewport {
@@ -29,16 +45,16 @@
 .scroll-pane .scroll-bar:vertical .increment-button:hover,
 .scroll-pane .scroll-bar:vertical .decrement-button:hover,
 .background-region {
-    -fx-background-color: #333333;
+    -fx-background-color: -fx-darker-container-color;
 }
 
 .scroll-pane .scroll-bar:vertical .thumb {
-    -fx-background-color: #333333;
+    -fx-background-color: -fx-darker-container-color;
     -fx-background-radius: 15px;
     -fx-scale-x: 70%;
 }
 
-.text-field, .button {
+.text-field, .button, .combo-box {
     -fx-background-color: -fx-container-color;
     -fx-background-radius: 5px;
     -fx-border-color: -fx-black-color;
@@ -60,4 +76,30 @@
 
 .button:hover {
     -fx-background-color: #4F66E0;
+}
+
+/* Combobox styling */
+.combo-box .list-cell, .account-box-new .label {
+    -fx-text-fill: -fx-text-color;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #404040;
+    -fx-background-radius: 5px;
+
+    -fx-background-insets: 0px;
+    -fx-border-insets: 0px;
+    -fx-padding: 3px;
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-text-fill: white;
+    -fx-background-color: #4F66E0;
+    -fx-background-radius: 5px;
 }

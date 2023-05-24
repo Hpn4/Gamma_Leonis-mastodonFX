@@ -26,10 +26,6 @@
     -fx-padding: 6px 10px 6px 20px;
 }
 
-.audio-player:hover {
-    -fx-background-color: #343434;
-}
-
 .video-player {
     -fx-background-color: #363636;
     -fx-background-radius: 0px;

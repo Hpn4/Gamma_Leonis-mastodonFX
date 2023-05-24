@@ -15,5 +15,6 @@
 
         <!-- Mapping files for our table -->
         <mapping resource="DBAccount.hbm.xml"/>
+        <mapping resource="DBApplication.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

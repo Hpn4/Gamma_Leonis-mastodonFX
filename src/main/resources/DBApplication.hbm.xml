@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="eus.ehu.gleonis.gleonismastodonfx.db.DBApplication" table="DBApplication">
+        <id name="domain" type="java.lang.String"/>
+
+        <property name="id" type="java.lang.String"/>
+        <property name="secret" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>

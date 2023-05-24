@@ -2,11 +2,15 @@ package eus.ehu.gleonis.gleonismastodonfx.presentation;
 
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.Token;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBAccount;
+import eus.ehu.gleonis.gleonismastodonfx.db.DBApplication;
 import eus.ehu.gleonis.gleonismastodonfx.utils.Utils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -21,6 +25,9 @@ public class LoginWindowController extends AbstractController {
 
     @FXML
     private Button authorizeButton;
+
+    @FXML
+    private ComboBox<String> appComboBox;
 
     @FXML
     private TextField codeTextField;
@@ -39,6 +46,7 @@ public class LoginWindowController extends AbstractController {
         Node node = accountsList.getChildren().get(0);
         accountsList.getChildren().clear();
         accountsList.getChildren().add(node);
+        codeTextField.clear();
 
         List<DBAccount> accounts = dbManager.getAccounts();
 
@@ -67,21 +75,50 @@ public class LoginWindowController extends AbstractController {
             accountBox.getChildren().add(lastAccess);
 
             accountBox.setOnMouseClicked(event -> {
-                if (api.switchUser(account.getToken()))
+                if (api.setupAPIWithUser(dbManager, account))
                     getApplication().requestMainScreen();
                 else {
                     dbManager.deleteAccount(account);
                     init();
-                    showError(Utils.getTranslation("login.error_expired"));
+                    showError("login.error_expired", true);
                 }
             });
 
             accountsList.getChildren().add(accountBox);
         }
+
+        setupComboBox();
+    }
+
+    private void setupComboBox() {
+        ObservableList<String> items = FXCollections.observableArrayList();
+        String addNew = Utils.getTranslation("login.new_application");
+
+        // Add all applications from the DB
+        for (DBApplication app: dbManager.getApplications())
+            items.add(app.getDomain());
+
+        items.add(addNew);
+
+        appComboBox.setItems(items);
+        appComboBox.getSelectionModel().selectedItemProperty().addListener((options, oldV, newV) -> {
+            if(newV == null)
+                return;
+
+            if(newV.equals(addNew)) // The last element is to create a new application
+                getApplication().requestConfigFileScreen();
+            else
+                api.useApplication(dbManager.getApplicationByDomain(newV));
+        });
     }
 
     @FXML
     void onAuthorizeClick() {
+        if(appComboBox.getSelectionModel().getSelectedItem() == null) {
+            showError("login.error_no_app", false);
+            return;
+        }
+
         getApplication().getHostServices().showDocument(api.getAuthorizedUserURL());
 
         authorizeButton.setDisable(true);
@@ -90,22 +127,29 @@ public class LoginWindowController extends AbstractController {
         loginButton.setDisable(false);
     }
 
-    private void showError(String label) {
+    private void showError(String key, boolean regen) {
         errorLabel.setVisible(true);
-        errorLabel.setText(label);
+        errorLabel.setText(Utils.getTranslation(key));
 
-        authorizeButton.setDisable(false);
-        authorizeButton.setText(Utils.getTranslation("login.generate_new"));
+        if(regen) {
+            authorizeButton.setDisable(false);
+            authorizeButton.setText(Utils.getTranslation("login.generate_new"));
+        }
     }
 
     @FXML
     void onLoginClick() {
+        if(appComboBox.getSelectionModel().getSelectedItem() == null) {
+            showError("login.error_no_app", false);
+            return;
+        }
+
         Token token = api.getToken(codeTextField.getText());
 
         if (token == null)
-            showError(Utils.getTranslation("login.error_get_token"));
+            showError("login.error_get_token", true);
         else if (!api.addNewUser(dbManager, token))
-            showError(Utils.getTranslation("login.error_add_user"));
+            showError("login.error_add_user", true);
         else
             getApplication().requestMainScreen();
 

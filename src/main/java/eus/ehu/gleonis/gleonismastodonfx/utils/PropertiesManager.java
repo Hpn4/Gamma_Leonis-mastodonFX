@@ -14,10 +14,6 @@ public class PropertiesManager {
 
     private Properties prop;
 
-    private String clientID;
-
-    private String clientSecret;
-
     private String dbUser;
 
     public PropertiesManager() {
@@ -63,8 +59,6 @@ public class PropertiesManager {
         // Then we read data from the file
         try (InputStream input = new FileInputStream(path)) {
             prop.load(input);
-            clientID = prop.getProperty("app.client.id");
-            clientSecret = prop.getProperty("app.client.secret");
             dbUser = prop.getProperty("db.user");
         } catch (final IOException ex) {
             ex.printStackTrace();
@@ -89,25 +83,4 @@ public class PropertiesManager {
         prop.setProperty("db.user", dbUser);
         saveProperties();
     }
-
-    public String getClientID() {
-        return clientID;
-    }
-
-    public String getClientSecret() {
-        return clientSecret;
-    }
-
-    public void setApp(String clientID, String clientSecret) {
-        this.clientID = clientID;
-        this.clientSecret = clientSecret;
-        prop.setProperty("app.client.id", clientID);
-        prop.setProperty("app.client.secret", clientSecret);
-        saveProperties();
-    }
-
-    public boolean empty() {
-        return clientID == null || clientSecret == null || clientID.isEmpty() || clientSecret.isEmpty();
-    }
-
 }

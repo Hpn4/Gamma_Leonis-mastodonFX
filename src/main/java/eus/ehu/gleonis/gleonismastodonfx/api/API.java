@@ -9,6 +9,7 @@ import eus.ehu.gleonis.gleonismastodonfx.api.adapter.VisibilityDeserializer;
 import eus.ehu.gleonis.gleonismastodonfx.api.apistruct.*;
 import eus.ehu.gleonis.gleonismastodonfx.api.websocks.StatusTimeline;
 import eus.ehu.gleonis.gleonismastodonfx.db.DBAccount;
+import eus.ehu.gleonis.gleonismastodonfx.db.DBApplication;
 import eus.ehu.gleonis.gleonismastodonfx.db.IDBManager;
 import eus.ehu.gleonis.gleonismastodonfx.utils.PropertiesManager;
 import javafx.collections.ObservableList;
@@ -38,7 +39,7 @@ public class API {
 
     private final StatusTimeline streamingFederatedTimeline;
 
-    private Application application;
+    private DBApplication application;
 
     private String token;
 
@@ -59,11 +60,9 @@ public class API {
         streamingFederatedTimeline = new StatusTimeline(gson);
     }
 
-    public void initAPI() {
-        application = new Application(propertiesManager.getClientID(), propertiesManager.getClientSecret());
-        token = null;
-    }
-
+    /*
+     * Error management
+     */
     public boolean errorOccurred() {
         return error != null;
     }
@@ -72,8 +71,64 @@ public class API {
         return error;
     }
 
+    public boolean createAppAndUse(IDBManager db, String domain, String id, String secret) {
+        application = db.insertApplication(domain, id, secret);
+        token = null;
+
+        return application != null;
+    }
+
+    public void useApplication(DBApplication app) {
+        application = app;
+    }
+
     public boolean isUser(Account account) {
         return Objects.equals(account.getId(), propertiesManager.getDbUser());
+    }
+
+    /**
+     * Set up the API and the application of the API with the specified user in the database.
+     * If the user is set to null, the last logged user will be retrieved.
+     * <p>
+     * This function returns true if the API have been successfully initialized. It will return false if:
+     * - There is no logged account
+     * - The token has expired
+     *
+     * @param db        The database manager
+     * @param dbAccount The account to set up the API with or null for last logged one
+     * @return If the API is initialized
+     */
+    public boolean setupAPIWithUser(IDBManager db, DBAccount dbAccount) {
+        if (dbAccount == null)
+            dbAccount = db.getLoggedAccount();
+
+        if (dbAccount == null)
+            return false; // NO user logged (have exited, no properties file...)
+
+        token = dbAccount.getToken();
+        application = db.getApplication(dbAccount);
+
+        Account account = verifyCredentials();
+        if (account == null) // The token is no longer working
+            return false;
+
+        db.updateAccount(account);
+        propertiesManager.setDbUser(dbAccount.getId());
+
+        return true;
+    }
+
+    /*
+     * Before calling this method the API should have an Application loaded
+     */
+    public boolean addNewUser(IDBManager db, Token token) {
+        this.token = token.getAccessToken();
+        Account account = getSingle("api/v1/accounts/verify_credentials", Account.class);
+        if (account == null)
+            return false;
+
+        propertiesManager.setDbUser(account.getId());
+        return db.insertAccount(account, application.getDomain(), token.getAccessToken()) != null;
     }
 
     //*******************************************************************
@@ -88,14 +143,14 @@ public class API {
     // The access token is then used to setup the API with setupAPI().
     // *******************************************************************
     public String getAuthorizedUserURL() {
-        return "https://mastodon.social/oauth/authorize?response_type=code&client_id=" +
-                application.getClientId() + "&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=read+write+push+follow";
+        return "https://" + application.getDomain() + "/oauth/authorize?response_type=code&client_id=" +
+                application.getId() + "&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=read+write+push+follow";
     }
 
     public Token getToken(String code) {
         RequestBody body = new FormBody.Builder()
-                .add("client_id", application.getClientId())
-                .add("client_secret", application.getClientSecret())
+                .add("client_id", application.getId())
+                .add("client_secret", application.getSecret())
                 .add("redirect_uri", "urn:ietf:wg:oauth:2.0:oob")
                 .add("grant_type", "authorization_code")
                 .add("code", code)
@@ -107,56 +162,27 @@ public class API {
 
     public void revokeToken(Token token) {
         RequestBody body = new FormBody.Builder()
-                .add("client_id", application.getClientId())
-                .add("client_secret", application.getClientSecret())
+                .add("client_id", application.getId())
+                .add("client_secret", application.getSecret())
                 .add("token", token.getAccessToken())
                 .build();
 
         request("oauth/revoke", "POST", body);
     }
 
-    public boolean isConfigFileEmpty() {
-        return propertiesManager.empty();
-    }
+    public Application createApplication(String domain, String name) {
+        application = new DBApplication(domain, null, null); // Tmp application
 
-    public boolean isUserConnected(IDBManager db) {
-        return !propertiesManager.getDbUser().isEmpty() && db.getLoggedAccount() != null;
-    }
+        RequestBody body = new FormBody.Builder()
+                .add("client_name", name)
+                .add("redirect_uris", "urn:ietf:wg:oauth:2.0:oob")
+                .add("scopes", "read write push follow")
+                .build();
 
-    public void setupUser(IDBManager db) {
-        DBAccount dbAccount = db.getLoggedAccount();
+        Application app = postSingle("api/v1/apps", Application.class, body);
+        application = null; // Reset tmp app
 
-        token = dbAccount.getToken();
-        Account account = verifyCredentials();
-
-        db.updateAccount(account);
-        propertiesManager.setDbUser(dbAccount.getId());
-    }
-
-    public boolean addNewUser(IDBManager db, Token token) {
-        this.token = token.getAccessToken();
-        Account account = getSingle("api/v1/accounts/verify_credentials", Account.class);
-        if (account == null)
-            return false;
-
-        propertiesManager.setDbUser(account.getId());
-        return db.insertAccount(account, token.getAccessToken()) != null;
-    }
-
-    public boolean switchUser(String token) {
-        this.token = token;
-        Account account = verifyCredentials();
-
-        if (account == null)
-            return false;
-
-        propertiesManager.setDbUser(account.getId());
-
-        return true;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
+        return app;
     }
 
 
@@ -395,7 +421,7 @@ public class API {
                 .build();
 
         Request.Builder builder = new Request.Builder()
-                .url("https://mastodon.social/api/v2/media")
+                .url("https://" + application.getDomain() + "/api/v2/media")
                 .addHeader("Authorization", "Bearer " + token)
                 .addHeader("content-type", "multipart/form-data;")
                 .post(multipartBody);
@@ -572,7 +598,7 @@ public class API {
 
     private ListStream<Status> getStreamedStatus(String type, StatusTimeline timeline) {
         Request.Builder builder = new Request.Builder()
-                .url("wss://mastodon.social/api/v1/streaming" +
+                .url("wss://" + application.getDomain() + "/api/v1/streaming" +
                         "?access_token=" + token +
                         "&stream=" + type +
                         "&type=subscribe");
@@ -625,10 +651,6 @@ public class API {
     // *******************************************************************
     public ListStream<Notification> getNotifications(int limit) {
         return getStream("api/v1/notifications", limit, Notification.class, false);
-    }
-
-    public Notification getNotification(String id) {
-        return getSingle("api/v1/notifications/" + id, Notification.class);
     }
 
     public void clearNotifications() {
@@ -769,7 +791,7 @@ public class API {
     }
 
     private Request buildRequest(String url, String method, RequestBody body) {
-        Request.Builder builder = new Request.Builder().url("https://mastodon.social/" + url);
+        Request.Builder builder = new Request.Builder().url("https://" + application.getDomain() + '/' + url);
 
         if (token != null)
             builder.addHeader("Authorization", "Bearer " + token);

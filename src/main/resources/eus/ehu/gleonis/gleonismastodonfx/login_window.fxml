@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -15,8 +16,8 @@
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -27,24 +28,24 @@
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
-   <Label alignment="CENTER" text="%login.instruction" textAlignment="CENTER" textFill="WHITE" wrapText="true" GridPane.columnIndex="2" GridPane.columnSpan="2">
+   <Label alignment="CENTER" text="%login.instruction" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.valignment="TOP">
       <font>
          <Font size="14.0" />
       </font>
    </Label>
-   <TextField fx:id="codeTextField" prefHeight="31.0" prefWidth="362.0" promptText="%login.enter_code" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+   <TextField fx:id="codeTextField" prefHeight="31.0" promptText="%login.enter_code" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
       <opaqueInsets>
          <Insets />
       </opaqueInsets>
    </TextField>
-   <Label fx:id="errorLabel" text="Error" textFill="#ff5555" visible="false" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-   <Button fx:id="authorizeButton" mnemonicParsing="false" onAction="#onAuthorizeClick" text="%login.authorize" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-   <Button fx:id="loginButton" alignment="CENTER_RIGHT" disable="true" mnemonicParsing="false" onAction="#onLoginClick" text="%login.login" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+   <Label fx:id="errorLabel" styleClass="error-label" text="Error" visible="false" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+   <Button fx:id="authorizeButton" mnemonicParsing="false" onAction="#onAuthorizeClick" text="%login.authorize" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+   <Button fx:id="loginButton" alignment="CENTER_RIGHT" disable="true" mnemonicParsing="false" onAction="#onLoginClick" text="%login.login" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="4" GridPane.valignment="CENTER">
       <GridPane.margin>
          <Insets right="10.0" />
       </GridPane.margin>
-      <VBox fx:id="accountsList" spacing="2.0" styleClass="scroll-pane">
+      <VBox fx:id="accountsList" spacing="2.0">
          <VBox alignment="CENTER" styleClass="account-box-new">
             <VBox.margin>
                <Insets />
@@ -52,11 +53,17 @@
             <padding>
                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
-            <Label alignment="CENTER" text="%login.new_account" textFill="#999999" />
+            <Label alignment="CENTER" text="%login.new_account" />
          </VBox>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
    </ScrollPane>
+   <Label text="%login.application" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="TOP">
+      <padding>
+         <Insets top="5.0" />
+      </padding>
+   </Label>
+   <ComboBox fx:id="appComboBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="TOP" />
 </GridPane>

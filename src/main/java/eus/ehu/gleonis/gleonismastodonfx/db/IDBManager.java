@@ -6,13 +6,11 @@ import java.util.List;
 
 public interface IDBManager {
 
-    void initDB();
-
     // Add a new account in the database
     // returns true if no problem, false if the account already exists
-    DBAccount insertAccount(Account account, String token);
+    DBAccount insertAccount(Account account, String domain, String token);
 
-    DBAccount insertAccount(String id, String username, String avatar, String token);
+    DBAccount insertAccount(String id, String domain, String username, String avatar, String token);
 
     boolean deleteAccount(String id);
 
@@ -26,4 +24,13 @@ public interface IDBManager {
 
     // Update the last access of the account and the avatar url if changed
     void updateAccount(Account ac);
+
+    // Gestion for applicaiton
+    List<DBApplication> getApplications(); // Get all the applications in the DB
+
+    DBApplication insertApplication(String domain, String id, String secret); // Add a new app
+
+    DBApplication getApplicationByDomain(String domain);
+
+    DBApplication getApplication(DBAccount account); // Retrieve the application linked to an account
 }

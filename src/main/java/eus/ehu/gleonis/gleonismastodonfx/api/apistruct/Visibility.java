@@ -4,7 +4,9 @@ public enum Visibility {
     PUBLIC("public"),
     UNLISTED("unlisted"),
     PRIVATE("private"),
-    DIRECT("direct");
+    DIRECT("direct"),
+
+    UNKNOWN("unknown");
 
     final String visibility;
 

@@ -33,12 +33,12 @@
             </VBox.margin>
             <Button mnemonicParsing="false" onAction="#onSettingsClick" prefHeight="30.0" prefWidth="30.0" styleClass="settings-button" />
             <Button layoutY="46.0" mnemonicParsing="false" onAction="#onNotificationsClick" prefHeight="30.0" prefWidth="30.0" styleClass="notification-button" />
-            <Label fx:id="accountUsername" styleClass="underlined" layoutX="116.0" layoutY="20.0" text="Hpn4" textFill="WHITE">
+            <Label fx:id="accountUsername" layoutX="116.0" layoutY="20.0" styleClass="underlined" text="Hpn4" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="accountWebfinger" styleClass="underlined" layoutX="112.0" layoutY="37.0" text="\@Hpn4" textFill="#666666" />
+            <Label fx:id="accountWebfinger" layoutX="112.0" layoutY="37.0" styleClass="underlined" text="\@Hpn4" textFill="#666666" />
             <Circle fx:id="accountImage" fill="DODGERBLUE" layoutX="71.0" layoutY="38.0" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
          </AnchorPane>
          <Separator prefWidth="200.0" styleClass="menu-separator">
@@ -210,27 +210,25 @@
                      <Font name="System Bold" size="16.0" />
                   </font>
                </Text>
-               <CheckBox fx:id="visibilityCheckbox" mnemonicParsing="false" onAction="#onVisibilityClick" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <CheckBox fx:id="visibilityCheckbox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                   <styleClass>
                      <String fx:value="send-toot-checkbox" />
-                     <String fx:value="toot-visibility-public" />
+                     <String fx:value="send-toot-visibility" />
                   </styleClass></CheckBox>
                <Region styleClass="fake-media-region" GridPane.rowIndex="4">
                   <GridPane.margin>
                      <Insets left="10.0" />
                   </GridPane.margin>
                </Region>
-               <HBox alignment="BOTTOM_RIGHT" minHeight="0.0" minWidth="0.0" spacing="10.0" GridPane.rowIndex="4"
-                     GridPane.valignment="BOTTOM">
+               <HBox alignment="BOTTOM_RIGHT" minHeight="0.0" minWidth="0.0" spacing="10.0" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                   <padding>
-                     <Insets bottom="2.0" left="5.0" right="8.0" top="5.0"/>
+                     <Insets bottom="2.0" left="5.0" right="8.0" top="5.0" />
                   </padding>
                   <GridPane.margin>
-                     <Insets/>
+                     <Insets />
                   </GridPane.margin>
-                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onMediAttachmentClick"
-                          styleClass="send-toot-attachment"/>
-                  <Text fx:id="charCountText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#onMediAttachmentClick" styleClass="send-toot-attachment" />
+                  <Text fx:id="charCountText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                </HBox>
                <ScrollPane fx:id="mediaAttachmentScroll" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" styleClass="media-attachment-pane" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP">
                   <padding>

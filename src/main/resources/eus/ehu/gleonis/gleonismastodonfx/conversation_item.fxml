@@ -17,14 +17,14 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="messageBorder" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="658.0" styleClass="toots-border-pane" stylesheets="@css/toots.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.comp.ConversationItem">
+<BorderPane fx:id="messageBorder" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="658.0" styleClass="gl-item" stylesheets="@css/toots.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.comp.ConversationItem">
    <top>
       <HBox prefHeight="64.0" prefWidth="892.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets right="10.0" />
          </BorderPane.margin>
          <StackPane>
-            <Rectangle fx:id="accountProfilePicture" arcHeight="15.0" arcWidth="15.0" fill="DODGERBLUE" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="40.0">
+            <Rectangle fx:id="accountProfilePicture" styleClass="account-picture" height="40.0" width="40.0">
                <StackPane.margin>
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </StackPane.margin>
@@ -34,12 +34,12 @@
             <padding>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>
-            <Label fx:id="userLabel" text="Username" textFill="WHITE">
+            <Label fx:id="userLabel" styleClass="underlined" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="webfingerLabel" prefHeight="18.0" prefWidth="97.0" text="Webfinger" textFill="#999999" />
+            <Label fx:id="webfingerLabel" styleClass="underlined" textFill="#999999" />
          </VBox>
          <Region HBox.hgrow="ALWAYS" />
          <GridPane focusTraversable="true">

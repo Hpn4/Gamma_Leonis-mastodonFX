@@ -5,6 +5,7 @@
     <class name="eus.ehu.gleonis.gleonismastodonfx.db.DBAccount" table="DBAccount">
         <id name="id" type="java.lang.String"/>
 
+        <property name="appDomain" type="java.lang.String"/>
         <property name="username" type="java.lang.String"/>
         <property name="avatarUrl" type="java.lang.String"/>
         <property name="last_access" type="java.lang.String"/>

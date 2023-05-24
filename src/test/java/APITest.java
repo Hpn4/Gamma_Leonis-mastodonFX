@@ -14,7 +14,7 @@ public class APITest {
     public void setUp() {
         api = new API();
 
-        api.setToken(""); //TODO: Insert your token here in order to test the API
+        //api.setToken(""); //TODO: Insert your token here in order to test the API
 
         us = api.verifyCredentials();
     }

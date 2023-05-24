@@ -17,19 +17,19 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="messageBorder" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="892.0" styleClass="toots-border-pane" stylesheets="@css/toots.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.comp.TootItem">
+<BorderPane fx:id="messageBorder" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="892.0" styleClass="gl-item" stylesheets="@css/toots.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eus.ehu.gleonis.gleonismastodonfx.presentation.comp.TootItem">
    <top>
       <HBox prefHeight="64.0" prefWidth="892.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets right="10.0" />
          </BorderPane.margin>
          <StackPane>
-            <Rectangle fx:id="accountProfilePicture" arcHeight="15.0" arcWidth="15.0" fill="DODGERBLUE" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="40.0">
+            <Rectangle fx:id="accountProfilePicture" arcHeight="15.0" arcWidth="15.0" fill="DODGERBLUE" height="40.0" width="40.0">
                <StackPane.margin>
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </StackPane.margin>
             </Rectangle>
-            <Rectangle fx:id="accountReblogAvatar" arcHeight="7.0" arcWidth="7.0" fill="DODGERBLUE" height="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0">
+            <Rectangle fx:id="accountReblogAvatar" arcHeight="7.0" arcWidth="7.0" fill="DODGERBLUE" height="20.0" width="20.0">
                <StackPane.margin>
                   <Insets left="35.0" top="20.0" />
                </StackPane.margin>
